@@ -12,6 +12,7 @@ public class Player {
     private int id;
     private String username;
     private String country;
+    //comment
     private boolean activity;
     public static final boolean ACTIVE = true;
     public static final boolean INACTIVE = false;
