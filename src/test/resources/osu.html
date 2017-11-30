@@ -1,0 +1,2785 @@
+<!DOCTYPE html>
+<!-- saved from url=(0043)https://osu.ppy.sh/rankings/osu/performance -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="shortcut icon" href="https://s.ppy.sh/favicon.ico" type="image/vnd.microsoft.icon">
+<link rel="icon" href="https://s.ppy.sh/favicon.ico" type="image/vnd.microsoft.icon">
+<script src="https://js-agent.newrelic.com/nr-1044.min.js"></script><script async="" src="https://www.google-analytics.com/analytics.js"></script><script type="text/javascript">window.NREUM||(NREUM={}),__nr_require=function(e,n,t){function r(t){if(!n[t]){var o=n[t]={exports:{}};e[t][0].call(o.exports,function(n){var o=e[t][1][n];return r(o||n)},o,o.exports)}return n[t].exports}if("function"==typeof __nr_require)return __nr_require;for(var o=0;o<t.length;o++)r(t[o]);return r}({1:[function(e,n,t){function r(){}function o(e,n,t){return function(){return i(e,[c.now()].concat(u(arguments)),n?null:this,t),n?void 0:this}}var i=e("handle"),a=e(2),u=e(3),f=e("ee").get("tracer"),c=e("loader"),s=NREUM;"undefined"==typeof window.newrelic&&(newrelic=s);var p=["setPageViewName","setCustomAttribute","setErrorHandler","finished","addToTrace","inlineHit","addRelease"],d="api-",l=d+"ixn-";a(p,function(e,n){s[n]=o(d+n,!0,"api")}),s.addPageAction=o(d+"addPageAction",!0),s.setCurrentRouteName=o(d+"routeName",!0),n.exports=newrelic,s.interaction=function(){return(new r).get()};var m=r.prototype={createTracer:function(e,n){var t={},r=this,o="function"==typeof n;return i(l+"tracer",[c.now(),e,t],r),function(){if(f.emit((o?"":"no-")+"fn-start",[c.now(),r,o],t),o)try{return n.apply(this,arguments)}finally{f.emit("fn-end",[c.now()],t)}}}};a("setName,setAttribute,save,ignore,onEnd,getContext,end,get".split(","),function(e,n){m[n]=o(l+n)}),newrelic.noticeError=function(e){"string"==typeof e&&(e=new Error(e)),i("err",[e,c.now()])}},{}],2:[function(e,n,t){function r(e,n){var t=[],r="",i=0;for(r in e)o.call(e,r)&&(t[i]=n(r,e[r]),i+=1);return t}var o=Object.prototype.hasOwnProperty;n.exports=r},{}],3:[function(e,n,t){function r(e,n,t){n||(n=0),"undefined"==typeof t&&(t=e?e.length:0);for(var r=-1,o=t-n||0,i=Array(o<0?0:o);++r<o;)i[r]=e[n+r];return i}n.exports=r},{}],4:[function(e,n,t){n.exports={exists:"undefined"!=typeof window.performance&&window.performance.timing&&"undefined"!=typeof window.performance.timing.navigationStart}},{}],ee:[function(e,n,t){function r(){}function o(e){function n(e){return e&&e instanceof r?e:e?f(e,u,i):i()}function t(t,r,o,i){if(!d.aborted||i){e&&e(t,r,o);for(var a=n(o),u=m(t),f=u.length,c=0;c<f;c++)u[c].apply(a,r);var p=s[y[t]];return p&&p.push([b,t,r,a]),a}}function l(e,n){v[e]=m(e).concat(n)}function m(e){return v[e]||[]}function w(e){return p[e]=p[e]||o(t)}function g(e,n){c(e,function(e,t){n=n||"feature",y[t]=n,n in s||(s[n]=[])})}var v={},y={},b={on:l,emit:t,get:w,listeners:m,context:n,buffer:g,abort:a,aborted:!1};return b}function i(){return new r}function a(){(s.api||s.feature)&&(d.aborted=!0,s=d.backlog={})}var u="nr@context",f=e("gos"),c=e(2),s={},p={},d=n.exports=o();d.backlog=s},{}],gos:[function(e,n,t){function r(e,n,t){if(o.call(e,n))return e[n];var r=t();if(Object.defineProperty&&Object.keys)try{return Object.defineProperty(e,n,{value:r,writable:!0,enumerable:!1}),r}catch(i){}return e[n]=r,r}var o=Object.prototype.hasOwnProperty;n.exports=r},{}],handle:[function(e,n,t){function r(e,n,t,r){o.buffer([e],r),o.emit(e,n,t)}var o=e("ee").get("handle");n.exports=r,r.ee=o},{}],id:[function(e,n,t){function r(e){var n=typeof e;return!e||"object"!==n&&"function"!==n?-1:e===window?0:a(e,i,function(){return o++})}var o=1,i="nr@id",a=e("gos");n.exports=r},{}],loader:[function(e,n,t){function r(){if(!x++){var e=h.info=NREUM.info,n=d.getElementsByTagName("script")[0];if(setTimeout(s.abort,3e4),!(e&&e.licenseKey&&e.applicationID&&n))return s.abort();c(y,function(n,t){e[n]||(e[n]=t)}),f("mark",["onload",a()+h.offset],null,"api");var t=d.createElement("script");t.src="https://"+e.agent,n.parentNode.insertBefore(t,n)}}function o(){"complete"===d.readyState&&i()}function i(){f("mark",["domContent",a()+h.offset],null,"api")}function a(){return E.exists&&performance.now?Math.round(performance.now()):(u=Math.max((new Date).getTime(),u))-h.offset}var u=(new Date).getTime(),f=e("handle"),c=e(2),s=e("ee"),p=window,d=p.document,l="addEventListener",m="attachEvent",w=p.XMLHttpRequest,g=w&&w.prototype;NREUM.o={ST:setTimeout,SI:p.setImmediate,CT:clearTimeout,XHR:w,REQ:p.Request,EV:p.Event,PR:p.Promise,MO:p.MutationObserver};var v=""+location,y={beacon:"bam.nr-data.net",errorBeacon:"bam.nr-data.net",agent:"js-agent.newrelic.com/nr-1044.min.js"},b=w&&g&&g[l]&&!/CriOS/.test(navigator.userAgent),h=n.exports={offset:u,now:a,origin:v,features:{},xhrWrappable:b};e(1),d[l]?(d[l]("DOMContentLoaded",i,!1),p[l]("load",r,!1)):(d[m]("onreadystatechange",o),p[m]("onload",r)),f("mark",["firstbyte",u],null,"api");var x=0,E=e(4)},{}]},{},["loader"]);</script>
+<meta name="description" content="osu! - Rhythm is just a *click* away!  With Ouendan/EBA, Taiko and original gameplay modes, as well as a fully functional level editor.">
+<meta name="keywords" content="osu, peppy, ouendan, elite, beat, agents, ds, windows, game, taiko, tatsujin, simulator, sim, xna, ddr, beatmania, osu!, osume">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#cc5288">
+<meta name="csrf-param" content="_token">
+<meta name="csrf-token" content="CQKpBpLWZctkGwMAXTA3qzqZwlISrpyuK5TL4Bqf">
+<meta name="turbolinks-cache-control" content="no-preview">
+<meta name="ga-tracking-id" content="UA-4774947-8">
+<link href="./osu_files/css" rel="stylesheet" type="text/css">
+<link href="./osu_files/css(1)" rel="stylesheet" type="text/css">
+<link rel="stylesheet" media="all" href="./osu_files/app.css" data-turbolinks-track="reload">
+<link rel="stylesheet" media="all" href="./osu_files/default-skin.css">
+<script>
+    var currentLocale = "en";
+    var fallbackLocale = "en";
+</script><style></style>
+<script src="./osu_files/vendor.js.download" data-turbolinks-track="reload"></script>
+<script src="./osu_files/raven.min.js.download" crossorigin="anonymous"></script>
+<script>
+        Raven.config('https://96bab5fc040d4fbba1dce8e8b2df65d2@sentry.io/24197', {release: '20171115-2066-180d9e2'}).install();
+        Raven.setUserContext({lang: currentLocale});
+    </script>
+<script src="./osu_files/app-deps.js.download" data-turbolinks-track="reload"></script>
+<script src="./osu_files/app.js.download" data-turbolinks-track="reload"></script>
+<script src="./osu_files/jquery.timeago.en.js.download" data-turbolinks-track="reload"></script>
+<title>
+                            rankings / performance
+                    </title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style id="style-1-cropbar-clipper">/* Copyright 2014 Evernote Corporation. All rights reserved. */
+.en-markup-crop-options {
+    top: 18px !important;
+    left: 50% !important;
+    margin-left: -100px !important;
+    width: 200px !important;
+    border: 2px rgba(255,255,255,.38) solid !important;
+    border-radius: 4px !important;
+}
+
+.en-markup-crop-options div div:first-of-type {
+    margin-left: 0px !important;
+}
+</style></head>
+<body class="
+            osu-layout
+            osu-layout--body
+            t-section-rankings
+            action-index
+            
+        ">
+<div id="overlay" class="blackout blackout--overlay" style="display: none;"></div>
+<div class="blackout js-blackout" data-visibility="hidden"></div>
+<div class="visible-xs no-print js-header--main">
+<div class="
+            navbar-mobile
+            navbar
+            navbar-default
+            navbar-static-top
+            u-section--bg
+        " role="navigation">
+<div class="container">
+<div class="navbar-header navbar-mobile__header">
+<div class="navbar-mobile__header-section">
+<a class="navbar-mobile__logo" href="https://osu.ppy.sh/home"></a>
+<span class="navbar-mobile__brand navbar-brand u-ellipsis-overflow">
+performance
+</span>
+</div>
+<div class="navbar-mobile__header-section navbar-mobile__header-section--buttons">
+<a href="https://osu.ppy.sh/forum/ucp.php?i=pm&amp;folder=inbox" class="notification-icon notification-icon--mobile">
+<i class="fa fa-lg fa-fw fa-inbox notification-icon__inbox"></i>
+<span class="notification-icon__count"></span>
+</a>
+<a href="https://osu.ppy.sh/users/5652163" class="avatar avatar--navbar-mobile js-navbar-mobile--top-icon" style="background-image: url(&#39;https://a.ppy.sh/5652163?1474856093.png&#39;);">
+</a>
+<button type="button" class="navbar-toggle navbar-mobile__toggle u-section--color-hover" data-toggle="collapse" data-target="#xs-navbar">
+<span class="sr-only">Toggle navigation</span>
+<span class="navbar-mobile__toggle-icon">
+<i class="fa fa-bars"></i>
+</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<div class="collapse navbar-collapse navbar-mobile__menu js-navbar-mobile--menu" id="xs-navbar">
+<ul class="nav navbar-nav navbar-mobile__menu-items">
+<li class="navbar-mobile-item navbar-mobile-item--user">
+<a class="navbar-mobile-item__main navbar-mobile-item__main--user" href="https://osu.ppy.sh/users/5652163" data-toggle="collapse" data-target=".js-navbar-mobile--menu">
+<span class="avatar avatar--navbar-mobile" style="background-image: url(&#39;https://a.ppy.sh/5652163?1474856093.png&#39;);"></span>
+Patriot720
+</a>
+<a class="navbar-mobile-item__main navbar-mobile-item__main--logout js-logout-link" href="https://osu.ppy.sh/session" data-method="DELETE" data-confirm="Are you sure you want to log out? :(" data-remote="1" data-toggle="collapse" data-target=".js-navbar-mobile--menu">
+<i class="fa fa-sign-out"></i>
+</a>
+</li>
+<li class="navbar-mobile-item dropdown">
+<a data-toggle="dropdown" class="navbar-mobile-item__main dropdown-toggle" href="https://osu.ppy.sh/home/news">
+<span class="navbar-mobile-item__icon navbar-mobile-item__icon--main navbar-mobile-item__icon--closed">
+<i class="fa fa-chevron-right"></i>
+</span>
+<span class="navbar-mobile-item__icon navbar-mobile-item__icon--main navbar-mobile-item__icon--opened">
+<i class="fa fa-chevron-down"></i>
+</span>
+home
+</a>
+<ul class="dropdown-menu" role="menu" aria-labelledby="expand-home">
+<li>
+<a class="navbar-mobile-item__submenu" href="https://osu.ppy.sh/home/news" data-toggle="collapse" data-target=".js-navbar-mobile--menu">
+<span class="navbar-mobile-item__icon">
+<i class="fa fa-chevron-right"></i>
+</span>
+news
+</a>
+</li>
+<li>
+<a class="navbar-mobile-item__submenu" href="https://osu.ppy.sh/home/friends" data-toggle="collapse" data-target=".js-navbar-mobile--menu">
+<span class="navbar-mobile-item__icon">
+<i class="fa fa-chevron-right"></i>
+</span>
+friends
+</a>
+</li>
+<li>
+<a class="navbar-mobile-item__submenu" href="https://osu.ppy.sh/home/changelog" data-toggle="collapse" data-target=".js-navbar-mobile--menu">
+<span class="navbar-mobile-item__icon">
+<i class="fa fa-chevron-right"></i>
+</span>
+changelog
+</a>
+</li>
+<li>
+<a class="navbar-mobile-item__submenu" href="https://osu.ppy.sh/home/download" data-toggle="collapse" data-target=".js-navbar-mobile--menu">
+<span class="navbar-mobile-item__icon">
+<i class="fa fa-chevron-right"></i>
+</span>
+download
+</a>
+</li>
+<li>
+<a class="navbar-mobile-item__submenu" href="https://osu.ppy.sh/home/search" data-toggle="collapse" data-target=".js-navbar-mobile--menu">
+<span class="navbar-mobile-item__icon">
+<i class="fa fa-chevron-right"></i>
+</span>
+search
+</a>
+</li>
+</ul>
+</li>
+<li class="navbar-mobile-item dropdown">
+<a data-toggle="dropdown" class="navbar-mobile-item__main dropdown-toggle" href="https://osu.ppy.sh/help/wiki/Welcome">
+<span class="navbar-mobile-item__icon navbar-mobile-item__icon--main navbar-mobile-item__icon--closed">
+<i class="fa fa-chevron-right"></i>
+</span>
+<span class="navbar-mobile-item__icon navbar-mobile-item__icon--main navbar-mobile-item__icon--opened">
+<i class="fa fa-chevron-down"></i>
+</span>
+help
+</a>
+<ul class="dropdown-menu" role="menu" aria-labelledby="expand-help">
+<li>
+<a class="navbar-mobile-item__submenu" href="https://osu.ppy.sh/help/wiki/Welcome" data-toggle="collapse" data-target=".js-navbar-mobile--menu">
+<span class="navbar-mobile-item__icon">
+<i class="fa fa-chevron-right"></i>
+</span>
+wiki
+</a>
+</li>
+<li>
+<a class="navbar-mobile-item__submenu" href="https://osu.ppy.sh/help/wiki/FAQ" data-toggle="collapse" data-target=".js-navbar-mobile--menu">
+<span class="navbar-mobile-item__icon">
+<i class="fa fa-chevron-right"></i>
+</span>
+faq
+</a>
+</li>
+<li>
+<a class="navbar-mobile-item__submenu" href="https://osu.ppy.sh/help/wiki/Help_Center" data-toggle="collapse" data-target=".js-navbar-mobile--menu">
+<span class="navbar-mobile-item__icon">
+<i class="fa fa-chevron-right"></i>
+</span>
+support
+</a>
+</li>
+</ul>
+</li>
+<li class="navbar-mobile-item dropdown">
+<a data-toggle="dropdown" class="navbar-mobile-item__main dropdown-toggle" href="https://osu.ppy.sh/rankings/osu/performance">
+<span class="navbar-mobile-item__icon navbar-mobile-item__icon--main navbar-mobile-item__icon--closed">
+<i class="fa fa-chevron-right"></i>
+</span>
+<span class="navbar-mobile-item__icon navbar-mobile-item__icon--main navbar-mobile-item__icon--opened">
+<i class="fa fa-chevron-down"></i>
+</span>
+rankings
+</a>
+<ul class="dropdown-menu" role="menu" aria-labelledby="expand-rankings">
+<li>
+<a class="navbar-mobile-item__submenu" href="https://osu.ppy.sh/rankings/osu/performance" data-toggle="collapse" data-target=".js-navbar-mobile--menu">
+<span class="navbar-mobile-item__icon">
+<i class="fa fa-chevron-right"></i>
+</span>
+performance
+</a>
+</li>
+<li>
+<a class="navbar-mobile-item__submenu" href="https://osu.ppy.sh/p/chart" data-toggle="collapse" data-target=".js-navbar-mobile--menu">
+<span class="navbar-mobile-item__icon">
+<i class="fa fa-chevron-right"></i>
+</span>
+charts
+</a>
+</li>
+<li>
+<a class="navbar-mobile-item__submenu" href="https://osu.ppy.sh/rankings/osu/score" data-toggle="collapse" data-target=".js-navbar-mobile--menu">
+<span class="navbar-mobile-item__icon">
+<i class="fa fa-chevron-right"></i>
+</span>
+score
+</a>
+</li>
+<li>
+<a class="navbar-mobile-item__submenu" href="https://osu.ppy.sh/rankings/osu/country" data-toggle="collapse" data-target=".js-navbar-mobile--menu">
+<span class="navbar-mobile-item__icon">
+<i class="fa fa-chevron-right"></i>
+</span>
+country
+</a>
+</li>
+<li>
+<a class="navbar-mobile-item__submenu" href="https://osu.ppy.sh/p/kudosu" data-toggle="collapse" data-target=".js-navbar-mobile--menu">
+<span class="navbar-mobile-item__icon">
+<i class="fa fa-chevron-right"></i>
+</span>
+kudosu
+</a>
+</li>
+</ul>
+</li>
+<li class="navbar-mobile-item dropdown">
+<a data-toggle="dropdown" class="navbar-mobile-item__main dropdown-toggle" href="https://osu.ppy.sh/beatmapsets">
+<span class="navbar-mobile-item__icon navbar-mobile-item__icon--main navbar-mobile-item__icon--closed">
+<i class="fa fa-chevron-right"></i>
+</span>
+<span class="navbar-mobile-item__icon navbar-mobile-item__icon--main navbar-mobile-item__icon--opened">
+<i class="fa fa-chevron-down"></i>
+</span>
+beatmaps
+</a>
+<ul class="dropdown-menu" role="menu" aria-labelledby="expand-beatmaps">
+<li>
+<a class="navbar-mobile-item__submenu" href="https://osu.ppy.sh/beatmapsets" data-toggle="collapse" data-target=".js-navbar-mobile--menu">
+<span class="navbar-mobile-item__icon">
+<i class="fa fa-chevron-right"></i>
+</span>
+listing
+</a>
+</li>
+<li>
+<a class="navbar-mobile-item__submenu" href="https://osu.ppy.sh/beatmaps/artists" data-toggle="collapse" data-target=".js-navbar-mobile--menu">
+<span class="navbar-mobile-item__icon">
+<i class="fa fa-chevron-right"></i>
+</span>
+featured artists
+</a>
+</li>
+<li>
+<a class="navbar-mobile-item__submenu" href="https://osu.ppy.sh/beatmaps/packs" data-toggle="collapse" data-target=".js-navbar-mobile--menu">
+<span class="navbar-mobile-item__icon">
+<i class="fa fa-chevron-right"></i>
+</span>
+packs
+</a>
+</li>
+</ul>
+</li>
+<li class="navbar-mobile-item dropdown">
+<a data-toggle="dropdown" class="navbar-mobile-item__main dropdown-toggle" href="https://osu.ppy.sh/community/forums">
+<span class="navbar-mobile-item__icon navbar-mobile-item__icon--main navbar-mobile-item__icon--closed">
+<i class="fa fa-chevron-right"></i>
+</span>
+<span class="navbar-mobile-item__icon navbar-mobile-item__icon--main navbar-mobile-item__icon--opened">
+<i class="fa fa-chevron-down"></i>
+</span>
+community
+</a>
+<ul class="dropdown-menu" role="menu" aria-labelledby="expand-community">
+<li>
+<a class="navbar-mobile-item__submenu" href="https://osu.ppy.sh/community/forums" data-toggle="collapse" data-target=".js-navbar-mobile--menu">
+<span class="navbar-mobile-item__icon">
+<i class="fa fa-chevron-right"></i>
+</span>
+forum
+</a>
+</li>
+<li>
+<a class="navbar-mobile-item__submenu" href="https://osu.ppy.sh/community/contests" data-toggle="collapse" data-target=".js-navbar-mobile--menu">
+<span class="navbar-mobile-item__icon">
+<i class="fa fa-chevron-right"></i>
+</span>
+contests
+</a>
+</li>
+<li>
+<a class="navbar-mobile-item__submenu" href="https://osu.ppy.sh/community/tournaments" data-toggle="collapse" data-target=".js-navbar-mobile--menu">
+<span class="navbar-mobile-item__icon">
+<i class="fa fa-chevron-right"></i>
+</span>
+tournaments
+ </a>
+</li>
+<li>
+<a class="navbar-mobile-item__submenu" href="https://osu.ppy.sh/community/livestreams" data-toggle="collapse" data-target=".js-navbar-mobile--menu">
+<span class="navbar-mobile-item__icon">
+<i class="fa fa-chevron-right"></i>
+</span>
+live
+</a>
+</li>
+<li>
+<a class="navbar-mobile-item__submenu" href="https://discord.gg/ppy" data-toggle="collapse" data-target=".js-navbar-mobile--menu">
+<span class="navbar-mobile-item__icon">
+<i class="fa fa-chevron-right"></i>
+</span>
+osu!dev
+</a>
+</li>
+</ul>
+</li>
+<li class="navbar-mobile-item dropdown">
+<a data-toggle="dropdown" class="navbar-mobile-item__main dropdown-toggle" href="https://osu.ppy.sh/store/listing">
+<span class="navbar-mobile-item__icon navbar-mobile-item__icon--main navbar-mobile-item__icon--closed">
+<i class="fa fa-chevron-right"></i>
+</span>
+<span class="navbar-mobile-item__icon navbar-mobile-item__icon--main navbar-mobile-item__icon--opened">
+<i class="fa fa-chevron-down"></i>
+</span>
+store
+</a>
+<ul class="dropdown-menu" role="menu" aria-labelledby="expand-store">
+<li>
+<a class="navbar-mobile-item__submenu" href="https://osu.ppy.sh/store/listing" data-toggle="collapse" data-target=".js-navbar-mobile--menu">
+<span class="navbar-mobile-item__icon">
+<i class="fa fa-chevron-right"></i>
+</span>
+listing
+</a>
+</li>
+<li>
+<a class="navbar-mobile-item__submenu" href="https://osu.ppy.sh/store/cart" data-toggle="collapse" data-target=".js-navbar-mobile--menu">
+<span class="navbar-mobile-item__icon">
+<i class="fa fa-chevron-right"></i>
+</span>
+cart
+</a>
+</li>
+</ul>
+</li>
+<li class="navbar-mobile-item dropdown">
+<a data-toggle="dropdown" class="navbar-mobile-item__main dropdown-toggle" href="https://osu.ppy.sh/rankings/osu/performance#">
+<span class="navbar-mobile-item__icon navbar-mobile-item__icon--main navbar-mobile-item__icon--closed">
+<i class="fa fa-chevron-right"></i>
+</span>
+<span class="navbar-mobile-item__icon navbar-mobile-item__icon--main navbar-mobile-item__icon--opened">
+<i class="fa fa-chevron-down"></i>
+</span>
+<span class="navbar-mobile-item__locale-flag" style="background-image: url(&#39;/images/flags/GB.png&#39;)"></span>
+English
+</a>
+<ul class="dropdown-menu">
+<li>
+<a class="navbar-mobile-item__submenu" href="https://osu.ppy.sh/home/set-locale?locale=en" data-remote="1" data-method="POST" data-toggle="collapse" data-target=".js-navbar-mobile--menu">
+ <span class="navbar-mobile-item__icon">
+<i class="fa fa-chevron-right"></i>
+</span>
+<span class="navbar-mobile-item__locale-flag" style="background-image: url(&#39;/images/flags/GB.png&#39;)"></span>
+English
+</a>
+</li>
+<li>
+<a class="navbar-mobile-item__submenu" href="https://osu.ppy.sh/home/set-locale?locale=es" data-remote="1" data-method="POST" data-toggle="collapse" data-target=".js-navbar-mobile--menu">
+<span class="navbar-mobile-item__icon">
+<i class="fa fa-chevron-right"></i>
+</span>
+<span class="navbar-mobile-item__locale-flag" style="background-image: url(&#39;/images/flags/ES.png&#39;)"></span>
+Español
+</a>
+</li>
+<li>
+<a class="navbar-mobile-item__submenu" href="https://osu.ppy.sh/home/set-locale?locale=fr" data-remote="1" data-method="POST" data-toggle="collapse" data-target=".js-navbar-mobile--menu">
+<span class="navbar-mobile-item__icon">
+<i class="fa fa-chevron-right"></i>
+</span>
+<span class="navbar-mobile-item__locale-flag" style="background-image: url(&#39;/images/flags/FR.png&#39;)"></span>
+Français
+</a>
+</li>
+<li>
+<a class="navbar-mobile-item__submenu" href="https://osu.ppy.sh/home/set-locale?locale=it" data-remote="1" data-method="POST" data-toggle="collapse" data-target=".js-navbar-mobile--menu">
+<span class="navbar-mobile-item__icon">
+<i class="fa fa-chevron-right"></i>
+</span>
+<span class="navbar-mobile-item__locale-flag" style="background-image: url(&#39;/images/flags/IT.png&#39;)"></span>
+Italiano
+</a>
+</li>
+<li>
+<a class="navbar-mobile-item__submenu" href="https://osu.ppy.sh/home/set-locale?locale=ko" data-remote="1" data-method="POST" data-toggle="collapse" data-target=".js-navbar-mobile--menu">
+<span class="navbar-mobile-item__icon">
+<i class="fa fa-chevron-right"></i>
+</span>
+<span class="navbar-mobile-item__locale-flag" style="background-image: url(&#39;/images/flags/KR.png&#39;)"></span>
+한국어
+</a>
+</li>
+<li>
+<a class="navbar-mobile-item__submenu" href="https://osu.ppy.sh/home/set-locale?locale=nl" data-remote="1" data-method="POST" data-toggle="collapse" data-target=".js-navbar-mobile--menu">
+<span class="navbar-mobile-item__icon">
+<i class="fa fa-chevron-right"></i>
+</span>
+<span class="navbar-mobile-item__locale-flag" style="background-image: url(&#39;/images/flags/NL.png&#39;)"></span>
+Nederlands
+</a>
+</li>
+<li>
+<a class="navbar-mobile-item__submenu" href="https://osu.ppy.sh/home/set-locale?locale=pl" data-remote="1" data-method="POST" data-toggle="collapse" data-target=".js-navbar-mobile--menu">
+<span class="navbar-mobile-item__icon">
+<i class="fa fa-chevron-right"></i>
+</span>
+<span class="navbar-mobile-item__locale-flag" style="background-image: url(&#39;/images/flags/PL.png&#39;)"></span>
+Polski
+</a>
+</li>
+<li>
+<a class="navbar-mobile-item__submenu" href="https://osu.ppy.sh/home/set-locale?locale=pt-br" data-remote="1" data-method="POST" data-toggle="collapse" data-target=".js-navbar-mobile--menu">
+<span class="navbar-mobile-item__icon">
+<i class="fa fa-chevron-right"></i>
+</span>
+<span class="navbar-mobile-item__locale-flag" style="background-image: url(&#39;/images/flags/BR.png&#39;)"></span>
+Português (Brasil)
+</a>
+</li>
+<li>
+<a class="navbar-mobile-item__submenu" href="https://osu.ppy.sh/home/set-locale?locale=ru" data-remote="1" data-method="POST" data-toggle="collapse" data-target=".js-navbar-mobile--menu">
+<span class="navbar-mobile-item__icon">
+<i class="fa fa-chevron-right"></i>
+</span>
+<span class="navbar-mobile-item__locale-flag" style="background-image: url(&#39;/images/flags/RU.png&#39;)"></span>
+Русский
+</a>
+</li>
+<li>
+<a class="navbar-mobile-item__submenu" href="https://osu.ppy.sh/home/set-locale?locale=zh" data-remote="1" data-method="POST" data-toggle="collapse" data-target=".js-navbar-mobile--menu">
+<span class="navbar-mobile-item__icon">
+<i class="fa fa-chevron-right"></i>
+</span>
+<span class="navbar-mobile-item__locale-flag" style="background-image: url(&#39;/images/flags/CN.png&#39;)"></span>
+中文
+</a>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<nav class="osu-layout__section osu-layout__section--minimum no-print js-header--main hidden-xs">
+<div class="bg u-section-bg">
+<div class="bg__triangles bg__triangles--1"></div>
+<div class="bg__triangles bg__triangles--2"></div>
+<div class="bg__triangles bg__triangles--3"></div>
+<div class="bg__gradient-overlay u-section--gradient-down"></div>
+</div>
+
+<div class="osu-nav js-nav-popup js-nav-search--popup-width-reference">
+<a class="osu-nav__col osu-nav__col--logo u-nav-float" href="https://osu.ppy.sh/home">
+<div href="#" class="logo">
+<span class="logo__main logo__main--glow"></span>
+<span class="logo__main logo__main--glow logo__main--delayed"></span>
+<span class="logo__main logo__main--bounce"></span>
+<span class="logo__main logo__main--overlay"></span>
+</div>
+</a>
+<div class="osu-nav__col osu-nav__col--title js-nav-switch js-nav-switch--active" data-nav-mode="default">
+<div class="osu-nav__title u-ellipsis-overflow">
+rankings
+<span class="osu-nav__title-separator">
+<i class="fa fa-angle-right"></i>
+<span class="hidden">-</span>
+</span>
+performance
+<div class="osu-nav__highlight-bar">
+<span class="bar"></span>
+</div>
+</div>
+</div>
+<div class="osu-nav__col js-nav-switch js-nav-search--input-container" data-nav-mode="search" data-nav-mode-switch="0">
+<div class="osu-nav__highlight-bar">
+<span class="bar"></span>
+</div>
+<label class="header-search-box js-parent-focus">
+<input class="header-search-box__input js-nav-search--input" name="query" data-min-length="2">
+<a href="https://osu.ppy.sh/rankings/osu/performance#" class="js-nav-search--run-link header-search-box__icon">
+<i class="fa fa-fw fa-search"></i>
+</a>
+</label>
+</div>
+<div class="osu-nav__col">
+<a href="https://osu.ppy.sh/forum/ucp.php?i=pm&amp;folder=inbox" class="notification-icon">
+<i class="fa fa-inbox"></i>
+</a>
+</div>
+<a class="osu-nav__col u-nav-float js-nav-switch js-user-header" href="https://osu.ppy.sh/rankings/osu/performance#" data-nav-mode="user">
+<div>
+<div class="osu-nav__title">
+Patriot720
+</div>
+<div class="osu-nav__highlight-bar">
+<span class="bar"></span>
+</div>
+</div>
+<div class="osu-nav__avatar">
+<div class="
+            avatar
+            avatar--full-rounded
+            
+            js-nav-avatar
+            js-current-user-avatar
+        " style="background-image: url(&quot;https://a.ppy.sh/5652163?1474856093.png&quot;);"></div>
+</div>
+</a>
+</div>
+</nav>
+<div class="js-user-verification--reference"></div>
+<div class="js-nav-data" id="nav-data-master" data-turbolinks-permanent="" data-current-mode="default"></div>
+<div class="js-nav-popup--beacon"></div>
+<div class="js-nav-popup--container u-nav-popup no-print">
+<div class="osu-page js-nav-popup js-nav-popup--popup">
+<div class="nav-popup-box js-nav-switch--menu js-nav-switch--active" data-nav-mode="default">
+<div class="nav-popup-box__slide-y">
+<div class="nav-popup-box__content">
+<div class="hidden-xs nav-popup nav-popup--main">
+<div class="nav-popup__menu">
+<a class="js-menu                     js-nav-section-link                                          nav-popup__menu-head" data-menu-default="" data-menu-target="header--home" href="https://osu.ppy.sh/home/news">
+<div class="nav-popup__menu-head-bar">
+<span class="bar bar--double"></span>
+</div>
+<div class="fake-bold" data-content="home">
+home
+</div>
+</a>
+<div class="nav-popup__submenu-container">
+<div class="js-menu nav-popup__submenu" data-menu-id="header--home" data-visibility="hidden" data-visibility-animation="none">
+<a class="nav-popup__link" href="https://osu.ppy.sh/home/news">
+news
+<div class="nav-popup__link-marker">
+<i class="fa fa-angle-right"></i>
+</div>
+</a>
+<a class="nav-popup__link" href="https://osu.ppy.sh/home/friends">
+friends
+<div class="nav-popup__link-marker">
+<i class="fa fa-angle-right"></i>
+</div>
+</a>
+<a class="nav-popup__link" href="https://osu.ppy.sh/home/changelog">
+changelog
+<div class="nav-popup__link-marker">
+<i class="fa fa-angle-right"></i>
+</div>
+</a>
+<a class="nav-popup__link" href="https://osu.ppy.sh/home/download">
+download
+<div class="nav-popup__link-marker">
+<i class="fa fa-angle-right"></i>
+</div>
+</a>
+<a class="nav-popup__link" href="https://osu.ppy.sh/home/search">
+search
+<div class="nav-popup__link-marker">
+<i class="fa fa-angle-right"></i>
+</div>
+</a>
+</div>
+</div>
+</div>
+<div class="nav-popup__menu">
+<a class="js-menu                     js-nav-section-link                                          nav-popup__menu-head" data-menu-default="" data-menu-target="header--help" href="https://osu.ppy.sh/help/wiki/Welcome">
+<div class="nav-popup__menu-head-bar">
+<span class="bar bar--double"></span>
+</div>
+<div class="fake-bold" data-content="help">
+help
+</div>
+</a>
+<div class="nav-popup__submenu-container">
+<div class="js-menu nav-popup__submenu" data-menu-id="header--help" data-visibility="hidden" data-visibility-animation="none">
+<a class="nav-popup__link" href="https://osu.ppy.sh/help/wiki/Welcome">
+wiki
+<div class="nav-popup__link-marker">
+<i class="fa fa-angle-right"></i>
+</div>
+</a>
+<a class="nav-popup__link" href="https://osu.ppy.sh/help/wiki/FAQ">
+faq
+<div class="nav-popup__link-marker">
+<i class="fa fa-angle-right"></i>
+</div>
+</a>
+<a class="nav-popup__link" href="https://osu.ppy.sh/help/wiki/Help_Center">
+support
+<div class="nav-popup__link-marker">
+<i class="fa fa-angle-right"></i>
+</div>
+</a>
+</div>
+</div>
+</div>
+<div class="nav-popup__menu">
+<a class="js-menu                     js-nav-section-link                     nav-popup__menu-head--active                     nav-popup__menu-head                  js-menu--active" data-menu-default="1" data-menu-target="header--rankings" href="https://osu.ppy.sh/rankings/osu/performance">
+<div class="nav-popup__menu-head-bar">
+<span class="bar bar--double"></span>
+</div>
+<div class="fake-bold" data-content="rankings">
+rankings
+</div>
+</a>
+<div class="nav-popup__submenu-container">
+<div class="js-menu nav-popup__submenu" data-menu-id="header--rankings" data-visibility="" data-visibility-animation="none">
+<a class="nav-popup__link" href="https://osu.ppy.sh/rankings/osu/performance">
+performance
+<div class="nav-popup__link-marker">
+<i class="fa fa-angle-right"></i>
+</div>
+</a>
+<a class="nav-popup__link" href="https://osu.ppy.sh/p/chart">
+charts
+<div class="nav-popup__link-marker">
+<i class="fa fa-angle-right"></i>
+</div>
+</a>
+<a class="nav-popup__link" href="https://osu.ppy.sh/rankings/osu/score">
+score
+<div class="nav-popup__link-marker">
+<i class="fa fa-angle-right"></i>
+</div>
+</a>
+<a class="nav-popup__link" href="https://osu.ppy.sh/rankings/osu/country">
+country
+<div class="nav-popup__link-marker">
+<i class="fa fa-angle-right"></i>
+</div>
+</a>
+<a class="nav-popup__link" href="https://osu.ppy.sh/p/kudosu">
+kudosu
+<div class="nav-popup__link-marker">
+<i class="fa fa-angle-right"></i>
+</div>
+</a>
+</div>
+</div>
+</div>
+<div class="nav-popup__menu">
+<a class="js-menu                     js-nav-section-link                                          nav-popup__menu-head" data-menu-default="" data-menu-target="header--beatmaps" href="https://osu.ppy.sh/beatmapsets">
+<div class="nav-popup__menu-head-bar">
+<span class="bar bar--double"></span>
+</div>
+<div class="fake-bold" data-content="beatmaps">
+beatmaps
+</div>
+</a>
+<div class="nav-popup__submenu-container">
+<div class="js-menu nav-popup__submenu" data-menu-id="header--beatmaps" data-visibility="hidden" data-visibility-animation="none">
+<a class="nav-popup__link" href="https://osu.ppy.sh/beatmapsets">
+listing
+<div class="nav-popup__link-marker">
+<i class="fa fa-angle-right"></i>
+</div>
+</a>
+<a class="nav-popup__link" href="https://osu.ppy.sh/beatmaps/artists">
+featured artists
+<div class="nav-popup__link-marker">
+<i class="fa fa-angle-right"></i>
+</div>
+</a>
+<a class="nav-popup__link" href="https://osu.ppy.sh/beatmaps/packs">
+packs
+<div class="nav-popup__link-marker">
+<i class="fa fa-angle-right"></i>
+</div>
+</a>
+</div>
+</div>
+</div>
+<div class="nav-popup__menu">
+<a class="js-menu                     js-nav-section-link                                          nav-popup__menu-head" data-menu-default="" data-menu-target="header--community" href="https://osu.ppy.sh/community/forums">
+<div class="nav-popup__menu-head-bar">
+<span class="bar bar--double"></span>
+</div>
+<div class="fake-bold" data-content="community">
+community
+</div>
+</a>
+<div class="nav-popup__submenu-container">
+<div class="js-menu nav-popup__submenu" data-menu-id="header--community" data-visibility="hidden" data-visibility-animation="none">
+<a class="nav-popup__link" href="https://osu.ppy.sh/community/forums">
+forum
+<div class="nav-popup__link-marker">
+<i class="fa fa-angle-right"></i>
+</div>
+</a>
+<a class="nav-popup__link" href="https://osu.ppy.sh/community/contests">
+contests
+<div class="nav-popup__link-marker">
+<i class="fa fa-angle-right"></i>
+</div>
+</a>
+<a class="nav-popup__link" href="https://osu.ppy.sh/community/tournaments">
+tournaments
+<div class="nav-popup__link-marker">
+<i class="fa fa-angle-right"></i>
+</div>
+</a>
+<a class="nav-popup__link" href="https://osu.ppy.sh/community/livestreams">
+live
+<div class="nav-popup__link-marker">
+<i class="fa fa-angle-right"></i>
+</div>
+</a>
+<a class="nav-popup__link" href="https://discord.gg/ppy">
+osu!dev
+<div class="nav-popup__link-marker">
+<i class="fa fa-angle-right"></i>
+</div>
+</a>
+</div>
+</div>
+</div>
+<div class="nav-popup__menu">
+<a class="js-menu                     js-nav-section-link                                          nav-popup__menu-head" data-menu-default="" data-menu-target="header--store" href="https://osu.ppy.sh/store/listing">
+<div class="nav-popup__menu-head-bar">
+<span class="bar bar--double"></span>
+</div>
+<div class="fake-bold" data-content="store">
+store
+</div>
+</a>
+<div class="nav-popup__submenu-container">
+<div class="js-menu nav-popup__submenu" data-menu-id="header--store" data-visibility="hidden" data-visibility-animation="none">
+<a class="nav-popup__link" href="https://osu.ppy.sh/store/listing">
+listing
+<div class="nav-popup__link-marker">
+<i class="fa fa-angle-right"></i>
+</div>
+</a>
+<a class="nav-popup__link" href="https://osu.ppy.sh/store/cart">
+cart
+<div class="nav-popup__link-marker">
+<i class="fa fa-angle-right"></i>
+</div>
+</a>
+</div>
+</div>
+</div>
+<div class="nav-popup__menu nav-popup__menu--locale">
+<a class="js-menu                 nav-popup__menu-head" data-menu-default="" data-menu-target="header--locale" href="https://osu.ppy.sh/rankings/osu/performance#">
+<div class="nav-popup__menu-head-bar">
+<span class="bar bar--double bar--locale"></span>
+</div>
+<div class="nav-popup__menu-icon" style="background-image: url(&#39;/images/flags/GB.png&#39;)"></div>
+<div class="fake-bold" data-content="English">
+English
+</div>
+</a>
+<div class="nav-popup__submenu-container">
+<div class="js-menu nav-popup__submenu" data-menu-id="header--locale" data-visibility="hidden" data-visibility-animation="none">
+<a class="nav-popup__link" href="https://osu.ppy.sh/home/set-locale?locale=en" data-remote="1" data-method="POST">
+<div class="nav-popup__menu-icon" style="background-image: url(&#39;/images/flags/GB.png&#39;)"></div>
+English
+<div class="nav-popup__link-marker">
+<i class="fa fa-angle-right"></i>
+</div>
+</a>
+<a class="nav-popup__link" href="https://osu.ppy.sh/home/set-locale?locale=es" data-remote="1" data-method="POST">
+<div class="nav-popup__menu-icon" style="background-image: url(&#39;/images/flags/ES.png&#39;)"></div>
+Español
+<div class="nav-popup__link-marker">
+<i class="fa fa-angle-right"></i>
+</div>
+</a>
+<a class="nav-popup__link" href="https://osu.ppy.sh/home/set-locale?locale=fr" data-remote="1" data-method="POST">
+<div class="nav-popup__menu-icon" style="background-image: url(&#39;/images/flags/FR.png&#39;)"></div>
+Français
+<div class="nav-popup__link-marker">
+<i class="fa fa-angle-right"></i>
+</div>
+</a>
+<a class="nav-popup__link" href="https://osu.ppy.sh/home/set-locale?locale=it" data-remote="1" data-method="POST">
+<div class="nav-popup__menu-icon" style="background-image: url(&#39;/images/flags/IT.png&#39;)"></div>
+Italiano
+<div class="nav-popup__link-marker">
+<i class="fa fa-angle-right"></i>
+</div>
+</a>
+<a class="nav-popup__link" href="https://osu.ppy.sh/home/set-locale?locale=ko" data-remote="1" data-method="POST">
+<div class="nav-popup__menu-icon" style="background-image: url(&#39;/images/flags/KR.png&#39;)"></div>
+한국어
+<div class="nav-popup__link-marker">
+<i class="fa fa-angle-right"></i>
+</div>
+</a>
+<a class="nav-popup__link" href="https://osu.ppy.sh/home/set-locale?locale=nl" data-remote="1" data-method="POST">
+<div class="nav-popup__menu-icon" style="background-image: url(&#39;/images/flags/NL.png&#39;)"></div>
+Nederlands
+<div class="nav-popup__link-marker">
+<i class="fa fa-angle-right"></i>
+</div>
+</a>
+<a class="nav-popup__link" href="https://osu.ppy.sh/home/set-locale?locale=pl" data-remote="1" data-method="POST">
+<div class="nav-popup__menu-icon" style="background-image: url(&#39;/images/flags/PL.png&#39;)"></div>
+Polski
+<div class="nav-popup__link-marker">
+<i class="fa fa-angle-right"></i>
+</div>
+</a>
+<a class="nav-popup__link" href="https://osu.ppy.sh/home/set-locale?locale=pt-br" data-remote="1" data-method="POST">
+<div class="nav-popup__menu-icon" style="background-image: url(&#39;/images/flags/BR.png&#39;)"></div>
+Português (Brasil)
+<div class="nav-popup__link-marker">
+<i class="fa fa-angle-right"></i>
+</div>
+</a>
+<a class="nav-popup__link" href="https://osu.ppy.sh/home/set-locale?locale=ru" data-remote="1" data-method="POST">
+<div class="nav-popup__menu-icon" style="background-image: url(&#39;/images/flags/RU.png&#39;)"></div>
+Русский
+<div class="nav-popup__link-marker">
+ <i class="fa fa-angle-right"></i>
+</div>
+</a>
+<a class="nav-popup__link" href="https://osu.ppy.sh/home/set-locale?locale=zh" data-remote="1" data-method="POST">
+<div class="nav-popup__menu-icon" style="background-image: url(&#39;/images/flags/CN.png&#39;)"></div>
+中文
+<div class="nav-popup__link-marker">
+<i class="fa fa-angle-right"></i>
+</div>
+</a>
+</div>
+</div>
+</div>
+<div class="nav-popup__socials">
+<a href="https://osu.ppy.sh/home/support" class="nav-popup__social nav-popup__social--support" title="support the game">
+<span class="fa fa-heart"></span>
+</a>
+<a href="https://osu.ppy.sh/help/wiki/Twitter" class="nav-popup__social nav-popup__social--twitter">
+<span class="fa fa-twitter"></span>
+</a>
+<a href="https://facebook.com/osugame" class="nav-popup__social nav-popup__social--facebook">
+<span class="fa fa-facebook-official"></span>
+</a>
+</div>
+<div class="nav-popup__bar">
+<span class="bar u-section-bg"></span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="nav-popup-box nav-popup-box--extra js-nav-switch--menu" data-nav-mode="search">
+<div class="nav-popup-box__slide-y">
+<div class="nav-popup-box__content">
+<div class="nav-popup js-nav-search--right-padded js-nav--hide" style="padding-right: 231.75px;">
+<div class="nav-search">
+<div class="js-nav-search--result hidden">
+</div>
+<div class="js-nav-search--initial">
+<div class="nav-search__box">
+Type to search!
+</div>
+</div>
+<div class="js-nav-search--loading hidden">
+<div class="nav-search__box">
+<span class="fa fa-spin fa-refresh"></span>
+</div>
+</div>
+<div class="js-nav-search--fail hidden">
+<div class="nav-search__box">
+<a href="https://osu.ppy.sh/rankings/osu/performance#" class="js-nav-search--run-link nav-search__link">
+Search failed. Click to retry.
+</a>
+</div>
+</div>
+</div>
+<div class="nav-popup__bar">
+<span class="bar u-section-bg"></span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="nav-popup-box nav-popup-box--extra js-nav-switch--menu" data-nav-mode="user">
+<div class="nav-popup-box__slide-y">
+<div class="nav-popup-box__content js-user-header-popup">
+<div class="nav-popup nav-popup--sections js-current-user-cover" style="background-image: url(&quot;https://osu.ppy.sh/images/headers/profile-covers/c3.jpg&quot;);">
+<div class="nav-popup__overlay"></div>
+<div class="nav-popup__section nav-popup__section--blank"></div>
+<div class="nav-popup__section nav-popup__section--user nav-popup__section--user-overview">
+<div class="nav-popup__row nav-popup__row--username">
+Patriot720
+</div>
+<div class="nav-popup__row nav-popup__row--with-gutter">
+<img class="nav-popup__flag" src="./osu_files/RU.png" title="Russian Federation">
+</div>
+</div>
+<div class="nav-popup__section nav-popup__section--user nav-popup__section--user-links">
+<a class="nav-popup__link" href="https://osu.ppy.sh/users/5652163">
+<div class="nav-popup__link-marker">
+<i class="fa fa-angle-right"></i>
+</div>
+My Profile
+</a>
+<a class="nav-popup__link" href="https://osu.ppy.sh/home/friends">
+<div class="nav-popup__link-marker">
+<i class="fa fa-angle-right"></i>
+</div>
+Friends
+</a>
+<a class="nav-popup__link" href="https://osu.ppy.sh/home/account/edit">
+<div class="nav-popup__link-marker">
+<i class="fa fa-angle-right"></i>
+</div>
+Settings
+</a>
+<a class="js-logout-link nav-popup__link" href="https://osu.ppy.sh/session" data-confirm="Are you sure you want to log out? :(" data-method="delete" data-remote="1">
+<div class="nav-popup__link-marker">
+<i class="fa fa-angle-right"></i>
+</div>
+Log Out
+</a>
+</div>
+<div class="nav-popup__bar">
+<span class="bar u-section-bg"></span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="popup-container">
+<div class="alert alert-dismissable popup-clone col-md-6 col-md-offset-3 text-center" style="display: none">
+<button type="button" data-dismiss="alert" class="close"><i class="fa fa-close"></i></button>
+<span class="popup-text"></span>
+</div>
+<div class="empty-popup empty-popup--clone" style="display: none">
+<div class="popup-content"></div>
+</div>
+</div>
+<div class="osu-layout__section osu-layout__section--full js-content rankings_index">
+<div class="osu-page">
+<ul class="page-mode">
+<li class="page-mode__item">
+<a class="page-mode-link page-mode-link--is-active" href="https://osu.ppy.sh/rankings/osu/performance">
+osu!
+<span class="page-mode-link__stripe"></span>
+</a>
+</li>
+<li class="page-mode__item">
+<a class="page-mode-link" href="https://osu.ppy.sh/rankings/taiko/performance">
+osu!taiko
+<span class="page-mode-link__stripe"></span>
+</a>
+</li>
+<li class="page-mode__item">
+<a class="page-mode-link" href="https://osu.ppy.sh/rankings/fruits/performance">
+osu!catch
+<span class="page-mode-link__stripe"></span>
+</a>
+</li>
+<li class="page-mode__item">
+<a class="page-mode-link" href="https://osu.ppy.sh/rankings/mania/performance">
+osu!mania
+<span class="page-mode-link__stripe"></span>
+</a>
+</li>
+</ul>
+<div class="ranking-page-header">
+<ul class="page-mode page-mode--ranking-page-mode-tabs">
+<li class="page-mode__item">
+<a class="page-mode-link page-mode-link--white page-mode-link--is-active" href="https://osu.ppy.sh/rankings/osu/performance">
+Performance
+<span class="page-mode-link__stripe page-mode-link__stripe--black"></span>
+</a>
+</li>
+<li class="page-mode__item">
+<span class="page-mode-link page-mode-link--white page-mode-link--is-disabled" title="Coming soon!™">
+Charts
+</span>
+</li>
+<li class="page-mode__item">
+<a class="page-mode-link page-mode-link--white" href="https://osu.ppy.sh/rankings/osu/score">
+Score
+<span class="page-mode-link__stripe page-mode-link__stripe--black"></span>
+</a>
+</li>
+<li class="page-mode__item">
+<a class="page-mode-link page-mode-link--white" href="https://osu.ppy.sh/rankings/osu/country">
+Country
+<span class="page-mode-link__stripe page-mode-link__stripe--black"></span>
+</a>
+</li>
+</ul>
+<hr class="page-mode__underline">
+<div class="ranking-page-header__title">
+<span class="ranking-page-header__title-type">Performance</span> Ranking
+</div>
+</div>
+</div>
+<div class="osu-page osu-page--small osu-page--rankings">
+<div class="ranking-page">
+<div class="ranking-page__jump-target" id="jump-target"></div>
+<table class="ranking-page-table">
+<thead>
+<tr>
+<th class="ranking-page-table__heading"></th>
+<th class="ranking-page-table__heading ranking-page-table__heading--main"></th>
+<th class="ranking-page-table__heading">
+Accuracy
+</th>
+<th class="ranking-page-table__heading">
+Play Count
+</th>
+<th class="ranking-page-table__heading ranking-page-table__heading--focused">
+Performance
+</th>
+<th class="ranking-page-table__heading ranking-page-table__heading--grade">
+SS
+</th>
+<th class="ranking-page-table__heading ranking-page-table__heading--grade">
+S
+</th>
+<th class="ranking-page-table__heading ranking-page-table__heading--grade">
+A
+</th>
+</tr>
+</thead>
+<tbody>
+<tr class="ranking-page-table__row">
+<td class="ranking-page-table__column ranking-page-table__column--rank">
+#1
+</td>
+<td class="ranking-page-table__column">
+<a class="ranking-page-table__user-link" href="https://osu.ppy.sh/users/124493">
+<span class="flag-country" title="South Korea" style="background-image: url(&#39;/images/flags/KR.png&#39;);"></span>
+<span class="ranking-page-table__user-link-text js-usercard" data-user-id="124493" data-tooltip-position="right center">
+Cookiezi
+</span>
+</a>
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+98.76%
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+19,586
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--focused">
+14,039
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+81
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+619
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+415
+</td>
+</tr>
+<tr class="ranking-page-table__row">
+<td class="ranking-page-table__column ranking-page-table__column--rank">
+#2
+</td>
+<td class="ranking-page-table__column">
+<a class="ranking-page-table__user-link" href="https://osu.ppy.sh/users/2558286">
+<span class="flag-country" title="Poland" style="background-image: url(&#39;/images/flags/PL.png&#39;);"></span>
+<span class="ranking-page-table__user-link-text js-usercard" data-user-id="2558286" data-tooltip-position="right center">
+Rafis
+</span>
+</a>
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+99.11%
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+225,179
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--focused">
+13,888
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+184
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+1,794
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+913
+</td>
+</tr>
+<tr class="ranking-page-table__row">
+<td class="ranking-page-table__column ranking-page-table__column--rank">
+#3
+</td>
+<td class="ranking-page-table__column">
+<a class="ranking-page-table__user-link" href="https://osu.ppy.sh/users/4787150">
+<span class="flag-country" title="United States" style="background-image: url(&#39;/images/flags/US.png&#39;);"></span>
+<span class="ranking-page-table__user-link-text js-usercard" data-user-id="4787150" data-tooltip-position="right center">
+Vaxei
+</span>
+</a>
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+98.38%
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+111,918
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--focused">
+13,553
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+52
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+736
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+702
+</td>
+</tr>
+<tr class="ranking-page-table__row">
+<td class="ranking-page-table__column ranking-page-table__column--rank">
+#4
+</td>
+<td class="ranking-page-table__column">
+<a class="ranking-page-table__user-link" href="https://osu.ppy.sh/users/2831793">
+<span class="flag-country" title="France" style="background-image: url(&#39;/images/flags/FR.png&#39;);"></span>
+<span class="ranking-page-table__user-link-text js-usercard" data-user-id="2831793" data-tooltip-position="right center">
+filsdelama
+</span>
+</a>
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+98.88%
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+125,627
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--focused">
+13,481
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+219
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+1,624
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+586
+</td>
+</tr>
+<tr class="ranking-page-table__row">
+<td class="ranking-page-table__column ranking-page-table__column--rank">
+#5
+</td>
+<td class="ranking-page-table__column">
+<a class="ranking-page-table__user-link" href="https://osu.ppy.sh/users/1777162">
+<span class="flag-country" title="South Korea" style="background-image: url(&#39;/images/flags/KR.png&#39;);"></span>
+<span class="ranking-page-table__user-link-text js-usercard" data-user-id="1777162" data-tooltip-position="right center">
+firebat92
+</span>
+</a>
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+98.77%
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+132,857
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--focused">
+13,332
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+173
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+1,469
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+726
+</td>
+</tr>
+<tr class="ranking-page-table__row">
+<td class="ranking-page-table__column ranking-page-table__column--rank">
+#6
+</td>
+<td class="ranking-page-table__column">
+<a class="ranking-page-table__user-link" href="https://osu.ppy.sh/users/50265">
+<span class="flag-country" title="Taiwan" style="background-image: url(&#39;/images/flags/TW.png&#39;);"></span>
+<span class="ranking-page-table__user-link-text js-usercard" data-user-id="50265" data-tooltip-position="right center">
+hvick225
+</span>
+</a>
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+98.93%
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+134,059
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--focused">
+12,421
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+826
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+3,471
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+700
+</td>
+</tr>
+<tr class="ranking-page-table__row">
+<td class="ranking-page-table__column ranking-page-table__column--rank">
+#7
+</td>
+<td class="ranking-page-table__column">
+<a class="ranking-page-table__user-link" href="https://osu.ppy.sh/users/6304246">
+<span class="flag-country" title="Canada" style="background-image: url(&#39;/images/flags/CA.png&#39;);"></span>
+<span class="ranking-page-table__user-link-text js-usercard" data-user-id="6304246" data-tooltip-position="right center">
+_RyuK
+</span>
+</a>
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+98.42%
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+85,491
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--focused">
+12,210
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+39
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+1,134
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+703
+</td>
+</tr>
+<tr class="ranking-page-table__row">
+<td class="ranking-page-table__column ranking-page-table__column--rank">
+#8
+</td>
+<td class="ranking-page-table__column">
+<a class="ranking-page-table__user-link" href="https://osu.ppy.sh/users/2003326">
+<span class="flag-country" title="Singapore" style="background-image: url(&#39;/images/flags/SG.png&#39;);"></span>
+<span class="ranking-page-table__user-link-text js-usercard" data-user-id="2003326" data-tooltip-position="right center">
+Emilia
+</span>
+</a>
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+96.47%
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+85,222
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--focused">
+12,109
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+39
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+1,260
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+1,046
+</td>
+</tr>
+<tr class="ranking-page-table__row">
+<td class="ranking-page-table__column ranking-page-table__column--rank">
+#9
+</td>
+<td class="ranking-page-table__column">
+<a class="ranking-page-table__user-link" href="https://osu.ppy.sh/users/5339515">
+<span class="flag-country" title="Chile" style="background-image: url(&#39;/images/flags/CL.png&#39;);"></span>
+<span class="ranking-page-table__user-link-text js-usercard" data-user-id="5339515" data-tooltip-position="right center">
+Mathi
+</span>
+</a>
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+98.59%
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+111,760
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--focused">
+11,901
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+32
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+710
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+571
+</td>
+</tr>
+<tr class="ranking-page-table__row">
+<td class="ranking-page-table__column ranking-page-table__column--rank">
+#10
+</td>
+<td class="ranking-page-table__column">
+<a class="ranking-page-table__user-link" href="https://osu.ppy.sh/users/3219026">
+<span class="flag-country" title="Romania" style="background-image: url(&#39;/images/flags/RO.png&#39;);"></span>
+<span class="ranking-page-table__user-link-text js-usercard" data-user-id="3219026" data-tooltip-position="right center">
+Rohulk
+</span>
+</a>
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+99.44%
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+45,867
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--focused">
+11,763
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+85
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+2,294
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+2,080
+</td>
+</tr>
+<tr class="ranking-page-table__row">
+<td class="ranking-page-table__column ranking-page-table__column--rank">
+#11
+</td>
+<td class="ranking-page-table__column">
+<a class="ranking-page-table__user-link" href="https://osu.ppy.sh/users/4163860">
+<span class="flag-country" title="Poland" style="background-image: url(&#39;/images/flags/PL.png&#39;);"></span>
+<span class="ranking-page-table__user-link-text js-usercard" data-user-id="4163860" data-tooltip-position="right center">
+Piggey
+</span>
+</a>
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+98.98%
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+126,091
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--focused">
+11,736
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+ 101
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+1,796
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+790
+</td>
+</tr>
+<tr class="ranking-page-table__row">
+<td class="ranking-page-table__column ranking-page-table__column--rank">
+#12
+</td>
+<td class="ranking-page-table__column">
+<a class="ranking-page-table__user-link" href="https://osu.ppy.sh/users/2204373">
+<span class="flag-country" title="United Kingdom" style="background-image: url(&#39;/images/flags/GB.png&#39;);"></span>
+<span class="ranking-page-table__user-link-text js-usercard" data-user-id="2204373" data-tooltip-position="right center">
+Spare
+</span>
+</a>
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+99.21%
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+82,912
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--focused">
+11,735
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+410
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+1,668
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+1,128
+</td>
+</tr>
+<tr class="ranking-page-table__row">
+<td class="ranking-page-table__column ranking-page-table__column--rank">
+#13
+</td>
+<td class="ranking-page-table__column">
+<a class="ranking-page-table__user-link" href="https://osu.ppy.sh/users/754565">
+<span class="flag-country" title="Germany" style="background-image: url(&#39;/images/flags/DE.png&#39;);"></span>
+<span class="ranking-page-table__user-link-text js-usercard" data-user-id="754565" data-tooltip-position="right center">
+Dustice
+</span>
+</a>
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+98.93%
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+89,603
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--focused">
+11,589
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+123
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+2,473
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+1,426
+</td>
+</tr>
+<tr class="ranking-page-table__row">
+<td class="ranking-page-table__column ranking-page-table__column--rank">
+#14
+</td>
+<td class="ranking-page-table__column">
+<a class="ranking-page-table__user-link" href="https://osu.ppy.sh/users/4650315">
+<span class="flag-country" title="United States" style="background-image: url(&#39;/images/flags/US.png&#39;);"></span>
+<span class="ranking-page-table__user-link-text js-usercard" data-user-id="4650315" data-tooltip-position="right center">
+idke
+</span>
+</a>
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+98.78%
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+43,320
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--focused">
+11,479
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+17
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+539
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+413
+</td>
+</tr>
+<tr class="ranking-page-table__row">
+<td class="ranking-page-table__column ranking-page-table__column--rank">
+#15
+</td>
+<td class="ranking-page-table__column">
+<a class="ranking-page-table__user-link" href="https://osu.ppy.sh/users/5182050">
+<span class="flag-country" title="United Kingdom" style="background-image: url(&#39;/images/flags/GB.png&#39;);"></span>
+<span class="ranking-page-table__user-link-text js-usercard" data-user-id="5182050" data-tooltip-position="right center">
+Bubbleman
+</span>
+</a>
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+98.66%
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+78,872
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--focused">
+11,476
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+94
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+882
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+1,193
+</td>
+</tr>
+<tr class="ranking-page-table__row">
+<td class="ranking-page-table__column ranking-page-table__column--rank">
+#16
+</td>
+<td class="ranking-page-table__column">
+<a class="ranking-page-table__user-link" href="https://osu.ppy.sh/users/256802">
+<span class="flag-country" title="United States" style="background-image: url(&#39;/images/flags/US.png&#39;);"></span>
+<span class="ranking-page-table__user-link-text js-usercard" data-user-id="256802" data-tooltip-position="right center">
+HappyStick
+</span>
+</a>
+</td>
+ <td class="ranking-page-table__column ranking-page-table__column--dimmed">
+98.43%
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+195,130
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--focused">
+11,471
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+150
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+2,790
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+480
+</td>
+</tr>
+<tr class="ranking-page-table__row">
+<td class="ranking-page-table__column ranking-page-table__column--rank">
+#17
+</td>
+<td class="ranking-page-table__column">
+<a class="ranking-page-table__user-link" href="https://osu.ppy.sh/users/2165650">
+<span class="flag-country" title="Hong Kong" style="background-image: url(&#39;/images/flags/HK.png&#39;);"></span>
+<span class="ranking-page-table__user-link-text js-usercard" data-user-id="2165650" data-tooltip-position="right center">
+mcy3
+</span>
+</a>
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+97.21%
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+139,296
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--focused">
+11,445
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+16
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+615
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+664
+</td>
+</tr>
+<tr class="ranking-page-table__row">
+<td class="ranking-page-table__column ranking-page-table__column--rank">
+#18
+</td>
+<td class="ranking-page-table__column">
+<a class="ranking-page-table__user-link" href="https://osu.ppy.sh/users/1883865">
+<span class="flag-country" title="South Korea" style="background-image: url(&#39;/images/flags/KR.png&#39;);"></span>
+<span class="ranking-page-table__user-link-text js-usercard" data-user-id="1883865" data-tooltip-position="right center">
+Yaong
+</span>
+</a>
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+99.43%
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+102,713
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--focused">
+11,426
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+701
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+2,261
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+577
+</td>
+</tr>
+<tr class="ranking-page-table__row">
+<td class="ranking-page-table__column ranking-page-table__column--rank">
+#19
+</td>
+<td class="ranking-page-table__column">
+<a class="ranking-page-table__user-link" href="https://osu.ppy.sh/users/652457">
+<span class="flag-country" title="Russian Federation" style="background-image: url(&#39;/images/flags/RU.png&#39;);"></span>
+<span class="ranking-page-table__user-link-text js-usercard" data-user-id="652457" data-tooltip-position="right center">
+_index
+</span>
+</a>
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+98.68%
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+60,500
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--focused">
+11,384
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+426
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+1,571
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+535
+</td>
+</tr>
+<tr class="ranking-page-table__row">
+<td class="ranking-page-table__column ranking-page-table__column--rank">
+#20
+</td>
+<td class="ranking-page-table__column">
+<a class="ranking-page-table__user-link" href="https://osu.ppy.sh/users/1419095">
+<span class="flag-country" title="United States" style="background-image: url(&#39;/images/flags/US.png&#39;);"></span>
+<span class="ranking-page-table__user-link-text js-usercard" data-user-id="1419095" data-tooltip-position="right center">
+bro_gamer72
+</span>
+</a>
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+99.19%
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+86,735
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--focused">
+11,357
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+30
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+706
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+778
+</td>
+</tr>
+<tr class="ranking-page-table__row">
+<td class="ranking-page-table__column ranking-page-table__column--rank">
+#21
+</td>
+<td class="ranking-page-table__column">
+<a class="ranking-page-table__user-link" href="https://osu.ppy.sh/users/3069354">
+<span class="flag-country" title="Chile" style="background-image: url(&#39;/images/flags/CL.png&#39;);"></span>
+<span class="ranking-page-table__user-link-text js-usercard" data-user-id="3069354" data-tooltip-position="right center">
+DanyL
+</span>
+</a>
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+97.44%
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+81,938
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--focused">
+11,347
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+81
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+866
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+301
+</td>
+</tr>
+<tr class="ranking-page-table__row">
+<td class="ranking-page-table__column ranking-page-table__column--rank">
+#22
+</td>
+<td class="ranking-page-table__column">
+<a class="ranking-page-table__user-link" href="https://osu.ppy.sh/users/3043603">
+<span class="flag-country" title="United States" style="background-image: url(&#39;/images/flags/US.png&#39;);"></span>
+<span class="ranking-page-table__user-link-text js-usercard" data-user-id="3043603" data-tooltip-position="right center">
+kablaze
+</span>
+</a>
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+99.29%
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+115,324
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--focused">
+11,172
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+572
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+1,894
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+1,127
+</td>
+</tr>
+<tr class="ranking-page-table__row">
+<td class="ranking-page-table__column ranking-page-table__column--rank">
+#23
+</td>
+<td class="ranking-page-table__column">
+<a class="ranking-page-table__user-link" href="https://osu.ppy.sh/users/1389663">
+<span class="flag-country" title="Russian Federation" style="background-image: url(&#39;/images/flags/RU.png&#39;);"></span>
+<span class="ranking-page-table__user-link-text js-usercard" data-user-id="1389663" data-tooltip-position="right center">
+talala
+</span>
+</a>
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+98.71%
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+197,813
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--focused">
+11,126
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+137
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+2,475
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+1,573
+</td>
+</tr>
+<tr class="ranking-page-table__row">
+<td class="ranking-page-table__column ranking-page-table__column--rank">
+#24
+</td>
+<td class="ranking-page-table__column">
+<a class="ranking-page-table__user-link" href="https://osu.ppy.sh/users/39828">
+<span class="flag-country" title="Poland" style="background-image: url(&#39;/images/flags/PL.png&#39;);"></span>
+<span class="ranking-page-table__user-link-text js-usercard" data-user-id="39828" data-tooltip-position="right center">
+WubWoofWolf
+</span>
+</a>
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+99.31%
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+229,130
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--focused">
+11,120
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+8,502
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+9,855
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+1,917
+</td>
+</tr>
+<tr class="ranking-page-table__row">
+<td class="ranking-page-table__column ranking-page-table__column--rank">
+#25
+</td>
+<td class="ranking-page-table__column">
+<a class="ranking-page-table__user-link" href="https://osu.ppy.sh/users/1650010">
+<span class="flag-country" title="United States" style="background-image: url(&#39;/images/flags/US.png&#39;);"></span>
+<span class="ranking-page-table__user-link-text js-usercard" data-user-id="1650010" data-tooltip-position="right center">
+Aireu
+</span>
+</a>
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+98.57%
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+144,654
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--focused">
+11,117
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+417
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+1,784
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+548
+</td>
+</tr>
+<tr class="ranking-page-table__row">
+<td class="ranking-page-table__column ranking-page-table__column--rank">
+#26
+</td>
+<td class="ranking-page-table__column">
+<a class="ranking-page-table__user-link" href="https://osu.ppy.sh/users/613592">
+<span class="flag-country" title="Poland" style="background-image: url(&#39;/images/flags/PL.png&#39;);"></span>
+<span class="ranking-page-table__user-link-text js-usercard" data-user-id="613592" data-tooltip-position="right center">
+Adamqs
+</span>
+</a>
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+99.32%
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+156,515
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--focused">
+11,112
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+263
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+2,210
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+1,107
+</td>
+</tr>
+<tr class="ranking-page-table__row">
+<td class="ranking-page-table__column ranking-page-table__column--rank">
+#27
+</td>
+<td class="ranking-page-table__column">
+<a class="ranking-page-table__user-link" href="https://osu.ppy.sh/users/4852013">
+<span class="flag-country" title="United States" style="background-image: url(&#39;/images/flags/US.png&#39;);"></span>
+<span class="ranking-page-table__user-link-text js-usercard" data-user-id="4852013" data-tooltip-position="right center">
+Monko2k
+</span>
+</a>
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+99.01%
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+64,861
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--focused">
+11,048
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+88
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+1,677
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+1,564
+</td>
+</tr>
+<tr class="ranking-page-table__row">
+<td class="ranking-page-table__column ranking-page-table__column--rank">
+#28
+</td>
+<td class="ranking-page-table__column">
+<a class="ranking-page-table__user-link" href="https://osu.ppy.sh/users/84841">
+<span class="flag-country" title="Norway" style="background-image: url(&#39;/images/flags/NO.png&#39;);"></span>
+<span class="ranking-page-table__user-link-text js-usercard" data-user-id="84841" data-tooltip-position="right center">
+CXu
+</span>
+</a>
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+98.90%
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+111,778
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--focused">
+11,027
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+867
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+3,618
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+165
+</td>
+</tr>
+<tr class="ranking-page-table__row">
+<td class="ranking-page-table__column ranking-page-table__column--rank">
+#29
+</td>
+<td class="ranking-page-table__column">
+<a class="ranking-page-table__user-link" href="https://osu.ppy.sh/users/2291265">
+<span class="flag-country" title="Peru" style="background-image: url(&#39;/images/flags/PE.png&#39;);"></span>
+<span class="ranking-page-table__user-link-text js-usercard" data-user-id="2291265" data-tooltip-position="right center">
+Arnold24x24
+</span>
+</a>
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+99.05%
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+104,493
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--focused">
+11,016
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+304
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+1,270
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+902
+</td>
+</tr>
+<tr class="ranking-page-table__row">
+<td class="ranking-page-table__column ranking-page-table__column--rank">
+#30
+</td>
+<td class="ranking-page-table__column">
+<a class="ranking-page-table__user-link" href="https://osu.ppy.sh/users/2021758">
+<span class="flag-country" title="Poland" style="background-image: url(&#39;/images/flags/PL.png&#39;);"></span>
+<span class="ranking-page-table__user-link-text js-usercard" data-user-id="2021758" data-tooltip-position="right center">
+Wilchq
+</span>
+</a>
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+99.35%
+</td>
+ <td class="ranking-page-table__column ranking-page-table__column--dimmed">
+88,105
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--focused">
+11,007
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+1,618
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+4,001
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+252
+</td>
+</tr>
+<tr class="ranking-page-table__row">
+<td class="ranking-page-table__column ranking-page-table__column--rank">
+#31
+</td>
+<td class="ranking-page-table__column">
+<a class="ranking-page-table__user-link" href="https://osu.ppy.sh/users/557197">
+<span class="flag-country" title="China" style="background-image: url(&#39;/images/flags/CN.png&#39;);"></span>
+<span class="ranking-page-table__user-link-text js-usercard" data-user-id="557197" data-tooltip-position="right center">
+Totoki
+</span>
+</a>
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+97.83%
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+119,188
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--focused">
+11,003
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+234
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+3,397
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+840
+</td>
+</tr>
+<tr class="ranking-page-table__row">
+<td class="ranking-page-table__column ranking-page-table__column--rank">
+#32
+</td>
+<td class="ranking-page-table__column">
+<a class="ranking-page-table__user-link" href="https://osu.ppy.sh/users/2757689">
+<span class="flag-country" title="United States" style="background-image: url(&#39;/images/flags/US.png&#39;);"></span>
+<span class="ranking-page-table__user-link-text js-usercard" data-user-id="2757689" data-tooltip-position="right center">
+Toy
+</span>
+</a>
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+99.40%
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+192,198
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--focused">
+10,996
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+4,179
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+3,503
+</td>
+ <td class="ranking-page-table__column ranking-page-table__column--dimmed">
+630
+</td>
+</tr>
+<tr class="ranking-page-table__row">
+<td class="ranking-page-table__column ranking-page-table__column--rank">
+#33
+</td>
+<td class="ranking-page-table__column">
+<a class="ranking-page-table__user-link" href="https://osu.ppy.sh/users/251683">
+<span class="flag-country" title="France" style="background-image: url(&#39;/images/flags/FR.png&#39;);"></span>
+<span class="ranking-page-table__user-link-text js-usercard" data-user-id="251683" data-tooltip-position="right center">
+Musty
+</span>
+</a>
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+99.28%
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+108,365
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--focused">
+10,984
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+124
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+1,795
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+1,365
+</td>
+</tr>
+<tr class="ranking-page-table__row">
+<td class="ranking-page-table__column ranking-page-table__column--rank">
+#34
+</td>
+<td class="ranking-page-table__column">
+<a class="ranking-page-table__user-link" href="https://osu.ppy.sh/users/3641404">
+<span class="flag-country" title="Australia" style="background-image: url(&#39;/images/flags/AU.png&#39;);"></span>
+<span class="ranking-page-table__user-link-text js-usercard" data-user-id="3641404" data-tooltip-position="right center">
+uyghti
+</span>
+</a>
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+99.13%
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+141,298
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--focused">
+10,930
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+112
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+1,024
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+1,001
+</td>
+</tr>
+<tr class="ranking-page-table__row">
+<td class="ranking-page-table__column ranking-page-table__column--rank">
+#35
+</td>
+<td class="ranking-page-table__column">
+<a class="ranking-page-table__user-link" href="https://osu.ppy.sh/users/3110552">
+<span class="flag-country" title="Finland" style="background-image: url(&#39;/images/flags/FI.png&#39;);"></span>
+<span class="ranking-page-table__user-link-text js-usercard" data-user-id="3110552" data-tooltip-position="right center">
+Sanze
+</span>
+</a>
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+99.18%
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+160,647
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--focused">
+10,868
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+110
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+1,381
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+1,087
+</td>
+</tr>
+<tr class="ranking-page-table__row">
+<td class="ranking-page-table__column ranking-page-table__column--rank">
+#36
+</td>
+<td class="ranking-page-table__column">
+<a class="ranking-page-table__user-link" href="https://osu.ppy.sh/users/4495871">
+<span class="flag-country" title="Portugal" style="background-image: url(&#39;/images/flags/PT.png&#39;);"></span>
+<span class="ranking-page-table__user-link-text js-usercard" data-user-id="4495871" data-tooltip-position="right center">
+Mizuru
+</span>
+</a>
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+99.07%
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+86,606
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--focused">
+10,855
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+89
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+945
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+1,056
+</td>
+</tr>
+<tr class="ranking-page-table__row">
+<td class="ranking-page-table__column ranking-page-table__column--rank">
+#37
+</td>
+<td class="ranking-page-table__column">
+<a class="ranking-page-table__user-link" href="https://osu.ppy.sh/users/8482062">
+<span class="flag-country" title="United States" style="background-image: url(&#39;/images/flags/US.png&#39;);"></span>
+<span class="ranking-page-table__user-link-text js-usercard" data-user-id="8482062" data-tooltip-position="right center">
+freedomdiver
+</span>
+</a>
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+89.97%
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+44,710
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--focused">
+10,824
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+258
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+982
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+308
+</td>
+</tr>
+<tr class="ranking-page-table__row">
+<td class="ranking-page-table__column ranking-page-table__column--rank">
+#38
+</td>
+<td class="ranking-page-table__column">
+<a class="ranking-page-table__user-link" href="https://osu.ppy.sh/users/27055">
+<span class="flag-country" title="Poland" style="background-image: url(&#39;/images/flags/PL.png&#39;);"></span>
+<span class="ranking-page-table__user-link-text js-usercard" data-user-id="27055" data-tooltip-position="right center">
+Astar
+</span>
+</a>
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+98.07%
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+140,329
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--focused">
+10,802
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+130
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+2,119
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+1,451
+</td>
+</tr>
+<tr class="ranking-page-table__row">
+<td class="ranking-page-table__column ranking-page-table__column--rank">
+#39
+</td>
+<td class="ranking-page-table__column">
+<a class="ranking-page-table__user-link" href="https://osu.ppy.sh/users/843086">
+<span class="flag-country" title="South Korea" style="background-image: url(&#39;/images/flags/KR.png&#39;);"></span>
+<span class="ranking-page-table__user-link-text js-usercard" data-user-id="843086" data-tooltip-position="right center">
+Resia
+</span>
+</a>
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+95.41%
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+78,483
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--focused">
+10,783
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+47
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+1,535
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+ 790
+</td>
+</tr>
+<tr class="ranking-page-table__row">
+<td class="ranking-page-table__column ranking-page-table__column--rank">
+#40
+</td>
+<td class="ranking-page-table__column">
+<a class="ranking-page-table__user-link" href="https://osu.ppy.sh/users/1787027">
+<span class="flag-country" title="Japan" style="background-image: url(&#39;/images/flags/JP.png&#39;);"></span>
+<span class="ranking-page-table__user-link-text js-usercard" data-user-id="1787027" data-tooltip-position="right center">
+Recia
+</span>
+</a>
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+99.01%
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+101,061
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--focused">
+10,779
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+666
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+2,742
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+192
+</td>
+</tr>
+<tr class="ranking-page-table__row">
+<td class="ranking-page-table__column ranking-page-table__column--rank">
+#41
+</td>
+<td class="ranking-page-table__column">
+<a class="ranking-page-table__user-link" href="https://osu.ppy.sh/users/1837989">
+<span class="flag-country" title="Poland" style="background-image: url(&#39;/images/flags/PL.png&#39;);"></span>
+<span class="ranking-page-table__user-link-text js-usercard" data-user-id="1837989" data-tooltip-position="right center">
+MrBooM
+</span>
+</a>
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+99.14%
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+53,767
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--focused">
+10,721
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+22
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+892
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+552
+</td>
+</tr>
+<tr class="ranking-page-table__row">
+<td class="ranking-page-table__column ranking-page-table__column--rank">
+#42
+</td>
+<td class="ranking-page-table__column">
+<a class="ranking-page-table__user-link" href="https://osu.ppy.sh/users/2734971">
+<span class="flag-country" title="Sweden" style="background-image: url(&#39;/images/flags/SE.png&#39;);"></span>
+ <span class="ranking-page-table__user-link-text js-usercard" data-user-id="2734971" data-tooltip-position="right center">
+bango
+</span>
+</a>
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+97.39%
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+88,447
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--focused">
+10,718
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+6
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+295
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+543
+</td>
+</tr>
+<tr class="ranking-page-table__row">
+<td class="ranking-page-table__column ranking-page-table__column--rank">
+#43
+</td>
+<td class="ranking-page-table__column">
+<a class="ranking-page-table__user-link" href="https://osu.ppy.sh/users/4196808">
+<span class="flag-country" title="United Kingdom" style="background-image: url(&#39;/images/flags/GB.png&#39;);"></span>
+<span class="ranking-page-table__user-link-text js-usercard" data-user-id="4196808" data-tooltip-position="right center">
+Karthy
+</span>
+</a>
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+98.93%
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+86,150
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--focused">
+10,712
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+529
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+2,570
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+1,912
+</td>
+</tr>
+<tr class="ranking-page-table__row ranking-page-table__row--inactive">
+<td class="ranking-page-table__column ranking-page-table__column--rank">
+#44
+</td>
+<td class="ranking-page-table__column">
+<a class="ranking-page-table__user-link" href="https://osu.ppy.sh/users/4183454">
+<span class="flag-country" title="Japan" style="background-image: url(&#39;/images/flags/JP.png&#39;);"></span>
+<span class="ranking-page-table__user-link-text js-usercard" data-user-id="4183454" data-tooltip-position="right center">
+-Zirba-
+</span>
+</a>
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+98.83%
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+78,874
+</td>
+ <td class="ranking-page-table__column ranking-page-table__column--focused">
+10,655
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+40
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+829
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+809
+</td>
+</tr>
+<tr class="ranking-page-table__row">
+<td class="ranking-page-table__column ranking-page-table__column--rank">
+#45
+</td>
+<td class="ranking-page-table__column">
+<a class="ranking-page-table__user-link" href="https://osu.ppy.sh/users/3533958">
+<span class="flag-country" title="United States" style="background-image: url(&#39;/images/flags/US.png&#39;);"></span>
+<span class="ranking-page-table__user-link-text js-usercard" data-user-id="3533958" data-tooltip-position="right center">
+fieryrage
+</span>
+</a>
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+98.04%
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+65,809
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--focused">
+10,648
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+86
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+1,253
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+757
+</td>
+</tr>
+<tr class="ranking-page-table__row">
+<td class="ranking-page-table__column ranking-page-table__column--rank">
+#46
+</td>
+<td class="ranking-page-table__column">
+<a class="ranking-page-table__user-link" href="https://osu.ppy.sh/users/1558603">
+<span class="flag-country" title="Brazil" style="background-image: url(&#39;/images/flags/BR.png&#39;);"></span>
+<span class="ranking-page-table__user-link-text js-usercard" data-user-id="1558603" data-tooltip-position="right center">
+MouseEasy
+</span>
+</a>
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+98.03%
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+116,420
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--focused">
+10,641
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+257
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+1,510
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+1,183
+</td>
+</tr>
+<tr class="ranking-page-table__row">
+<td class="ranking-page-table__column ranking-page-table__column--rank">
+#47
+</td>
+<td class="ranking-page-table__column">
+<a class="ranking-page-table__user-link" href="https://osu.ppy.sh/users/4007897">
+<span class="flag-country" title="Hong Kong" style="background-image: url(&#39;/images/flags/HK.png&#39;);"></span>
+<span class="ranking-page-table__user-link-text js-usercard" data-user-id="4007897" data-tooltip-position="right center">
+obtio
+</span>
+</a>
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+98.52%
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+111,153
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--focused">
+10,624
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+52
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+908
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+822
+</td>
+</tr>
+<tr class="ranking-page-table__row">
+<td class="ranking-page-table__column ranking-page-table__column--rank">
+#48
+</td>
+<td class="ranking-page-table__column">
+<a class="ranking-page-table__user-link" href="https://osu.ppy.sh/users/4581715">
+<span class="flag-country" title="Canada" style="background-image: url(&#39;/images/flags/CA.png&#39;);"></span>
+<span class="ranking-page-table__user-link-text js-usercard" data-user-id="4581715" data-tooltip-position="right center">
+Dunois
+</span>
+</a>
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+99.01%
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+104,234
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--focused">
+10,618
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+190
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+1,536
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+1,153
+</td>
+</tr>
+<tr class="ranking-page-table__row">
+<td class="ranking-page-table__column ranking-page-table__column--rank">
+#49
+</td>
+<td class="ranking-page-table__column">
+<a class="ranking-page-table__user-link" href="https://osu.ppy.sh/users/3126596">
+<span class="flag-country" title="United States" style="background-image: url(&#39;/images/flags/US.png&#39;);"></span>
+<span class="ranking-page-table__user-link-text js-usercard" data-user-id="3126596" data-tooltip-position="right center">
+Mlaw22
+</span>
+</a>
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+99.17%
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+92,017
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--focused">
+10,613
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+210
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+2,931
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+1,262
+</td>
+</tr>
+<tr class="ranking-page-table__row">
+<td class="ranking-page-table__column ranking-page-table__column--rank">
+#50
+</td>
+<td class="ranking-page-table__column">
+<a class="ranking-page-table__user-link" href="https://osu.ppy.sh/users/3068044">
+<span class="flag-country" title="Australia" style="background-image: url(&#39;/images/flags/AU.png&#39;);"></span>
+<span class="ranking-page-table__user-link-text js-usercard" data-user-id="3068044" data-tooltip-position="right center">
+Dumii
+</span>
+</a>
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+98.28%
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+117,548
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--focused">
+10,613
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+80
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+1,319
+</td>
+<td class="ranking-page-table__column ranking-page-table__column--dimmed">
+1,727
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="paginator">
+<span class="paginator__page paginator__page--disabled">«</span>
+<span class="paginator__page paginator__page--disabled">‹</span>
+<span class="paginator__page paginator__page--current">1</span>
+<a class="paginator__page" href="https://osu.ppy.sh/rankings/osu/performance?page=2#jump-target">2</a>
+<a class="paginator__page" href="https://osu.ppy.sh/rankings/osu/performance?page=3#jump-target">3</a>
+<a class="paginator__page" href="https://osu.ppy.sh/rankings/osu/performance?page=4#jump-target">4</a>
+<a class="paginator__page" href="https://osu.ppy.sh/rankings/osu/performance?page=5#jump-target">5</a>
+<a class="paginator__page" href="https://osu.ppy.sh/rankings/osu/performance?page=6#jump-target">6</a>
+<a class="paginator__page" href="https://osu.ppy.sh/rankings/osu/performance?page=7#jump-target">7</a>
+<a class="paginator__page" href="https://osu.ppy.sh/rankings/osu/performance?page=8#jump-target">8</a>
+<a class="paginator__page" href="https://osu.ppy.sh/rankings/osu/performance?page=9#jump-target">9</a>
+<a class="paginator__page" href="https://osu.ppy.sh/rankings/osu/performance?page=2#jump-target">›</a>
+<a class="paginator__page" href="https://osu.ppy.sh/rankings/osu/performance?page=200#jump-target">»</a>
+</div>
+</div>
+</div>
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+
+<div class="pswp__container">
+<div class="pswp__item"></div>
+<div class="pswp__item"></div>
+<div class="pswp__item"></div>
+</div>
+
+<div class="pswp__ui pswp__ui--hidden">
+<div class="pswp__top-bar">
+
+<div class="pswp__counter"></div>
+<button type="button" class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+<button type="button" class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+<button type="button" class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+
+<div class="pswp__preloader">
+<div class="pswp__preloader__icn">
+<div class="pswp__preloader__cut">
+<div class="pswp__preloader__donut"></div>
+</div>
+</div>
+</div>
+</div>
+<div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+<div class="pswp__share-tooltip"></div>
+</div>
+<button type="button" class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+</button>
+<button type="button" class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+</button>
+<div class="pswp__caption">
+<div class="pswp__caption__center"></div>
+</div>
+</div>
+</div>
+</div>
+<footer class="no-print footer">
+<div class="footer__row">
+<a class="footer__link" href="https://osu.ppy.sh/legal/terms">
+Terms of Service
+</a>
+<a class="footer__link" href="https://osu.ppy.sh/legal/copyright">
+Copyright (DMCA)
+</a>
+<a class="footer__link" href="http://stat.ppy.sh/">
+Server Status
+</a>
+<a class="footer__link" href="https://twitter.com/osustatus">
+@osustatus
+</a>
+</div>
+<div class="footer__row">ppy powered 2007-2017</div>
+<div class="js-sync-height--target" data-sync-height-id="permanent-fixed-footer" style="min-height: 0px;"></div>
+</footer>
+<div class="fixed-bar
+                js-fixed-element
+                js-fixed-bottom-bar
+                js-sticky-footer--fixed-bar">
+<div class="js-permanent-fixed-footer
+                    js-sync-height--reference" data-sync-height-target="permanent-fixed-footer">
+</div>
+</div>
+<audio class="js-audio" preload="auto"></audio>
+<script data-turbolinks-eval="always">
+    var csrf = "CQKpBpLWZctkGwMAXTA3qzqZwlISrpyuK5TL4Bqf";
+    var section = "rankings";
+    var page = "index";
+    var canonicalUrl = "";
+    var reloadUrl = "";
+    var disqusShortName = "osugame";
+</script>
+
+<div id="js-usercard__loading-template" class="hidden">
+<div class="usercard">
+<div class="usercard__background-overlay usercard__background-overlay--guest"></div>
+<div class="usercard__link-wrapper"> <div class="usercard__main-card">
+<div class="usercard__avatar-space">
+<div class="usercard__avatar usercard__avatar--loader js-usercard--avatar-loader">
+<i class="fa fa-fw fa-refresh fa-spin"></i>
+</div>
+</div>
+<div class="usercard__metadata">
+<div class="usercard__username">Loading...</div>
+<div class="usercard__icons">
+<div class="usercard__icon">
+<span class="flag-country" style="background-image: url(&#39;/images/flags/XX.png&#39;);"></span>
+</div>
+</div>
+</div>
+</div>
+<div class="usercard__status-bar usercard__status-bar--offline">
+<span class="fa fa-fw fa-circle-o usercard__status-icon"></span>
+<span class="usercard__status-message" title="">
+Offline
+</span>
+</div>
+</div> </div>
+</div>
+<div class="loading-overlay js-loading-overlay">
+<div class="loading-overlay__container">
+<div class="loading-overlay__follow-point
+                    loading-overlay__follow-point--1">
+›
+</div>
+<div class="loading-overlay__circle
+                        loading-overlay__circle--1
+                        loading-overlay__circle--approach"></div>
+<div class="loading-overlay__circle
+                        loading-overlay__circle--1
+                        loading-overlay__circle--hit"></div>
+<div class="loading-overlay__follow-point
+                    loading-overlay__follow-point--2">
+›
+</div>
+<div class="loading-overlay__circle
+                        loading-overlay__circle--2
+                        loading-overlay__circle--approach"></div>
+<div class="loading-overlay__circle
+                        loading-overlay__circle--2
+                        loading-overlay__circle--hit"></div>
+<div class="loading-overlay__follow-point
+                    loading-overlay__follow-point--3">
+›
+</div>
+<div class="loading-overlay__circle
+                        loading-overlay__circle--3
+                        loading-overlay__circle--approach"></div>
+<div class="loading-overlay__circle
+                        loading-overlay__circle--3
+                        loading-overlay__circle--hit"></div>
+<div class="loading-overlay__follow-point
+                    loading-overlay__follow-point--4">
+›
+</div>
+<div class="loading-overlay__circle
+                        loading-overlay__circle--4
+                        loading-overlay__circle--approach"></div>
+<div class="loading-overlay__circle
+                        loading-overlay__circle--4
+                        loading-overlay__circle--hit"></div>
+</div>
+</div>
+<div class="js-user-verification modal fade" tabindex="-1">
+<div class="modal-dialog modal-dialog--full">
+<div class="user-verification-popup">
+<div class="osu-layout__row">
+<div class="user-verification-popup__modal">
+<div class="js-user-verification--box user-verification-popup__box">
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<script type="text/javascript">window.NREUM||(NREUM={});NREUM.info={"beacon":"bam.nr-data.net","licenseKey":"027c432b6c","applicationID":"50908119","transactionName":"YgZbYkBYVkZSWkZfXVtMeFVGUFdbHEtTWFlcDV5F","queueTime":0,"applicationTime":201,"atts":"TkFYFAhCRUg=","errorBeacon":"bam.nr-data.net","agent":""}</script>
+
+</body><div></div></html>

@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">osuhub</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="feed">Feed</string>
+    <string name="list">Players list</string>
+    <string name="default_diff">23</string>
+    <string name="default_rank">1</string>
+    <string name="default_username">Cookiezi</string>
+    <string name="default_pp">14000</string>
+    <string name="default_acc">98.78</string>
+    <string name="default_pc">23000</string>
+</resources>
