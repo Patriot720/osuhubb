@@ -28,13 +28,18 @@ public class PlayerParser {
             country = country.substring(country.indexOf("/"));
             country = country.toLowerCase();
             country = country.substring(1);
-           p.set(Columns.ACC,acc);
-           p.set(Columns.PP,pp);
-           p.set(Columns.PC,pc);
-           p.set(Columns.RANK,'-' + rank.substring(1));
+           p.setComparable(Columns.ACC,acc);
+           p.setComparable(Columns.PP,pp);
+           p.setComparable(Columns.PC,pc);
+           p.setComparable(Columns.RANK,'-' + rank.substring(1));
            p.setUsername(username);
            p.setCountry(country);
            p.setActivity(activity);
            return p;
+    }
+    public static Player parsePlayerOld(Element tr){
+        if(tr == null)
+            return null;
+        return null;
     }
 }

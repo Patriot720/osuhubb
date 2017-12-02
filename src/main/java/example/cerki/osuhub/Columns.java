@@ -9,4 +9,8 @@ public class Columns{
     public static final String ID = "id";
     public static final String PC = "pc";
     public static final String ACTIVITY = "activity" ;
+    public static class Following{
+        public static final String ID = "id";
+        public static final String TIMESTAMP = "timestamp";
+    }
 }

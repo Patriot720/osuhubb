@@ -1,6 +1,7 @@
 package example.cerki.osuhub;
 
 import android.content.ClipData;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -19,10 +20,14 @@ import android.view.MenuItem;
 
 import example.cerki.osuhub.List.ListFragment;
 import example.cerki.osuhub.List.Player;
+import example.cerki.osuhub.PlayerFragment.PlayerFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
+        PlayerFragment.OnFragmentInteractionListener,
         ListFragment.OnListFragmentInteractionListener {
+
+    private FragmentManager mFragmentManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,16 +53,19 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        mFragmentManager = getSupportFragmentManager();
     }
 
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        int backStackEntryCount = mFragmentManager.getBackStackEntryCount();
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
-        } else {
+        } else if(backStackEntryCount > 0)
+                mFragmentManager.popBackStack();
+        else
             super.onBackPressed();
-        }
     }
 
     @Override
@@ -93,8 +101,7 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_list) {
             fragment = ListFragment.newInstance();
         }
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.content_main,fragment).commit();
+        mFragmentManager.beginTransaction().replace(R.id.content_main,fragment).commit();
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
@@ -102,6 +109,15 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onListFragmentInteraction(Player player) {
+        Fragment fragment = PlayerFragment.newInstance(player.getId());
+        mFragmentManager.beginTransaction().add(R.id.content_main,fragment)
+                .addToBackStack("stack")
+                .commit();
         // TODO launch player Fragment
+    }
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
     }
 }

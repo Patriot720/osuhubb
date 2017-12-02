@@ -3,6 +3,7 @@ package example.cerki.osuhub.List;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -13,6 +14,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import example.cerki.osuhub.OsuDb;
+import example.cerki.osuhub.PlayersTable;
 import example.cerki.osuhub.R;
 
 /**
@@ -28,6 +31,8 @@ public class ListFragment extends Fragment {
     private OnListFragmentInteractionListener mListener;
     private RecyclerView.Adapter mAdapter;
     private List<Player> mData;
+    private SwipeRefreshLayout mRefresh;
+    private RecyclerView mRecycler;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -50,11 +55,14 @@ public class ListFragment extends Fragment {
 
     private void initData() {
         mData = new ArrayList<>();
-        new ListTask(new WorkDoneListener() {
+        PlayersTable table = new PlayersTable(new OsuDb(getContext()).getWritableDatabase());
+        new ListTask(table,new WorkDoneListener() {
             @Override
             public void workDone(Collection<Player> players) {
                 mData.addAll(players); // TODO keep in mind refreshing
                 mAdapter.notifyDataSetChanged();
+                mRefresh.setRefreshing(false);
+                mRecycler.scheduleLayoutAnimation();
                 // TODO
             }
         }).loadPlayers();
@@ -64,15 +72,21 @@ public class ListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_player_list, container, false);
-
-        // Set the adapter
-        if (view instanceof RecyclerView) {
+            if(view instanceof SwipeRefreshLayout){
+                mRefresh = (SwipeRefreshLayout) view;
+                mRefresh.setRefreshing(true);
+                mRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+                    @Override
+                    public void onRefresh() {
+                        initData();
+                    }
+                });
+            }
             Context context = view.getContext();
-            RecyclerView recyclerView = (RecyclerView) view;
-            recyclerView.setLayoutManager(new LinearLayoutManager(context));
-            mAdapter = new MyPlayerRecyclerViewAdapter(mData,mListener);
-            recyclerView.setAdapter(mAdapter);
-        }
+            mRecycler = view.findViewById(R.id.list);
+            mRecycler.setLayoutManager(new LinearLayoutManager(context));
+            mAdapter = new MyPlayerRecyclerViewAdapter(getContext(),mData,mListener);
+            mRecycler.setAdapter(mAdapter);
         return view;
     }
 

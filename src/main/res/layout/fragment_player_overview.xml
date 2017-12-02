@@ -1,0 +1,36 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="example.cerki.osuhub.PlayerFragment.PlayerOverviewFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <ProgressBar
+        android:id="@+id/avatar_progressbar"
+        style="@android:style/Widget.DeviceDefault.Light.ProgressBar.Large"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_alignStart="@+id/player_avatar"
+        android:layout_alignTop="@+id/player_avatar" />
+
+    <ImageView
+        android:id="@+id/player_avatar"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="31dp"
+        android:src="@mipmap/ic_launcher"
+        android:visibility="invisible"
+        tools:ignore="ContentDescription" />
+
+    <ToggleButton
+        android:id="@+id/follow_button"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:textOff="@string/follow"
+        android:textOn="@string/following" />
+</RelativeLayout>

@@ -3,6 +3,10 @@ package example.cerki.osuhub.List;
 import org.junit.Before;
 import org.junit.Test;
 
+import static example.cerki.osuhub.Columns.ACC;
+import static example.cerki.osuhub.Columns.PC;
+import static example.cerki.osuhub.Columns.PP;
+import static example.cerki.osuhub.TestHelper.getFakePlayer;
 import static org.junit.Assert.*;
 
 /**
@@ -14,8 +18,25 @@ public class PlayerTest {
 
     @Before
     public void setUp() throws Exception {
-
         player = new Player(21);
+    }
+    @Test
+    public void comparison() throws Exception {
+        Player player1 = getFakePlayer();
+        Player player2 = getFakePlayer(2);
+        player1.compare(player2);
+        assertEquals("-1000",player1.getDifferenceString(PP));
+        assertEquals("-10.32",player1.getDifferenceString(ACC));
+    }
+
+    @Test
+    public void comparsionEmptyPlayer() throws Exception {
+        Player player1 = getFakePlayer();
+        Player player2 = new Player();
+        player1.compare(player2);
+        assertTrue(player1.getDifferenceString(PP).equals(""));
+        assertTrue(player1.getDifferenceString(ACC).equals(""));
+        assertTrue(player1.getDifferenceString(PC).equals(""));
     }
 
     @Test
@@ -26,21 +47,21 @@ public class PlayerTest {
 
     @Test
     public void getStringShouldReturnIntValuesWithoutFloatingPoint() throws Exception {
-        player.set("performance","23");
+        player.setComparable("performance","23");
         String performance = player.getString("performance");
         assertEquals("23",performance);
     }
 
     @Test
     public void getStringShouldReturnFloatValuesWithFLoatingPointsUpTo2Digits() throws Exception {
-        player.set("acc","23.32");
+        player.setComparable("acc","23.32");
         String acc = player.getString("acc");
         assertEquals("23.32",acc);
     }
     @Test
     public void setShouldParseStringValuesAccordingly(){
-        player.set("m","wtf23.32%");
-        player.set("l","wtf44pp");
+        player.setComparable("m","wtf23.32%");
+        player.setComparable("l","wtf44pp");
         String m = player.getString("m");
         String l = player.getString("l");
         assertEquals("23.32",m);
