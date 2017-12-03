@@ -3,7 +3,6 @@
     package="example.cerki.osuhub">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -18,20 +17,18 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+
         </activity>
         <service
-            android:name=".JobService"
-            android:label="Word service"
-            android:permission="android.permission.BIND_JOB_SERVICE" >
-
-        </service>
-        <receiver android:name="StartServiceReceiver" >
+            android:name=".MyTaskService"
+            android:exported="true"
+            android:permission="com.google.android.gms.permission.BIND_NETWORK_TASK_SERVICE">
             <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="com.google.android.gms.gcm.ACTION_TASK_READY" />
             </intent-filter>
-        </receiver>
+        </service>
     </application>
 
 </manifest>

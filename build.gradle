@@ -30,4 +30,5 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
     implementation files('libs/jsoup-1.10.3.jar')
+    compile 'com.google.android.gms:play-services:11.6.0'
 }
