@@ -12,5 +12,6 @@ public class Columns{
     public static class Following{
         public static final String ID = "id";
         public static final String TIMESTAMP = "timestamp";
+        public static final String USERNAME = "username";
     }
 }

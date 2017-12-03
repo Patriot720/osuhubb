@@ -21,6 +21,7 @@ import android.view.MenuItem;
 import example.cerki.osuhub.List.ListFragment;
 import example.cerki.osuhub.List.Player;
 import example.cerki.osuhub.PlayerFragment.PlayerFragment;
+import jonathanfinerty.once.Once;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
@@ -54,6 +55,8 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         mFragmentManager = getSupportFragmentManager();
+        Once.initialise(this);
+        scheduleSync();
     }
 
     @Override
@@ -114,6 +117,12 @@ public class MainActivity extends AppCompatActivity
                 .addToBackStack("stack")
                 .commit();
         // TODO launch player Fragment
+    }
+    private void scheduleSync() {
+        if (!Once.beenDone(Once.THIS_APP_INSTALL, "tag")) { // TODO EXTRACT Constant
+            MyTaskService.scheduleSync(this);
+            Once.markDone("tag");
+        }
     }
 
     @Override

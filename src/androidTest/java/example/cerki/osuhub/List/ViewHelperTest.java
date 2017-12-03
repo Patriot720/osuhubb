@@ -95,7 +95,7 @@ public class ViewHelperTest {
         Double value = -0.5;
         ViewHelper.setDiff(textView,arrow,value);
         assertEquals(textView.getText(),"0.50");
-        assertTrue(isImageEqualToRes(arrow,R.drawable.arrow_up));
+        assertTrue(isImageEqualToRes(arrow,R.drawable.arrow_down));
     }
 
     @Test
@@ -111,6 +111,18 @@ public class ViewHelperTest {
         Double value = 0.000000000023;
         ViewHelper.setDiff(textView,arrow,value);
         assertEquals(textView.getVisibility() , View.INVISIBLE);
+        assertEquals(textView.getVisibility(),View.INVISIBLE);
+    }
+    @Test
+    public void testNullValue(){
+        Double value = 0d;
+        ViewHelper.setDiff(textView,arrow,value);
+        assertEquals(textView.getVisibility(),View.INVISIBLE);
+    }
+    @Test
+    public void testHugeNegativeNullValue(){
+        Double value = -0.0000000004343;
+        ViewHelper.setDiff(textView,arrow,value);
         assertEquals(textView.getVisibility(),View.INVISIBLE);
     }
 }

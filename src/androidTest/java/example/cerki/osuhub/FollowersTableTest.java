@@ -4,8 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 
-import java.sql.Date;
-import java.sql.Timestamp;
+import java.util.Collection;
 
 import static android.support.test.InstrumentationRegistry.getTargetContext;
 import static org.junit.Assert.*;
@@ -54,5 +53,29 @@ public class FollowersTableTest {
         mTable.insertOrUpdateFollower(1);
         mTable.deleteFollower(1);
         assertEquals("",mTable.getTimestamp(1));
+    }
+    @Test
+    public void testTimestamps() throws Exception{
+        mTable.insertOrUpdateFollower(1);
+        String timestamp = mTable.getTimestamp(1);
+        Thread.sleep(1000);
+        mTable.insertOrUpdateFollower(1);
+        String timestamp1 = mTable.getTimestamp(1);
+    }
+
+    @Test
+    public void getAll() throws Exception {
+        mTable.insertOrUpdateFollower(20);
+        mTable.insertOrUpdateFollower(22);
+        mTable.insertOrUpdateFollower(23);
+        mTable.insertOrUpdateFollower(24);
+        mTable.insertOrUpdateFollower(25);
+        Collection<Following> followers =  mTable.getAll();
+        assertEquals(followers.size(),5);
+        for (Following f :
+                followers) {
+            assertFalse(f.timestamp.isEmpty());
+            assertTrue(f.id  != 0);
+        }
     }
 }

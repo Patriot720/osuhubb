@@ -41,7 +41,12 @@ public class ViewHelper {
     }
     @SuppressLint("SetTextI18n")
     public static void setDiff(TextView textView, ImageView arrow, Double value) {
-        if(value < 0.01 && value > 0){
+        if(value == null) {
+            arrow.setVisibility(View.INVISIBLE);
+            textView.setVisibility(View.INVISIBLE);
+            return;
+        }
+        if(value < 0.01 && value > -0.01){
             textView.setVisibility(View.INVISIBLE);
             arrow.setVisibility(View.INVISIBLE);
             return;

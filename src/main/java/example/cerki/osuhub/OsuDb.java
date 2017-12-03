@@ -25,8 +25,9 @@ public class OsuDb extends SQLiteOpenHelper {
             + ACC +  " FLOAT,"
             + RANK + " NUMBER)";
     public static final String FOLLOWERS_TABLE_CREATE = "CREATE TABLE " + FOLLOWERS_TABLE_NAME + "("
-            + Following.ID + " NUMBER PRIMARY KEY,"
-            + Following.TIMESTAMP + " TIMESTAMP DEFAULT CURRENT_TIMESTAMP)";
+            + Columns.Following.ID + " NUMBER PRIMARY KEY,"
+            + Columns.Following.USERNAME + " TEXT,"
+            + Columns.Following.TIMESTAMP + " TIMESTAMP DEFAULT CURRENT_TIMESTAMP)";
     private static final int VERSION = 1;
 
     public OsuDb(Context context) {
