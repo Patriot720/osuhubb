@@ -62,7 +62,7 @@ public class ListFragment extends Fragment {
                 mData.addAll(players); // TODO keep in mind refreshing
                 mAdapter.notifyDataSetChanged();
                 mRefresh.setRefreshing(false);
-                mRecycler.scheduleLayoutAnimation();
+                mRecycler.scheduleLayoutAnimation(); // TODO refresh bug
                 // TODO
             }
         }).loadPlayers();

@@ -22,7 +22,7 @@ import java.util.Collection;
 
 public class MyTaskService extends GcmTaskService {
     private static final String PERIODIC_SYNC_TAG = "tag";
-    private static final long SYNC_PERIOD_SECONDS = 50; // TODO extract to settings
+    private static final long SYNC_PERIOD_SECONDS = 5; // TODO extract to settings
     private static int mNotificationId = 1;
     @Override
     public int onRunTask(TaskParams taskParams) {
@@ -48,7 +48,7 @@ public class MyTaskService extends GcmTaskService {
                 }
             } catch (IOException | JSONException | ParseException e) {
                 e.printStackTrace();
-            }
+            } // TODO CLOSE DATABASE
         }
         return GcmNetworkManager.RESULT_SUCCESS;
     }

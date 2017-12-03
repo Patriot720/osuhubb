@@ -40,14 +40,14 @@ public class FollowersNotificator {
     }
     public static Collection<Score> getNewScores(Following follower) throws IOException, JSONException, ParseException {
         JSONArray jsonArray = getJsonObject(follower.id);
-        Date lastDate = Util.parseTimestamp(follower.timestamp, TimeZone.getDefault());
+        Date lastDate = Util.parseTimestamp(follower.timestamp,TimeZone.getTimeZone("GMT"));
         Collection<Score> scores = new ArrayList<>();
         for (int i = 0; i < jsonArray.length(); i++) {
             JSONObject jsonObject = jsonArray.getJSONObject(i);
             Date date = Util.parseTimestamp(jsonObject.getString("date"),TimeZone.getTimeZone("GMT+8"));
             if(lastDate.compareTo(date) <= 0){
                 Score score = new Score();
-                Log.d(TAG, "getNewScores: " + date.toString() + " " + date.toString());
+                Log.d(TAG, "getNewScores: " + date.toString() + " " + lastDate.toString());
                 for (Iterator<String> it = jsonObject.keys(); it.hasNext(); ) {
                     String name = it.next();
                     String value = jsonObject.getString(name);

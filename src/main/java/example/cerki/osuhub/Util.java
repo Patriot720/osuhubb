@@ -18,4 +18,8 @@ public class Util {
         return format.parse(stamp);
     }
 
+    public static Date parseTimestamp(String stamp) throws ParseException {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+        return format.parse(stamp);
+    }
 }

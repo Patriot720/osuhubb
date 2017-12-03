@@ -70,6 +70,7 @@ public class Player {
                 Double value = query.getDouble(i);
                 setComparable(columnName, value);
             }
+            query.close();
         }
     }
 

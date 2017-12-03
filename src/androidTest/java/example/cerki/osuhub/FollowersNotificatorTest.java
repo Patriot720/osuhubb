@@ -65,7 +65,7 @@ public class FollowersNotificatorTest {
     @Test
     public void testDateComparsion() throws Exception {
         Date date = Util.parseTimestamp("2017-12-03 20:49:10", TimeZone.getTimeZone("GMT+8"));
-        Date date1 = Util.parseTimestamp("2017-12-03 17:02:22", TimeZone.getTimeZone("GMT+3"));
+        Date date1 = Util.parseTimestamp("2017-12-03 17:02:22", TimeZone.getDefault());
         assertTrue(date.compareTo(date1) < 0);
 
     }
