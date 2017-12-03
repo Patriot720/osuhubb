@@ -43,6 +43,9 @@ public class Player {
             difference.put(val,secondVal - firstVal);
         }
     }
+    public Double getDifferenceDouble(String key){
+        return difference.get(key);
+    }
     public Player(int id) {
         this();
         this.id = id;

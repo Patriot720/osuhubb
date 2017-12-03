@@ -60,21 +60,21 @@ public class MyPlayerRecyclerViewAdapter extends RecyclerView.Adapter<MyPlayerRe
         holder.mPlaycountView.setText(player.getString(PC));
         holder.mRankView.setText(String.format("#%s", player.getString(RANK)));
 
-        ViewHelper.setDifference(holder.mPerformanceDifference,holder.mPerformanceArrow,player.getDifferenceString(PP));
-        ViewHelper.setDifference(
+        ViewHelper.setDiff(holder.mPerformanceDifference,holder.mPerformanceArrow,player.getDifferenceDouble(PP));
+        ViewHelper.setDiff(
                 holder.mAccuracyDifference,
                 holder.mAccuracyArrow,
-                player.getDifferenceString(ACC)
+                player.getDifferenceDouble(ACC)
         );
-        ViewHelper.setDifference(
+        ViewHelper.setDiff(
                 holder.mPlaycountDifference,
                 holder.mPlaycountArrow,
-                player.getDifferenceString(PC)
+                player.getDifferenceDouble(PC)
         );
-        ViewHelper.setDifference(
+        ViewHelper.setDiff(
                 holder.mRankDifference,
                 holder.mRankArrow,
-                "-" + player.getDifferenceString(RANK)
+                 player.getDifferenceDouble(RANK)
         );
 
         holder.mView.setOnClickListener(new View.OnClickListener() {

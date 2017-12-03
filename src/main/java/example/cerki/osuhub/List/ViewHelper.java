@@ -1,8 +1,11 @@
 package example.cerki.osuhub.List;
 
+import android.annotation.SuppressLint;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import java.util.Locale;
 
 import example.cerki.osuhub.R;
 
@@ -26,5 +29,29 @@ public class ViewHelper {
         textView.setVisibility(View.VISIBLE);
         arrow.setVisibility(View.VISIBLE);
 
+    }
+
+    public static String convertToString(Double value){
+
+        if(value % 1 == 0) {
+            int val = value.intValue();
+            return String.valueOf(val);
+        }
+        return String.format(Locale.getDefault(),"%.2f",value);
+    }
+    @SuppressLint("SetTextI18n")
+    public static void setDiff(TextView textView, ImageView arrow, Double value) {
+        if(value < 0.01 && value > 0){
+            textView.setVisibility(View.INVISIBLE);
+            arrow.setVisibility(View.INVISIBLE);
+            return;
+        }
+        if(value < 0){
+            arrow.setImageResource(R.drawable.arrow_down);
+            value = value * -1;
+        }
+        textView.setText(convertToString(value));
+        arrow.setVisibility(View.VISIBLE);
+        textView.setVisibility(View.VISIBLE);
     }
 }
