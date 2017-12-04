@@ -16,7 +16,6 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.TimeZone;
 
-import example.cerki.osuhub.Notifications.Following;
 import example.cerki.osuhub.Score;
 import example.cerki.osuhub.Util;
 
@@ -24,12 +23,10 @@ import example.cerki.osuhub.Util;
  * Created by cerki on 03-Dec-17.
  */
 
-public class FollowersNotificator {
-    public static final String API_KEY = "b40b7a7a8207b1ebd870eaf1f74bd2995f1a2cb6";
-    private static final String BASE_URL = "https://osu.ppy.sh/api/";
+class FollowersNotificator {
 
-    public static JSONArray getJsonObject(int id) throws IOException, JSONException {
-        URL url = new  URL(BASE_URL + "get_user_best?k=" + API_KEY + "&u=" + id + "&limit=100");
+    public static JSONArray getPlayerJsonArray(int id) throws IOException, JSONException {
+        URL url = new  URL(Util.BASE_URL + "get_user_best?k=" + Util.API_KEY + "&u=" + id + "&limit=100");
         URLConnection inputStream = url.openConnection();
         BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream.getInputStream()));
         StringBuilder stringBuilder = new StringBuilder();
@@ -39,7 +36,7 @@ public class FollowersNotificator {
         return new JSONArray(stringBuilder.toString());
     }
     public static Collection<Score> getNewScores(Following follower) throws IOException, JSONException, ParseException {
-        JSONArray jsonArray = getJsonObject(follower.id);
+        JSONArray jsonArray = getPlayerJsonArray(follower.id); // TODO get follower to constructor
         Date lastDate = Util.parseTimestamp(follower.timestamp,TimeZone.getTimeZone("GMT"));
         Collection<Score> scores = new ArrayList<>();
         for (int i = 0; i < jsonArray.length(); i++) {
@@ -48,9 +45,9 @@ public class FollowersNotificator {
             if(lastDate.compareTo(date) < 0){
                 Score score = new Score();
                 for (Iterator<String> it = jsonObject.keys(); it.hasNext(); ) {
-                    String name = it.next();
-                    String value = jsonObject.getString(name);
-                    score.put(name,value);
+                    String key = it.next(); // todo refactor
+                    String value = jsonObject.getString(key);
+                    score.put(key,value);
                 }
                 scores.add(score);
             }

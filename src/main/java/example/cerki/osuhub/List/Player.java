@@ -3,7 +3,11 @@ package example.cerki.osuhub.List;
 import android.annotation.SuppressLint;
 import android.database.Cursor;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
@@ -28,7 +32,24 @@ public class Player {
     public static final boolean INACTIVE = false;
      private Map<String,Double> comparable;
 
-     public String getDifferenceString(String key){
+    public Player(JSONObject jsonObject) throws JSONException {
+        this();
+        if(jsonObject == null || jsonObject.length() == 0)
+            return;
+        id = jsonObject.getInt("user_id"); // TODO change to constants
+        username = jsonObject.getString("username");
+        country = jsonObject.getString("country");
+        jsonObject.remove("id");
+        jsonObject.remove("username");
+        jsonObject.remove("country");
+        jsonObject.remove("events");// TODO UNDO THIS parse events
+        for (Iterator<String> it = jsonObject.keys(); it.hasNext(); ) {
+            String key = it.next();
+            comparable.put(key,jsonObject.getDouble(key));
+        }
+    }
+
+    public String getDifferenceString(String key){
          return toString(difference.get(key));
      }
 
@@ -112,7 +133,7 @@ public class Player {
     }
 
     public Set<String> getKeySet(){
-        return comparable.keySet();
+        return comparable.keySet(); // TODO rename to differ between Difference and comparable
     }
 
     public void setId(int id) {

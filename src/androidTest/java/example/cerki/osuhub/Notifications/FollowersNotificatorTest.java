@@ -32,13 +32,13 @@ public class FollowersNotificatorTest {
 
     @Test
     public void getJsonObject() throws Exception{
-        JSONArray jsonArray = FollowersNotificator.getJsonObject(124493);
+        JSONArray jsonArray = FollowersNotificator.getPlayerJsonArray(124493);
         assertNotNull(jsonArray);
     }
 
     @Test
     public void getJsonFakeId() throws Exception {
-        JSONArray jsonArray = FollowersNotificator.getJsonObject(0);
+        JSONArray jsonArray = FollowersNotificator.getPlayerJsonArray(0);
         assertTrue(jsonArray.length() == 0);
     }
 
@@ -80,7 +80,7 @@ public class FollowersNotificatorTest {
     @Test
     public void testDbDate() throws  Exception{
         FollowersTable table = new FollowersTable(new OsuDb(getTargetContext()).getWritableDatabase());
-        table.insertOrUpdateFollower(1);
+        table.insertOrUpdate(1);
         String timestamp = table.getTimestamp(1);
         Date date1 = Util.parseTimestamp(timestamp, TimeZone.getTimeZone("GMT"));
         Date date2 = new Date();
@@ -90,7 +90,7 @@ public class FollowersNotificatorTest {
     @Test
     public void testDbDateZone() throws Exception{
         FollowersTable table = new FollowersTable(new OsuDb(getTargetContext()).getWritableDatabase());
-        table.insertOrUpdateFollower(1);
+        table.insertOrUpdate(1);
         String timestamp = table.getTimestamp(1);
         Date date = Util.parseTimestamp(timestamp, TimeZone.getDefault());
         Date date2 = new Date();

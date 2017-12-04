@@ -15,6 +15,7 @@ import java.io.IOException;
 
 import example.cerki.osuhub.List.Player;
 
+import static example.cerki.osuhub.TestHelper.*;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
@@ -24,9 +25,8 @@ public class PlayerParserTest {
     Elements tbody;
     @Before
     public void setUp() throws Exception {
-        String path = new File("").getAbsolutePath();
-        File f = new File(path + "/app/src/test/resources/osu.html");
-        Document doc = Jsoup.parse(f,"utf8");
+        File fromResources = getFromResources("osu.html");
+        Document doc = Jsoup.parse(fromResources,"utf8");
          tbody = doc.select("tbody").first().children();
     }
 
@@ -54,8 +54,7 @@ public class PlayerParserTest {
     // TODO
 //    @Test
     public void parseOldPage() throws IOException {
-        String path = new File("").getAbsolutePath();
-        File f = new File(path + "/app/src/test/resources/oldOsu.html");
+        File f = getFromResources("oldOsu.html");
         Document doc = Jsoup.parse(f,"utf8");
         Elements table = doc.select("tbody").first().children();
         Element tr = table.get(0);

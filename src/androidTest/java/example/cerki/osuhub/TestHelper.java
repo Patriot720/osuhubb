@@ -6,7 +6,10 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.widget.ImageView;
 
+import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
+import java.io.InputStreamReader;
+import java.net.URL;
 import java.util.Arrays;
 
 import example.cerki.osuhub.List.Player;
@@ -71,5 +74,14 @@ public class TestHelper {
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         bm2.compress(Bitmap.CompressFormat.PNG,100,bos);
         return bos.toByteArray();
+    }
+        public static StringBuilder getFromResources(String fileName) throws Exception{
+            URL resource = getTargetContext().getClassLoader().getResource(fileName);
+            BufferedReader reader = new BufferedReader(new InputStreamReader(resource.openStream()));
+            StringBuilder builder = new StringBuilder();
+            String line;
+            while((line = reader.readLine()) != null)
+                builder.append(line).append("\n");
+            return builder;
     }
 }

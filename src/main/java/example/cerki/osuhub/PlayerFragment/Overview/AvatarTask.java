@@ -14,8 +14,8 @@ import java.net.URL;
 
 
 
-public class AvatarTask extends AsyncTask<String,Void,Bitmap>{
-    public AvatarTask(WorkDoneListener workDoneListener) {
+class AvatarTask extends AsyncTask<String,Void,Bitmap>{
+    AvatarTask(WorkDoneListener workDoneListener) {
         this.workDoneListener = workDoneListener;
     }
     interface WorkDoneListener{

@@ -19,6 +19,9 @@ import example.cerki.osuhub.List.Player;
  */
 
 public class Util {
+    public static final String BASE_URL = "https://osu.ppy.sh/api/";
+    public static final String API_KEY = "b40b7a7a8207b1ebd870eaf1f74bd2995f1a2cb6";
+
     @SuppressLint("DefaultLocale")
     public static String calculateAccuracy(Score score){
         float count50 = score.getAsInt("count50");

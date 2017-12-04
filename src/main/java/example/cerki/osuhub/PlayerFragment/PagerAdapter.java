@@ -11,7 +11,7 @@ import java.util.List;
  * Created by cerki on 02-Dec-17.
  */
 
-public class PagerAdapter extends FragmentPagerAdapter{
+class PagerAdapter extends FragmentPagerAdapter{
     private List<Fragment> mFragments = new ArrayList<>();
     private List<String> mTitles = new ArrayList<>();
     public PagerAdapter(FragmentManager fm) {

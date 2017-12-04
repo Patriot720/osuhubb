@@ -1,35 +1,59 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="top|center"
+    android:orientation="vertical"
     tools:context="example.cerki.osuhub.PlayerFragment.Overview.OverviewFragment">
 
 
-    <ProgressBar
-        android:id="@+id/avatar_progressbar"
-        style="@android:style/Widget.DeviceDefault.Light.ProgressBar.Large"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_alignStart="@+id/player_avatar"
-        android:layout_alignTop="@+id/player_avatar" />
-
-    <ImageView
-        android:id="@+id/player_avatar"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="31dp"
-        android:src="@mipmap/ic_launcher"
-        android:visibility="invisible"
-        tools:ignore="ContentDescription" />
-
-    <ToggleButton
-        android:id="@+id/follow_button"
-        android:layout_width="150dp"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:textOff="@string/follow"
-        android:textOn="@string/following" />
-</RelativeLayout>
+        android:gravity="top|center"
+        android:orientation="vertical">
+
+        <ProgressBar
+            android:id="@+id/avatar_progressbar"
+            style="@android:style/Widget.DeviceDefault.Light.ProgressBar.Large"
+            android:layout_width="match_parent"
+            android:layout_height="150dp" />
+
+        <ImageView
+            android:id="@+id/player_avatar"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_marginTop="31dp"
+            android:adjustViewBounds="false"
+            android:cropToPadding="false"
+            android:src="@mipmap/ic_launcher"
+            android:visibility="gone"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@+id/player_username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="21dp"
+            android:text=""
+            android:textSize="24sp" />
+
+        <ToggleButton
+            android:id="@+id/follow_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="19dp"
+            android:textOff="@string/follow"
+            android:textOn="@string/following" />
+
+        <TextView
+            android:id="@+id/other_info_temp"
+            android:layout_width="wrap_content"
+            android:layout_height="700dp"
+            android:text="" />
+            <!--TODO FIX THIS-->
+
+    </LinearLayout>
+
+
+</ScrollView>

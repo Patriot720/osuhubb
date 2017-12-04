@@ -11,6 +11,7 @@ import example.cerki.osuhub.Notifications.Following;
 
 import static example.cerki.osuhub.Columns.Following.ID;
 import static example.cerki.osuhub.Columns.Following.TIMESTAMP;
+import static example.cerki.osuhub.Columns.Following.USERNAME;
 import static example.cerki.osuhub.OsuDb.FOLLOWERS_TABLE_NAME;
 
 /**
@@ -26,7 +27,7 @@ public class FollowersTable {
 
 
 
-    public void insertOrUpdateFollower(int userId) {
+    public void insertOrUpdate(int userId) {
         ContentValues cv = new ContentValues();
         cv.put(ID, userId);
         mDb.replaceOrThrow(FOLLOWERS_TABLE_NAME, null, cv);
@@ -54,7 +55,8 @@ public class FollowersTable {
         while (query.moveToNext()) {
             int id = query.getInt(query.getColumnIndex(ID));
             String timestamp = query.getString(query.getColumnIndex(TIMESTAMP));
-            followers.add(new Following(id, timestamp));
+            String username = query.getString(query.getColumnIndex(USERNAME));
+            followers.add(new Following(id, timestamp,username));
         }
         query.close();
         return followers;
@@ -63,5 +65,12 @@ public class FollowersTable {
     @Override
     protected void finalize() throws Throwable {
         mDb.close();
+    }
+
+    public void insertOrUpdate(int id, String username) {
+        ContentValues cv = new ContentValues();
+        cv.put(ID,id);
+        cv.put(USERNAME,username);
+        mDb.replaceOrThrow(OsuDb.FOLLOWERS_TABLE_NAME,null,cv);
     }
 }

@@ -7,9 +7,16 @@ package example.cerki.osuhub.Notifications;
 public class Following {
     int id;
     String timestamp;
+    String username;
 
     public Following(int id, String timestamp) {
         this.id = id;
         this.timestamp = timestamp;
+    }
+
+    public Following(int id, String timestamp, String username) {
+        this.id = id;
+        this.timestamp = timestamp;
+        this.username = username;
     }
 }

@@ -10,9 +10,11 @@ import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.ToggleButton;
 
 import example.cerki.osuhub.FollowersTable;
+import example.cerki.osuhub.List.Player;
 import example.cerki.osuhub.OsuDb;
 import example.cerki.osuhub.R;
 
@@ -26,6 +28,7 @@ public class OverviewFragment extends Fragment {
     private static final String ARG_PARAM1 = "mUserId";
 
     private int mUserId;
+    private String mUsername;
 
 
     public OverviewFragment() {
@@ -68,6 +71,8 @@ public class OverviewFragment extends Fragment {
                 followButton.setChecked(true);
             final ImageView avatar = view.findViewById(R.id.player_avatar);
             final ProgressBar progressBar = view.findViewById(R.id.avatar_progressbar);
+            final TextView username = view.findViewById(R.id.player_username);
+            final TextView otherInfoTemp = view.findViewById(R.id.other_info_temp); // TODO CHANGE THIS
             new AvatarTask(new AvatarTask.WorkDoneListener() {
                 @Override
                 public void workDone(Bitmap bitmap) {
@@ -75,12 +80,23 @@ public class OverviewFragment extends Fragment {
                     avatar.setVisibility(View.VISIBLE);
                     progressBar.setVisibility(View.GONE);
                 }
-            }).execute("https://osu.ppy.sh/users/" + mUserId + "/card");
+            }).execute("https://osu.ppy.sh/users/" + mUserId + "/card"); // TODO extract these Strings
+            new PlayerInfoTask(new PlayerInfoTask.workDoneListener() {
+                @Override
+                public void workDone(Player player) {
+                    mUsername = player.getUsername();
+                    username.setText(mUsername);
+                    StringBuilder builder = new StringBuilder();
+                    for(String key : player.getKeySet())
+                        builder.append(key).append(": ").append(player.getString(key)).append("\n");
+                    otherInfoTemp.setText(builder.toString());
+                }
+            }).execute(mUserId);
             followButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                     if(b)
-                        table.insertOrUpdateFollower(mUserId);
+                        table.insertOrUpdate(mUserId,mUsername);
                     else
                         table.deleteFollower(mUserId);
                 }

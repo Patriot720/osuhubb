@@ -20,10 +20,7 @@ import example.cerki.osuhub.FollowersTable;
 import example.cerki.osuhub.OsuDb;
 import example.cerki.osuhub.R;
 import example.cerki.osuhub.Score;
-
-/**
- * Created by cerki on 03-Dec-17.
- */
+import example.cerki.osuhub.Util;
 
 public class NotificationsService extends GcmTaskService {
     private static final String PERIODIC_SYNC_TAG = "tag";
@@ -38,9 +35,9 @@ public class NotificationsService extends GcmTaskService {
         try {
             for (Following f : all) {
                 newScores = FollowersNotificator.getNewScores(f);
-                followersTable.insertOrUpdateFollower(f.id);
+                followersTable.insertOrUpdate(f.id);
                 for (Score score : newScores)
-                    pushNotification(generateScoreString(score));
+                    pushNotification(generateScoreString(score,f.username));
         }
         } catch(IOException | JSONException | ParseException e){
             e.printStackTrace();
@@ -49,11 +46,15 @@ public class NotificationsService extends GcmTaskService {
     }
 
     @NonNull
-    private String generateScoreString(Score score) {
+    private String generateScoreString(Score score, String username) {
         StringBuilder builder = new StringBuilder();
-        builder
-                .append(score.get("pp")) // TODO Create ACC CALCULATOR
-                .append(" "); // TODO FETCH MAP DATA
+        builder.append(username)
+                .append(" ")
+                .append(score.get("pp"))
+                .append(" ")
+                .append(Util.calculateAccuracy(score))
+                .append("\n");
+        // TODO FETCH MAP DATA
         // TODO GetUsername from follower, add username to follower
         return builder.toString();
     }
@@ -68,7 +69,7 @@ public class NotificationsService extends GcmTaskService {
         mBuilder.setAutoCancel(true);
         NotificationManager mNotifyMgr = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         assert mNotifyMgr != null;
-        mNotifyMgr.notify(mNotificationId, mBuilder.build());
+        mNotifyMgr.notify(mNotificationId++, mBuilder.build());
     }
 
     public static void scheduleSync(Context ctx) {
