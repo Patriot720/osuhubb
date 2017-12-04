@@ -3,6 +3,7 @@ package example.cerki.osuhub.List;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.support.v7.util.DiffUtil;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,13 +11,14 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import example.cerki.osuhub.Columns;
-import example.cerki.osuhub.List.ListFragment.OnListFragmentInteractionListener;
+import example.cerki.osuhub.List.Fragment.OnListFragmentInteractionListener;
 import example.cerki.osuhub.R;
+import example.cerki.osuhub.Util;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
 
 import static example.cerki.osuhub.Columns.*;
@@ -27,20 +29,49 @@ import static example.cerki.osuhub.Columns.RANK;
 /**
  * {@link RecyclerView.Adapter} that can display a {@link Player} and makes a call to the
  * specified {@link OnListFragmentInteractionListener}.
- * TODO: Replace the implementation with code for your data type.
  */
-public class MyPlayerRecyclerViewAdapter extends RecyclerView.Adapter<MyPlayerRecyclerViewAdapter.ViewHolder> {
+class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> {
 
     private final List<Player> mValues;
     private final OnListFragmentInteractionListener mListener;
     private Context mContext;
 
-    public MyPlayerRecyclerViewAdapter(Context context, List<Player> items, OnListFragmentInteractionListener listener) {
+    RecyclerAdapter(Context context, List<Player> items, OnListFragmentInteractionListener listener) {
         mValues = items;
         mListener = listener;
         mContext = context;
     }
 
+    void replaceData(final List<Player> players){
+        final List<Player> oldData = new ArrayList<>(mValues);
+        mValues.clear();
+
+        if (players != null) {
+            mValues.addAll(players);
+        }
+
+        DiffUtil.calculateDiff(new DiffUtil.Callback() {
+            @Override
+            public int getOldListSize() {
+                return oldData.size();
+            }
+
+            @Override
+            public int getNewListSize() {
+                return mValues.size();
+            }
+
+            @Override
+            public boolean areItemsTheSame(int oldItemPosition, int newItemPosition) {
+                return oldData.get(oldItemPosition).equals(mValues.get(newItemPosition));
+            }
+
+            @Override
+            public boolean areContentsTheSame(int oldItemPosition, int newItemPosition) {
+                return oldData.get(oldItemPosition).equals(mValues.get(newItemPosition));
+            }
+        }).dispatchUpdatesTo(this);
+    }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -60,18 +91,18 @@ public class MyPlayerRecyclerViewAdapter extends RecyclerView.Adapter<MyPlayerRe
         holder.mPlaycountView.setText(player.getString(PC));
         holder.mRankView.setText(String.format("#%s", player.getString(RANK)));
 
-        ViewHelper.setDiff(holder.mPerformanceDifference,holder.mPerformanceArrow,player.getDifferenceDouble(PP));
-        ViewHelper.setDiff(
+        Util.showPlayerDifference(holder.mPerformanceDifference,holder.mPerformanceArrow,player.getDifferenceDouble(PP));
+        Util.showPlayerDifference(
                 holder.mAccuracyDifference,
                 holder.mAccuracyArrow,
                 player.getDifferenceDouble(ACC)
         );
-        ViewHelper.setDiff(
+        Util.showPlayerDifference(
                 holder.mPlaycountDifference,
                 holder.mPlaycountArrow,
                 player.getDifferenceDouble(PC)
         );
-        ViewHelper.setDiff(
+        Util.showPlayerDifference(
                 holder.mRankDifference,
                 holder.mRankArrow,
                  player.getDifferenceDouble(RANK)
@@ -105,7 +136,7 @@ public class MyPlayerRecyclerViewAdapter extends RecyclerView.Adapter<MyPlayerRe
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final View mView;
-        public final TextView mUsernameView; // TODO add shit
+        public final TextView mUsernameView;
         public final TextView mRankView;
         public final TextView mPerformanceView;
         public final TextView mAccuracyView;

@@ -2,7 +2,6 @@ package example.cerki.osuhub.List;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -11,11 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import example.cerki.osuhub.OsuDb;
-import example.cerki.osuhub.PlayersTable;
 import example.cerki.osuhub.R;
 
 /**
@@ -24,12 +21,10 @@ import example.cerki.osuhub.R;
  * Activities containing this fragment MUST implement the {@link OnListFragmentInteractionListener}
  * interface.
  */
-public class ListFragment extends Fragment {
+public class Fragment extends android.support.v4.app.Fragment {
 
-    // TODO: Customize parameter argument names
-    // TODO: Customize parameters
     private OnListFragmentInteractionListener mListener;
-    private RecyclerView.Adapter mAdapter;
+    private RecyclerAdapter mAdapter;
     private List<Player> mData;
     private SwipeRefreshLayout mRefresh;
     private RecyclerView mRecycler;
@@ -38,13 +33,12 @@ public class ListFragment extends Fragment {
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
-    public ListFragment() {
+    public Fragment() {
     }
 
-    // TODO: Customize parameter initialization
     @SuppressWarnings("unused")
-    public static ListFragment newInstance() {
-        return new ListFragment();
+    public static Fragment newInstance() {
+        return new Fragment();
     }
 
     @Override
@@ -56,14 +50,12 @@ public class ListFragment extends Fragment {
     private void initData() {
         mData = new ArrayList<>();
         PlayersTable table = new PlayersTable(new OsuDb(getContext()).getWritableDatabase());
-        new ListTask(table,new WorkDoneListener() {
+        new Task(table,new WorkDoneListener() {
             @Override
-            public void workDone(Collection<Player> players) {
-                mData.addAll(players); // TODO keep in mind refreshing
-                mAdapter.notifyDataSetChanged();
+            public void workDone(List<Player> players) {
+                mAdapter.replaceData(players);
                 mRefresh.setRefreshing(false);
-                mRecycler.scheduleLayoutAnimation(); // TODO refresh bug
-                // TODO
+                mRecycler.scheduleLayoutAnimation();
             }
         }).loadPlayers();
     }
@@ -85,7 +77,7 @@ public class ListFragment extends Fragment {
             Context context = view.getContext();
             mRecycler = view.findViewById(R.id.list);
             mRecycler.setLayoutManager(new LinearLayoutManager(context));
-            mAdapter = new MyPlayerRecyclerViewAdapter(getContext(),mData,mListener);
+            mAdapter = new RecyclerAdapter(getContext(),mData,mListener);
             mRecycler.setAdapter(mAdapter);
         return view;
     }
@@ -119,7 +111,6 @@ public class ListFragment extends Fragment {
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnListFragmentInteractionListener {
-        // TODO: Update argument type and name
         void onListFragmentInteraction(Player player);
     }
 }

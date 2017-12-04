@@ -1,4 +1,4 @@
-package example.cerki.osuhub.PlayerFragment;
+package example.cerki.osuhub.PlayerFragment.Overview;
 
 import android.os.AsyncTask;
 
@@ -6,5 +6,5 @@ import android.os.AsyncTask;
  * Created by cerki on 02-Dec-17.
  */
 
-class OverviewTask{
+class Task {
 }

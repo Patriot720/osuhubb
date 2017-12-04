@@ -20,6 +20,28 @@ public class PlayerTest {
     public void setUp() throws Exception {
         player = new Player(21);
     }
+
+    @Test
+    public void testEqualsSamePlayers() throws Exception {
+        Player p = getFakePlayer();
+        Player p2 = getFakePlayer();
+        assertTrue(p.equals(p2));
+    }
+
+    @Test
+    public void testEqualsDifferentPlayers() throws Exception {
+        Player p = getFakePlayer();
+        Player p2 = getFakePlayer(2);
+        assertTrue(!p.equals(p2));
+    }
+    @Test
+    public void testEqualsDifferentDifferenceInPlayers() throws Exception{
+        Player p = getFakePlayer();
+        Player p2 = getFakePlayer();
+        p.compare(getFakePlayer(2));
+        assertTrue(!p.equals(p2));
+    }
+
     @Test
     public void comparison() throws Exception {
         Player player1 = getFakePlayer();

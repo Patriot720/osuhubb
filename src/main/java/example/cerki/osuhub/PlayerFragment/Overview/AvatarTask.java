@@ -1,4 +1,4 @@
-package example.cerki.osuhub.PlayerFragment;
+package example.cerki.osuhub.PlayerFragment.Overview;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -14,8 +14,8 @@ import java.net.URL;
 
 
 
-public class OverViewAvatarTask extends AsyncTask<String,Void,Bitmap>{
-    public OverViewAvatarTask(WorkDoneListener workDoneListener) {
+public class AvatarTask extends AsyncTask<String,Void,Bitmap>{
+    public AvatarTask(WorkDoneListener workDoneListener) {
         this.workDoneListener = workDoneListener;
     }
     interface WorkDoneListener{

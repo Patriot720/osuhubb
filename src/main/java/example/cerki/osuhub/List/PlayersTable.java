@@ -1,17 +1,19 @@
-package example.cerki.osuhub;
+package example.cerki.osuhub.List;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import example.cerki.osuhub.List.Player;
+import example.cerki.osuhub.OsuDb;
+import example.cerki.osuhub.PlayersTableWrapper;
+import example.cerki.osuhub.Util;
 
 import static example.cerki.osuhub.Columns.ID;
 
 /**
  * Created by cerki on 30-Nov-17.
  */
-
-public class PlayersTable implements  PlayersTableWrapper {
+// TODO mDb leaks bug;
+public class PlayersTable implements PlayersTableWrapper {
 
     private final SQLiteDatabase mDb;
 
@@ -21,7 +23,7 @@ public class PlayersTable implements  PlayersTableWrapper {
 
     @Override
     public void insertPlayer(Player player) {
-        mDb.replaceOrThrow(OsuDb.PLAYERS_TABLE_NAME,null, ContentValuesGenerator.generateContentValues(player));
+        mDb.replaceOrThrow(OsuDb.PLAYERS_TABLE_NAME,null, Util.generateContentValues(player));
     }
 
     @Override

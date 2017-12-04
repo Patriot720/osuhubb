@@ -2,9 +2,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="example.cerki.osuhub.PlayerFragment.PlayerOverviewFragment">
+    tools:context="example.cerki.osuhub.PlayerFragment.Overview.OverviewFragment">
 
-    <!-- TODO: Update blank fragment layout -->
 
     <ProgressBar
         android:id="@+id/avatar_progressbar"

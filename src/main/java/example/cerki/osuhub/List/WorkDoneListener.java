@@ -1,6 +1,7 @@
 package example.cerki.osuhub.List;
 
 import java.util.Collection;
+import java.util.List;
 
 import example.cerki.osuhub.List.Player;
 
@@ -8,6 +9,6 @@ import example.cerki.osuhub.List.Player;
  * Created by cerki on 30-Nov-17.
  */
 
-public interface WorkDoneListener  {
-    void workDone(Collection<Player> obj);
+interface WorkDoneListener  {
+    void workDone(List<Player> obj);
 }

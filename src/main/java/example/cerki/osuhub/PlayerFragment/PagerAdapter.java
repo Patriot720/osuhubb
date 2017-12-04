@@ -11,10 +11,10 @@ import java.util.List;
  * Created by cerki on 02-Dec-17.
  */
 
-public class PlayerPagerAdapter extends FragmentPagerAdapter{
+public class PagerAdapter extends FragmentPagerAdapter{
     private List<Fragment> mFragments = new ArrayList<>();
     private List<String> mTitles = new ArrayList<>();
-    public PlayerPagerAdapter(FragmentManager fm) {
+    public PagerAdapter(FragmentManager fm) {
         super(fm);
     }
     public void addFragment(Fragment fragment, String title){

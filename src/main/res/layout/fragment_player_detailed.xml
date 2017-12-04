@@ -6,7 +6,7 @@
     android:clickable="true"
     android:focusable="true"
     android:background="@color/colorBackground"
-    tools:context="example.cerki.osuhub.PlayerFragment.PlayerFragment">
+    tools:context="example.cerki.osuhub.PlayerFragment.Fragment">
 
 
     <android.support.design.widget.TabLayout

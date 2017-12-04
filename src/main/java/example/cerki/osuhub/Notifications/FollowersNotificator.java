@@ -1,6 +1,4 @@
-package example.cerki.osuhub;
-
-import android.util.Log;
+package example.cerki.osuhub.Notifications;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -18,7 +16,9 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.TimeZone;
 
-import static android.content.ContentValues.TAG;
+import example.cerki.osuhub.Notifications.Following;
+import example.cerki.osuhub.Score;
+import example.cerki.osuhub.Util;
 
 /**
  * Created by cerki on 03-Dec-17.
@@ -45,9 +45,8 @@ public class FollowersNotificator {
         for (int i = 0; i < jsonArray.length(); i++) {
             JSONObject jsonObject = jsonArray.getJSONObject(i);
             Date date = Util.parseTimestamp(jsonObject.getString("date"),TimeZone.getTimeZone("GMT+8"));
-            if(lastDate.compareTo(date) <= 0){
+            if(lastDate.compareTo(date) < 0){
                 Score score = new Score();
-                Log.d(TAG, "getNewScores: " + date.toString() + " " + lastDate.toString());
                 for (Iterator<String> it = jsonObject.keys(); it.hasNext(); ) {
                     String name = it.next();
                     String value = jsonObject.getString(name);

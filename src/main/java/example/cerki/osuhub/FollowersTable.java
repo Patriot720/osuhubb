@@ -7,6 +7,8 @@ import android.database.sqlite.SQLiteDatabase;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import example.cerki.osuhub.Notifications.Following;
+
 import static example.cerki.osuhub.Columns.Following.ID;
 import static example.cerki.osuhub.Columns.Following.TIMESTAMP;
 import static example.cerki.osuhub.OsuDb.FOLLOWERS_TABLE_NAME;
@@ -14,7 +16,7 @@ import static example.cerki.osuhub.OsuDb.FOLLOWERS_TABLE_NAME;
 /**
  * Created by cerki on 02-Dec-17.
  */
-
+// TODO mDb leaks bug;
 public class FollowersTable {
     SQLiteDatabase mDb;
 
@@ -22,9 +24,7 @@ public class FollowersTable {
         mDb = db;
     }
 
-    public FollowersTable() {
 
-    }
 
     public void insertOrUpdateFollower(int userId) {
         ContentValues cv = new ContentValues();
@@ -58,5 +58,10 @@ public class FollowersTable {
         }
         query.close();
         return followers;
+    }
+
+    @Override
+    protected void finalize() throws Throwable {
+        mDb.close();
     }
 }

@@ -1,4 +1,4 @@
-package example.cerki.osuhub.PlayerFragment;
+package example.cerki.osuhub.PlayerFragment.Overview;
 
 import android.graphics.Bitmap;
 
@@ -9,6 +9,8 @@ import org.junit.Test;
 
 import java.io.File;
 
+import example.cerki.osuhub.PlayerFragment.Overview.AvatarTask;
+
 import static org.junit.Assert.*;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.notNull;
@@ -17,13 +19,13 @@ import static org.mockito.Mockito.mock;
 /**
  * Created by cerki on 02-Dec-17.
  */
-public class OverViewAvatarTaskTest {
+public class AvatarTaskTest {
 
     private Document mDocument;
 
     @Test
     public void getAvatar() throws Exception {
-        String url = new OverViewAvatarTask(new OverViewAvatarTask.WorkDoneListener() {
+        String url = new AvatarTask(new AvatarTask.WorkDoneListener() {
             @Override
             public void workDone(Bitmap bitmap) {
 

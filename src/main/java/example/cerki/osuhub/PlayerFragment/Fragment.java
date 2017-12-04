@@ -4,33 +4,31 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import example.cerki.osuhub.PlayerFragment.Overview.OverviewFragment;
 import example.cerki.osuhub.R;
 
 /**
- * A simple {@link Fragment} subclass.
+ * A simple {@link android.support.v4.app.Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link PlayerFragment.OnFragmentInteractionListener} interface
+ * {@link Fragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link PlayerFragment#newInstance} factory method to
+ * Use the {@link Fragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class PlayerFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
+public class Fragment extends android.support.v4.app.Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "userId";
 
-    // TODO: Rename and change types of parameters
     private int userId;
 
     private OnFragmentInteractionListener mListener;
 
-    public PlayerFragment() {
+    public Fragment() {
         // Required empty public constructor
     }
 
@@ -39,11 +37,10 @@ public class PlayerFragment extends Fragment {
      * this fragment using the provided parameters.
      *
      * @param userId Parameter 1.
-     * @return A new instance of fragment PlayerFragment.
+     * @return A new instance of fragment Fragment.
      */
-    // TODO: Rename and change types and number of parameters
-    public static PlayerFragment newInstance(int userId) {
-        PlayerFragment fragment = new PlayerFragment();
+    public static Fragment newInstance(int userId) {
+        Fragment fragment = new Fragment();
         Bundle args = new Bundle();
         args.putInt(ARG_PARAM1, userId);
         fragment.setArguments(args);
@@ -71,12 +68,11 @@ public class PlayerFragment extends Fragment {
     }
 
     private void setupPager(ViewPager pager) {
-        PlayerPagerAdapter adapter = new PlayerPagerAdapter(getChildFragmentManager());
-        adapter.addFragment(PlayerOverviewFragment.newInstance(userId),"Overview");
+        PagerAdapter adapter = new PagerAdapter(getChildFragmentManager());
+        adapter.addFragment(OverviewFragment.newInstance(userId),"Overview");
         pager.setAdapter(adapter);
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
@@ -111,7 +107,6 @@ public class PlayerFragment extends Fragment {
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
 }

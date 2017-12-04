@@ -33,7 +33,11 @@ public class Player {
      }
 
     private Map<String,Double> difference;
-    // TODO Add difference
+
+    public void setDifference(Map<String, Double> difference) {
+        this.difference = difference;
+    }
+
     public void compare(Player p){
         if(p.id != id)
             return;
@@ -137,5 +141,29 @@ public class Player {
 
     public boolean getActivity() {
         return activity;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if(this == o)return true;
+        if(o == null || getClass() != o.getClass())return false;
+        Player p = (Player) o;
+        return p.id != 0 && id == p.id && username != null &&
+                difference != null &&
+                comparable != null &&
+                username.equals(p.username) &&
+                difference.equals(p.difference) &&
+                comparable.equals(p.comparable);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id;
+        result = 31 * result + (username != null ? username.hashCode() : 0);
+        result = 31 * result + (country != null ? country.hashCode() : 0);
+        result = 31 * result + (activity ? 1 : 0);
+        result = 31 * result + (comparable != null ? comparable.hashCode() : 0);
+        result = 31 * result + (difference != null ? difference.hashCode() : 0);
+        return result;
     }
 }

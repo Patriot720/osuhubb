@@ -1,43 +1,34 @@
-package example.cerki.osuhub.PlayerFragment;
+package example.cerki.osuhub.PlayerFragment.Overview;
 
 
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.ToggleButton;
 
-import org.jsoup.Connection;
-import org.jsoup.Jsoup;
-
 import example.cerki.osuhub.FollowersTable;
 import example.cerki.osuhub.OsuDb;
 import example.cerki.osuhub.R;
 
-import static android.content.ContentValues.TAG;
-
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link PlayerOverviewFragment#newInstance} factory method to
+ * Use the {@link OverviewFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class PlayerOverviewFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
+public class OverviewFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "mUserId";
 
-    // TODO: Rename and change types of parameters
     private int mUserId;
 
 
-    public PlayerOverviewFragment() {
+    public OverviewFragment() {
         // Required empty public constructor
     }
 
@@ -46,11 +37,10 @@ public class PlayerOverviewFragment extends Fragment {
      * this fragment using the provided parameters.
      *
      * @param userId Parameter 1.
-     * @return A new instance of fragment PlayerOverviewFragment.
+     * @return A new instance of fragment OverviewFragment.
      */
-    // TODO: Rename and change types and number of parameters
-    public static PlayerOverviewFragment newInstance(int userId) {
-        PlayerOverviewFragment fragment = new PlayerOverviewFragment();
+    public static OverviewFragment newInstance(int userId) {
+        OverviewFragment fragment = new OverviewFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_PARAM1, userId);
         fragment.setArguments(args);
@@ -78,7 +68,7 @@ public class PlayerOverviewFragment extends Fragment {
                 followButton.setChecked(true);
             final ImageView avatar = view.findViewById(R.id.player_avatar);
             final ProgressBar progressBar = view.findViewById(R.id.avatar_progressbar);
-            new OverViewAvatarTask(new OverViewAvatarTask.WorkDoneListener() {
+            new AvatarTask(new AvatarTask.WorkDoneListener() {
                 @Override
                 public void workDone(Bitmap bitmap) {
                     avatar.setImageBitmap(bitmap);
@@ -86,7 +76,6 @@ public class PlayerOverviewFragment extends Fragment {
                     progressBar.setVisibility(View.GONE);
                 }
             }).execute("https://osu.ppy.sh/users/" + mUserId + "/card");
-            // TODO EXTRACT STRING
             followButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton compoundButton, boolean b) {

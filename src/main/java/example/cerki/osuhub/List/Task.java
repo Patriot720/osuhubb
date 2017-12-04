@@ -9,19 +9,17 @@ import org.jsoup.select.Elements;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import example.cerki.osuhub.PlayerParser;
-import example.cerki.osuhub.PlayersTable;
 
 
-public class ListTask extends AsyncTask<String,Void,List<Player>> {
+class Task extends AsyncTask<String,Void,List<Player>> {
     public static final String REQUEST_URL = "https://osu.ppy.sh/rankings/osu/performance";
     private final PlayersTable mTable;
     private WorkDoneListener workDoneListener;
 
-    public ListTask(PlayersTable table, WorkDoneListener workDoneListener) {
+    public Task(PlayersTable table, WorkDoneListener workDoneListener) {
         this.workDoneListener = workDoneListener;
         mTable = table;
     }

@@ -7,7 +7,6 @@ import android.support.v4.app.FragmentManager;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mockito;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
@@ -15,13 +14,13 @@ import static org.mockito.Mockito.mock;
 /**
  * Created by cerki on 02-Dec-17.
  */
-public class PlayerPagerAdapterTest {
-    private PlayerPagerAdapter mAdapter;
+public class PagerAdapterTest {
+    private PagerAdapter mAdapter;
 
     @Before
     public void setUp() throws Exception {
         FragmentManager mock = mock(FragmentManager.class);
-        mAdapter = new PlayerPagerAdapter(mock);
+        mAdapter = new PagerAdapter(mock);
     }
 
     @Test

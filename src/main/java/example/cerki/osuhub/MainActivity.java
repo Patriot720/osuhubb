@@ -1,13 +1,10 @@
 package example.cerki.osuhub;
 
-import android.content.ClipData;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -18,17 +15,18 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import example.cerki.osuhub.List.ListFragment;
 import example.cerki.osuhub.List.Player;
-import example.cerki.osuhub.PlayerFragment.PlayerFragment;
+import example.cerki.osuhub.Notifications.NotificationsService;
+import example.cerki.osuhub.PlayerFragment.Fragment;
 import jonathanfinerty.once.Once;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
-        PlayerFragment.OnFragmentInteractionListener,
-        ListFragment.OnListFragmentInteractionListener {
+        Fragment.OnFragmentInteractionListener,
+        example.cerki.osuhub.List.Fragment.OnListFragmentInteractionListener {
 
     private FragmentManager mFragmentManager;
+    private String SCHEDULE_NOTIFICATIONS_TAG = "tag";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,9 +52,11 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
         mFragmentManager = getSupportFragmentManager();
+
         Once.initialise(this);
-        scheduleSync();
+        scheduleNotifications();
     }
 
     @Override
@@ -98,11 +98,11 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-        Fragment fragment = null;
+        android.support.v4.app.Fragment fragment = null;
         if (id == R.id.nav_feed) {
 
         } else if (id == R.id.nav_list) {
-            fragment = ListFragment.newInstance();
+            fragment = example.cerki.osuhub.List.Fragment.newInstance();
         }
         mFragmentManager.beginTransaction().replace(R.id.content_main,fragment).commit();
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -112,16 +112,15 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onListFragmentInteraction(Player player) {
-        Fragment fragment = PlayerFragment.newInstance(player.getId());
+        android.support.v4.app.Fragment fragment = Fragment.newInstance(player.getId());
         mFragmentManager.beginTransaction().add(R.id.content_main,fragment)
                 .addToBackStack("stack")
                 .commit();
-        // TODO launch player Fragment
     }
-    private void scheduleSync() {
-        if (!Once.beenDone(Once.THIS_APP_INSTALL, "tag")) { // TODO EXTRACT Constant
-            MyTaskService.scheduleSync(this);
-            Once.markDone("tag");
+    private void scheduleNotifications() {
+        if (!Once.beenDone(Once.THIS_APP_INSTALL, SCHEDULE_NOTIFICATIONS_TAG)) {
+            NotificationsService.scheduleSync(this);
+            Once.markDone(SCHEDULE_NOTIFICATIONS_TAG);
         }
     }
 

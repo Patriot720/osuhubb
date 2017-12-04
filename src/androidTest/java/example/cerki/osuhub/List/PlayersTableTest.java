@@ -1,4 +1,4 @@
-package example.cerki.osuhub;
+package example.cerki.osuhub.List;
 
 import android.database.sqlite.SQLiteDatabase;
 
@@ -7,9 +7,11 @@ import org.junit.Before;
 import org.junit.Test;
 
 import example.cerki.osuhub.List.Player;
+import example.cerki.osuhub.List.PlayersTable;
+import example.cerki.osuhub.OsuDb;
+import example.cerki.osuhub.TestHelper;
 
 import static android.support.test.InstrumentationRegistry.getTargetContext;
-import static org.junit.Assert.*;
 
 /**
  * Created by cerki on 30-Nov-17.

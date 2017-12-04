@@ -1,10 +1,13 @@
-package example.cerki.osuhub;
+package example.cerki.osuhub.Notifications;
 
 import org.junit.Before;
 import org.junit.Test;
 
 
 import java.util.Collection;
+
+import example.cerki.osuhub.FollowersTable;
+import example.cerki.osuhub.OsuDb;
 
 import static android.support.test.InstrumentationRegistry.getTargetContext;
 import static org.junit.Assert.*;
@@ -42,7 +45,7 @@ public class FollowersTableTest {
     public void updatingTimestamp() throws Exception {
        mTable.insertOrUpdateFollower(1);
        String timestamp = mTable.getTimestamp(1);
-       Thread.sleep(1000);
+       Thread.sleep(2000);
        mTable.insertOrUpdateFollower(1);
        String newTimestamp = mTable.getTimestamp(1);
        assertNotEquals(timestamp,newTimestamp);

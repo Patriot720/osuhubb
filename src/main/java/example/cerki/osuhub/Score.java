@@ -7,4 +7,7 @@ import java.util.HashMap;
  */
 
 public class Score extends  HashMap<String,String>{
+    public int getAsInt(String key) {
+        return Integer.parseInt(get(key));
+    }
 }
