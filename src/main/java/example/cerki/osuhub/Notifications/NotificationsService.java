@@ -35,7 +35,7 @@ public class NotificationsService extends GcmTaskService {
         try {
             for (Following f : all) {
                 newScores = FollowersNotificator.getNewScores(f);
-                followersTable.insertOrUpdate(f.id);
+                followersTable.insertOrUpdate(f.id,f.username);
                 for (Score score : newScores)
                     pushNotification(generateScoreString(score,f.username));
         }

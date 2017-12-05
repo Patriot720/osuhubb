@@ -21,7 +21,7 @@ import example.cerki.osuhub.R;
  * Activities containing this fragment MUST implement the {@link OnListFragmentInteractionListener}
  * interface.
  */
-public class Fragment extends android.support.v4.app.Fragment {
+public class ListFragment extends android.support.v4.app.Fragment {
 
     private OnListFragmentInteractionListener mListener;
     private RecyclerAdapter mAdapter;
@@ -33,12 +33,12 @@ public class Fragment extends android.support.v4.app.Fragment {
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
-    public Fragment() {
+    public ListFragment() {
     }
 
     @SuppressWarnings("unused")
-    public static Fragment newInstance() {
-        return new Fragment();
+    public static ListFragment newInstance() {
+        return new ListFragment();
     }
 
     @Override

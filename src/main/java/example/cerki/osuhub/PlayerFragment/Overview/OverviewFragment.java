@@ -26,6 +26,7 @@ import example.cerki.osuhub.R;
 public class OverviewFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "mUserId";
+    private static final String ARG_PARAM2 = "mUsername" ;
 
     private int mUserId;
     private String mUsername;
@@ -42,10 +43,11 @@ public class OverviewFragment extends Fragment {
      * @param userId Parameter 1.
      * @return A new instance of fragment OverviewFragment.
      */
-    public static OverviewFragment newInstance(int userId) {
+    public static OverviewFragment newInstance(int userId,String username) {
         OverviewFragment fragment = new OverviewFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_PARAM1, userId);
+        args.putString(ARG_PARAM2,username);
         fragment.setArguments(args);
         return fragment;
     }
@@ -55,6 +57,7 @@ public class OverviewFragment extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             mUserId = getArguments().getInt(ARG_PARAM1);
+            mUsername = getArguments().getString(ARG_PARAM2);
         }
     }
 
@@ -72,6 +75,7 @@ public class OverviewFragment extends Fragment {
             final ImageView avatar = view.findViewById(R.id.player_avatar);
             final ProgressBar progressBar = view.findViewById(R.id.avatar_progressbar);
             final TextView username = view.findViewById(R.id.player_username);
+            username.setText(mUsername);
             final TextView otherInfoTemp = view.findViewById(R.id.other_info_temp); // TODO CHANGE THIS
             new AvatarTask(new AvatarTask.WorkDoneListener() {
                 @Override
@@ -84,8 +88,6 @@ public class OverviewFragment extends Fragment {
             new PlayerInfoTask(new PlayerInfoTask.workDoneListener() {
                 @Override
                 public void workDone(Player player) {
-                    mUsername = player.getUsername();
-                    username.setText(mUsername);
                     StringBuilder builder = new StringBuilder();
                     for(String key : player.getKeySet())
                         builder.append(key).append(": ").append(player.getString(key)).append("\n");

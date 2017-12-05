@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import example.cerki.osuhub.List.Fragment.OnListFragmentInteractionListener;
+import example.cerki.osuhub.List.ListFragment.OnListFragmentInteractionListener;
 import example.cerki.osuhub.R;
 import example.cerki.osuhub.Util;
 

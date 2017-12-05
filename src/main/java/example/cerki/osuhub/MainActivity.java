@@ -15,15 +15,16 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import example.cerki.osuhub.List.ListFragment;
 import example.cerki.osuhub.List.Player;
 import example.cerki.osuhub.Notifications.NotificationsService;
-import example.cerki.osuhub.PlayerFragment.Fragment;
+import example.cerki.osuhub.PlayerFragment.PlayerFragment;
 import jonathanfinerty.once.Once;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
-        Fragment.OnFragmentInteractionListener,
-        example.cerki.osuhub.List.Fragment.OnListFragmentInteractionListener {
+        PlayerFragment.OnFragmentInteractionListener,
+        ListFragment.OnListFragmentInteractionListener {
 
     private FragmentManager mFragmentManager;
     private String SCHEDULE_NOTIFICATIONS_TAG = "tag";
@@ -102,7 +103,7 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.nav_feed) {
 
         } else if (id == R.id.nav_list) {
-            fragment = example.cerki.osuhub.List.Fragment.newInstance();
+            fragment = ListFragment.newInstance();
         }
         mFragmentManager.beginTransaction().replace(R.id.content_main,fragment).commit();
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -112,7 +113,7 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onListFragmentInteraction(Player player) {
-        android.support.v4.app.Fragment fragment = Fragment.newInstance(player.getId());
+        android.support.v4.app.Fragment fragment = PlayerFragment.newInstance(player.getId(),player.getUsername());
         mFragmentManager.beginTransaction().add(R.id.content_main,fragment)
                 .addToBackStack("stack")
                 .commit();

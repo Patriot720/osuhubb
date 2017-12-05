@@ -15,20 +15,22 @@ import example.cerki.osuhub.R;
 /**
  * A simple {@link android.support.v4.app.Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link Fragment.OnFragmentInteractionListener} interface
+ * {@link PlayerFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link Fragment#newInstance} factory method to
+ * Use the {@link PlayerFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Fragment extends android.support.v4.app.Fragment {
+public class PlayerFragment extends android.support.v4.app.Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "userId";
+    private static final String ARG_PARAM2 = "mUsername" ;
 
     private int userId;
+    private String mUsername;
 
     private OnFragmentInteractionListener mListener;
 
-    public Fragment() {
+    public PlayerFragment() {
         // Required empty public constructor
     }
 
@@ -37,12 +39,13 @@ public class Fragment extends android.support.v4.app.Fragment {
      * this fragment using the provided parameters.
      *
      * @param userId Parameter 1.
-     * @return A new instance of fragment Fragment.
+     * @return A new instance of fragment ListFragment.
      */
-    public static Fragment newInstance(int userId) {
-        Fragment fragment = new Fragment();
+    public static PlayerFragment newInstance(int userId,String username) {
+        PlayerFragment fragment = new PlayerFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_PARAM1, userId);
+        args.putString(ARG_PARAM2,username);
         fragment.setArguments(args);
         return fragment;
     }
@@ -52,6 +55,7 @@ public class Fragment extends android.support.v4.app.Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             userId = getArguments().getInt(ARG_PARAM1);
+            mUsername = getArguments().getString(ARG_PARAM2);
         }
     }
 
@@ -69,7 +73,7 @@ public class Fragment extends android.support.v4.app.Fragment {
 
     private void setupPager(ViewPager pager) {
         PagerAdapter adapter = new PagerAdapter(getChildFragmentManager());
-        adapter.addFragment(OverviewFragment.newInstance(userId),"Overview");
+        adapter.addFragment(OverviewFragment.newInstance(userId, mUsername),"Overview");
         pager.setAdapter(adapter);
     }
 
