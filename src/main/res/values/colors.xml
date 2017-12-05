@@ -7,5 +7,6 @@
     <color name="defaultTextColor">#000</color>
     <color name="textColorHighlight">#FFF</color>
     <color name="usernameColor">#0A0</color>
-    <color name="FeedTitleColor">#CCC</color>
+    <color name="FeedTitleColor">#FBFBFB</color>
+    <color name="FeedDefault">#333</color>
 </resources>

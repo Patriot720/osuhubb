@@ -13,13 +13,14 @@ import example.cerki.osuhub.Util;
  * Created by cerki on 05-Dec-17.
  */
 
-public class FeedItem implements  Comparable<Score>{
+public class FeedItem implements  Comparable<FeedItem>{
     String beatmapImageUrl;
     Score score;
     Beatmap beatmap;
     String username;
     @Override
-    public int compareTo(@NonNull Score score) {
+    public int compareTo(@NonNull FeedItem feedItem) {
+        Score score = feedItem.score;
         String dateString = score.get("date");
         String thisDateString = this.score.get("date");
         if(dateString == null || thisDateString == null)
