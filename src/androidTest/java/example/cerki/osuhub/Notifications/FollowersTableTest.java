@@ -86,6 +86,7 @@ public class FollowersTableTest {
     public void insertFollowing() throws Exception {
         String dansGamu = "DansGamu";
         mTable.insertOrUpdate(1, dansGamu);
+        mTable.close();
         Collection<Following> all = mTable.getAll();
         for (Following following : all) {
             assertEquals(following.username,dansGamu);

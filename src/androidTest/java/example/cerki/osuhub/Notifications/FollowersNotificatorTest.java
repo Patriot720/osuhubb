@@ -97,5 +97,7 @@ public class FollowersNotificatorTest {
         assertTrue(date.compareTo(date2) != 0);
     }
 
-
+    @Test
+    public void getNewScoresStrings() throws Exception {
+    }
 }

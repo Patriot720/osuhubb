@@ -61,11 +61,11 @@ public class FollowersTable {
         query.close();
         return followers;
     }
-
-    @Override
-    protected void finalize() throws Throwable {
+    public void close(){
         mDb.close();
     }
+
+
 
     public void insertOrUpdate(int id, String username) {
         ContentValues cv = new ContentValues();

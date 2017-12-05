@@ -3,7 +3,6 @@ package example.cerki.osuhub.Notifications;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.content.Context;
-import android.support.annotation.NonNull;
 
 import com.google.android.gms.gcm.GcmNetworkManager;
 import com.google.android.gms.gcm.GcmTaskService;
@@ -20,7 +19,6 @@ import example.cerki.osuhub.FollowersTable;
 import example.cerki.osuhub.OsuDb;
 import example.cerki.osuhub.R;
 import example.cerki.osuhub.Score;
-import example.cerki.osuhub.Util;
 
 public class NotificationsService extends GcmTaskService {
     private static final String PERIODIC_SYNC_TAG = "tag";
@@ -37,26 +35,13 @@ public class NotificationsService extends GcmTaskService {
                 newScores = FollowersNotificator.getNewScores(f);
                 followersTable.insertOrUpdate(f.id,f.username);
                 for (Score score : newScores)
-                    pushNotification(generateScoreString(score,f.username));
+                    pushNotification(score.generateScoreString(f.username));
         }
         } catch(IOException | JSONException | ParseException e){
             e.printStackTrace();
-        } // TODO CLOSE DATABASE
+        }
+        followersTable.close();
         return GcmNetworkManager.RESULT_SUCCESS;
-    }
-
-    @NonNull
-    private String generateScoreString(Score score, String username) {
-        StringBuilder builder = new StringBuilder();
-        builder.append(username)
-                .append(" ")
-                .append(score.get("pp"))
-                .append(" ")
-                .append(Util.calculateAccuracy(score))
-                .append("\n");
-        // TODO FETCH MAP DATA
-        // TODO GetUsername from follower, add username to follower
-        return builder.toString();
     }
 
 
