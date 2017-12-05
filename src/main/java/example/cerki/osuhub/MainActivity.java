@@ -15,6 +15,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import example.cerki.osuhub.Feed.FeedItem;
+import example.cerki.osuhub.Feed.FeedItemFragment;
 import example.cerki.osuhub.List.ListFragment;
 import example.cerki.osuhub.List.Player;
 import example.cerki.osuhub.Notifications.NotificationsService;
@@ -24,7 +26,8 @@ import jonathanfinerty.once.Once;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
         PlayerFragment.OnFragmentInteractionListener,
-        ListFragment.OnListFragmentInteractionListener {
+        ListFragment.OnListFragmentInteractionListener,
+        FeedItemFragment.OnListFragmentInteractionListener{
 
     private FragmentManager mFragmentManager;
     private String SCHEDULE_NOTIFICATIONS_TAG = "tag";
@@ -101,7 +104,7 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
         android.support.v4.app.Fragment fragment = null;
         if (id == R.id.nav_feed) {
-
+            fragment = new FeedItemFragment();
         } else if (id == R.id.nav_list) {
             fragment = ListFragment.newInstance();
         }
@@ -127,6 +130,11 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onFragmentInteraction(Uri uri) {
+
+    }
+
+    @Override
+    public void onListFragmentInteraction(FeedItem item) {
 
     }
 }
