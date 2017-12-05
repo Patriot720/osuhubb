@@ -2,10 +2,16 @@ package example.cerki.osuhub;
 
 import android.annotation.SuppressLint;
 import android.content.ContentValues;
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -26,14 +32,14 @@ public class Util {
     }
 
     @SuppressLint("DefaultLocale")
-    public static String calculateAccuracy(Score score){
+    public static String getAccuracyString(Score score){
         float count50 = score.getAsInt("count50");
         float count100 = score.getAsInt("count100");
         float count300 = score.getAsInt("count300");
         float countmiss = score.getAsInt("countmiss");
         float acc = ((50*count50) + (100*count100) + (300*count300))/(300*(countmiss + count50 + count100 + count300));
         return String.format("%.2f%%",acc*100);
-    }
+    } // TODO change not a clear method name
     public static Date parseTimestamp(String stamp,TimeZone timezone) throws ParseException {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
         format.setTimeZone(timezone);
@@ -65,7 +71,16 @@ public class Util {
         arrow.setVisibility(View.VISIBLE);
         textView.setVisibility(View.VISIBLE);
     }
-
+   public static void setImageFromAsset(Context context, ImageView destination, String source) {
+        try {
+            InputStream open = context.getAssets().open(source);
+            Bitmap bitmap = BitmapFactory.decodeStream(open);
+            destination.setImageBitmap(bitmap);
+        } catch (IOException e) {
+            if (!(e instanceof FileNotFoundException))
+                e.printStackTrace();
+        }
+    }
     public static String doubleToString(Double value){
 
         if(value % 1 == 0) {

@@ -11,6 +11,11 @@ import java.util.Iterator;
  */
 
 public class Beatmap extends HashMap<String,String> {
+    public static final String MAX_COMBO = "max_combo";
+    public static final String MAP_NAME = "title";
+    public static final String DIFFICULTY_NAME = "version" ;
+    public static final String STAR_RATING = "difficultyrating" ;
+
     public Beatmap(JSONObject jsonObject) throws JSONException {
         for (Iterator<String> it = jsonObject.keys(); it.hasNext(); ) {
             String key = it.next();

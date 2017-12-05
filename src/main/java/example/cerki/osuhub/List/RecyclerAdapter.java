@@ -1,8 +1,6 @@
 package example.cerki.osuhub.List;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.support.v7.util.DiffUtil;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,17 +9,14 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import example.cerki.osuhub.List.ListFragment.OnListFragmentInteractionListener;
 import example.cerki.osuhub.R;
 import example.cerki.osuhub.Util;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
-
-import static example.cerki.osuhub.Columns.*;
+import static example.cerki.osuhub.Columns.ACC;
 import static example.cerki.osuhub.Columns.PC;
 import static example.cerki.osuhub.Columns.PP;
 import static example.cerki.osuhub.Columns.RANK;
@@ -85,7 +80,7 @@ class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> {
         Player player = mValues.get(position);
         holder.mItem = player;
         holder.mUsernameView.setText(player.getUsername());
-        setImage(holder.mCountryImage,player.getCountry());
+        Util.setImageFromAsset(mContext,holder.mCountryImage,player.getCountry());
         holder.mPerformanceView.setText(player.getString(PP));
         holder.mAccuracyView.setText(String.format("%s%%", player.getString(ACC)));
         holder.mPlaycountView.setText(player.getString(PC));
@@ -119,16 +114,7 @@ class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> {
             }
         });
     }
-    private void setImage(ImageView destination, String source) {
-        try {
-            InputStream open = mContext.getAssets().open(source);
-            Bitmap bitmap = BitmapFactory.decodeStream(open);
-            destination.setImageBitmap(bitmap);
-        } catch (IOException e) {
-            if (!(e instanceof FileNotFoundException))
-                e.printStackTrace();
-        }
-    }
+
     @Override
     public int getItemCount() {
         return mValues.size();

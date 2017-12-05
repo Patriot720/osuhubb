@@ -11,6 +11,11 @@ import java.util.Iterator;
 
 // TODO comparable only works for dates !!!;
 public class Score extends  HashMap<String,String>{
+    public static final String MISS = "countmiss" ;
+    public static final String PP = "pp" ;
+    public static final String COMBO = "maxcombo" ;
+    public static final String RANK = "rank";
+
     public Score(JSONObject jsonObject) throws JSONException {
         for (Iterator<String> it = jsonObject.keys(); it.hasNext(); ) {
             String key = it.next(); // todo refactor
@@ -34,7 +39,7 @@ public class Score extends  HashMap<String,String>{
                 .append(" ")
                 .append(get("pp"))
                 .append(" ")
-                .append(Util.calculateAccuracy(this))
+                .append(Util.getAccuracyString(this))
                 .append("\n");
         // TODO FETCH MAP DATA
         // TODO GetUsername from follower, add username to follower

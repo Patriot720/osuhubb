@@ -5,9 +5,9 @@ package example.cerki.osuhub.Notifications;
  */
 
 public class Following {
-    int id;
-    String timestamp;
-    String username;
+    public int id;
+    public String timestamp;
+    public String username;
 
     public Following(int id, String timestamp) {
         this.id = id;

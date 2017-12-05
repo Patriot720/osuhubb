@@ -20,7 +20,7 @@ public class UtilTest {
         score.put("count100","2");
         score.put("count300","549");
         score.put("countmiss","0");
-        String s = Util.calculateAccuracy(score);
+        String s = Util.getAccuracyString(score);
         assertTrue(s != null);
         assertEquals("99.61%",s);
     }
