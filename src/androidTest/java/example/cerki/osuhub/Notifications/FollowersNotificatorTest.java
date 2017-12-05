@@ -1,9 +1,9 @@
 package example.cerki.osuhub.Notifications;
 
-import org.json.JSONArray;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 import java.util.TimeZone;
@@ -15,8 +15,6 @@ import example.cerki.osuhub.Util;
 
 import static android.support.test.InstrumentationRegistry.getTargetContext;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -30,17 +28,9 @@ public class FollowersNotificatorTest {
     public void setUp() throws Exception {
     }
 
-    @Test
-    public void getJsonObject() throws Exception{
-        JSONArray jsonArray = FollowersNotificator.getPlayerJsonArray(124493);
-        assertNotNull(jsonArray);
-    }
 
-    @Test
-    public void getJsonFakeId() throws Exception {
-        JSONArray jsonArray = FollowersNotificator.getPlayerJsonArray(0);
-        assertTrue(jsonArray.length() == 0);
-    }
+
+
 
     @Test
     public void ShouldCheckEachFollowerIfTheyHaveNewerScoreAndReturnsTheseScoresCollection() throws Exception {
@@ -98,6 +88,24 @@ public class FollowersNotificatorTest {
     }
 
     @Test
-    public void getNewScoresStrings() throws Exception {
+    public void getScoresMonthOld() throws Exception {
+        Collection<Score> scores = FollowersNotificator.getMonthOldScores(new Following(5187234,"","alko-chan"));
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.MONTH,-1);
+        Date monthOldDate = calendar.getTime();
+        assertTrue(scores.size() > 0); // TODO not a consistent test
+        for (Score score : scores) {
+            Date date = Util.parseTimestamp(score.get("date"),TimeZone.getTimeZone("GMT+8"));
+            assertTrue(date.compareTo(monthOldDate) > 0);
+        }
+        }
+    @Test
+    public void getScoresDayOld() throws Exception{
+        Calendar date = Calendar.getInstance();
+        date.add(Calendar.DAY_OF_MONTH,-1);
+        Date dayOldDate = date.getTime(); // TODO not a consistent test
+        Collection<Score> scoresAfter = FollowersNotificator.getScoresAfter(dayOldDate, new Following(5187234, "", "alko-chan"));
+        assertTrue(scoresAfter.size() == 0);
     }
+
 }

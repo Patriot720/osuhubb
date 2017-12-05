@@ -8,10 +8,8 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Iterator;
 
-/**
- * Created by cerki on 03-Dec-17.
- */
 
+// TODO comparable only works for dates !!!;
 public class Score extends  HashMap<String,String>{
     public Score(JSONObject jsonObject) throws JSONException {
         for (Iterator<String> it = jsonObject.keys(); it.hasNext(); ) {
@@ -19,6 +17,10 @@ public class Score extends  HashMap<String,String>{
             String value = jsonObject.getString(key);
             this.put(key,value);
         }
+    }
+
+    protected Score() {
+
     }
 
     public int getAsInt(String key) {
@@ -38,4 +40,6 @@ public class Score extends  HashMap<String,String>{
         // TODO GetUsername from follower, add username to follower
         return builder.toString();
     }
+
+
 }

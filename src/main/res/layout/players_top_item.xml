@@ -93,7 +93,7 @@
     </RelativeLayout>
 
     <RelativeLayout
-        android:id="@+id/pp"
+        android:id="@+id/star_rate"
         android:layout_width="65dp"
         android:layout_height="match_parent">
 
