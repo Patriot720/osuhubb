@@ -50,7 +50,7 @@ public class FeedItemFragment extends Fragment {
             public void workDone(List<FeedItem> items) {
                 mData.clear();// TODO
                 mData.addAll(items);
-                mAdapter.notifyDataSetChanged();
+                mAdapter.notifyDataSetChanged(); // TODO change to diff util
                 mRefresh.setRefreshing(false);
                 // Todo animation schedule
             }
@@ -77,6 +77,10 @@ public class FeedItemFragment extends Fragment {
             RecyclerView recyclerView = view.findViewById(R.id.feedlist);
             recyclerView.setLayoutManager(new LinearLayoutManager(context));
             mAdapter = new MyFeedItemRecyclerViewAdapter(mData,getContext(),this.mListener);
+            recyclerView.setHasFixedSize(true);
+            recyclerView.setItemViewCacheSize(20);
+            recyclerView.setDrawingCacheEnabled(true);
+            recyclerView.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_LOW);
             recyclerView.setAdapter(mAdapter);
         return view;
     }
@@ -110,7 +114,6 @@ public class FeedItemFragment extends Fragment {
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnListFragmentInteractionListener {
-        // TODO: Update argument type and name
         void onListFragmentInteraction(FeedItem item);
     }
 }

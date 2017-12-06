@@ -27,7 +27,7 @@ public class FollowersNotificatorTest {
     @Test
     public void ShouldCheckEachFollowerIfTheyHaveNewerScoreAndReturnsTheseScoresCollection() throws Exception {
         Following follower = new Following(124493, "2013-06-22 9:11:16");
-        Collection<Score> scores = new OsuAPI().getNewScores(follower);
+        Collection<Score> scores = follower.getNewScores(new OsuAPI());
         assertTrue(scores.size() > 0);
          Score score = (Score) scores.toArray()[0];
          assertEquals(score.get("rank"),"SH");
@@ -36,7 +36,7 @@ public class FollowersNotificatorTest {
     @Test
     public void ShouldNotReturnAnything() throws Exception{
         Following follower = new Following(124493,"2017-12-03 16:02:22");
-        Collection<Score> newScores = new OsuAPI().getNewScores(follower);
+        Collection<Score> newScores = follower.getNewScores(new OsuAPI());
         assertTrue(newScores.size() == 0);
     }
 
@@ -49,7 +49,7 @@ public class FollowersNotificatorTest {
     @Test
     public void ShouldReturnEmpty() throws Exception {
         Following follower = new Following(1, "2013-06-22 9:11:16");
-        Collection<Score> scores = new OsuAPI().getNewScores(follower);
+        Collection<Score> scores = follower.getNewScores(new OsuAPI());
         assertTrue(scores.size() == 0);
     }
 
@@ -81,7 +81,7 @@ public class FollowersNotificatorTest {
 
     @Test
     public void getScoresMonthOld() throws Exception {
-        Collection<Score> scores = new OsuAPI().getMonthOldScores(new Following(5187234,"","alko-chan"));
+        Collection<Score> scores = new Following(5187234,"","alko-chan").getMonthOldScores();
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.MONTH,-1);
         Date monthOldDate = calendar.getTime();
@@ -96,7 +96,7 @@ public class FollowersNotificatorTest {
         Calendar date = Calendar.getInstance();
         date.add(Calendar.DAY_OF_MONTH,-1);
         Date dayOldDate = date.getTime(); // TODO not a consistent test
-        Collection<Score> scoresAfter = new OsuAPI().getScoresAfter(dayOldDate, new Following(5187234, "", "alko-chan"));
+        Collection<Score> scoresAfter = new Following(5187234, "", "alko-chan").getScoresAfter(dayOldDate);
         assertTrue(scoresAfter.size() == 0);
     }
 

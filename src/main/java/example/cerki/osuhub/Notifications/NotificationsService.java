@@ -35,7 +35,7 @@ public class NotificationsService extends GcmTaskService {
         OsuAPI osuAPI = new OsuAPI();
         try {
             for (Following f : all) {
-                newScores = osuAPI.getNewScores(f); // TODO EOF exception
+                newScores = f.getNewScores(osuAPI); // TODO EOF exception
                 followersTable.insertOrUpdate(f.id,f.username);
                 for (Score score : newScores)
                     pushNotification(score.generateScoreString(f.username));

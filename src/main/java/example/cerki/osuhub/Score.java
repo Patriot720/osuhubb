@@ -16,6 +16,8 @@ public class Score extends  HashMap<String,String>{
     public static final String COMBO = "maxcombo" ;
     public static final String RANK = "rank";
     public static final String BEATMAP_ID = "beatmap_id";
+    public static final String MODS = "enabled_mods";
+    public static final String DATE = "date";
 
     public Score(JSONObject jsonObject) throws JSONException {
         for (Iterator<String> it = jsonObject.keys(); it.hasNext(); ) {

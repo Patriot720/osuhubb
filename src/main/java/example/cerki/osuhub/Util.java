@@ -50,6 +50,12 @@ public class Util {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
         return format.parse(stamp);
     }
+    public static Date parsePeppyTime(String stamp) throws ParseException{
+        return parseTimestamp(stamp,TimeZone.getTimeZone("GMT+8"));
+    }
+    public static Date parseSQLTime(String stamp) throws ParseException {
+        return parseTimestamp(stamp,TimeZone.getTimeZone("GMT"));
+    }
 
     @SuppressLint("SetTextI18n")
     public static void showPlayerDifference(TextView textView, ImageView arrow, Double value) {

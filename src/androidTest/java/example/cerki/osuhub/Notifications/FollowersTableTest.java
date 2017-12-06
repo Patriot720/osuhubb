@@ -58,15 +58,6 @@ public class FollowersTableTest {
         assertEquals("",mTable.getTimestamp(1));
     }
     @Test
-    public void testTimestamps() throws Exception{
-        mTable.insertOrUpdate(1);
-        String timestamp = mTable.getTimestamp(1);
-        Thread.sleep(1000);
-        mTable.insertOrUpdate(1);
-        String timestamp1 = mTable.getTimestamp(1);
-    }
-
-    @Test
     public void getAll() throws Exception {
         mTable.insertOrUpdate(20);
         mTable.insertOrUpdate(22);

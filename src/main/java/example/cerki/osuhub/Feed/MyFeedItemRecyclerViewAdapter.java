@@ -10,13 +10,18 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.RequestOptions;
 
 import java.util.List;
 
 import example.cerki.osuhub.Feed.FeedItemFragment.OnListFragmentInteractionListener;
+import example.cerki.osuhub.Mods;
 import example.cerki.osuhub.R;
 import example.cerki.osuhub.Score;
 import example.cerki.osuhub.Util;
+
+import static com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade;
 
 /**
  * specified {@link OnListFragmentInteractionListener}.
@@ -38,7 +43,15 @@ public class MyFeedItemRecyclerViewAdapter extends RecyclerView.Adapter<MyFeedIt
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.fragment_feeditem, parent, false);
-        return new ViewHolder(view);
+        final ViewHolder viewHolder = new ViewHolder(view);
+        viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FeedItem feedItem = mValues.get(viewHolder.getAdapterPosition());
+                mListener.onListFragmentInteraction(feedItem);
+            }
+        });
+        return viewHolder;
     }
 
     @SuppressLint("DefaultLocale")
@@ -50,28 +63,18 @@ public class MyFeedItemRecyclerViewAdapter extends RecyclerView.Adapter<MyFeedIt
         holder.mAccuracy.setText(Util.getAccuracyString(item.score));
         holder.mMissCount.setText(String.format("%sxMiss", item.score.get(Score.MISS)));
         holder.mCombo.setText(String.format("%s/%s", item.score.get(Score.COMBO), item.beatmap.get(Beatmap.MAX_COMBO)));
-        holder.mMods.setText("WIP"); // TODO create enum for this
+        holder.mMods.setText(Mods.parseFlags(item.score.get(Score.MODS)));
         holder.mUsername.setText(item.username);
         holder.mMapName.setText(String.format("%s[%s]",item.beatmap.get(Beatmap.MAP_NAME),item.beatmap.get(Beatmap.DIFFICULTY_NAME)));
-        holder.mStarRate.setText(String.format("%.2f",item.beatmap.getAsDouble(Beatmap.STAR_RATING)));// Todo fix these floats
+        holder.mStarRate.setText(String.format("%.2f",item.beatmap.getAsDouble(Beatmap.STAR_RATING)));
         Util.setImageFromAsset(mContext,holder.mRank,item.score.get(Score.RANK) + ".png"); // Todo :thinking:
-        // TODO implement date ago;
-        Glide.with(mContext)
-                .load(item.beatmapImageUrl)
+        holder.mRelativeDate.setText(item.relativeDate);
+        Glide.with(holder.mView)
+                .load(item.coverUrl)
+                .apply(RequestOptions.centerCropTransform())
+                .apply(RequestOptions.diskCacheStrategyOf(DiskCacheStrategy.ALL))
+                .transition(withCrossFade())
                 .into(holder.mCover);
-
-
-
-        holder.mView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (null != mListener) {
-                    // Notify the active callbacks interface (the activity, if the
-                    // fragment is attached to one) that an item has been selected.
-                    mListener.onListFragmentInteraction(holder.mItem);
-                }
-            }
-        });
     }
 
     @Override
@@ -79,7 +82,7 @@ public class MyFeedItemRecyclerViewAdapter extends RecyclerView.Adapter<MyFeedIt
         return mValues.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
         public final View mView;
         public FeedItem mItem;
         public TextView mPerformance;
@@ -90,6 +93,7 @@ public class MyFeedItemRecyclerViewAdapter extends RecyclerView.Adapter<MyFeedIt
         public TextView mMods;
         public TextView mAccuracy;
         public TextView mStarRate;
+        public TextView mRelativeDate;
         public ImageView mCover;
         public ImageView mRank;
 
@@ -105,6 +109,7 @@ public class MyFeedItemRecyclerViewAdapter extends RecyclerView.Adapter<MyFeedIt
             mMods = view.findViewById(R.id.mods);
             mAccuracy = view.findViewById(R.id.acc);
             mStarRate = view.findViewById(R.id.star_rate);
+            mRelativeDate = view.findViewById(R.id.relative_date);
             mCover = view.findViewById(R.id.cover);
             mRank = view.findViewById(R.id.rank);
         }

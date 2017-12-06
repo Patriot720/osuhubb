@@ -9,12 +9,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Collection;
-import java.util.Date;
-import java.util.TimeZone;
 
 import example.cerki.osuhub.Feed.Beatmap;
 import example.cerki.osuhub.List.Player;
@@ -74,29 +70,8 @@ public class OsuAPI { // Todo SPR
     public Player getPlayer(String id) throws IOException, JSONException {
         return getPlayer(Integer.parseInt(id));
     }
-    public  Collection<Score> getNewScores(Following following) throws IOException, JSONException, ParseException {
-        Date lastDate = Util.parseTimestamp(following.timestamp,TimeZone.getTimeZone("GMT"));
-        return getScoresAfter(lastDate,following);
-    }
 
-    public Collection<Score> getScoresAfter(Date lastDate,Following following) throws JSONException, ParseException, IOException {
-        Collection<Score> scores = new OsuAPI().getPlayerBest(following.id);
-        Collection<Score> newScores = new ArrayList<>();
-        for (Score score : scores) {
-            Date date = Util.parseTimestamp(score.get("date"), TimeZone.getTimeZone("GMT+8"));// todo extract to Columns
-            if(lastDate.compareTo(date) < 0){
-                newScores.add(score);
-            }
-        }
-        return newScores;
-    }
-    public Collection<Score> getMonthOldScores(Following following) throws ParseException, IOException, JSONException {
-        Calendar cal = Calendar.getInstance();
-        cal.add(Calendar.MONTH, -1);
-        Date result = cal.getTime();
-        return getScoresAfter(result,following);
-    }
     public String getCoverUrl(String mapset_id){
-        return "https://assets.ppy.sh//beatmaps/" + mapset_id + "/covers/cover.jpg";
+        return "https://assets.ppy.sh//beatmaps/" + mapset_id + "/covers/card.jpg";
     }
 }

@@ -14,191 +14,208 @@
         android:layout_margin="10dp"
         android:elevation="3dp">
 
-        <RelativeLayout
+        <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="200dp">
 
-            <RelativeLayout
-                android:id="@+id/top"
-                android:layout_width="match_parent"
-                android:layout_height="100dp">
+            <View
+                android:id="@+id/delimiter"
+                android:layout_width="1dp"
+                android:layout_height="30dp"
+                android:layout_alignBottom="@id/cover"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="70dp"
+                android:layout_toEndOf="@id/username"
+                android:background="@color/FeedTitleColor"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-                <ImageView
-                    android:id="@+id/cover"
-                    android:layout_width="match_parent"
-                    android:layout_height="100dp"
-                    android:adjustViewBounds="false"
-                    android:cropToPadding="false"
-                    android:scaleType="centerCrop"
-                    app:srcCompat="@drawable/cover" />
-
-                <View
-                    android:id="@+id/cover_bottom"
-                    android:layout_width="match_parent"
-                    android:layout_height="30dp"
-                    android:layout_alignBottom="@id/cover"
-                    android:alpha=".4"
-                    android:background="#000"
-                    android:visibility="visible" />
-
-                <TextView
-                    android:id="@+id/username"
-                    android:layout_width="100dp"
-                    android:layout_height="30dp"
-                    android:layout_alignBottom="@id/cover"
-                    android:layout_alignParentStart="true"
-                    android:gravity="center|right"
-                    android:text="TextView"
-                    android:textAlignment="center"
-                    android:textColor="@color/FeedTitleColor"
-                    android:textSize="16sp"
-                    tools:text="Kablaze" />
-
-                <TextView
-                    android:id="@+id/map_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:layout_alignBottom="@id/cover"
-                    android:layout_alignParentEnd="true"
-                    android:gravity="center|right"
-                    android:paddingEnd="5dp"
-                    android:text="Hitorigoto -TV MIX- [Soloqui]"
-                    android:textColor="@color/FeedTitleColor"
-                    android:textSize="16sp" />
-
-                <View
-                    android:id="@+id/delimiter"
-                    android:layout_width="1dp"
-                    android:layout_height="30dp"
-                    android:layout_alignBottom="@id/cover"
-                    android:layout_toEndOf="@id/username"
-                    android:background="@color/FeedTitleColor" />
-            </RelativeLayout>
-
-            <android.support.constraint.ConstraintLayout
-                android:id="@+id/bottom"
+            <ImageView
+                android:id="@+id/cover"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
-                android:layout_alignParentBottom="true">
+                android:contentDescription="TODO"
+                android:cropToPadding="true"
+                android:scaleType="centerCrop"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/cover" />
 
-                <TextView
-                    android:id="@+id/star_rate"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignBottom="@id/star_rate_icon"
-                    android:layout_marginBottom="8dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_toStartOf="@id/star_rate_icon"
-                    android:text="7.43"
-                    android:textColor="@color/FeedDefault"
-                    android:textSize="18sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/star_rate_icon"
-                    app:layout_constraintTop_toBottomOf="@+id/acc" />
+            <View
+                android:id="@+id/cover_bottom"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_alignBottom="@id/cover"
+                android:layout_marginTop="70dp"
+                android:alpha=".4"
+                android:background="#000"
+                android:visibility="visible"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-                <TextView
-                    android:id="@+id/FC"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="FC"
-                    android:textColor="@color/FeedDefault"
-                    android:visibility="gone" />
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/username"
+                android:layout_width="100dp"
+                android:layout_height="30dp"
+                android:layout_alignBottom="@id/cover"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="70dp"
+                android:gravity="center|right"
+                android:text="TextView"
+                android:textAlignment="center"
+                android:textColor="@color/FeedTitleColor"
+                android:textSize="16sp"
+                app:autoSizeTextType="uniform"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Kablaze" />
 
-                <ImageView
-                    android:id="@+id/rank"
-                    android:layout_width="100dp"
-                    android:layout_height="match_parent"
-                    android:layout_alignTop="@+id/star_rate"
-                    android:alpha=".5"
-                    android:visibility="visible"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:srcCompat="@drawable/ss"
-                    tools:layout_editor_absoluteY="0dp" />
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/map_name"
+                android:layout_width="240dp"
+                android:layout_height="30dp"
+                android:layout_alignBottom="@id/cover"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="70dp"
+                android:gravity="center|right"
+                android:text="Hitorigoto -TV MIX- [Soloqui]"
+                android:textColor="@color/FeedTitleColor"
+                android:textSize="16sp"
+                app:autoSizeTextType="uniform"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-                <ImageView
-                    android:id="@+id/star_rate_icon"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginBottom="8dp"
-                    android:layout_marginEnd="13dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:srcCompat="@drawable/star_128" />
+            <ImageView
+                android:id="@+id/star_rate_icon"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_alignParentEnd="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.94"
+                app:layout_constraintStart_toStartOf="parent"
+                app:srcCompat="@drawable/star_128"
+                tools:layout_editor_absoluteY="7dp" />
 
-                <TextView
-                    android:id="@+id/mods"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignBaseline="@+id/acc"
-                    android:layout_alignBottom="@+id/acc"
-                    android:layout_alignStart="@+id/star_rate"
-                    android:layout_marginEnd="16dp"
-                    android:layout_marginTop="6dp"
-                    android:text="+HDHR"
-                    android:textColor="@color/FeedDefault"
-                    android:textSize="18sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+            <TextView
+                android:id="@+id/mods"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/acc"
+                android:layout_alignBottom="@+id/acc"
+                android:layout_alignStart="@+id/star_rate"
+                android:layout_marginEnd="18dp"
+                android:layout_marginTop="2dp"
+                android:text="+HDHR"
+                android:textColor="@color/FeedDefault"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cover" />
 
-                <TextView
-                    android:id="@+id/pp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/FC"
-                    android:layout_toEndOf="@+id/FC"
-                    android:text="700pp"
-                    android:textColor="@color/FeedDefault"
-                    android:textSize="30sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.062"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+            <TextView
+                android:id="@+id/acc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/pp"
+                android:layout_below="@+id/pp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginTop="6dp"
+                android:text="@string/default_acc"
+                android:textColor="@color/FeedDefault"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/mods" />
 
-                <TextView
-                    android:id="@+id/combo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="1200/2438"
-                    android:textColor="@color/FeedDefault"
-                    android:textSize="18sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+            <TextView
+                android:id="@+id/FC"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="FC"
+                android:textColor="@color/FeedDefault"
+                android:visibility="gone" />
 
-                <TextView
-                    android:id="@+id/miss_count"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:text="25xMiss"
-                    android:textColor="@color/FeedDefault"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toStartOf="parent" />
+            <TextView
+                android:id="@+id/miss_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="48dp"
+                android:text="25xMiss"
+                android:textColor="@color/FeedDefault"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.501"
+                app:layout_constraintStart_toStartOf="parent" />
 
-                <TextView
-                    android:id="@+id/acc"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignStart="@+id/pp"
-                    android:layout_below="@+id/pp"
-                    android:layout_marginEnd="28dp"
-                    android:layout_marginTop="6dp"
-                    android:text="@string/default_acc"
-                    android:textColor="@color/FeedDefault"
-                    android:textSize="18sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/mods" />
-            </android.support.constraint.ConstraintLayout>
+            <TextView
+                android:id="@+id/star_rate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="5dp"
+                android:layout_marginTop="7dp"
+                android:shadowColor="@color/defaultShadowColor"
+                android:shadowDx="1"
+                android:shadowDy="0"
+                android:shadowRadius="1"
+                android:text="7.43"
+                android:textColor="@color/FeedTitleColor"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toStartOf="@+id/star_rate_icon"
+                app:layout_constraintTop_toBottomOf="parent" />
 
-        </RelativeLayout>
+            <TextView
+                android:id="@+id/combo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="1200/2438"
+                android:textColor="@color/FeedDefault"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.501"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cover" />
+
+            <TextView
+                android:id="@+id/relative_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:text="2 days ago"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <ImageView
+                android:id="@+id/rank"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_alignTop="@+id/star_rate"
+                android:layout_marginStart="8dp"
+                android:alpha=".5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cover"
+                app:srcCompat="@drawable/ss" />
+
+            <TextView
+                android:id="@+id/pp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/FC"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="27dp"
+                android:layout_toEndOf="@+id/FC"
+                android:shadowColor="@color/defaultShadowColor"
+                android:shadowDx="1"
+                android:shadowDy="0"
+                android:shadowRadius="1"
+                android:text="700pp"
+                android:textColor="@color/FeedTitleColor"
+                android:textSize="30sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cover" />
+
+        </android.support.constraint.ConstraintLayout>
 
     </android.support.v7.widget.CardView>
 
