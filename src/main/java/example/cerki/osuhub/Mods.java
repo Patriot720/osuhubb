@@ -27,7 +27,9 @@ public class Mods {
     @NonNull
     public static String parseFlags(int flags){
        StringBuilder builder = new StringBuilder();
-       builder.append("+");
+       if(flags == 0)
+           builder.append("NoMod");
+        else builder.append("+");
        if((flags & NoFail) == NoFail)builder.append("NF");
        if((flags & Easy) == Easy)builder.append("EZ");
        if((flags & Hidden) == Hidden)builder.append("HD");

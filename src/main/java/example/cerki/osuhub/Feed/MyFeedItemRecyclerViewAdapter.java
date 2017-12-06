@@ -66,7 +66,7 @@ public class MyFeedItemRecyclerViewAdapter extends RecyclerView.Adapter<MyFeedIt
         holder.mMods.setText(Mods.parseFlags(item.score.get(Score.MODS)));
         holder.mUsername.setText(item.username);
         holder.mMapName.setText(String.format("%s[%s]",item.beatmap.get(Beatmap.MAP_NAME),item.beatmap.get(Beatmap.DIFFICULTY_NAME)));
-        holder.mStarRate.setText(String.format("%.2f",item.beatmap.getAsDouble(Beatmap.STAR_RATING)));
+        holder.mStarRate.setText(String.format("%.2f",item.beatmap.getAsDouble(Beatmap.STAR_RATING))); // TODO Calculate for MODS
         Util.setImageFromAsset(mContext,holder.mRank,item.score.get(Score.RANK) + ".png"); // Todo :thinking:
         holder.mRelativeDate.setText(item.relativeDate);
         Glide.with(holder.mView)

@@ -135,6 +135,6 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onListFragmentInteraction(FeedItem item) {
-
+            // Todo implement Map Activity
     }
 }
