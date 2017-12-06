@@ -9,8 +9,12 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
+import java.util.Date;
+import java.util.TimeZone;
 
 import example.cerki.osuhub.Feed.Beatmap;
 import example.cerki.osuhub.List.Player;
@@ -19,7 +23,7 @@ import example.cerki.osuhub.List.Player;
  * Created by cerki on 05-Dec-17.
  */
 
-public class OsuAPI {
+public class OsuAPI { // Todo SPR
     public static final String BASE_URL = "https://osu.ppy.sh/api/";
     private String API_KEY = "b40b7a7a8207b1ebd870eaf1f74bd2995f1a2cb6";
     private int LIMIT = 100;
@@ -69,5 +73,30 @@ public class OsuAPI {
 
     public Player getPlayer(String id) throws IOException, JSONException {
         return getPlayer(Integer.parseInt(id));
+    }
+    public  Collection<Score> getNewScores(Following following) throws IOException, JSONException, ParseException {
+        Date lastDate = Util.parseTimestamp(following.timestamp,TimeZone.getTimeZone("GMT"));
+        return getScoresAfter(lastDate,following);
+    }
+
+    public Collection<Score> getScoresAfter(Date lastDate,Following following) throws JSONException, ParseException, IOException {
+        Collection<Score> scores = new OsuAPI().getPlayerBest(following.id);
+        Collection<Score> newScores = new ArrayList<>();
+        for (Score score : scores) {
+            Date date = Util.parseTimestamp(score.get("date"), TimeZone.getTimeZone("GMT+8"));// todo extract to Columns
+            if(lastDate.compareTo(date) < 0){
+                newScores.add(score);
+            }
+        }
+        return newScores;
+    }
+    public Collection<Score> getMonthOldScores(Following following) throws ParseException, IOException, JSONException {
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.MONTH, -1);
+        Date result = cal.getTime();
+        return getScoresAfter(result,following);
+    }
+    public String getCoverUrl(String mapset_id){
+        return "https://assets.ppy.sh//beatmaps/" + mapset_id + "/covers/cover.jpg";
     }
 }

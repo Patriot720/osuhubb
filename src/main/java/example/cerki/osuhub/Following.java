@@ -1,4 +1,4 @@
-package example.cerki.osuhub.Notifications;
+package example.cerki.osuhub;
 
 /**
  * Created by cerki on 03-Dec-17.

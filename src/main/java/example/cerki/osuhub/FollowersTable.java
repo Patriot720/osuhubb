@@ -7,7 +7,6 @@ import android.database.sqlite.SQLiteDatabase;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import example.cerki.osuhub.Notifications.Following;
 
 import static example.cerki.osuhub.Columns.Following.ID;
 import static example.cerki.osuhub.Columns.Following.TIMESTAMP;

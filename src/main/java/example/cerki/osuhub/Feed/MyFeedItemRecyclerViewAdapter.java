@@ -1,5 +1,6 @@
 package example.cerki.osuhub.Feed;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -7,6 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
 
 import java.util.List;
 
@@ -25,7 +28,7 @@ public class MyFeedItemRecyclerViewAdapter extends RecyclerView.Adapter<MyFeedIt
     private final OnListFragmentInteractionListener mListener;
     private final Context mContext;
 
-    public MyFeedItemRecyclerViewAdapter(List<FeedItem> items, OnListFragmentInteractionListener listener, Context mContext) {
+    public MyFeedItemRecyclerViewAdapter(List<FeedItem> items, Context mContext, OnListFragmentInteractionListener listener) {
         mValues = items;
         mListener = listener;
         this.mContext = mContext;
@@ -38,6 +41,7 @@ public class MyFeedItemRecyclerViewAdapter extends RecyclerView.Adapter<MyFeedIt
         return new ViewHolder(view);
     }
 
+    @SuppressLint("DefaultLocale")
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
@@ -49,10 +53,13 @@ public class MyFeedItemRecyclerViewAdapter extends RecyclerView.Adapter<MyFeedIt
         holder.mMods.setText("WIP"); // TODO create enum for this
         holder.mUsername.setText(item.username);
         holder.mMapName.setText(String.format("%s[%s]",item.beatmap.get(Beatmap.MAP_NAME),item.beatmap.get(Beatmap.DIFFICULTY_NAME)));
-        holder.mStarRate.setText(item.beatmap.get(Beatmap.STAR_RATING));// Todo fix these floats
+        holder.mStarRate.setText(String.format("%.2f",item.beatmap.getAsDouble(Beatmap.STAR_RATING)));// Todo fix these floats
         Util.setImageFromAsset(mContext,holder.mRank,item.score.get(Score.RANK) + ".png"); // Todo :thinking:
-        // TODO rank
-        // TODO cover
+        // TODO implement date ago;
+        Glide.with(mContext)
+                .load(item.beatmapImageUrl)
+                .into(holder.mCover);
+
 
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
@@ -90,6 +97,16 @@ public class MyFeedItemRecyclerViewAdapter extends RecyclerView.Adapter<MyFeedIt
         public ViewHolder(View view) {
             super(view);
             mView = view;
+            mPerformance = view.findViewById(R.id.pp);
+            mCombo = view.findViewById(R.id.combo);
+            mUsername = view.findViewById(R.id.username);
+            mMapName = view.findViewById(R.id.map_name);
+            mMissCount = view.findViewById(R.id.miss_count);
+            mMods = view.findViewById(R.id.mods);
+            mAccuracy = view.findViewById(R.id.acc);
+            mStarRate = view.findViewById(R.id.star_rate);
+            mCover = view.findViewById(R.id.cover);
+            mRank = view.findViewById(R.id.rank);
         }
 
     }

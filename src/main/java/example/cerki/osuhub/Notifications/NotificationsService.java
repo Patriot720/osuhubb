@@ -16,6 +16,8 @@ import java.text.ParseException;
 import java.util.Collection;
 
 import example.cerki.osuhub.FollowersTable;
+import example.cerki.osuhub.Following;
+import example.cerki.osuhub.OsuAPI;
 import example.cerki.osuhub.OsuDb;
 import example.cerki.osuhub.R;
 import example.cerki.osuhub.Score;
@@ -30,9 +32,10 @@ public class NotificationsService extends GcmTaskService {
         FollowersTable followersTable = new FollowersTable(new OsuDb(this).getWritableDatabase());
         Collection<Following> all = followersTable.getAll();
         Collection<Score> newScores;
+        OsuAPI osuAPI = new OsuAPI();
         try {
             for (Following f : all) {
-                newScores = FollowersNotificator.getNewScores(f);
+                newScores = osuAPI.getNewScores(f); // TODO EOF exception
                 followersTable.insertOrUpdate(f.id,f.username);
                 for (Score score : newScores)
                     pushNotification(score.generateScoreString(f.username));

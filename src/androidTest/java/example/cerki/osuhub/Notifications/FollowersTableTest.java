@@ -7,7 +7,7 @@ import org.junit.Test;
 import java.util.Collection;
 
 import example.cerki.osuhub.FollowersTable;
-import example.cerki.osuhub.OsuDb;
+import example.cerki.osuhub.Following;import example.cerki.osuhub.OsuDb;
 
 import static android.support.test.InstrumentationRegistry.getTargetContext;
 import static org.junit.Assert.*;

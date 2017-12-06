@@ -4,11 +4,15 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import example.cerki.osuhub.R;
 
@@ -22,6 +26,9 @@ public class FeedItemFragment extends Fragment {
 
 
     private OnListFragmentInteractionListener mListener;
+    private List<FeedItem> mData;
+    private MyFeedItemRecyclerViewAdapter mAdapter;
+    private SwipeRefreshLayout mRefresh;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -30,6 +37,25 @@ public class FeedItemFragment extends Fragment {
     public FeedItemFragment() {
     }
 
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        initData();
+    }
+
+    private void initData() {
+        mData = new ArrayList<>();
+        new FeedTask(getContext(), new FeedTask.WorkDoneListener() {
+            @Override
+            public void workDone(List<FeedItem> items) {
+                mData.clear();// TODO
+                mData.addAll(items);
+                mAdapter.notifyDataSetChanged();
+                mRefresh.setRefreshing(false);
+                // Todo animation schedule
+            }
+        }).execute();
+    }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -37,11 +63,21 @@ public class FeedItemFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_feeditem_list, container, false);
 
         // Set the adapter
-        if (view instanceof RecyclerView) {
-            Context context = view.getContext();
-            RecyclerView recyclerView = (RecyclerView) view;
-            recyclerView.setLayoutManager(new LinearLayoutManager(context));
+        if(view instanceof SwipeRefreshLayout){
+            mRefresh = (SwipeRefreshLayout) view;
+            mRefresh.setRefreshing(true);
+            mRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+                @Override
+                public void onRefresh() {
+                    initData();
+                }
+            });
         }
+            Context context = view.getContext();
+            RecyclerView recyclerView = view.findViewById(R.id.feedlist);
+            recyclerView.setLayoutManager(new LinearLayoutManager(context));
+            mAdapter = new MyFeedItemRecyclerViewAdapter(mData,getContext(),this.mListener);
+            recyclerView.setAdapter(mAdapter);
         return view;
     }
 

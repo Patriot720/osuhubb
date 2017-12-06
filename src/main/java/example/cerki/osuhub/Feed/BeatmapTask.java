@@ -21,6 +21,9 @@ class BeatmapTask extends AsyncTask<String,Void,Beatmap>{
         this.workDoneListener = workDoneListener;
     }
 
+    public BeatmapTask() {
+    }
+
     private WorkDoneListener workDoneListener;
     @Override
     protected Beatmap doInBackground(String... strings) {

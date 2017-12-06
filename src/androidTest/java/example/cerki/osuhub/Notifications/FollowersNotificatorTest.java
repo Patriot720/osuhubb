@@ -1,6 +1,5 @@
 package example.cerki.osuhub.Notifications;
 
-import org.junit.Before;
 import org.junit.Test;
 
 import java.util.Calendar;
@@ -9,6 +8,8 @@ import java.util.Date;
 import java.util.TimeZone;
 
 import example.cerki.osuhub.FollowersTable;
+import example.cerki.osuhub.Following;
+import example.cerki.osuhub.OsuAPI;
 import example.cerki.osuhub.OsuDb;
 import example.cerki.osuhub.Score;
 import example.cerki.osuhub.Util;
@@ -22,20 +23,11 @@ import static org.junit.Assert.assertTrue;
  */
 public class FollowersNotificatorTest {
 
-    private FollowersNotificator followersNotificator;
-
-    @Before
-    public void setUp() throws Exception {
-    }
-
-
-
-
 
     @Test
     public void ShouldCheckEachFollowerIfTheyHaveNewerScoreAndReturnsTheseScoresCollection() throws Exception {
         Following follower = new Following(124493, "2013-06-22 9:11:16");
-        Collection<Score> scores = FollowersNotificator.getNewScores(follower);
+        Collection<Score> scores = new OsuAPI().getNewScores(follower);
         assertTrue(scores.size() > 0);
          Score score = (Score) scores.toArray()[0];
          assertEquals(score.get("rank"),"SH");
@@ -44,7 +36,7 @@ public class FollowersNotificatorTest {
     @Test
     public void ShouldNotReturnAnything() throws Exception{
         Following follower = new Following(124493,"2017-12-03 16:02:22");
-        Collection<Score> newScores = FollowersNotificator.getNewScores(follower);
+        Collection<Score> newScores = new OsuAPI().getNewScores(follower);
         assertTrue(newScores.size() == 0);
     }
 
@@ -57,7 +49,7 @@ public class FollowersNotificatorTest {
     @Test
     public void ShouldReturnEmpty() throws Exception {
         Following follower = new Following(1, "2013-06-22 9:11:16");
-        Collection<Score> scores = FollowersNotificator.getNewScores(follower);
+        Collection<Score> scores = new OsuAPI().getNewScores(follower);
         assertTrue(scores.size() == 0);
     }
 
@@ -89,7 +81,7 @@ public class FollowersNotificatorTest {
 
     @Test
     public void getScoresMonthOld() throws Exception {
-        Collection<Score> scores = FollowersNotificator.getMonthOldScores(new Following(5187234,"","alko-chan"));
+        Collection<Score> scores = new OsuAPI().getMonthOldScores(new Following(5187234,"","alko-chan"));
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.MONTH,-1);
         Date monthOldDate = calendar.getTime();
@@ -104,7 +96,7 @@ public class FollowersNotificatorTest {
         Calendar date = Calendar.getInstance();
         date.add(Calendar.DAY_OF_MONTH,-1);
         Date dayOldDate = date.getTime(); // TODO not a consistent test
-        Collection<Score> scoresAfter = FollowersNotificator.getScoresAfter(dayOldDate, new Following(5187234, "", "alko-chan"));
+        Collection<Score> scoresAfter = new OsuAPI().getScoresAfter(dayOldDate, new Following(5187234, "", "alko-chan"));
         assertTrue(scoresAfter.size() == 0);
     }
 

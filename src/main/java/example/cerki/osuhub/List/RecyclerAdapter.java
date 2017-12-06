@@ -36,7 +36,7 @@ class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> {
         mListener = listener;
         mContext = context;
     }
-
+// TODO extract replace data;
     void replaceData(final List<Player> players){
         final List<Player> oldData = new ArrayList<>(mValues);
         mValues.clear();

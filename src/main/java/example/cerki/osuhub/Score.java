@@ -15,6 +15,7 @@ public class Score extends  HashMap<String,String>{
     public static final String PP = "pp" ;
     public static final String COMBO = "maxcombo" ;
     public static final String RANK = "rank";
+    public static final String BEATMAP_ID = "beatmap_id";
 
     public Score(JSONObject jsonObject) throws JSONException {
         for (Iterator<String> it = jsonObject.keys(); it.hasNext(); ) {
@@ -29,7 +30,8 @@ public class Score extends  HashMap<String,String>{
     }
 
     public int getAsInt(String key) {
-        return Integer.parseInt(get(key));
+        Double v = Double.parseDouble(get(key));
+        return  v.intValue();
     }
 
     @NonNull

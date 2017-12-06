@@ -28,7 +28,7 @@ public class FeedItem implements  Comparable<FeedItem>{
         try {
             Date date = Util.parseTimestamp(dateString, TimeZone.getTimeZone("GMT+8")); // TODO extract second argument it's always gmt+8
             Date thisDate = Util.parseTimestamp(thisDateString, TimeZone.getTimeZone("GMT+8"));
-            return thisDate.compareTo(date);
+            return date.compareTo(thisDate);
         } catch (ParseException e) {
             e.printStackTrace();
         }

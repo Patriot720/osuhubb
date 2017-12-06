@@ -34,5 +34,4 @@ public class PlayersTable implements PlayersTableWrapper {
         query.close();
         return p;
     }
-
 }

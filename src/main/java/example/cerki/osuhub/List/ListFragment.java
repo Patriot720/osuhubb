@@ -44,7 +44,13 @@ public class ListFragment extends android.support.v4.app.Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if(this.isResumed()){
+         getFromDb();   // Todo fix long white screen if app is unloaded;
+        }
         initData();
+    }
+
+    private void getFromDb() {
     }
 
     private void initData() {

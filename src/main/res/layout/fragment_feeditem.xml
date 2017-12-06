@@ -93,8 +93,8 @@
                     android:textColor="@color/FeedDefault"
                     android:textSize="18sp"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/acc"
-                    tools:layout_editor_absoluteX="267dp" />
+                    app:layout_constraintEnd_toStartOf="@+id/star_rate_icon"
+                    app:layout_constraintTop_toBottomOf="@+id/acc" />
 
                 <TextView
                     android:id="@+id/FC"
@@ -106,12 +106,15 @@
 
                 <ImageView
                     android:id="@+id/rank"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="100dp"
+                    android:layout_height="match_parent"
                     android:layout_alignTop="@+id/star_rate"
                     android:alpha=".5"
+                    android:visibility="visible"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:srcCompat="@drawable/ss"
-                    tools:layout_editor_absoluteX="0dp"
                     tools:layout_editor_absoluteY="0dp" />
 
                 <ImageView
@@ -120,8 +123,9 @@
                     android:layout_height="25dp"
                     android:layout_alignParentEnd="true"
                     android:layout_marginBottom="8dp"
+                    android:layout_marginEnd="13dp"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/star_rate"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:srcCompat="@drawable/star_128" />
 
                 <TextView
@@ -168,7 +172,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/textView3"
+                    android:id="@+id/miss_count"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
