@@ -2,6 +2,7 @@ package example.cerki.osuhub.Feed;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.support.v7.util.DiffUtil;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,16 +11,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.request.RequestOptions;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import example.cerki.osuhub.Feed.FeedItemFragment.OnListFragmentInteractionListener;
-import example.cerki.osuhub.Mods;
 import example.cerki.osuhub.R;
-import example.cerki.osuhub.Score;
-import example.cerki.osuhub.Util;
 
 import static com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade;
 
@@ -27,18 +24,50 @@ import static com.bumptech.glide.load.resource.drawable.DrawableTransitionOption
  * specified {@link OnListFragmentInteractionListener}.
  * TODO: Replace the implementation with code for your data type.
  */
+// TODO move to fastAdapter mb
+    // TODO infinite SCroll one week at the time
+    // TODO updates available thingy instead of reloading everything completely cache FeedItems
+    // TODO preload from database first then ^^^
 public class MyFeedItemRecyclerViewAdapter extends RecyclerView.Adapter<MyFeedItemRecyclerViewAdapter.ViewHolder> {
 
     private final List<FeedItem> mValues;
     private final OnListFragmentInteractionListener mListener;
-    private final Context mContext;
 
-    public MyFeedItemRecyclerViewAdapter(List<FeedItem> items, Context mContext, OnListFragmentInteractionListener listener) {
+    public MyFeedItemRecyclerViewAdapter(List<FeedItem> items, OnListFragmentInteractionListener listener) {
         mValues = items;
         mListener = listener;
-        this.mContext = mContext;
     }
+    // TODO extract This
+void replaceData(final List<FeedItem> players){
+        final List<FeedItem> oldData = new ArrayList<>(mValues);
+        mValues.clear();
 
+        if (players != null) {
+            mValues.addAll(players);
+        }
+
+        DiffUtil.calculateDiff(new DiffUtil.Callback() {
+            @Override
+            public int getOldListSize() {
+                return oldData.size();
+            }
+
+            @Override
+            public int getNewListSize() {
+                return mValues.size();
+            }
+
+            @Override
+            public boolean areItemsTheSame(int oldItemPosition, int newItemPosition) {
+                return oldData.get(oldItemPosition).equals(mValues.get(newItemPosition));
+            }
+
+            @Override
+            public boolean areContentsTheSame(int oldItemPosition, int newItemPosition) {
+                return oldData.get(oldItemPosition).equals(mValues.get(newItemPosition));
+            }
+        }).dispatchUpdatesTo(this);
+    }
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
@@ -59,20 +88,20 @@ public class MyFeedItemRecyclerViewAdapter extends RecyclerView.Adapter<MyFeedIt
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
         FeedItem item = mValues.get(position);
-        holder.mPerformance.setText(String.format("%sPP", item.score.getAsInt(Score.PP)));
-        holder.mAccuracy.setText(Util.getAccuracyString(item.score));
-        holder.mMissCount.setText(String.format("%sxMiss", item.score.get(Score.MISS)));
-        holder.mCombo.setText(String.format("%s/%s", item.score.get(Score.COMBO), item.beatmap.get(Beatmap.MAX_COMBO)));
-        holder.mMods.setText(Mods.parseFlags(item.score.get(Score.MODS)));
+        holder.mPerformance.setText(item.performance);
+        holder.mAccuracy.setText(item.accuracy);
+        holder.mMissCount.setText(item.missCount);
+        holder.mCombo.setText(item.combo);
+        holder.mMods.setText(item.mods);
         holder.mUsername.setText(item.username);
-        holder.mMapName.setText(String.format("%s[%s]",item.beatmap.get(Beatmap.MAP_NAME),item.beatmap.get(Beatmap.DIFFICULTY_NAME)));
-        holder.mStarRate.setText(String.format("%.2f",item.beatmap.getAsDouble(Beatmap.STAR_RATING))); // TODO Calculate for MODS
-        Util.setImageFromAsset(mContext,holder.mRank,item.score.get(Score.RANK) + ".png"); // Todo :thinking:
+        holder.mMapName.setText(item.mapName);
+        holder.mStarRate.setText(item.starRate); // TODO Calculate for MODS
         holder.mRelativeDate.setText(item.relativeDate);
         Glide.with(holder.mView)
+                .load(item.rankResource)
+                .into(holder.mRank);
+        Glide.with(holder.mView)
                 .load(item.coverUrl)
-                .apply(RequestOptions.centerCropTransform())
-                .apply(RequestOptions.diskCacheStrategyOf(DiskCacheStrategy.ALL))
                 .transition(withCrossFade())
                 .into(holder.mCover);
     }

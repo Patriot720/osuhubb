@@ -3,6 +3,7 @@ package example.cerki.osuhub.Notifications;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.content.Context;
+import android.util.Log;
 
 import com.google.android.gms.gcm.GcmNetworkManager;
 import com.google.android.gms.gcm.GcmTaskService;
@@ -11,20 +12,22 @@ import com.google.android.gms.gcm.TaskParams;
 
 import org.json.JSONException;
 
+import java.io.EOFException;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.Collection;
 
 import example.cerki.osuhub.FollowersTable;
 import example.cerki.osuhub.Following;
-import example.cerki.osuhub.OsuAPI;
 import example.cerki.osuhub.OsuDb;
 import example.cerki.osuhub.R;
 import example.cerki.osuhub.Score;
 
+import static android.content.ContentValues.TAG;
+
 public class NotificationsService extends GcmTaskService {
     private static final String PERIODIC_SYNC_TAG = "tag";
-    private static final long SYNC_PERIOD_SECONDS = 5; // TODO extract to settings
+    private static final long SYNC_PERIOD_SECONDS = 1800; // TODO extract to settings
     private static int mNotificationId = 1;
 
     @Override
@@ -32,18 +35,19 @@ public class NotificationsService extends GcmTaskService {
         FollowersTable followersTable = new FollowersTable(new OsuDb(this).getWritableDatabase());
         Collection<Following> all = followersTable.getAll();
         Collection<Score> newScores;
-        OsuAPI osuAPI = new OsuAPI();
         try {
             for (Following f : all) {
-                newScores = f.getNewScores(osuAPI); // TODO EOF exception
+                newScores = f.getNewScores();
                 followersTable.insertOrUpdate(f.id,f.username);
                 for (Score score : newScores)
                     pushNotification(score.generateScoreString(f.username));
         }
+        followersTable.close();
         } catch(IOException | JSONException | ParseException e){
+            if(e instanceof EOFException)
+                Log.e(TAG, "Notification: EOFException");
             e.printStackTrace();
         }
-        followersTable.close();
         return GcmNetworkManager.RESULT_SUCCESS;
     }
 

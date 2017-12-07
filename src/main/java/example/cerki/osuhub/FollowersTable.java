@@ -17,10 +17,12 @@ import static example.cerki.osuhub.OsuDb.FOLLOWERS_TABLE_NAME;
  * Created by cerki on 02-Dec-17.
  */
 // TODO mDb leaks bug;
+    // TODO extract Table class parent
 public class FollowersTable {
     SQLiteDatabase mDb;
 
     public FollowersTable(SQLiteDatabase db) {
+
         mDb = db;
     }
 

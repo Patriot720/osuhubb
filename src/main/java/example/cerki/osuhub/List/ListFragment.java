@@ -66,6 +66,7 @@ public class ListFragment extends android.support.v4.app.Fragment {
         }).loadPlayers();
     }
 
+    // TODO preload from DB and add last update thing at the top
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

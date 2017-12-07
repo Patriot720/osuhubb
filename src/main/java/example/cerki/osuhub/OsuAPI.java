@@ -71,7 +71,4 @@ public class OsuAPI { // Todo SPR
         return getPlayer(Integer.parseInt(id));
     }
 
-    public String getCoverUrl(String mapset_id){
-        return "https://assets.ppy.sh//beatmaps/" + mapset_id + "/covers/card.jpg";
-    }
 }

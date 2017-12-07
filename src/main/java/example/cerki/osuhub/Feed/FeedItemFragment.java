@@ -29,6 +29,7 @@ public class FeedItemFragment extends Fragment {
     private List<FeedItem> mData;
     private MyFeedItemRecyclerViewAdapter mAdapter;
     private SwipeRefreshLayout mRefresh;
+    private RecyclerView mRecycler;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -48,10 +49,9 @@ public class FeedItemFragment extends Fragment {
         new FeedTask(getContext(), new FeedTask.WorkDoneListener() {
             @Override
             public void workDone(List<FeedItem> items) {
-                mData.clear();// TODO
-                mData.addAll(items);
-                mAdapter.notifyDataSetChanged(); // TODO change to diff util
+                mAdapter.replaceData(items);
                 mRefresh.setRefreshing(false);
+                mRecycler.scheduleLayoutAnimation();
                 // Todo animation schedule
             }
         }).execute();
@@ -74,14 +74,14 @@ public class FeedItemFragment extends Fragment {
             });
         }
             Context context = view.getContext();
-            RecyclerView recyclerView = view.findViewById(R.id.feedlist);
-            recyclerView.setLayoutManager(new LinearLayoutManager(context));
-            mAdapter = new MyFeedItemRecyclerViewAdapter(mData,getContext(),this.mListener);
-            recyclerView.setHasFixedSize(true);
-            recyclerView.setItemViewCacheSize(20);
-            recyclerView.setDrawingCacheEnabled(true);
-            recyclerView.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_LOW);
-            recyclerView.setAdapter(mAdapter);
+            mRecycler = view.findViewById(R.id.feedlist);
+            mRecycler.setLayoutManager(new LinearLayoutManager(context));
+            mAdapter = new MyFeedItemRecyclerViewAdapter(mData,mListener);
+            mRecycler.setHasFixedSize(true);
+            mRecycler.setItemViewCacheSize(20);
+            mRecycler.setDrawingCacheEnabled(true);
+            mRecycler.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_LOW);
+            mRecycler.setAdapter(mAdapter);
         return view;
     }
 

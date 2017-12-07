@@ -28,8 +28,8 @@ public class Following {
         this.timestamp = timestamp;
         this.username = username;
     }
-
-    public Collection<Score> getNewScores(OsuAPI osuAPI) throws IOException, JSONException, ParseException {
+        // TODO change all followers to following
+    public Collection<Score> getNewScores() throws IOException, JSONException, ParseException {
         Date lastDate = Util.parseSQLTime(timestamp);
         return getScoresAfter(lastDate);
     }

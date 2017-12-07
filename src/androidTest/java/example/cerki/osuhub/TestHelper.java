@@ -9,9 +9,12 @@ import android.widget.ImageView;
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStreamReader;
+import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
 import java.net.URL;
 import java.util.Arrays;
 
+import example.cerki.osuhub.Feed.Beatmap;
 import example.cerki.osuhub.List.Player;
 
 import static android.support.test.InstrumentationRegistry.getTargetContext;
@@ -83,5 +86,27 @@ public class TestHelper {
             while((line = reader.readLine()) != null)
                 builder.append(line).append("\n");
             return builder;
+    }
+
+    public static Beatmap getFakeBeatmap(){
+        Beatmap beatmap = new Beatmap();
+        Field[] fields = beatmap.getClass().getFields();
+        for (Field field : fields) {
+            if(Modifier.isStatic(field.getModifiers())){
+                try {
+                    String key = (String) field.get(field.getName());
+                    beatmap.put(key,"1");
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return beatmap;
+    }
+    public static void assertFakeBeatmap(Beatmap beatmap){
+        Beatmap fakeBeatmap = getFakeBeatmap();
+        for(String s : fakeBeatmap.keySet()){
+            assertEquals(beatmap.get(s),fakeBeatmap.get(s));
+        }
     }
 }

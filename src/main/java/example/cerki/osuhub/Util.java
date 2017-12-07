@@ -1,7 +1,6 @@
 package example.cerki.osuhub;
 
 import android.annotation.SuppressLint;
-import android.content.ContentValues;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -17,8 +16,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
-
-import example.cerki.osuhub.List.Player;
 
 /**
  * Created by cerki on 03-Dec-17.
@@ -88,7 +85,6 @@ public class Util {
         }
     }
     public static String doubleToString(Double value){
-
         if(value % 1 == 0) {
             int val = value.intValue();
             return String.valueOf(val);
@@ -96,19 +92,4 @@ public class Util {
         return String.format(Locale.getDefault(),"%.2f",value);
     }
 
-    public static ContentValues generateContentValues(Player p) {
-        ContentValues cv = new ContentValues();
-        cv.put(Columns.ID, p.getId());
-        cv.put(Columns.USERNAME, p.getUsername());
-        cv.put(Columns.COUNTRY, p.getCountry());
-        cv.put(Columns.ACTIVITY, p.getActivity());
-        for (String key : p.getKeySet()) {
-            String val = p.getString(key);
-            if (val.contains("."))
-                cv.put(key, Float.parseFloat(val));
-            else
-                cv.put(key, Integer.parseInt(val));
-        }
-        return cv;
-    }
 }
