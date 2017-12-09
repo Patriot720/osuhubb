@@ -19,6 +19,7 @@ import example.cerki.osuhub.BeatmapsTable;
 import example.cerki.osuhub.FollowersTable;
 import example.cerki.osuhub.Following;
 import example.cerki.osuhub.Mods;
+import example.cerki.osuhub.NewDatabase;
 import example.cerki.osuhub.OsuAPI;
 import example.cerki.osuhub.OsuDb;
 import example.cerki.osuhub.Score;
@@ -52,10 +53,13 @@ public class FeedTask extends AsyncTask<Void, Void, List<FeedItem>> {
         try {
             for (Following following : all) { // TODO  Cache Beatmaps and Scores;
                 // Todo add search for players
-                Collection<Score> monthOldScores = following.getMonthOldScores(); // TODO get BY WEEKS
+                Collection<Score> monthOldScores = following.getMonthOldScores(); // TODO get BY WEEKS Bottleneck
                 for (Score monthOldScore : monthOldScores) {
-                    FeedItem item = getFeedItem(following.username, monthOldScore);
-                    items.add(item);
+                    FeedItem feedItem = NewDatabase.getInstance().feedItemDao().get(following.username, Util.parsePeppyTime(monthOldScore.get(Score.DATE))); // TODO delete this
+                    if(feedItem == null) {
+                         feedItem = getFeedItem(following.username, monthOldScore);
+                    }
+                        items.add(feedItem);
                 }
             }
             Collections.sort(items);
@@ -100,6 +104,7 @@ public class FeedTask extends AsyncTask<Void, Void, List<FeedItem>> {
         feedItem.rankResource = mContext.getResources().getIdentifier(uri,null,mContext.getPackageName());
         feedItem.relativeDate = (String) DateUtils.getRelativeTimeSpanString(date.getTime());
         feedItem.date = date;
+        NewDatabase.getInstance().feedItemDao().insert(feedItem); // TODO change this
         return feedItem;
     }
 

@@ -1,6 +1,8 @@
 package example.cerki.osuhub;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
 
 import java.util.Collection;
 
@@ -11,12 +13,10 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
-/**
- * Created by cerki on 05-Dec-17.
- */
 
 
 // TODO not consistent tests
+@RunWith(RobolectricTestRunner.class)
 public class OsuAPITest {
     @Test
     public void getBeatmap() throws Exception {

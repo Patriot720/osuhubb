@@ -1,27 +1,36 @@
 package example.cerki.osuhub.Feed;
 
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
+import android.arch.persistence.room.TypeConverters;
 import android.support.annotation.NonNull;
 
 import java.util.Date;
+
+import example.cerki.osuhub.Converters;
 
 /**
  * Created by cerki on 05-Dec-17.
  */
 
+@Entity
+@TypeConverters({Converters.class})
 public class FeedItem implements  Comparable<FeedItem>{
-    String coverUrl;
-    String username;
-    String relativeDate;
-    String performance;
-    String accuracy;
-    String combo;
-    String mods;
-    String mapName;
-    String starRate;
-    String missCount;
-    int rankResource;
-    Date date;
+    public String coverUrl;
+    public String username;
+    public String relativeDate;
+    public String performance;
+    public String accuracy;
+    public String combo;
+    public String mods;
+    public String mapName;
+    public String starRate;
+    public String missCount;
+    public int rankResource;
+    public Date date;
 
+    @PrimaryKey(autoGenerate = true)
+    int id;
 
     public FeedItem() {
 

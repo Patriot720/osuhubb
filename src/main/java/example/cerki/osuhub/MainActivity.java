@@ -59,6 +59,8 @@ public class MainActivity extends AppCompatActivity
 
         mFragmentManager = getSupportFragmentManager();
 
+        NewDatabase.newInstance(this);
+
         Once.initialise(this);
         scheduleNotifications();
     }

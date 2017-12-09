@@ -1,6 +1,9 @@
 package example.cerki.osuhub.Notifications;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
+import org.robolectric.RuntimeEnvironment;
 
 import java.util.Calendar;
 import java.util.Collection;
@@ -13,13 +16,10 @@ import example.cerki.osuhub.OsuDb;
 import example.cerki.osuhub.Score;
 import example.cerki.osuhub.Util;
 
-import static android.support.test.InstrumentationRegistry.getTargetContext;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-/**
- * Created by cerki on 03-Dec-17.
- */
+@RunWith(RobolectricTestRunner.class)
 public class FollowersNotificatorTest {
 
 
@@ -60,7 +60,7 @@ public class FollowersNotificatorTest {
     }
     @Test
     public void testDbDate() throws  Exception{
-        FollowersTable table = new FollowersTable(new OsuDb(getTargetContext()).getWritableDatabase());
+        FollowersTable table = new FollowersTable(new OsuDb(RuntimeEnvironment.application).getWritableDatabase());
         table.insertOrUpdate(1);
         String timestamp = table.getTimestamp(1);
         Date date1 = Util.parseTimestamp(timestamp, TimeZone.getTimeZone("GMT"));
@@ -70,7 +70,7 @@ public class FollowersNotificatorTest {
     }
     @Test
     public void testDbDateZone() throws Exception{
-        FollowersTable table = new FollowersTable(new OsuDb(getTargetContext()).getWritableDatabase());
+        FollowersTable table = new FollowersTable(new OsuDb(RuntimeEnvironment.application).getWritableDatabase());
         table.insertOrUpdate(1);
         String timestamp = table.getTimestamp(1);
         Date date = Util.parseTimestamp(timestamp, TimeZone.getDefault());
@@ -95,7 +95,7 @@ public class FollowersNotificatorTest {
         Calendar date = Calendar.getInstance();
         date.add(Calendar.DAY_OF_MONTH,-1);
         Date dayOldDate = date.getTime(); // TODO not a consistent test
-        Collection<Score> scoresAfter = new Following(5187234, "", "alko-chan").getScoresAfter(dayOldDate);
+        Collection<Score> scoresAfter = new Following(5652163, "", "alko-chan").getScoresAfter(dayOldDate);
         assertTrue(scoresAfter.size() == 0);
     }
 

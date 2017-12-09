@@ -2,28 +2,33 @@ package example.cerki.osuhub.Notifications;
 
 import org.junit.Before;
 import org.junit.Test;
-
+import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
+import org.robolectric.RuntimeEnvironment;
 
 import java.util.Collection;
 
 import example.cerki.osuhub.FollowersTable;
-import example.cerki.osuhub.Following;import example.cerki.osuhub.OsuDb;
+import example.cerki.osuhub.Following;
+import example.cerki.osuhub.OsuDb;
 
-import static android.support.test.InstrumentationRegistry.getTargetContext;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Created by cerki on 02-Dec-17.
  */
-
+@RunWith(RobolectricTestRunner.class)
 public class FollowersTableTest {
 
     private FollowersTable mTable;
 
     @Before
     public void setUp() throws Exception {
-        getTargetContext().deleteDatabase(OsuDb.DATABASE_NAME);
-        OsuDb osudb = new OsuDb(getTargetContext());
+        RuntimeEnvironment.application.deleteDatabase(OsuDb.DATABASE_NAME);
+        OsuDb osudb = new OsuDb(RuntimeEnvironment.application);
         mTable = new FollowersTable(osudb.getWritableDatabase());
     }
 

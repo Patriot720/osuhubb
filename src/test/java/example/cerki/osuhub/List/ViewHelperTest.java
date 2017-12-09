@@ -1,6 +1,6 @@
 package example.cerki.osuhub.List;
 
-import android.support.test.runner.AndroidJUnit4;
+import android.content.Context;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -10,36 +10,31 @@ import org.json.JSONObject;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
+import org.robolectric.RobolectricTestRunner;
+import org.robolectric.RuntimeEnvironment;
 
 import example.cerki.osuhub.R;
 import example.cerki.osuhub.TestHelper;
 import example.cerki.osuhub.Util;
 
-import static android.support.test.InstrumentationRegistry.getTargetContext;
 import static example.cerki.osuhub.TestHelper.getFromResources;
-import static example.cerki.osuhub.TestHelper.isImageEqualToRes;
-import static org.junit.Assert.*;
-
-/**
- * Created by cerki on 02-Dec-17.
- */
-@RunWith(AndroidJUnit4.class)
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+@RunWith(RobolectricTestRunner.class)
 public class ViewHelperTest {
     private ImageView arrow;
     private TextView textView;
+    private Context mContext;
 
     @Before
     public void setUp() throws Exception {
-        arrow = new ImageView(getTargetContext());
-        textView = new TextView(getTargetContext());
+        mContext = RuntimeEnvironment.application;
+        arrow = new ImageView(mContext);
+        textView = new TextView(mContext);
     }
     @Test
     public void testJsonObjectConstructor() throws Exception {
-        StringBuilder builder = getFromResources("json.txt"); // TODO move to it's own test class
+        StringBuilder builder = getFromResources(mContext,"json.txt"); // TODO move to it's own test class
         JSONArray jsonArray = new JSONArray(builder.toString());
         Player player = new Player(jsonArray.getJSONObject(0));
         assertEquals(player.getString("pp_rank"),"4");
@@ -55,7 +50,7 @@ public class ViewHelperTest {
     public void setDiffNormalNegativeFloatValue(){
         Double value = -0.5;
         Util.showPlayerDifference(textView,arrow,value);
-        assertDown("0.50", isImageEqualToRes(arrow, R.drawable.arrow_down));
+        assertDown("0.50", TestHelper.isImageEqualToRes(mContext,arrow, R.drawable.arrow_down));
     }
 
     private void assertDown(String actual, boolean imageEqualToRes) {

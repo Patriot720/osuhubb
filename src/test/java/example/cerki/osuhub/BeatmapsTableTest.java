@@ -1,29 +1,33 @@
 package example.cerki.osuhub;
 
+import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
+import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
 
 import example.cerki.osuhub.Feed.Beatmap;
 
-import static android.support.test.InstrumentationRegistry.getTargetContext;
 import static example.cerki.osuhub.TestHelper.assertFakeBeatmap;
 import static example.cerki.osuhub.TestHelper.getFakeBeatmap;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-/**
- * Created by cerki on 07-Dec-17.
- */
+@Config(manifest = Config.NONE)
+@RunWith(RobolectricTestRunner.class)
 public class BeatmapsTableTest {
 
     private BeatmapsTable mTable;
 
     @Before
     public void setUp() throws Exception {
-        getTargetContext().deleteDatabase(OsuDb.DATABASE_NAME);
-        SQLiteDatabase mDb = new OsuDb(getTargetContext()).getWritableDatabase();
+        Context context = RuntimeEnvironment.application;
+        context.deleteDatabase(OsuDb.DATABASE_NAME);
+        SQLiteDatabase mDb = new OsuDb(context).getWritableDatabase();
         mTable = new BeatmapsTable(mDb);
     }
 
