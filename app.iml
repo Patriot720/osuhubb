@@ -124,9 +124,11 @@
     <orderEntry type="library" name="com.google.android.gms:play-services-fido-11.6.2" level="project" />
     <orderEntry type="library" name="com.google.android.gms:play-services-wearable-license-11.6.2" level="project" />
     <orderEntry type="library" scope="TEST" name="com.squareup:javawriter:2.1.1@jar" level="project" />
+    <orderEntry type="library" name="com.google.code.gson:gson:2.8.1@jar" level="project" />
     <orderEntry type="library" name="com.google.android.gms:play-services-basement-license-11.6.2" level="project" />
     <orderEntry type="library" name="com.google.android.gms:play-services-iid-11.6.2" level="project" />
     <orderEntry type="library" name="com.google.android.gms:play-services-drive-license-11.6.2" level="project" />
+    <orderEntry type="library" scope="TEST" name="android.arch.persistence.room:migration:1.0.0@jar" level="project" />
     <orderEntry type="library" name="com.google.android.gms:play-services-panorama-11.6.2" level="project" />
     <orderEntry type="library" name="android.arch.lifecycle:runtime-1.0.3" level="project" />
     <orderEntry type="library" name="com.google.android.gms:play-services-11.6.2" level="project" />
@@ -165,6 +167,7 @@
     <orderEntry type="library" name="com.google.android.gms:play-services-gass-license-11.6.2" level="project" />
     <orderEntry type="library" name="com.google.android.gms:play-services-awareness-license-11.6.2" level="project" />
     <orderEntry type="library" name="com.google.android.gms:play-services-nearby-11.6.2" level="project" />
+    <orderEntry type="library" name="android.arch.persistence.room:runtime-1.0.0" level="project" />
     <orderEntry type="library" name="com.google.android.gms:play-services-appinvite-11.6.2" level="project" />
     <orderEntry type="library" name="com.google.android.gms:play-services-analytics-impl-license-11.6.2" level="project" />
     <orderEntry type="library" name="io.reactivex.rxjava2:rxjava:2.1.2@jar" level="project" />
@@ -181,6 +184,7 @@
     <orderEntry type="library" name="com.google.firebase:firebase-storage-common-license-11.6.2" level="project" />
     <orderEntry type="library" name="com.google.android.gms:play-services-location-11.6.2" level="project" />
     <orderEntry type="library" name="__local_aars__:C.\Users\cerki\AndroidStudioProjects\osuhub\app\libs\jsoup-1.10.3.jar:unspecified@jar" level="project" />
+    <orderEntry type="library" name="android.arch.persistence.room:common:1.0.0@jar" level="project" />
     <orderEntry type="library" name="com.google.firebase:firebase-database-11.6.2" level="project" />
     <orderEntry type="library" name="com.google.android.gms:play-services-gass-11.6.2" level="project" />
     <orderEntry type="library" name="com.google.firebase:firebase-appindexing-11.6.2" level="project" />
@@ -193,10 +197,12 @@
     <orderEntry type="library" name="com.nytimes.android:cache3:3.0.0-beta@jar" level="project" />
     <orderEntry type="library" name="com.google.android.gms:play-services-tagmanager-v4-impl-11.6.2" level="project" />
     <orderEntry type="library" name="com.google.android.gms:play-services-tagmanager-11.6.2" level="project" />
+    <orderEntry type="library" name="android.arch.persistence.room:rxjava2-1.0.0" level="project" />
     <orderEntry type="library" name="com.google.android.gms:play-services-wearable-11.6.2" level="project" />
     <orderEntry type="library" name="com.google.android.gms:play-services-drive-11.6.2" level="project" />
     <orderEntry type="library" name="com.google.android.gms:play-services-base-license-11.6.2" level="project" />
     <orderEntry type="library" name="com.google.firebase:firebase-auth-license-11.6.2" level="project" />
+    <orderEntry type="library" scope="TEST" name="org.jetbrains.kotlin:kotlin-stdlib:1.1.3@jar" level="project" />
     <orderEntry type="library" name="com.google.android.gms:play-services-cast-framework-license-11.6.2" level="project" />
     <orderEntry type="library" name="com.android.support.constraint:constraint-layout-solver:1.0.2@jar" level="project" />
     <orderEntry type="library" name="com.android.support.constraint:constraint-layout-1.0.2" level="project" />
@@ -212,6 +218,7 @@
     <orderEntry type="library" name="com.google.android.gms:play-services-ads-11.6.2" level="project" />
     <orderEntry type="library" name="com.google.android.gms:play-services-basement-11.6.2" level="project" />
     <orderEntry type="library" name="android.arch.core:common:1.0.0@jar" level="project" />
+    <orderEntry type="library" name="android.arch.persistence:db-framework-1.0.0" level="project" />
     <orderEntry type="library" name="com.google.firebase:firebase-common-11.6.2" level="project" />
     <orderEntry type="library" name="com.android.support:support-core-ui-27.0.2" level="project" />
     <orderEntry type="library" name="com.google.firebase:firebase-dynamic-links-license-11.6.2" level="project" />
@@ -229,6 +236,7 @@
     <orderEntry type="library" name="com.google.android.gms:play-services-auth-api-phone-license-11.6.2" level="project" />
     <orderEntry type="library" name="com.google.firebase:firebase-auth-11.6.2" level="project" />
     <orderEntry type="library" name="com.google.firebase:firebase-analytics-impl-11.6.2" level="project" />
+    <orderEntry type="library" name="android.arch.core:runtime-1.0.0" level="project" />
     <orderEntry type="library" name="com.github.bumptech.glide:gifdecoder:4.4.0@jar" level="project" />
     <orderEntry type="library" name="com.android.support:design-27.0.1" level="project" />
     <orderEntry type="library" name="com.google.firebase:firebase-storage-11.6.2" level="project" />
@@ -239,16 +247,20 @@
     <orderEntry type="library" scope="TEST" name="junit:junit:4.12@jar" level="project" />
     <orderEntry type="library" name="com.google.android.gms:play-services-wallet-11.6.2" level="project" />
     <orderEntry type="library" name="com.google.android.gms:play-services-auth-api-phone-11.6.2" level="project" />
-    <orderEntry type="library" scope="TEST" name="javax.inject:javax.inject:1@jar" level="project" />
+    <orderEntry type="library" name="com.nytimes.android:filesystem3:3.0.0-beta@jar" level="project" />
+    <orderEntry type="library" name="javax.inject:javax.inject:1@jar" level="project" />
     <orderEntry type="library" name="com.github.bumptech.glide:glide:4.4.0@jar" level="project" />
     <orderEntry type="library" name="com.android.support:recyclerview-v7-27.0.1" level="project" />
     <orderEntry type="library" name="com.google.android.gms:play-services-instantapps-license-11.6.2" level="project" />
     <orderEntry type="library" name="com.google.android.gms:play-services-maps-license-11.6.2" level="project" />
     <orderEntry type="library" name="com.google.android.gms:play-services-fido-license-11.6.2" level="project" />
+    <orderEntry type="library" name="android.arch.persistence:db-1.0.0" level="project" />
     <orderEntry type="library" scope="TEST" name="org.mockito:mockito-core:1.10.19@jar" level="project" />
     <orderEntry type="library" name="com.google.firebase:firebase-analytics-11.6.2" level="project" />
+    <orderEntry type="library" name="com.squareup.okio:okio:1.13.0@jar" level="project" />
     <orderEntry type="library" scope="TEST" name="com.android.support.test:rules-1.0.1" level="project" />
     <orderEntry type="library" name="com.google.android.gms:play-services-ads-license-11.6.2" level="project" />
+    <orderEntry type="library" name="com.nytimes.android:middleware3:3.0.0-beta@jar" level="project" />
     <orderEntry type="library" name="com.google.android.gms:play-services-games-11.6.2" level="project" />
     <orderEntry type="library" name="android.arch.lifecycle:common:1.0.3@jar" level="project" />
     <orderEntry type="library" name="com.google.firebase:firebase-storage-license-11.6.2" level="project" />
@@ -256,9 +268,11 @@
     <orderEntry type="library" name="com.google.firebase:firebase-messaging-11.6.2" level="project" />
     <orderEntry type="library" name="com.google.android.gms:play-services-auth-base-license-11.6.2" level="project" />
     <orderEntry type="library" name="com.google.firebase:firebase-dynamic-links-11.6.2" level="project" />
+    <orderEntry type="library" scope="TEST" name="android.arch.persistence.room:testing-1.0.0" level="project" />
     <orderEntry type="library" name="com.google.firebase:firebase-storage-common-11.6.2" level="project" />
     <orderEntry type="library" name="com.android.support:support-core-utils-27.0.2" level="project" />
     <orderEntry type="library" name="com.google.android.gms:play-services-instantapps-11.6.2" level="project" />
+    <orderEntry type="library" scope="TEST" name="org.jetbrains:annotations:13.0@jar" level="project" />
     <orderEntry type="library" name="com.google.android.gms:play-services-fitness-11.6.2" level="project" />
     <orderEntry type="library" name="com.google.firebase:firebase-crash-license-11.6.2" level="project" />
     <orderEntry type="library" name="com.google.android.gms:play-services-gcm-11.6.2" level="project" />

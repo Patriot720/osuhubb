@@ -17,6 +17,8 @@ import java.util.Collection;
 import example.cerki.osuhub.Feed.Beatmap;
 import example.cerki.osuhub.List.Player;
 import io.reactivex.Single;
+import okio.BufferedSource;
+import okio.Okio;
 
 /**
  * Created by cerki on 05-Dec-17.
@@ -49,6 +51,21 @@ public class OsuAPI { // Todo SPR
         while((line = reader.readLine()) != null)
             stringBuilder.append(line).append("\n");
         return new JSONArray(stringBuilder.toString());
+    }
+
+    @NonNull
+    public Single<BufferedSource> getBufferedSourceAsync(String id) {
+        return Single.fromCallable(() -> getBufferedSource(id));
+    }
+    public BufferedSource getBufferedSource(String id){
+        BufferedSource src = null;
+        try {
+            URL url = this.generateURL("get_user","u=" + id);
+            src = Okio.buffer(Okio.source(url.openStream()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return src;
     }
 
     public Collection<Score> getPlayerBest(int id) throws IOException, JSONException {
