@@ -1,5 +1,7 @@
 package example.cerki.osuhub;
 
+import android.support.annotation.NonNull;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -14,6 +16,7 @@ import java.util.Collection;
 
 import example.cerki.osuhub.Feed.Beatmap;
 import example.cerki.osuhub.List.Player;
+import io.reactivex.Single;
 
 /**
  * Created by cerki on 05-Dec-17.
@@ -65,6 +68,11 @@ public class OsuAPI { // Todo SPR
        if(playerJson.length() == 0)
            return new Player();
        return new Player(playerJson.getJSONObject(0));
+    }
+    @NonNull
+    public Single<Player> getPlayerAsync(String id){
+
+        return Single.fromCallable(() -> getPlayer(id));
     }
 
     public Player getPlayer(String id) throws IOException, JSONException {

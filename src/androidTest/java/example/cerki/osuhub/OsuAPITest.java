@@ -50,4 +50,6 @@ public class OsuAPITest {
         Player p = osuAPI.getPlayer(id);
         assertEquals("Patriot720",p.getUsername());
     }
+
+
 }

@@ -9,7 +9,6 @@ import java.util.TimeZone;
 
 import example.cerki.osuhub.FollowersTable;
 import example.cerki.osuhub.Following;
-import example.cerki.osuhub.OsuAPI;
 import example.cerki.osuhub.OsuDb;
 import example.cerki.osuhub.Score;
 import example.cerki.osuhub.Util;
@@ -27,7 +26,7 @@ public class FollowersNotificatorTest {
     @Test
     public void ShouldCheckEachFollowerIfTheyHaveNewerScoreAndReturnsTheseScoresCollection() throws Exception {
         Following follower = new Following(124493, "2013-06-22 9:11:16");
-        Collection<Score> scores = follower.getNewScores(new OsuAPI());
+        Collection<Score> scores = follower.getNewScores();
         assertTrue(scores.size() > 0);
          Score score = (Score) scores.toArray()[0];
          assertEquals(score.get("rank"),"SH");
@@ -36,7 +35,7 @@ public class FollowersNotificatorTest {
     @Test
     public void ShouldNotReturnAnything() throws Exception{
         Following follower = new Following(124493,"2017-12-03 16:02:22");
-        Collection<Score> newScores = follower.getNewScores(new OsuAPI());
+        Collection<Score> newScores = follower.getNewScores();
         assertTrue(newScores.size() == 0);
     }
 
@@ -49,7 +48,7 @@ public class FollowersNotificatorTest {
     @Test
     public void ShouldReturnEmpty() throws Exception {
         Following follower = new Following(1, "2013-06-22 9:11:16");
-        Collection<Score> scores = follower.getNewScores(new OsuAPI());
+        Collection<Score> scores = follower.getNewScores();
         assertTrue(scores.size() == 0);
     }
 

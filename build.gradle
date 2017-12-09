@@ -17,6 +17,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    compileOptions {
+        targetCompatibility 1.8
+        sourceCompatibility 1.8
+    }
 }
 
 dependencies {
@@ -42,4 +46,6 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.4.0'
     compile 'com.android.support:support-annotations:27.0.2'
     compile 'com.android.support:support-v13:27.0.2'
+    compile 'com.nytimes.android:cache3:3.0.0-beta'
+    compile 'com.nytimes.android:store3:3.0.0-beta'
 }
