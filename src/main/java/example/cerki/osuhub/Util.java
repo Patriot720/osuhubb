@@ -24,6 +24,8 @@ import java.util.TimeZone;
 public class Util {
     public static final String BASE_URL = "https://osu.ppy.sh/api/";
     public static final String API_KEY = "b40b7a7a8207b1ebd870eaf1f74bd2995f1a2cb6";
+    public static final String PATTERN = "yyyy-MM-dd HH:mm:ss";
+
     public static String makeRequestUrl(String method,String query){
         return BASE_URL + method + "?k=" + API_KEY + "&" + query;
     }
@@ -44,7 +46,7 @@ public class Util {
     }
 
     public static Date parseTimestamp(String stamp) throws ParseException {
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+        SimpleDateFormat format = new SimpleDateFormat(PATTERN, Locale.getDefault());
         return format.parse(stamp);
     }
     public static Date parsePeppyTime(String stamp) throws ParseException{

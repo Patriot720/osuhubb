@@ -1,23 +1,34 @@
 package example.cerki.osuhub.Notifications;
 
+import org.json.JSONException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mockito;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 import java.util.TimeZone;
 
+import javax.annotation.Nonnull;
+
 import example.cerki.osuhub.FollowersTable;
 import example.cerki.osuhub.Following;
+import example.cerki.osuhub.OsuAPI;
 import example.cerki.osuhub.OsuDb;
+import example.cerki.osuhub.PastScores;
 import example.cerki.osuhub.Score;
 import example.cerki.osuhub.Util;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Matchers.anyInt;
+import static org.mockito.Mockito.when;
 
 @RunWith(RobolectricTestRunner.class)
 public class FollowersNotificatorTest {
@@ -26,16 +37,13 @@ public class FollowersNotificatorTest {
     @Test
     public void ShouldCheckEachFollowerIfTheyHaveNewerScoreAndReturnsTheseScoresCollection() throws Exception {
         Following follower = new Following(124493, "2013-06-22 9:11:16");
-        Collection<Score> scores = follower.getNewScores();
+        Collection<Score> scores = new PastScores(follower,getOsuAPI()).getNewScores();
         assertTrue(scores.size() > 0);
-         Score score = (Score) scores.toArray()[0];
-         assertEquals(score.get("rank"),"SH");
-         assertEquals(Float.parseFloat(score.get("pp")),817,3); // TODO these test will fail if cookiezi has a better score
     }
     @Test
     public void ShouldNotReturnAnything() throws Exception{
-        Following follower = new Following(124493,"2017-12-03 16:02:22");
-        Collection<Score> newScores = follower.getNewScores();
+        Following follower = new Following(124493,"3017-12-03 16:02:22");
+        Collection<Score> newScores = new PastScores(follower,getOsuAPI()).getNewScores();
         assertTrue(newScores.size() == 0);
     }
 
@@ -44,12 +52,6 @@ public class FollowersNotificatorTest {
         Date date = Util.parseTimestamp("2017-12-03 20:49:10", TimeZone.getTimeZone("GMT+8"));
         Date date1 = Util.parseTimestamp("2017-12-03 17:02:22", TimeZone.getDefault());
         assertTrue(date.compareTo(date1) < 0);
-    }
-    @Test
-    public void ShouldReturnEmpty() throws Exception {
-        Following follower = new Following(1, "2013-06-22 9:11:16");
-        Collection<Score> scores = follower.getNewScores();
-        assertTrue(scores.size() == 0);
     }
 
     @Test
@@ -80,23 +82,41 @@ public class FollowersNotificatorTest {
 
     @Test
     public void getScoresMonthOld() throws Exception {
-        Collection<Score> scores = new Following(5187234,"","alko-chan").getMonthOldScores();
+        OsuAPI osuAPI = getOsuAPI();
+        Collection<Score> scores = new PastScores(new Following(228,"","kaka"),osuAPI).getMonthOldScores();
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.MONTH,-1);
         Date monthOldDate = calendar.getTime();
-        assertTrue(scores.size() > 0); // TODO not a consistent test
+        assertTrue(scores.size() > 0);
         for (Score score : scores) {
             Date date = Util.parseTimestamp(score.get("date"),TimeZone.getTimeZone("GMT+8"));
             assertTrue(date.compareTo(monthOldDate) > 0);
         }
         }
-    @Test
-    public void getScoresDayOld() throws Exception{
-        Calendar date = Calendar.getInstance();
-        date.add(Calendar.DAY_OF_MONTH,-1);
-        Date dayOldDate = date.getTime(); // TODO not a consistent test
-        Collection<Score> scoresAfter = new Following(5652163, "", "alko-chan").getScoresAfter(dayOldDate);
-        assertTrue(scoresAfter.size() == 0);
+
+    @Nonnull
+    private OsuAPI getOsuAPI() throws IOException, JSONException {
+        OsuAPI osuAPI = Mockito.mock(OsuAPI.class);
+        when(osuAPI.getPlayerBest(anyInt())).then(invocation -> {
+            ArrayList<Score> scores = new ArrayList<>();
+            Score score = new Score();
+            Calendar instance = Calendar.getInstance();
+            instance.add(Calendar.DAY_OF_MONTH,-2);
+            Date time1 = instance.getTime();
+            SimpleDateFormat dateFormat = new SimpleDateFormat(Util.PATTERN);
+            String format = dateFormat.format(time1);
+            score.put("date",format);
+            scores.add(score);
+            Calendar calendar = Calendar.getInstance();
+            calendar.add(Calendar.MONTH,-2);
+            Date time = calendar.getTime();
+            String moreThanAMonthDate = dateFormat.format(time);
+            Score score1 = new Score();
+            score1.put("date",moreThanAMonthDate);
+            scores.add(score1);
+            return scores;
+        });
+        return osuAPI;
     }
 
 }

@@ -1,4 +1,4 @@
-package example.cerki.osuhub.Feed;
+package example.cerki.osuhub.API.POJO;
 
 import android.arch.persistence.room.Entity;
 
@@ -10,7 +10,7 @@ import com.google.gson.annotations.SerializedName;
  */
 
 @Entity
-public class GsonBeatmap {
+public class Beatmap {
 
     @SerializedName("beatmapset_id")
     @Expose

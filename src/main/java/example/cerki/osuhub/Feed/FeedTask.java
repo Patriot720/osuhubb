@@ -22,6 +22,7 @@ import example.cerki.osuhub.Mods;
 import example.cerki.osuhub.NewDatabase;
 import example.cerki.osuhub.OsuAPI;
 import example.cerki.osuhub.OsuDb;
+import example.cerki.osuhub.PastScores;
 import example.cerki.osuhub.Score;
 import example.cerki.osuhub.Util;
 
@@ -53,7 +54,7 @@ public class FeedTask extends AsyncTask<Void, Void, List<FeedItem>> {
         try {
             for (Following following : all) { // TODO  Cache Beatmaps and Scores;
                 // Todo add search for players
-                Collection<Score> monthOldScores = following.getMonthOldScores(); // TODO get BY WEEKS Bottleneck
+                Collection<Score> monthOldScores = new PastScores(following).getMonthOldScores(); // TODO get BY WEEKS Bottleneck
                 for (Score monthOldScore : monthOldScores) {
                     FeedItem feedItem = NewDatabase.getInstance().feedItemDao().get(following.username, Util.parsePeppyTime(monthOldScore.get(Score.DATE))); // TODO delete this
                     if(feedItem == null) {

@@ -4,6 +4,7 @@ package example.cerki.osuhub;
 import org.jsoup.nodes.Element;
 
 import example.cerki.osuhub.List.Player;
+import retrofit2.Converter;
 
 public class PlayerParser {
     public static Player parsePlayer(Element tr){

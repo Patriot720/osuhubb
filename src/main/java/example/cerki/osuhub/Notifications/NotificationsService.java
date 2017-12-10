@@ -20,6 +20,7 @@ import java.util.Collection;
 import example.cerki.osuhub.FollowersTable;
 import example.cerki.osuhub.Following;
 import example.cerki.osuhub.OsuDb;
+import example.cerki.osuhub.PastScores;
 import example.cerki.osuhub.R;
 import example.cerki.osuhub.Score;
 
@@ -37,7 +38,7 @@ public class NotificationsService extends GcmTaskService {
         Collection<Score> newScores;
         try {
             for (Following f : all) {
-                newScores = f.getNewScores();
+                newScores = new PastScores(f).getNewScores();
                 followersTable.insertOrUpdate(f.id,f.username);
                 for (Score score : newScores)
                     pushNotification(score.generateScoreString(f.username));

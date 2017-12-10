@@ -8,6 +8,7 @@ import com.nytimes.android.external.store3.util.ParserException;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
@@ -23,9 +24,9 @@ import static junit.framework.Assert.assertEquals;
  * Created by cerki on 06-Dec-17.
  */
 
+@Ignore("Heavy test")
 @RunWith(RobolectricTestRunner.class)
 public class StoreTest {
-
 
         @Test
         public void store() throws Exception {

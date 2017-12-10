@@ -27,7 +27,7 @@ public class Score extends  HashMap<String,String>{
         }
     }
 
-    protected Score() {
+    public Score() {
 
     }
 
