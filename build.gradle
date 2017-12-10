@@ -43,7 +43,6 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
     implementation files('libs/jsoup-1.10.3.jar')
-    //noinspection UseOfBundledGooglePlayServices
     compile 'com.google.android.gms:play-services:11.6.2'
     compile 'com.jonathanfinerty.once:once:1.2.2'
     compile 'com.android.support:cardview-v7:27.0.2'
@@ -51,10 +50,6 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.4.0'
     compile 'com.android.support:support-annotations:27.0.2'
     compile 'com.android.support:support-v13:27.0.2'
-    compile 'com.nytimes.android:cache3:3.0.0-beta'
-    compile 'com.nytimes.android:store3:3.0.0-beta'
-    compile 'com.nytimes.android:filesystem3:3.0.0-beta'
-    compile 'com.nytimes.android:middleware3:3.0.0-beta'
     implementation "android.arch.persistence.room:runtime:1.0.0"
     annotationProcessor "android.arch.persistence.room:compiler:1.0.0"
     testImplementation "android.arch.persistence.room:testing:1.0.0"
@@ -64,5 +59,8 @@ dependencies {
     compile 'com.squareup.retrofit2:retrofit:2.3.0'
     compile 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
     compile 'com.squareup.retrofit2:converter-gson:2.3.0'
+    compile 'eu.davidea:flexible-adapter:5.0.0-rc3'
+    compile 'eu.davidea:flexible-adapter-livedata:1.0.0-b1'
+    compile 'eu.davidea:flexible-adapter-databinding:1.0.0-b2'
 
 }
