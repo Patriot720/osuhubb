@@ -4,6 +4,7 @@ package example.cerki.osuhub.PlayerFragment.Overview;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,17 +14,31 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
+import java.util.Date;
+import java.util.concurrent.Callable;
+
+import example.cerki.osuhub.API.ApiDatabase.ApiDatabase;
+import example.cerki.osuhub.API.POJO.Following;
 import example.cerki.osuhub.FollowersTable;
 import example.cerki.osuhub.List.Player;
 import example.cerki.osuhub.OsuDb;
 import example.cerki.osuhub.R;
+import io.reactivex.Completable;
+import io.reactivex.Maybe;
+import io.reactivex.Scheduler;
+import io.reactivex.Single;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
+
+import static android.content.ContentValues.TAG;
 
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link OverviewFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class OverviewFragment extends Fragment {
+public class OverviewFragment extends Fragment
+{
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "mUserId";
     private static final String ARG_PARAM2 = "mUsername" ;
@@ -70,40 +85,33 @@ public class OverviewFragment extends Fragment {
                     new OsuDb(getContext()).getWritableDatabase()
             );
             ToggleButton followButton = view.findViewById(R.id.follow_button);
-            if(!table.getTimestamp(mUserId).isEmpty())
+            if(ApiDatabase.getInstance().followingDao().getBy(mUserId) != null) // Todo refactor this
                 followButton.setChecked(true);
             final ImageView avatar = view.findViewById(R.id.player_avatar);
             final ProgressBar progressBar = view.findViewById(R.id.avatar_progressbar);
             final TextView username = view.findViewById(R.id.player_username);
             username.setText(mUsername);
             final TextView otherInfoTemp = view.findViewById(R.id.other_info_temp); // TODO CHANGE THIS
-            new AvatarTask(new AvatarTask.WorkDoneListener() {
-                @Override
-                public void workDone(Bitmap bitmap) {
-                    avatar.setImageBitmap(bitmap);
-                    avatar.setVisibility(View.VISIBLE);
-                    progressBar.setVisibility(View.GONE);
-                }
+            new AvatarTask(bitmap -> {
+                avatar.setImageBitmap(bitmap);
+                avatar.setVisibility(View.VISIBLE);
+                progressBar.setVisibility(View.GONE);
             }).execute("https://osu.ppy.sh/users/" + mUserId + "/card"); // TODO extract these Strings
-            new PlayerInfoTask(new PlayerInfoTask.workDoneListener() {
-                @Override
-                public void workDone(Player player) {
-                    StringBuilder builder = new StringBuilder();
-                    for(String key : player.getKeySet())
-                        builder.append(key).append(": ").append(player.getString(key)).append("\n");
-                    otherInfoTemp.setText(builder.toString());
-                }
+            new PlayerInfoTask(player -> {
+                StringBuilder builder = new StringBuilder();
+                for(String key : player.getKeySet())
+                    builder.append(key).append(": ").append(player.getString(key)).append("\n");
+                otherInfoTemp.setText(builder.toString());
             }).execute(mUserId);
-            followButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                    if(b)
-                        table.insertOrUpdate(mUserId,mUsername);
-                    else
-                        table.deleteFollower(mUserId);
-                }
+            followButton.setOnCheckedChangeListener((compoundButton, b) -> {
+                Following following = new Following(mUserId, new Date().getTime(), mUsername);
+                if(b)
+                    ApiDatabase.getInstance().followingDao().insert(following);
+                else
+                    ApiDatabase.getInstance().followingDao().delete(following);
             });
             return view;
         }
+
 
 }

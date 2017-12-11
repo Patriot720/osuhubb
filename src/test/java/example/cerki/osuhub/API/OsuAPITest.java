@@ -1,5 +1,6 @@
 package example.cerki.osuhub.API;
 
+import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Room;
 
 import org.junit.Before;
@@ -9,6 +10,8 @@ import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import example.cerki.osuhub.API.ApiDatabase.ApiDatabase;
@@ -24,7 +27,6 @@ import static org.junit.Assert.*;
 /**
  * Created by cerki on 10-Dec-17.
  */
-@Ignore
 @RunWith(RobolectricTestRunner.class)
 public class OsuAPITest {
 
@@ -56,14 +58,73 @@ public class OsuAPITest {
     public void getUserBest() throws Exception {
         Single<List<BestScore>> cookiezi = osuApiService.getBestScoresBy("cookiezi");
         int size = cookiezi.blockingGet().size();
-        assertEquals(size,10);
+        assertEquals(size,50);
+    }
+
+    @Test // Todo not a consistent test
+    public void testDateConversionFromApi() throws Exception{
+        Single<List<BestScore>> cookiezi = osuApiService.getBestScoresBy("cookiezi");
+        Date date = cookiezi.blockingGet().get(0).getDate();
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        int i = cal.get(Calendar.DATE);
+        assertEquals(i,30);
     }
 
     @Test
-    public void testDatabase() throws Exception {
+    public void testDatabaseInsertion() throws Exception {
         List<BestScore> cookiezi = osuApiService.getBestScoresBy("cookiezi").blockingGet();
         osuApiDb.bestScoreDao().insert(cookiezi);
         List<BestScore> by = osuApiDb.bestScoreDao().getBy(cookiezi.get(0).getUserId());
-        assertEquals(by.size(),10);
+        assertEquals(by.size(),50);
+    }
+    @Test // Todo not a consistent test
+    public void testDatabaseDateConversion() throws Exception {
+        List<BestScore> cookiezi = osuApiService.getBestScoresBy("cookiezi").blockingGet();
+        osuApiDb.bestScoreDao().insert(cookiezi);
+        List<BestScore> by = osuApiDb.bestScoreDao().getBy(cookiezi.get(0).getUserId());
+        Date date = by.get(0).getDate();
+        Calendar instance = Calendar.getInstance();
+        instance.setTime(date);
+        int i = instance.get(Calendar.DATE);
+        assertEquals(30,i);
+    }
+    @Test // Todo not a consistent test
+    public void testDatabaseGetByUserId() throws Exception{
+        List<BestScore> cookiezi = osuApiService.getBestScoresBy("cookiezi").blockingGet();
+        osuApiDb.bestScoreDao().insert(cookiezi);
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.MONTH,-2);
+        Date time = calendar.getTime();
+        int size = osuApiDb.bestScoreDao().getScoresAfter(time).size();
+        assertEquals(1,size);
+    }
+
+    @Test
+    public void testIntegersHandling() throws Exception {
+        List<BestScore> cookiezi = osuApiService.getBestScoresBy("cookiezi").blockingGet();
+        int count50 = cookiezi.get(0).getCount50();
+        assertEquals(count50,0);
+    }
+
+    @Test
+    public void testBeatmapFetchingAndDatabaseHandling() throws Exception {
+        Single<List<Beatmap>> beatmapBy = osuApiService.getBeatmapBy("1262832");
+        List<Beatmap> beatmaps = beatmapBy.blockingGet();
+        Beatmap beatmap = beatmaps.get(0);
+        osuApiDb.beatmapDao().insert(beatmap);
+        Beatmap by = osuApiDb.beatmapDao().getBy(1262832);
+        assertEquals(by.getArtist(),"ClariS");
+
+    }
+
+    @Test
+    public void bestScoreHashCode() throws Exception {
+        Single<List<BestScore>> cookiezi = osuApiService.getBestScoresBy("cookiezi");
+        BestScore bestScore = cookiezi.blockingGet().get(0);
+        osuApiDb.bestScoreDao().insert(bestScore);
+        osuApiDb.bestScoreDao().insert(bestScore);
+        List<BestScore> by = osuApiDb.bestScoreDao().getBy(bestScore.getUserId());
+        assertEquals(by.size(),1);
     }
 }

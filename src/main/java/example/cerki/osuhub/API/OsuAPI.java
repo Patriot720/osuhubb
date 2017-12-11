@@ -1,5 +1,13 @@
 package example.cerki.osuhub.API;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonDeserializer;
+import com.google.gson.JsonPrimitive;
+import com.google.gson.JsonSerializer;
+
+import java.util.Date;
+
 import example.cerki.osuhub.Util;
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
@@ -31,11 +39,14 @@ public class OsuAPI {
             Request request = requestBuilder.build();
             return chain.proceed(request);
         });
-
+        Gson gson = new GsonBuilder()
+                .registerTypeAdapter(Date.class, (JsonDeserializer<Date>) (json, typeOfT, context) -> Util.parsePeppyTime(json.getAsJsonPrimitive().getAsString()))
+                .registerTypeAdapter(Date.class, (JsonSerializer<Date>) (date, type, jsonSerializationContext) -> new JsonPrimitive(date.getTime()))
+                .create();
         Retrofit build = new Retrofit.Builder()
                 .baseUrl(Util.BASE_URL)
                 .client(httpClient.build())
-                .addConverterFactory(GsonConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create(gson))
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build();
         return build.create(OsuApiService.class);

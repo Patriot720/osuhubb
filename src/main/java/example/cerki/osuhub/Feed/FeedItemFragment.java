@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +15,11 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 
+import eu.davidea.flexibleadapter.FlexibleAdapter;
 import example.cerki.osuhub.R;
+import example.cerki.osuhub.Util;
+
+import static android.content.ContentValues.TAG;
 
 /**
  * A fragment representing a list of Items.
@@ -27,7 +32,7 @@ public class FeedItemFragment extends Fragment {
 
     private OnListFragmentInteractionListener mListener;
     private List<FeedItem> mData;
-    private MyFeedItemRecyclerViewAdapter mAdapter;
+    private FlexibleAdapter<FeedItem> mAdapter;
     private SwipeRefreshLayout mRefresh;
     private RecyclerView mRecycler;
 
@@ -41,19 +46,22 @@ public class FeedItemFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        initData();
     }
 
     private void initData() {
         mData = new ArrayList<>();
-        new FeedTask(getContext(), new FeedTask.WorkDoneListener() {
-            @Override
-            public void workDone(List<FeedItem> items) {
-                mAdapter.replaceData(items);
-                mRefresh.setRefreshing(false);
-                mRecycler.scheduleLayoutAnimation();
-                // Todo animation schedule
-            }
+        new NewFeedTaskDb(items -> {
+            mAdapter.updateDataSet(items);
+            mRefresh.setRefreshing(false);
+            if(Util.isNetworkAvailable(getContext()))
+                updateData();
+        }).execute();
+    }
+    void updateData(){
+        mRefresh.setRefreshing(true);
+        new NewFeedTaskNetwork(items -> {
+            mAdapter.updateDataSet(items,true);
+            mRefresh.setRefreshing(false);
         }).execute();
     }
 
@@ -61,28 +69,31 @@ public class FeedItemFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_feeditem_list, container, false);
-
-        // Set the adapter
         if(view instanceof SwipeRefreshLayout){
             mRefresh = (SwipeRefreshLayout) view;
             mRefresh.setRefreshing(true);
-            mRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-                @Override
-                public void onRefresh() {
-                    initData();
-                }
-            });
+            mRefresh.setOnRefreshListener(this::updateData);
         }
             Context context = view.getContext();
             mRecycler = view.findViewById(R.id.feedlist);
             mRecycler.setLayoutManager(new LinearLayoutManager(context));
-            mAdapter = new MyFeedItemRecyclerViewAdapter(mData,mListener);
+            mAdapter = new FlexibleAdapter<>(mData);
+            addListeners();
             mRecycler.setHasFixedSize(true);
             mRecycler.setItemViewCacheSize(20);
             mRecycler.setDrawingCacheEnabled(true);
             mRecycler.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_LOW);
             mRecycler.setAdapter(mAdapter);
+            initData();
         return view;
+    }
+
+    private void addListeners() {
+        mAdapter.addListener((FlexibleAdapter.OnItemClickListener) position -> {
+            FeedItem item = mAdapter.getItem(position);
+            mListener.onListFragmentInteraction(item);
+            return true;
+        });
     }
 
 

@@ -54,5 +54,4 @@ public class OsuAPITest {
         assertEquals("Patriot720",p.getUsername());
     }
 
-
 }

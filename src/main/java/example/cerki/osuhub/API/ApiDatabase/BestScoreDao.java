@@ -4,6 +4,7 @@ import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Database;
 import android.arch.persistence.room.Delete;
 import android.arch.persistence.room.Insert;
+import android.arch.persistence.room.OnConflictStrategy;
 import android.arch.persistence.room.Query;
 import android.arch.persistence.room.TypeConverters;
 
@@ -21,12 +22,16 @@ import example.cerki.osuhub.Feed.FeedItem;
 @Dao
 @TypeConverters({Converters.class})
 public interface BestScoreDao {
-    @Query("SELECT * FROM bestscore WHERE userId=:userId AND timestamp=:date")
+    @Query("SELECT * FROM bestscore WHERE userId=:userId AND date=:date")
     BestScore getBy(String userId,Date date); // TOdo change to Date
     @Query("SELECT * FROM bestscore WHERE userId=:userId")
-    List<BestScore> getBy(String userId);
-    @Insert
+    List<BestScore> getBy(int userId);
+    @Query("SELECT * FROM bestscore WHERE date > :date")
+    List<BestScore> getScoresAfter(Date date);
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(List<BestScore> score);
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    void insert(BestScore score);
     @Delete
     void delete(BestScore score);
     @Query("DELETE FROM bestscore")

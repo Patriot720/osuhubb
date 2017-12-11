@@ -18,8 +18,12 @@ import retrofit2.http.Query;
 public interface OsuApiService {
     @GET("get_beatmaps")
     Single<List<Beatmap>> getBeatmapBy(@Query("b")String id);
+    @GET("get_beatmaps")
+    Single<List<Beatmap>> getBeatmapBy(@Query("b") int id);
     @GET("get_user")
     Single<List<User>>  getUserBy(@Query("u")String idOrUsername);
-    @GET("get_user_best")
+    @GET("get_user_best?limit=50")
     Single<List<BestScore>> getBestScoresBy(@Query("u")String idOrUsername);
+    @GET("get_user_best?limit=50")
+    Single<List<BestScore>> getBestScoresBy(@Query("u") int id); // Todo remove rxJava maybe
 }

@@ -13,7 +13,6 @@
         android:layout_height="match_parent"
         app:layoutManager="LinearLayoutManager"
         tools:context="example.cerki.osuhub.Feed.FeedItemFragment"
-        android:layoutAnimation="@anim/layout_animation_fall_down"
         tools:listitem="@layout/fragment_feeditem">
 
     </android.support.v7.widget.RecyclerView>

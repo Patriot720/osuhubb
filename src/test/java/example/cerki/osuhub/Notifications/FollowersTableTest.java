@@ -9,7 +9,7 @@ import org.robolectric.RuntimeEnvironment;
 import java.util.Collection;
 
 import example.cerki.osuhub.FollowersTable;
-import example.cerki.osuhub.Following;
+import example.cerki.osuhub.API.POJO.Following;
 import example.cerki.osuhub.OsuDb;
 
 import static org.junit.Assert.assertEquals;

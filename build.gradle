@@ -17,8 +17,8 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    testOptions{
-        unitTests{
+    testOptions {
+        unitTests {
             includeAndroidResources = true
         }
     }
@@ -62,5 +62,7 @@ dependencies {
     compile 'eu.davidea:flexible-adapter:5.0.0-rc3'
     compile 'eu.davidea:flexible-adapter-livedata:1.0.0-b1'
     compile 'eu.davidea:flexible-adapter-databinding:1.0.0-b2'
-
+    compile 'com.jakewharton:butterknife:8.4.0'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
+    compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
 }

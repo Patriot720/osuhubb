@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 
+import example.cerki.osuhub.API.POJO.Following;
+
 import static example.cerki.osuhub.Columns.Following.ID;
 import static example.cerki.osuhub.Columns.Following.TIMESTAMP;
 import static example.cerki.osuhub.Columns.Following.USERNAME;

@@ -1,5 +1,7 @@
 package example.cerki.osuhub.Notifications;
 
+import android.support.annotation.NonNull;
+
 import org.json.JSONException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -15,17 +17,15 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.TimeZone;
 
-import javax.annotation.Nonnull;
 
 import example.cerki.osuhub.FollowersTable;
-import example.cerki.osuhub.Following;
+import example.cerki.osuhub.API.POJO.Following;
 import example.cerki.osuhub.OsuAPI;
 import example.cerki.osuhub.OsuDb;
 import example.cerki.osuhub.PastScores;
 import example.cerki.osuhub.Score;
 import example.cerki.osuhub.Util;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.when;
@@ -94,7 +94,7 @@ public class FollowersNotificatorTest {
         }
         }
 
-    @Nonnull
+    @NonNull
     private OsuAPI getOsuAPI() throws IOException, JSONException {
         OsuAPI osuAPI = Mockito.mock(OsuAPI.class);
         when(osuAPI.getPlayerBest(anyInt())).then(invocation -> {

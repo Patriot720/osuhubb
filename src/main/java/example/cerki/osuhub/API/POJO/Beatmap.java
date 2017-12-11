@@ -1,6 +1,7 @@
 package example.cerki.osuhub.API.POJO;
 
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -17,7 +18,8 @@ public class Beatmap {
     private String beatmapsetId;
     @SerializedName("beatmap_id")
     @Expose
-    private String beatmapId;
+    @PrimaryKey
+    private int beatmapId;
     @SerializedName("approved")
     @Expose
     private String approved;
@@ -92,7 +94,7 @@ public class Beatmap {
     private String maxCombo;
     @SerializedName("difficultyrating")
     @Expose
-    private String difficultyrating;
+    private Float difficultyrating;
 
     public String getBeatmapsetId() {
         return beatmapsetId;
@@ -102,11 +104,11 @@ public class Beatmap {
         this.beatmapsetId = beatmapsetId;
     }
 
-    public String getBeatmapId() {
+    public int getBeatmapId() {
         return beatmapId;
     }
 
-    public void setBeatmapId(String beatmapId) {
+    public void setBeatmapId(int beatmapId) {
         this.beatmapId = beatmapId;
     }
 
@@ -302,11 +304,11 @@ public class Beatmap {
         this.maxCombo = maxCombo;
     }
 
-    public String getDifficultyrating() {
+    public Float getDifficultyrating() {
         return difficultyrating;
     }
 
-    public void setDifficultyrating(String difficultyrating) {
+    public void setDifficultyrating(Float difficultyrating) {
         this.difficultyrating = difficultyrating;
     }
 

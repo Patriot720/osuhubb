@@ -9,6 +9,8 @@ import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 
+import example.cerki.osuhub.API.POJO.Following;
+
 public class PastScores {
     private final Following following;
     private  OsuAPI api;

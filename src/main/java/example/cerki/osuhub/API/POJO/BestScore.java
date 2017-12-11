@@ -1,44 +1,50 @@
 package example.cerki.osuhub.API.POJO;
 
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
+import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.PrimaryKey;
+import android.arch.persistence.room.TypeConverters;
+import android.support.annotation.NonNull;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-/**
- * Created by cerki on 10-Dec-17.
- */
+import java.util.Date;
 
-@Entity
+import example.cerki.osuhub.API.Converters;
+import example.cerki.osuhub.Util;
+
+@Entity(primaryKeys = {"beatmapId","userId"})
+@TypeConverters({Converters.class})
 public class BestScore {
         @SerializedName("beatmap_id")
         @Expose
-        private String beatmapId;
+        private int beatmapId;
         @SerializedName("score")
         @Expose
         private String score;
         @SerializedName("maxcombo")
         @Expose
-        private String maxcombo;
+        private int maxcombo;
         @SerializedName("count50")
         @Expose
-        private String count50;
+        private int count50;
         @SerializedName("count100")
         @Expose
-        private String count100;
+        private int count100;
         @SerializedName("count300")
         @Expose
-        private String count300;
+        private int count300;
         @SerializedName("countmiss")
         @Expose
-        private String countmiss;
+        private int countmiss;
         @SerializedName("countkatu")
         @Expose
-        private String countkatu;
+        private int countkatu;
         @SerializedName("countgeki")
         @Expose
-        private String countgeki;
+        private int countgeki;
         @SerializedName("perfect")
         @Expose
         private String perfect;
@@ -47,43 +53,22 @@ public class BestScore {
         private String enabledMods;
         @SerializedName("user_id")
         @Expose
-        private String userId;
+        private int userId;
         @SerializedName("date")
         @Expose
-        private String date;
+        private Date date;
         @SerializedName("rank")
         @Expose
         private String rank;
         @SerializedName("pp")
         @Expose
-        private String pp;
+        private Float pp;
 
-    @PrimaryKey(autoGenerate = true)
-    private int id;
-    private int timestamp;
-
-    public int getTimestamp() {
-        return timestamp;
-    }
-
-    public void setTimestamp(int timestamp) {
-        this.timestamp = timestamp;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-
-        public String getBeatmapId() {
+    public int getBeatmapId() {
             return beatmapId;
         }
 
-        public void setBeatmapId(String beatmapId) {
+        public void setBeatmapId(int beatmapId) {
             this.beatmapId = beatmapId;
         }
 
@@ -95,59 +80,59 @@ public class BestScore {
             this.score = score;
         }
 
-        public String getMaxcombo() {
+        public int getMaxcombo() {
             return maxcombo;
         }
 
-        public void setMaxcombo(String maxcombo) {
+        public void setMaxcombo(int maxcombo) {
             this.maxcombo = maxcombo;
         }
 
-        public String getCount50() {
+        public int getCount50() {
             return count50;
         }
 
-        public void setCount50(String count50) {
+        public void setCount50(int count50) {
             this.count50 = count50;
         }
 
-        public String getCount100() {
+        public int getCount100() {
             return count100;
         }
 
-        public void setCount100(String count100) {
+        public void setCount100(int count100) {
             this.count100 = count100;
         }
 
-        public String getCount300() {
+        public int getCount300() {
             return count300;
         }
 
-        public void setCount300(String count300) {
+        public void setCount300(int count300) {
             this.count300 = count300;
         }
 
-        public String getCountmiss() {
+        public int getCountmiss() {
             return countmiss;
         }
 
-        public void setCountmiss(String countmiss) {
+        public void setCountmiss(int countmiss) {
             this.countmiss = countmiss;
         }
 
-        public String getCountkatu() {
+        public int getCountkatu() {
             return countkatu;
         }
 
-        public void setCountkatu(String countkatu) {
+        public void setCountkatu(int countkatu) {
             this.countkatu = countkatu;
         }
 
-        public String getCountgeki() {
+        public int getCountgeki() {
             return countgeki;
         }
 
-        public void setCountgeki(String countgeki) {
+        public void setCountgeki(int countgeki) {
             this.countgeki = countgeki;
         }
 
@@ -167,19 +152,19 @@ public class BestScore {
             this.enabledMods = enabledMods;
         }
 
-        public String getUserId() {
+        public int getUserId() {
             return userId;
         }
 
-        public void setUserId(String userId) {
+        public void setUserId(int userId) {
             this.userId = userId;
         }
 
-        public String getDate() {
+        public Date getDate() {
             return date;
         }
 
-        public void setDate(String date) {
+        public void setDate(Date date) {
             this.date = date;
         }
 
@@ -191,11 +176,11 @@ public class BestScore {
             this.rank = rank;
         }
 
-        public String getPp() {
+        public Float getPp() {
             return pp;
         }
 
-        public void setPp(String pp) {
+        public void setPp(Float pp) {
             this.pp = pp;
         }
 
@@ -206,20 +191,29 @@ public class BestScore {
 
         BestScore bestScore = (BestScore) o;
 
-        if (beatmapId != null ? !beatmapId.equals(bestScore.beatmapId) : bestScore.beatmapId != null)
-            return false;
+        if (beatmapId != bestScore.beatmapId) return false;
+        if (userId != bestScore.userId) return false;
         if (score != null ? !score.equals(bestScore.score) : bestScore.score != null) return false;
-        if (userId != null ? !userId.equals(bestScore.userId) : bestScore.userId != null)
-            return false;
         return date != null ? date.equals(bestScore.date) : bestScore.date == null;
     }
 
+    @Ignore
     @Override
     public int hashCode() {
-        int result = beatmapId != null ? beatmapId.hashCode() : 0;
+        int result = beatmapId;
         result = 31 * result + (score != null ? score.hashCode() : 0);
-        result = 31 * result + (userId != null ? userId.hashCode() : 0);
+        result = 31 * result + userId;
         result = 31 * result + (date != null ? date.hashCode() : 0);
         return result;
+    }
+
+    public boolean isMonthOld() {
+        Date monthOldDate = Util.getMonthOldDate();
+        return date.compareTo(monthOldDate) > 0;
+    }
+
+    public boolean isWeekOld() {
+        Date weekOldDate = Util.getWeekOldDate();
+        return date.compareTo(weekOldDate) > 0;
     }
 }
