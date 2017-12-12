@@ -20,6 +20,7 @@ import static example.cerki.osuhub.OsuDb.FOLLOWERS_TABLE_NAME;
  */
 // TODO mDb leaks bug;
     // TODO extract Table class parent
+    @Deprecated
 public class FollowersTable {
     SQLiteDatabase mDb;
 

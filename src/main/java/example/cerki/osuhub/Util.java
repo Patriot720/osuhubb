@@ -80,6 +80,7 @@ public class Util {
     }
 
     @SuppressLint("SetTextI18n")
+    @Deprecated
     public static void showPlayerDifference(TextView textView, ImageView arrow, Double value) {
         if(value == null) {
             arrow.setVisibility(View.INVISIBLE);
@@ -99,6 +100,7 @@ public class Util {
         arrow.setVisibility(View.VISIBLE);
         textView.setVisibility(View.VISIBLE);
     }
+    @Deprecated
    public static void setImageFromAsset(Context context, ImageView destination, String source) {
         try {
             InputStream open = context.getAssets().open(source);
@@ -109,6 +111,7 @@ public class Util {
                 e.printStackTrace();
         }
     }
+    @Deprecated
     public static String doubleToString(Double value){
         if(value % 1 == 0) {
             int val = value.intValue();

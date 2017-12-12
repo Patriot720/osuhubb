@@ -14,6 +14,7 @@ import java.net.URL;
 
 
 
+@Deprecated
 class AvatarTask extends AsyncTask<String,Void,Bitmap>{
     AvatarTask(WorkDoneListener workDoneListener) {
         this.workDoneListener = workDoneListener;

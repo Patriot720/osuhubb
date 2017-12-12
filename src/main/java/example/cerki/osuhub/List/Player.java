@@ -21,6 +21,7 @@ import static example.cerki.osuhub.Columns.USERNAME;
  * Created by cerki on 30-Nov-17.
  */
 
+@Deprecated
 public class Player {
     private int id;
     private String username;

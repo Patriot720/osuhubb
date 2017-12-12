@@ -13,6 +13,7 @@ import static example.cerki.osuhub.Columns.ID;
  * Created by cerki on 30-Nov-17.
  */
 // TODO mDb leaks bug;
+    @Deprecated
 public class PlayersTable implements PlayersTableWrapper {
 
     private final SQLiteDatabase mDb;

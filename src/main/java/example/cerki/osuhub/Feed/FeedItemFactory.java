@@ -15,11 +15,6 @@ import example.cerki.osuhub.Score;
 import example.cerki.osuhub.Util;
 
 public class FeedItemFactory {
-    private final FeedTask feedTask;
-
-    public FeedItemFactory(FeedTask feedTask) {
-        this.feedTask = feedTask;
-    }
 
     public static String getCoverUrl(String mapset_id){
         return "https://assets.ppy.sh//beatmaps/" + mapset_id + "/covers/card.jpg";

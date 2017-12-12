@@ -16,14 +16,11 @@ import java.util.List;
 import eu.davidea.flexibleadapter.FlexibleAdapter;
 import eu.davidea.flexibleadapter.items.AbstractFlexibleItem;
 import eu.davidea.viewholders.FlexibleViewHolder;
-import example.cerki.osuhub.Converters;
 import example.cerki.osuhub.R;
 
 import static com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade;
 
 
-@Entity
-@TypeConverters({Converters.class})
 public class FeedItem extends AbstractFlexibleItem<FeedItem.FeedViewHolder> implements  Comparable<FeedItem>{
     public String coverUrl;
     public String username;
@@ -37,9 +34,6 @@ public class FeedItem extends AbstractFlexibleItem<FeedItem.FeedViewHolder> impl
     public String missCount;
     public int rankResource;
     public Date date;
-
-    @PrimaryKey(autoGenerate = true)
-    int id;
     public String rankURI;
     public String rank;
 

@@ -44,6 +44,7 @@ import static example.cerki.osuhub.Feed.Beatmap.TITLE;
  * Created by cerki on 30-Nov-17.
  */
 
+@Deprecated
 public class OsuDb extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "osudb";
     public static final String PLAYERS_TABLE_NAME = "PlayersTable";

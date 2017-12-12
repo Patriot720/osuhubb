@@ -10,6 +10,7 @@ import java.util.Iterator;
 
 
 // TODO comparable only works for dates !!!;
+@Deprecated
 public class Score extends  HashMap<String,String>{
     public static final String MISS = "countmiss" ;
     public static final String PP = "pp" ;

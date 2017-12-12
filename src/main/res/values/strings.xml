@@ -20,4 +20,8 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_beatmap">BeatmapActivity</string>
+    <string name="no_more_load_retry" />
+    <string name="endless_cancel">Cancelled</string>
+    <string name="endless_error">error loading</string>
+    <string name="endless_disabled">disabled</string>
 </resources>

@@ -13,6 +13,7 @@ import org.junit.runners.JUnit4;
 import java.io.File;
 import java.io.IOException;
 
+import example.cerki.osuhub.API.POJO.User;
 import example.cerki.osuhub.List.Player;
 
 import static example.cerki.osuhub.TestHelper.*;
@@ -33,7 +34,7 @@ public class PlayerParserTest {
     @Test
     public void parse() throws Exception {
         Element tr = tbody.get(0);
-        Player player = PlayerParser.parsePlayer(tr);
+        Player player = UserParser.parsePlayer(tr);
         assertPlayer(player);
     }
 
@@ -48,7 +49,7 @@ public class PlayerParserTest {
     @Test
     public void parseInactivePlayer() throws Exception{
         Element tr = tbody.get(43);
-        Player player = PlayerParser.parsePlayer(tr);
+        Player player = UserParser.parsePlayer(tr);
         assertEquals(Player.INACTIVE,player.getActivity());
     }
     // TODO
@@ -58,15 +59,29 @@ public class PlayerParserTest {
         Document doc = Jsoup.parse(f,"utf8");
         Elements table = doc.select("tbody").first().children();
         Element tr = table.get(0);
-        Player player = PlayerParser.parsePlayer(tr);
+        Player player = UserParser.parsePlayer(tr);
         assertPlayer(player);
     }
 
-
+    @Test
+    public void UserParse() throws Exception {
+        File f = getFromResources("osu.html");
+        Document doc = Jsoup.parse(f,"utf8");
+        Elements table = doc.select("tbody").first().children();
+        Element tr = table.get(0);
+        User user = UserParser.parseUser(tr);
+        assertEquals(user.getUserId(),124493);
+        assertEquals(user.getAccuracy(),(float)98.76,2);
+        assertEquals(user.getPpRaw(),14039);
+        assertEquals(user.getPlaycount(),19586);
+        assertEquals(user.getPpRank(),1);
+        assertEquals(user.getUsername(),"Cookiezi");
+        assertEquals(user.getCountry(),"flags/kr.png"); // Todo change this to KR only
+    }
 
     @Test
     public void parseEmpty() throws Exception{
-        Player player = PlayerParser.parsePlayer(null);
+        Player player = UserParser.parsePlayer(null);
         assertEquals(null,player);
     }
 }

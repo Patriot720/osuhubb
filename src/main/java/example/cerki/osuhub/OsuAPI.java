@@ -24,6 +24,7 @@ import okio.Okio;
  * Created by cerki on 05-Dec-17.
  */
 
+@Deprecated
 public class OsuAPI { // Todo SPR
     public static final String BASE_URL = "https://osu.ppy.sh/api/";
     private String API_KEY = "b40b7a7a8207b1ebd870eaf1f74bd2995f1a2cb6";

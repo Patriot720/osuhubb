@@ -28,6 +28,7 @@ import static org.junit.Assert.*;
  * Created by cerki on 10-Dec-17.
  */
 @RunWith(RobolectricTestRunner.class)
+@Ignore
 public class OsuAPITest {
 
     private OsuApiService osuApiService;

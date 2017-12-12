@@ -46,7 +46,7 @@ public class OverviewFragmentTest {
         db.followingDao().insert(new Following(1,223L,"username"));
         Maybe.fromCallable(()->db.followingDao().getBy(1))
                 .subscribeOn(Schedulers.newThread())
-                .subscribe((items)-> assertEquals(items.id,2));
+                .subscribe((items)-> assertEquals(items.id,1));
         Thread.sleep(1000);
     }
 }

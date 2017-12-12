@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,8 +13,14 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 
-import example.cerki.osuhub.OsuDb;
+import eu.davidea.flexibleadapter.FlexibleAdapter;
+import eu.davidea.flexibleadapter.items.IFlexible;
+import example.cerki.osuhub.API.ApiDatabase.ApiDatabase;
+import example.cerki.osuhub.API.POJO.User;
 import example.cerki.osuhub.R;
+import io.reactivex.Single;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * A fragment representing a list of Items.
@@ -21,11 +28,12 @@ import example.cerki.osuhub.R;
  * Activities containing this fragment MUST implement the {@link OnListFragmentInteractionListener}
  * interface.
  */
+@SuppressWarnings("unchecked")
 public class ListFragment extends android.support.v4.app.Fragment {
 
     private OnListFragmentInteractionListener mListener;
-    private RecyclerAdapter mAdapter;
-    private List<Player> mData;
+    private FlexibleAdapter mAdapter;
+    private List<User> mData;
     private SwipeRefreshLayout mRefresh;
     private RecyclerView mRecycler;
 
@@ -44,29 +52,23 @@ public class ListFragment extends android.support.v4.app.Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if(this.isResumed()){
-         getFromDb();   // Todo fix long white screen if app is unloaded;
-        }
-        initData();
     }
-
-    private void getFromDb() {
+    private void initData(){
+        Single.fromCallable(()-> ApiDatabase.getInstance().userDao().getAll())
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe((items)->{ mAdapter.updateDataSet(items,true);
+                        updateData();
+        });
     }
-
-    private void initData() {
+    private void updateData() {
         mData = new ArrayList<>();
-        PlayersTable table = new PlayersTable(new OsuDb(getContext()).getWritableDatabase());
-        new Task(table,new WorkDoneListener() {
-            @Override
-            public void workDone(List<Player> players) {
-                mAdapter.replaceData(players);
-                mRefresh.setRefreshing(false);
-                mRecycler.scheduleLayoutAnimation();
-            }
-        }).loadPlayers();
+        new Task((users -> {
+            mAdapter.updateDataSet(users,true);
+            mRefresh.setRefreshing(false);
+        })).loadUsers();
     }
 
-    // TODO preload from DB and add last update thing at the top
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -74,19 +76,37 @@ public class ListFragment extends android.support.v4.app.Fragment {
             if(view instanceof SwipeRefreshLayout){
                 mRefresh = (SwipeRefreshLayout) view;
                 mRefresh.setRefreshing(true);
-                mRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-                    @Override
-                    public void onRefresh() {
-                        initData();
-                    }
-                });
+                mRefresh.setOnRefreshListener(this::updateData);
             }
             Context context = view.getContext();
             mRecycler = view.findViewById(R.id.list);
             mRecycler.setLayoutManager(new LinearLayoutManager(context));
-            mAdapter = new RecyclerAdapter(getContext(),mData,mListener);
+            mAdapter = new FlexibleAdapter<>(mData);
+            setListeners();
             mRecycler.setAdapter(mAdapter);
+            initData();
         return view;
+    }
+
+    private void setListeners() {
+        mAdapter.addListener((FlexibleAdapter.OnItemClickListener) position -> {
+            mListener.onListFragmentInteraction(mAdapter.getItem(position));
+            return true;
+        });
+        mAdapter.setEndlessScrollListener(new FlexibleAdapter.EndlessScrollListener() {
+            @Override
+            public void noMoreLoad(int newItemsSize) {
+                Log.e("WTF","WtfA;");
+            }
+
+            @Override
+            public void onLoadMore(int lastPosition, int currentPage) {
+                Log.e("Very nice","WTF");
+                new Task(items->{
+                    mAdapter.onLoadMoreComplete(items);
+                }).loadUsersFromPage(currentPage+1);
+            }
+        },new ProgressItem()).setEndlessScrollThreshold(10).setEndlessPageSize(50);
     }
 
 
@@ -118,6 +138,6 @@ public class ListFragment extends android.support.v4.app.Fragment {
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnListFragmentInteractionListener {
-        void onListFragmentInteraction(Player player);
+        void onListFragmentInteraction(IFlexible player);
     }
 }

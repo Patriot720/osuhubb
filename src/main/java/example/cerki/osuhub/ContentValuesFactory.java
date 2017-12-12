@@ -5,6 +5,7 @@ import android.content.ContentValues;
 import example.cerki.osuhub.Feed.Beatmap;
 import example.cerki.osuhub.List.Player;
 
+@Deprecated
 public class ContentValuesFactory {
     public static ContentValues generate(Player p) {
         ContentValues cv = new ContentValues();

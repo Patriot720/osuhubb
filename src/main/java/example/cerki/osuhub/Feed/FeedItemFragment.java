@@ -16,8 +16,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import eu.davidea.flexibleadapter.FlexibleAdapter;
+import example.cerki.osuhub.API.ApiDatabase.ApiDatabase;
 import example.cerki.osuhub.R;
 import example.cerki.osuhub.Util;
+import io.reactivex.Completable;
 
 import static android.content.ContentValues.TAG;
 
@@ -60,7 +62,7 @@ public class FeedItemFragment extends Fragment {
     void updateData(){
         mRefresh.setRefreshing(true);
         new NewFeedTaskNetwork(items -> {
-            mAdapter.updateDataSet(items,true);
+            mAdapter.addItems(0,items);
             mRefresh.setRefreshing(false);
         }).execute();
     }

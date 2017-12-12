@@ -1,12 +1,10 @@
 package example.cerki.osuhub;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentManager;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -17,15 +15,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.AdapterView;
 
 import eu.davidea.flexibleadapter.FlexibleAdapter;
+import eu.davidea.flexibleadapter.items.IFlexible;
+import eu.davidea.flexibleadapter.utils.Log;
 import example.cerki.osuhub.API.ApiDatabase.ApiDatabase;
+import example.cerki.osuhub.API.POJO.User;
 import example.cerki.osuhub.BeatmapActivity.BeatmapActivity;
 import example.cerki.osuhub.Feed.FeedItem;
 import example.cerki.osuhub.Feed.FeedItemFragment;
 import example.cerki.osuhub.List.ListFragment;
-import example.cerki.osuhub.List.Player;
 import example.cerki.osuhub.Notifications.NotificationsService;
 import example.cerki.osuhub.PlayerFragment.PlayerFragment;
 import jonathanfinerty.once.Once;
@@ -67,6 +66,9 @@ public class MainActivity extends AppCompatActivity
         mFragmentManager = getSupportFragmentManager();
 
         ApiDatabase.createInstance(this);
+
+
+        FlexibleAdapter.enableLogs(Log.Level.VERBOSE);
 
         Once.initialise(this);
         scheduleNotifications();
@@ -124,11 +126,14 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void onListFragmentInteraction(Player player) {
-        android.support.v4.app.Fragment fragment = PlayerFragment.newInstance(player.getId(),player.getUsername());
-        mFragmentManager.beginTransaction().add(R.id.content_main,fragment)
-                .addToBackStack("stack")
-                .commit();
+    public void onListFragmentInteraction(IFlexible player) {
+        if(player instanceof User) {
+            User user = ((User) player);
+            android.support.v4.app.Fragment fragment = PlayerFragment.newInstance(user.getUserId(), user.getUsername());
+            mFragmentManager.beginTransaction().add(R.id.content_main, fragment)
+                    .addToBackStack("stack")
+                    .commit();
+        }
     }
     private void scheduleNotifications() {
         if (!Once.beenDone(Once.THIS_APP_INSTALL, SCHEDULE_NOTIFICATIONS_TAG)) {

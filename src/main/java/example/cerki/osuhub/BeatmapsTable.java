@@ -10,6 +10,7 @@ import example.cerki.osuhub.Feed.Beatmap;
  * Created by cerki on 07-Dec-17.
  */
 
+@Deprecated
 public class BeatmapsTable { // Todo make them static maybe with(OsuDb.getInstance()).insert(stuff).into(TABLE)
     private SQLiteDatabase mDb;
 

@@ -11,6 +11,7 @@ import java.util.Date;
 
 import example.cerki.osuhub.API.POJO.Following;
 
+@Deprecated
 public class PastScores {
     private final Following following;
     private  OsuAPI api;

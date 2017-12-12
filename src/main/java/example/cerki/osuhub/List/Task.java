@@ -11,31 +11,37 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import example.cerki.osuhub.PlayerParser;
+import example.cerki.osuhub.API.ApiDatabase.ApiDatabase;
+import example.cerki.osuhub.API.ApiDatabase.UserDao;
+import example.cerki.osuhub.API.POJO.User;
+import example.cerki.osuhub.UserParser;
 
 
-class Task extends AsyncTask<String,Void,List<Player>> {
+class Task extends AsyncTask<String,Void,List<User>> {
     public static final String REQUEST_URL = "https://osu.ppy.sh/rankings/osu/performance";
-    private final PlayersTable mTable;
+    interface WorkDoneListener{
+        void workDone(List<User> users);
+    }
     private WorkDoneListener workDoneListener;
 
-    public Task(PlayersTable table, WorkDoneListener workDoneListener) {
+    public Task(WorkDoneListener workDoneListener) {
         this.workDoneListener = workDoneListener;
-        mTable = table;
     }
 
     @Override
-    protected List<Player> doInBackground(String... url) {
-        ArrayList<Player> players = new ArrayList<>();
+    protected List<User> doInBackground(String... url) {
+        ArrayList<User> players = new ArrayList<>();
+        UserDao userDao = ApiDatabase.getInstance().userDao();
         try {
             Document page = Jsoup.connect(url[0]).get();
             Elements tbody = page.select("tbody").first().children();
             for (Element tr : tbody) {
-                Player player = PlayerParser.parsePlayer(tr);
-                Player dbPlayer = mTable.getPlayer(player.getId());
-                player.compare(dbPlayer);
-                mTable.insertPlayer(player);
-                players.add(player);
+                User user = UserParser.parseUser(tr);
+                User dbUser = userDao.getUserBy(user.getUserId());
+                if(dbUser != null)
+                    user.compare(dbUser);
+                userDao.insert(user);
+                players.add(user);
             }
             return players;
         } catch (IOException e) {
@@ -45,15 +51,15 @@ class Task extends AsyncTask<String,Void,List<Player>> {
     }
 
     @Override
-    protected void onPostExecute(List<Player> players) {
+    protected void onPostExecute(List<User> players) {
         workDoneListener.workDone(players);
     }
 
-    public void loadPlayersFromPage(int number) {
+    public void loadUsersFromPage(int number) {
         execute(REQUEST_URL + "?page=" + number);
     }
 
-    public void loadPlayers() {
+    public void loadUsers() {
         execute(REQUEST_URL);
     }
 }
