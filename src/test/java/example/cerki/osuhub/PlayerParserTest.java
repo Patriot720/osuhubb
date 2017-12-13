@@ -14,7 +14,6 @@ import java.io.File;
 import java.io.IOException;
 
 import example.cerki.osuhub.API.POJO.User;
-import example.cerki.osuhub.List.Player;
 
 import static example.cerki.osuhub.TestHelper.*;
 import static org.junit.Assert.assertEquals;

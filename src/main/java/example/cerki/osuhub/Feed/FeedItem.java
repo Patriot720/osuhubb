@@ -105,6 +105,11 @@ public class FeedItem extends AbstractFlexibleItem<FeedItem.FeedViewHolder> impl
     }
 
     @Override
+    public String toString() {
+        return String.format("%s (mapset by %s | %s★) (%s) %s | %s",mapName,"TODO",starRate,accuracy,missCount,performance);
+    }
+
+    @Override
     public int hashCode() {
         int result = coverUrl != null ? coverUrl.hashCode() : 0;
         result = 31 * result + (username != null ? username.hashCode() : 0);

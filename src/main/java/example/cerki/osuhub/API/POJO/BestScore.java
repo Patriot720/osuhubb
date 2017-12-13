@@ -212,8 +212,18 @@ public class BestScore {
         return date.compareTo(monthOldDate) > 0;
     }
 
+
     public boolean isWeekOld() {
         Date weekOldDate = Util.getWeekOldDate();
         return date.compareTo(weekOldDate) > 0;
+    }
+
+    @Override
+    public String toString() {
+        return pp.toString();
+    }
+
+    public boolean isNewerThan(Long realTimestamp) {
+        return date.getTime() >= realTimestamp;
     }
 }

@@ -8,7 +8,6 @@ import org.robolectric.RobolectricTestRunner;
 import java.util.Collection;
 
 import example.cerki.osuhub.Feed.Beatmap;
-import example.cerki.osuhub.List.Player;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;

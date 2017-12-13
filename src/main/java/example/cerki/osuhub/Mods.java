@@ -34,16 +34,20 @@ public class Mods {
        if((flags & Easy) == Easy)builder.append("EZ");
        if((flags & Hidden) == Hidden)builder.append("HD");
        if((flags & HardRock) == HardRock)builder.append("HR");
-       if((flags & SuddenDeath) == SuddenDeath)builder.append("SD");
-       if((flags & DoubleTime) == DoubleTime)builder.append("DT");
+       if((flags & SuddenDeath) == SuddenDeath){
+           if((flags & Perfect) == Perfect)builder.append("PF");
+           else builder.append("SD");
+       }
+       if((flags & DoubleTime) == DoubleTime){
+           if((flags & Nightcore) == Nightcore)builder.append("NC");
+           else builder.append("DT"); // Todo test this
+       }
        if((flags & Relax) == Relax)builder.append("RX");
        if((flags & HalfTime) == HalfTime)builder.append("HF");
-       if((flags & Nightcore) == Nightcore)builder.append("NC");
        if((flags & Flashlight) == Flashlight)builder.append("FL");
        if((flags & Autoplay) == Autoplay)builder.append("AP");
        if((flags & SpunOut) == SpunOut)builder.append("SO");
        if((flags & Relax2) == Relax2)builder.append("RX");
-       if((flags & Perfect) == Perfect)builder.append("PF");
        return builder.toString();
     }
     @NonNull

@@ -20,29 +20,22 @@ import java.util.Date;
 public class Following {
     @PrimaryKey
     public int id;
-    @Deprecated
-    public String timestamp;
     public Long realTimestamp;
     public String username;
 
     @Ignore
-    @Deprecated
-    public Following(int id, String timestamp) {
-        this.id = id;
-        this.timestamp = timestamp;
-    }
-
-    @Ignore
-    @Deprecated
-    public Following(int id, String timestamp, String username) {
-        this.id = id;
-        this.timestamp = timestamp;
-        this.username = username;
-    }
-
     public Following(int id, Long realTimestamp, String username) {
         this.id = id;
         this.realTimestamp = realTimestamp;
         this.username = username;
+    }
+
+    public Following(int id,String username){
+        this.id = id;
+        this.username = username;
+        this.realTimestamp = new Date().getTime();
+    }
+    public void updateTimestamp(){
+        realTimestamp = new Date().getTime();
     }
 }

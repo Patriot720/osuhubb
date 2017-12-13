@@ -8,7 +8,6 @@ import android.arch.persistence.room.Query;
 import java.util.List;
 
 import example.cerki.osuhub.API.POJO.Following;
-import example.cerki.osuhub.Columns;
 
 /**
  * Created by cerki on 11-Dec-17.

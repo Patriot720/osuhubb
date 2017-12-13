@@ -18,12 +18,7 @@ import java.util.Date;
 import java.util.TimeZone;
 
 
-import example.cerki.osuhub.FollowersTable;
 import example.cerki.osuhub.API.POJO.Following;
-import example.cerki.osuhub.OsuAPI;
-import example.cerki.osuhub.OsuDb;
-import example.cerki.osuhub.PastScores;
-import example.cerki.osuhub.Score;
 import example.cerki.osuhub.Util;
 
 import static org.junit.Assert.assertTrue;
@@ -103,7 +98,7 @@ public class FollowersNotificatorTest {
             Calendar instance = Calendar.getInstance();
             instance.add(Calendar.DAY_OF_MONTH,-2);
             Date time1 = instance.getTime();
-            SimpleDateFormat dateFormat = new SimpleDateFormat(Util.PATTERN);
+            SimpleDateFormat dateFormat = new SimpleDateFormat(Util.TIMESTAMP_PATTERN);
             String format = dateFormat.format(time1);
             score.put("date",format);
             scores.add(score);

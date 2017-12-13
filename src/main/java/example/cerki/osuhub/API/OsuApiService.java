@@ -26,4 +26,7 @@ public interface OsuApiService {
     Single<List<BestScore>> getBestScoresBy(@Query("u")String idOrUsername);
     @GET("get_user_best?limit=50")
     Single<List<BestScore>> getBestScoresBy(@Query("u") int id); // Todo remove rxJava maybe
+
+    @GET("get_user")
+    Single<List<User>> getUserBy(int mUserId);
 }

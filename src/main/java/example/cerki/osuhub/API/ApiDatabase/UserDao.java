@@ -18,7 +18,7 @@ import example.cerki.osuhub.API.POJO.User;
 public interface UserDao {
     @Query("SELECT * FROM user WHERE userId=:userId")
     User getUserBy(int userId);
-    @Query("SELECT * FROM user")
+    @Query("SELECT * FROM user ORDER BY ppRank")
     List<User> getAll();
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(User user);

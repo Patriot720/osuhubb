@@ -7,7 +7,12 @@ import com.google.gson.JsonPrimitive;
 import com.google.gson.JsonSerializer;
 
 import java.util.Date;
+import java.util.List;
 
+import example.cerki.osuhub.API.ApiDatabase.ApiDatabase;
+import example.cerki.osuhub.API.ApiDatabase.UserDao;
+import example.cerki.osuhub.API.POJO.Beatmap;
+import example.cerki.osuhub.API.POJO.User;
 import example.cerki.osuhub.Util;
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
@@ -50,5 +55,19 @@ public class OsuAPI {
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build();
         return build.create(OsuApiService.class);
+    }
+
+    public static Beatmap getBeatmapBy(int id) {
+        ApiDatabase db = ApiDatabase.getInstance();
+        Beatmap dbBeatmap = db.beatmapDao().getBy(id);
+        if (dbBeatmap != null)
+            return dbBeatmap;
+        List<Beatmap> beatmaps = getApi().getBeatmapBy(id).blockingGet();
+        if (beatmaps.size() > 0) {
+            Beatmap beatmap = beatmaps.get(0);
+            db.beatmapDao().insert(beatmap);
+            return beatmap;
+        }
+        return new Beatmap();
     }
 }

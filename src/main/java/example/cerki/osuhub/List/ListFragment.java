@@ -18,6 +18,7 @@ import eu.davidea.flexibleadapter.items.IFlexible;
 import example.cerki.osuhub.API.ApiDatabase.ApiDatabase;
 import example.cerki.osuhub.API.POJO.User;
 import example.cerki.osuhub.R;
+import example.cerki.osuhub.Util;
 import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -57,11 +58,15 @@ public class ListFragment extends android.support.v4.app.Fragment {
         Single.fromCallable(()-> ApiDatabase.getInstance().userDao().getAll())
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe((items)->{ mAdapter.updateDataSet(items,true);
-                        updateData();
+                .subscribe((items)->{
+                mAdapter.updateDataSet(items,true);
+                mRefresh.setRefreshing(false);
+                if(Util.isNetworkAvailable(getContext()))
+                    updateData();
         });
     }
     private void updateData() {
+        mRefresh.setRefreshing(true);
         mData = new ArrayList<>();
         new Task((users -> {
             mAdapter.updateDataSet(users,true);
@@ -101,10 +106,7 @@ public class ListFragment extends android.support.v4.app.Fragment {
 
             @Override
             public void onLoadMore(int lastPosition, int currentPage) {
-                Log.e("Very nice","WTF");
-                new Task(items->{
-                    mAdapter.onLoadMoreComplete(items);
-                }).loadUsersFromPage(currentPage+1);
+                new Task(items-> mAdapter.onLoadMoreComplete(items)).loadUsersFromPage(currentPage+1);
             }
         },new ProgressItem()).setEndlessScrollThreshold(10).setEndlessPageSize(50);
     }

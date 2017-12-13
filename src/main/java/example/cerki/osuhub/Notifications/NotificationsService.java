@@ -3,28 +3,23 @@ package example.cerki.osuhub.Notifications;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.content.Context;
-import android.util.Log;
 
 import com.google.android.gms.gcm.GcmNetworkManager;
 import com.google.android.gms.gcm.GcmTaskService;
 import com.google.android.gms.gcm.PeriodicTask;
 import com.google.android.gms.gcm.TaskParams;
 
-import org.json.JSONException;
-
-import java.io.EOFException;
-import java.io.IOException;
-import java.text.ParseException;
 import java.util.Collection;
+import java.util.Date;
 
-import example.cerki.osuhub.FollowersTable;
+import example.cerki.osuhub.API.ApiDatabase.ApiDatabase;
+import example.cerki.osuhub.API.OsuAPI;
+import example.cerki.osuhub.API.POJO.Beatmap;
+import example.cerki.osuhub.API.POJO.BestScore;
 import example.cerki.osuhub.API.POJO.Following;
-import example.cerki.osuhub.OsuDb;
-import example.cerki.osuhub.PastScores;
+import example.cerki.osuhub.Feed.FeedItem;
+import example.cerki.osuhub.Feed.FeedItemFactory;
 import example.cerki.osuhub.R;
-import example.cerki.osuhub.Score;
-
-import static android.content.ContentValues.TAG;
 
 public class NotificationsService extends GcmTaskService {
     private static final String PERIODIC_SYNC_TAG = "tag";
@@ -33,26 +28,35 @@ public class NotificationsService extends GcmTaskService {
 
     @Override
     public int onRunTask(TaskParams taskParams) {
-        FollowersTable followersTable = new FollowersTable(new OsuDb(this).getWritableDatabase());
-        Collection<Following> all = followersTable.getAll();
-        Collection<Score> newScores;
-        try {
-            for (Following f : all) {
-                newScores = new PastScores(f).getNewScores();
-                followersTable.insertOrUpdate(f.id,f.username);
-                for (Score score : newScores)
-                    pushNotification(score.generateScoreString(f.username));
-        }
-        followersTable.close();
-        } catch(IOException | JSONException | ParseException e){
-            if(e instanceof EOFException)
-                Log.e(TAG, "Notification: EOFException");
-            e.printStackTrace();
+        ApiDatabase db = ApiDatabase.getInstance();
+        Collection<Following> all = db.followingDao().getAll();
+        Collection<BestScore> newScores;
+        for (Following f : all) {
+            newScores = OsuAPI.getApi().getBestScoresBy(f.id).blockingGet();
+            f.realTimestamp = new Date().getTime();
+            db.followingDao().insert(f);
+            for (BestScore score : newScores)
+                if(score.isNewerThan(f.realTimestamp)) {
+                Beatmap beatmap = OsuAPI.getBeatmapBy(score.getBeatmapId());
+                    pushNotification(f.username, score, beatmap); // Todo getBeatmap
+                }
         }
         return GcmNetworkManager.RESULT_SUCCESS;
     }
 
 
+    private void pushNotification(String username,BestScore score,Beatmap beatmap){
+        FeedItem feeditem = FeedItemFactory.getFeeditem(username, score, beatmap);
+        Notification.Builder builder = new Notification.Builder(this);
+        builder.setSmallIcon(R.mipmap.ic_launcher);
+        builder.setContentTitle(username);
+        builder.setContentText(feeditem.toString());
+        builder.setAutoCancel(true);
+        NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        assert notificationManager != null;
+        notificationManager.notify(mNotificationId++,builder.build());
+    }
+    @Deprecated
     private void pushNotification(String text) {
         Notification.Builder mBuilder = new Notification.Builder(this);
         // TODO THIS THING ONLY updates notifications if there's more than one
