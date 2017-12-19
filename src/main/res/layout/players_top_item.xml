@@ -21,7 +21,6 @@
             android:layout_alignBottom="@+id/item_rank"
             android:layout_alignParentEnd="true"
             android:layout_marginTop="10dp"
-            android:layout_toEndOf="@+id/item_hash"
             android:src="@drawable/arrow_up"
             android:visibility="invisible"
             app:layout_constraintEnd_toEndOf="parent"
@@ -50,7 +49,6 @@
             android:text="@string/default_rank"
             android:textColor="@color/textColorHighlight"
             android:textSize="14sp"
-            app:layout_constraintStart_toEndOf="@+id/item_acc"
             app:layout_constraintTop_toTopOf="parent" />
 
 
@@ -210,8 +208,7 @@
             android:textColor="@color/defaultTextColor"
             android:textSize="12sp"
             android:visibility="invisible"
-            app:layout_constraintEnd_toStartOf="@+id/item_rank"
-            app:layout_constraintTop_toBottomOf="@+id/item_acc" />
+           />
 
         <ImageView
             android:id="@+id/item_pc_arrow"
@@ -224,8 +221,7 @@
             android:cropToPadding="true"
             android:src="@drawable/arrow_up"
             android:visibility="invisible"
-            app:layout_constraintEnd_toStartOf="@+id/item_acc_difference"
-            app:layout_constraintTop_toBottomOf="@+id/item_acc" />
+/>
 
     </RelativeLayout>
 

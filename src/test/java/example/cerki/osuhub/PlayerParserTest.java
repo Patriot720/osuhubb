@@ -11,7 +11,6 @@ import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
 import java.io.File;
-import java.io.IOException;
 
 import example.cerki.osuhub.API.POJO.User;
 
@@ -31,38 +30,6 @@ public class PlayerParserTest {
     }
 
     @Test
-    public void parse() throws Exception {
-        Element tr = tbody.get(0);
-        Player player = UserParser.parsePlayer(tr);
-        assertPlayer(player);
-    }
-
-    private void assertPlayer(Player player) {
-        assertEquals("Cookiezi",player.getUsername());
-        assertEquals("flags/kr.png",player.getCountry());
-        assertNotNull(player.getString("pp"));
-        assertNotNull(player.getString("acc"));
-        assertEquals(Player.ACTIVE,player.getActivity());
-    }
-
-    @Test
-    public void parseInactivePlayer() throws Exception{
-        Element tr = tbody.get(43);
-        Player player = UserParser.parsePlayer(tr);
-        assertEquals(Player.INACTIVE,player.getActivity());
-    }
-    // TODO
-//    @Test
-    public void parseOldPage() throws IOException {
-        File f = getFromResources("oldOsu.html");
-        Document doc = Jsoup.parse(f,"utf8");
-        Elements table = doc.select("tbody").first().children();
-        Element tr = table.get(0);
-        Player player = UserParser.parsePlayer(tr);
-        assertPlayer(player);
-    }
-
-    @Test
     public void UserParse() throws Exception {
         File f = getFromResources("osu.html");
         Document doc = Jsoup.parse(f,"utf8");
@@ -71,7 +38,7 @@ public class PlayerParserTest {
         User user = UserParser.parseUser(tr);
         assertEquals(user.getUserId(),124493);
         assertEquals(user.getAccuracy(),(float)98.76,2);
-        assertEquals(user.getPpRaw(),14039);
+        assertEquals(user.getPpRaw(),14039,0);
         assertEquals(user.getPlaycount(),19586);
         assertEquals(user.getPpRank(),1);
         assertEquals(user.getUsername(),"Cookiezi");
@@ -80,7 +47,7 @@ public class PlayerParserTest {
 
     @Test
     public void parseEmpty() throws Exception{
-        Player player = UserParser.parsePlayer(null);
+        User player = UserParser.parseUser(null);
         assertEquals(null,player);
     }
 }

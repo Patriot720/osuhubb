@@ -24,4 +24,9 @@
     <string name="endless_cancel">Cancelled</string>
     <string name="endless_error">error loading</string>
     <string name="endless_disabled">disabled</string>
+    <string name="app_label">osu!hub</string>
+    <string name="search_hint">Search Player</string>
+    <string name="search">Search</string>
+    <string name="open_in_browser">Open in browser</string>
+    <string name="sorting_dialog_title">Get mods scoreboard</string>
 </resources>

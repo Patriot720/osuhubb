@@ -35,12 +35,17 @@ public  class NewFeedTaskNetwork extends AsyncTask<Void,Void,List<FeedItem>>{
         BestScoreDao scoreDb = ApiDatabase.getInstance().bestScoreDao();
         for (Following following : all) {
             List<BestScore> scores = getScoresFor(following.id);
-            Completable.fromAction(()->scoreDb.insert(scores)).subscribeOn(Schedulers.trampoline());
+            List<BestScore> dbScores = scoreDb.getBy(following.id);
+            if(dbScores.equals(scores))
+                continue;
             for (BestScore score : scores) {
                 if(score.isWeekOld()) { // Todo speedup with firebase
-                    example.cerki.osuhub.API.POJO.Beatmap beatmap = getBeatmap(score.getBeatmapId());
-                    FeedItem feeditem = FeedItemFactory.getFeeditem(following.username, score, beatmap);
-                    feedItems.add(feeditem);
+                    if(scoreDb.getBy(score.getUserId(),score.getDate()) == null) {
+                        scoreDb.insert(score);
+                        example.cerki.osuhub.API.POJO.Beatmap beatmap = getBeatmap(score.getBeatmapId());
+                        FeedItem feeditem = FeedItemFactory.getFeeditem(following.username, score, beatmap);
+                        feedItems.add(feeditem);
+                    }
                 }
             }
         }

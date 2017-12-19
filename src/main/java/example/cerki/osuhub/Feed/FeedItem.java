@@ -32,10 +32,9 @@ public class FeedItem extends AbstractFlexibleItem<FeedItem.FeedViewHolder> impl
     public String mapName;
     public String starRate;
     public String missCount;
-    public int rankResource;
     public Date date;
-    public String rankURI;
     public String rank;
+    public int beatmap_id;
 
     public FeedItem() {
 

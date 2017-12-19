@@ -28,7 +28,7 @@ public interface BestScoreDao {
     List<BestScore> getBy(int userId);
     @Query("SELECT * FROM bestscore WHERE date > :date")
     List<BestScore> getScoresAfter(Date date);
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     void insert(List<BestScore> score);
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(BestScore score);

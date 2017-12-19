@@ -1,11 +1,15 @@
 package example.cerki.osuhub;
 
+import android.app.SearchManager;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentManager;
+import android.support.v7.widget.SearchView;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -16,10 +20,18 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.miguelcatalan.materialsearchview.MaterialSearchView;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import eu.davidea.flexibleadapter.FlexibleAdapter;
 import eu.davidea.flexibleadapter.items.IFlexible;
 import eu.davidea.flexibleadapter.utils.Log;
 import example.cerki.osuhub.API.ApiDatabase.ApiDatabase;
+import example.cerki.osuhub.API.OsuAPI;
 import example.cerki.osuhub.API.POJO.User;
 import example.cerki.osuhub.BeatmapActivity.BeatmapActivity;
 import example.cerki.osuhub.Feed.FeedItem;
@@ -27,7 +39,13 @@ import example.cerki.osuhub.Feed.FeedItemFragment;
 import example.cerki.osuhub.List.ListFragment;
 import example.cerki.osuhub.Notifications.NotificationsService;
 import example.cerki.osuhub.PlayerFragment.PlayerFragment;
+import example.cerki.osuhub.Searching.SearchHandler;
+import io.reactivex.Scheduler;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 import jonathanfinerty.once.Once;
+
+import static junit.framework.Assert.assertEquals;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
@@ -37,11 +55,24 @@ public class MainActivity extends AppCompatActivity
 
     private FragmentManager mFragmentManager;
     private String SCHEDULE_NOTIFICATIONS_TAG = "tag";
+    private MaterialSearchView mSearchView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        String[] perms = {"android.permission.WRITE_EXTERNAL_STORAGE",
+        "android.permission.READ_LOGS"
+        ,"android.permission.READ_EXTERNAL_STORAGE"
+        ,"android.permission.INTERNET"};
+
+        int permsRequestCode = 200;
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            requestPermissions(perms, permsRequestCode);
+        }
+                    Thread.setDefaultUncaughtExceptionHandler(new ExceptionHandler(
+                    Environment.getExternalStorageDirectory().getPath())); // Todo refactor
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -70,6 +101,8 @@ public class MainActivity extends AppCompatActivity
 
         FlexibleAdapter.enableLogs(Log.Level.VERBOSE);
 
+        setupSearchView();
+
         Once.initialise(this);
         scheduleNotifications();
     }
@@ -78,18 +111,108 @@ public class MainActivity extends AppCompatActivity
     public void onBackPressed() {
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         int backStackEntryCount = mFragmentManager.getBackStackEntryCount();
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
+        if (drawer.isDrawerOpen(GravityCompat.START))
             drawer.closeDrawer(GravityCompat.START);
-        } else if(backStackEntryCount > 0)
+        else if(mSearchView.isSearchOpen()){
+            mSearchView.closeSearch();
+        }
+         else if(backStackEntryCount > 0)
                 mFragmentManager.popBackStack();
         else
             super.onBackPressed();
+    }
+
+    private void setupSearchView(){
+        mSearchView = findViewById(R.id.search_view);
+        SearchHandler searchHandler = new SearchHandler();
+        mSearchView.setSubmitOnClick(true);
+        mSearchView.setOnQueryTextListener(new MaterialSearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                User userBy;
+                userBy = ApiDatabase.getInstance().userDao().getUserBy(query);
+                if(userBy == null){
+                    OsuAPI.getApi().getUserBy(query)
+                            .subscribeOn(Schedulers.newThread())
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribe((user)->{ // Todo refactor
+                                if(user.size() == 0)
+                                    return;
+                        launchUserFragment(user.get(0));
+                    });
+                }
+                else
+                    launchUserFragment(userBy);
+                mSearchView.closeSearch();
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                searchHandler.doMySearch(newText,mSearchView);
+                return true;
+            }
+        });
+        mSearchView.setOnSearchViewListener(new MaterialSearchView.SearchViewListener() {
+            @Override
+            public void onSearchViewShown() {
+
+            }
+
+            @Override
+            public void onSearchViewClosed() {
+
+            }
+        });
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        SendLoagcatMail();
+    }
+
+    public void SendLoagcatMail(){
+
+        // save logcat in file
+        File outputFile = new File(Environment.getExternalStorageDirectory(),
+                "logcat.txt");
+        try {
+            Runtime.getRuntime().exec(
+                    "logcat -f " + outputFile.getAbsolutePath());
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        //send file using email
+        Intent emailIntent = new Intent(Intent.ACTION_SEND);
+        // Set type to "email"
+        emailIntent.setType("vnd.android.cursor.dir/email");
+        String to[] = {"cerkin-3@yandex.ru"};
+        emailIntent .putExtra(Intent.EXTRA_EMAIL, to);
+        // the attachment
+        emailIntent .putExtra(Intent.EXTRA_STREAM, outputFile.getAbsolutePath());
+        // the mail subject
+        emailIntent .putExtra(Intent.EXTRA_SUBJECT, "Subject");
+        startActivity(Intent.createChooser(emailIntent , "Send email..."));
+    }
+
+    private void launchUserFragment(User user) {
+           getSupportFragmentManager()
+                            .beginTransaction()
+                            .addToBackStack("stack")
+                            .replace(R.id.content_main,PlayerFragment.newInstance(user.getUserId(),user.getUsername()))
+                            .commit();
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
+        MenuItem search = menu.findItem(R.id.action_search);
+        mSearchView.setMenuItem(search);
+
         return true;
     }
 
@@ -99,12 +222,7 @@ public class MainActivity extends AppCompatActivity
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -150,8 +268,15 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onListFragmentInteraction(FeedItem item) {
             // Todo implement Map Activity
-        Intent intent = new Intent(this, BeatmapActivity.class);
-        startActivity(intent);
-    }
+            Intent intent = new Intent(this, BeatmapActivity.class);
+            intent.putExtra("beatmap_id",item.beatmap_id);
+            startActivity(intent);
+//            String group = matcher.group(1);
+//            String url = "https://osu.ppy.sh/beatmapsets/" + group;
+//            Intent i = new Intent(Intent.ACTION_VIEW);
+//            i.setData(Uri.parse(url));
+//            startActivity(i);
+        }
+
 
 }

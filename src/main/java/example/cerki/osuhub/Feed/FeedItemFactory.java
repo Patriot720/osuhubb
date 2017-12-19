@@ -34,6 +34,7 @@ public class FeedItemFactory {
         feedItem.rank =  score.getRank();
         feedItem.relativeDate = (String) DateUtils.getRelativeTimeSpanString(score.getDate().getTime());
         feedItem.date = score.getDate();
+        feedItem.beatmap_id = score.getBeatmapId();
         return feedItem;
     }
 }

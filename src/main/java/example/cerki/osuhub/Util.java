@@ -5,6 +5,9 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
@@ -66,7 +69,41 @@ public class Util {
         calendar.add(Calendar.MONTH,-1);
         return calendar.getTime();
     }
-
+    public static void showPlayerDifference(TextView textView, ImageView arrow, float value) {
+        if(value == 0) {
+            arrow.setVisibility(View.INVISIBLE);
+            textView.setVisibility(View.INVISIBLE);
+            return;
+        }
+        if(value < 0.01 && value > -0.01){
+            textView.setVisibility(View.INVISIBLE);
+            arrow.setVisibility(View.INVISIBLE);
+            return;
+        }
+        if(value < 0){
+            arrow.setImageResource(R.drawable.arrow_down);
+            value = value * -1;
+        }
+        textView.setText(String.valueOf(value));
+        arrow.setVisibility(View.VISIBLE);
+        textView.setVisibility(View.VISIBLE);
+    }
+    public static void showPlayerDifference(TextView textview, ImageView arrow, int value)
+    {
+        if(value == 0)
+        {
+            arrow.setVisibility(View.INVISIBLE);
+            textview.setVisibility(View.INVISIBLE);
+            return;
+        }
+        if(value < 0) {
+            arrow.setImageResource(R.drawable.arrow_down);
+            value = value * -1;
+        }
+        textview.setText(String.valueOf(value));
+        arrow.setVisibility(View.VISIBLE);
+        textview.setVisibility(View.VISIBLE);
+    }
     public static Date getWeekOldDate() {
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.DAY_OF_MONTH,-7);
@@ -81,21 +118,4 @@ public class Util {
         return activeNetworkInfo != null;
     }
 
-    public static boolean hasActiveInternetConnection(Context context) {
-        if (isNetworkAvailable(context)) {
-            try {
-                HttpURLConnection urlc = (HttpURLConnection) (new URL("http://www.google.com").openConnection());
-                urlc.setRequestProperty("User-Agent", "Test");
-                urlc.setRequestProperty("Connection", "close");
-                urlc.setConnectTimeout(1500);
-                urlc.connect();
-                return (urlc.getResponseCode() == 200);
-            } catch (IOException e) {
-                Log.e("LOG", "Error checking internet connection", e);
-            }
-        } else {
-            Log.d("LOG", "No network available!");
-        }
-        return false;
-    }
 }

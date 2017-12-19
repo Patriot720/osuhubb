@@ -98,19 +98,12 @@ public class OverviewFragment extends Fragment {
     }
 
     private void loadUserInto(TextView otherInfoTemp) {
-        if(Util.hasActiveInternetConnection(getContext()))
-        OsuAPI.getApi().getUserBy(mUserId)
+        if(Util.isNetworkAvailable(getContext()) && mUserId != 0)
+            OsuAPI.getApi().getUserBy(mUserId)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe((user) -> {
-                    StringBuilder builder = new StringBuilder();
-                    Field[] fields = user.getClass().getDeclaredFields();
-                    for (Field field : fields) {
-                        String val = String.valueOf(field.get(user));
-                        String name = field.getName();
-                        builder.append(name).append(": ").append(val).append("\n");
-                    }
-                    otherInfoTemp.setText(builder.toString());
+            // TODO
                 });
     }
 

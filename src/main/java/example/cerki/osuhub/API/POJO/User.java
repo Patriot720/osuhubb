@@ -18,6 +18,7 @@ import eu.davidea.flexibleadapter.FlexibleAdapter;
 import eu.davidea.flexibleadapter.items.AbstractFlexibleItem;
 import eu.davidea.viewholders.FlexibleViewHolder;
 import example.cerki.osuhub.R;
+import example.cerki.osuhub.Util;
 
 /**
  * Created by cerki on 10-Dec-17.
@@ -58,7 +59,7 @@ public class User extends AbstractFlexibleItem<User.UserViewHolder>{
     private String level;
     @SerializedName("pp_raw")
     @Expose
-    private int ppRaw;
+    private float ppRaw;
     @SerializedName("accuracy")
     @Expose
     private float accuracy;
@@ -84,7 +85,7 @@ public class User extends AbstractFlexibleItem<User.UserViewHolder>{
     @Ignore
     private float accuracy_difference;
     @Ignore
-    private int performance_difference;
+    private float performance_difference;
     @Ignore
     private int rank_difference;
     @Ignore
@@ -98,11 +99,11 @@ public class User extends AbstractFlexibleItem<User.UserViewHolder>{
         this.accuracy_difference = accuracy_difference;
     }
 
-    public int getPerformance_difference() {
+    public float getPerformance_difference() {
         return performance_difference;
     }
 
-    public void setPerformance_difference(int performance_difference) {
+    public void setPerformance_difference(float performance_difference) {
         this.performance_difference = performance_difference;
     }
 
@@ -202,11 +203,11 @@ public class User extends AbstractFlexibleItem<User.UserViewHolder>{
         this.level = level;
     }
 
-    public int getPpRaw() {
+    public float getPpRaw() {
         return ppRaw;
     }
 
-    public void setPpRaw(int ppRaw) {
+    public void setPpRaw(float ppRaw) {
         this.ppRaw = ppRaw;
     }
 
@@ -267,11 +268,23 @@ public class User extends AbstractFlexibleItem<User.UserViewHolder>{
     }
 
     public void compare(User user){
-        accuracy_difference = user.accuracy - accuracy;
-        rank_difference =  ppRank - user.ppRank;
-        performance_difference = user.ppRaw - ppRaw;
-        playcount_difference = user.playcount - playcount;
+        accuracy_difference = accuracy - user.accuracy;
+        rank_difference =  user.ppRank - ppRank;
+        performance_difference = ppRaw - user.ppRaw;
+        playcount_difference = playcount - user.playcount;
     }
+
+    @Override
+    public int hashCode() {
+        int result = userId;
+        result = 31 * result + playcount;
+        result = 31 * result + ppRank;
+        result = 31 * result + (level != null ? level.hashCode() : 0);
+        result = 31 * result + (ppRaw != +0.0f ? Float.floatToIntBits(ppRaw) : 0);
+        result = 31 * result + (accuracy != +0.0f ? Float.floatToIntBits(accuracy) : 0);
+        return result;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -282,18 +295,8 @@ public class User extends AbstractFlexibleItem<User.UserViewHolder>{
         if (userId != user.userId) return false;
         if (playcount != user.playcount) return false;
         if (ppRank != user.ppRank) return false;
-        if (ppRaw != user.ppRaw) return false;
+        if (Float.compare(user.ppRaw, ppRaw) != 0) return false;
         return Float.compare(user.accuracy, accuracy) == 0;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = userId;
-        result = 31 * result + playcount;
-        result = 31 * result + ppRank;
-        result = 31 * result + ppRaw;
-        result = 31 * result + (accuracy != +0.0f ? Float.floatToIntBits(accuracy) : 0);
-        return result;
     }
 
     @Override
@@ -318,7 +321,27 @@ public class User extends AbstractFlexibleItem<User.UserViewHolder>{
         holder.mAccuracyView.setText(String.format("%s%%",accuracy));
         holder.mPlaycountView.setText(String.valueOf(playcount));
         holder.mRankView.setText(String.format("#%d",ppRank));
-        // TOdo difference
+        Util.showPlayerDifference(
+                holder.mPerformanceDifference,
+                holder.mPerformanceArrow,
+                performance_difference
+        );
+        Util.showPlayerDifference(
+                holder.mAccuracyDifference,
+                holder.mAccuracyArrow,
+                accuracy_difference
+
+        );
+        Util.showPlayerDifference(
+                holder.mRankDifference,
+                holder.mRankArrow,
+                rank_difference
+        );
+        Util.showPlayerDifference(
+                holder.mPlaycountDifference,
+                holder.mPlaycountArrow,
+                playcount_difference
+        );
     }
 
     public class UserViewHolder extends FlexibleViewHolder{

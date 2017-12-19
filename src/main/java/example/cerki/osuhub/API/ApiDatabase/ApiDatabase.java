@@ -14,7 +14,7 @@ import example.cerki.osuhub.API.POJO.User;
  * Created by cerki on 10-Dec-17.
  */
 
-@Database(entities = {BestScore.class, Following.class, Beatmap.class,User.class},version = 9,exportSchema = false)
+@Database(entities = {BestScore.class, Following.class, Beatmap.class,User.class},version = 10,exportSchema = false)
 public abstract class ApiDatabase extends RoomDatabase {
     public abstract BestScoreDao bestScoreDao();
     public abstract FollowingDao followingDao();

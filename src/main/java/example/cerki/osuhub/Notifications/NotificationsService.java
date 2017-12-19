@@ -28,24 +28,28 @@ public class NotificationsService extends GcmTaskService {
 
     @Override
     public int onRunTask(TaskParams taskParams) {
-        ApiDatabase db = ApiDatabase.getInstance();
+        ApiDatabase db = ApiDatabase.createInstance(this);
+        notifyAll(db);
+        return GcmNetworkManager.RESULT_SUCCESS;
+    }
+
+    public void notifyAll(ApiDatabase db) {
         Collection<Following> all = db.followingDao().getAll();
         Collection<BestScore> newScores;
         for (Following f : all) {
             newScores = OsuAPI.getApi().getBestScoresBy(f.id).blockingGet();
-            f.realTimestamp = new Date().getTime();
-            db.followingDao().insert(f);
             for (BestScore score : newScores)
                 if(score.isNewerThan(f.realTimestamp)) {
                 Beatmap beatmap = OsuAPI.getBeatmapBy(score.getBeatmapId());
                     pushNotification(f.username, score, beatmap); // Todo getBeatmap
                 }
+            f.realTimestamp = new Date().getTime();
+            db.followingDao().insert(f);
         }
-        return GcmNetworkManager.RESULT_SUCCESS;
     }
 
 
-    private void pushNotification(String username,BestScore score,Beatmap beatmap){
+    public void pushNotification(String username,BestScore score,Beatmap beatmap){
         FeedItem feeditem = FeedItemFactory.getFeeditem(username, score, beatmap);
         Notification.Builder builder = new Notification.Builder(this);
         builder.setSmallIcon(R.mipmap.ic_launcher);
