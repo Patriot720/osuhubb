@@ -1,5 +1,10 @@
 package example.cerki.osuhub.Feed;
 
+import org.junit.Ignore;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
+
 import java.util.List;
 
 import example.cerki.osuhub.API.POJO.Beatmap;
@@ -13,9 +18,10 @@ import static org.junit.Assert.assertEquals;
 /**
  * Created by cerki on 09-Dec-17.
  */
-//@RunWith(RobolectricTestRunner.class) // todo remove all calls to api
+@Ignore
+@RunWith(RobolectricTestRunner.class)
 public class GsonBeatmapTest {
-//    @Test
+    @Test
     public void retrofit() throws Exception {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Util.BASE_URL)

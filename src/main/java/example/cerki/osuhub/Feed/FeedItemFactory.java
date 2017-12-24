@@ -29,7 +29,7 @@ public class FeedItemFactory {
         feedItem.starRate = String.format("%.2f",beatmap.getDifficultyrating());
         feedItem.mapName = String.format("%s[%s]",beatmap.getTitle(),beatmap.getVersion());
         feedItem.combo = String.format("%s/%s",score.getMaxcombo(),beatmap.getMaxCombo());
-        feedItem.coverUrl = getCoverUrl(beatmap.getBeatmapsetId()); // Todo change this
+        feedItem.coverUrl = getCoverUrl(beatmap.getBeatmapsetId());
         feedItem.username = username;
         feedItem.rank =  score.getRank();
         feedItem.relativeDate = (String) DateUtils.getRelativeTimeSpanString(score.getDate().getTime());

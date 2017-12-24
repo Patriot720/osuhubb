@@ -32,7 +32,6 @@ public class NotificationsService extends GcmTaskService {
         notifyAll(db);
         return GcmNetworkManager.RESULT_SUCCESS;
     }
-
     public void notifyAll(ApiDatabase db) {
         Collection<Following> all = db.followingDao().getAll();
         Collection<BestScore> newScores;
@@ -41,14 +40,12 @@ public class NotificationsService extends GcmTaskService {
             for (BestScore score : newScores)
                 if(score.isNewerThan(f.realTimestamp)) {
                 Beatmap beatmap = OsuAPI.getBeatmapBy(score.getBeatmapId());
-                    pushNotification(f.username, score, beatmap); // Todo getBeatmap
+                    pushNotification(f.username, score, beatmap);
                 }
             f.realTimestamp = new Date().getTime();
             db.followingDao().insert(f);
         }
     }
-
-
     public void pushNotification(String username,BestScore score,Beatmap beatmap){
         FeedItem feeditem = FeedItemFactory.getFeeditem(username, score, beatmap);
         Notification.Builder builder = new Notification.Builder(this);
@@ -56,23 +53,12 @@ public class NotificationsService extends GcmTaskService {
         builder.setContentTitle(username);
         builder.setContentText(feeditem.toString());
         builder.setAutoCancel(true);
+        Notification.BigTextStyle bigNotification = new Notification.BigTextStyle(builder);
+        bigNotification.bigText(feeditem.toString()); // Todo add intent player page
         NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         assert notificationManager != null;
-        notificationManager.notify(mNotificationId++,builder.build());
+        notificationManager.notify(mNotificationId++, bigNotification.build());
     }
-    @Deprecated
-    private void pushNotification(String text) {
-        Notification.Builder mBuilder = new Notification.Builder(this);
-        // TODO THIS THING ONLY updates notifications if there's more than one
-        mBuilder.setSmallIcon(R.mipmap.ic_launcher);
-        mBuilder.setContentTitle(getString(R.string.app_name));
-        mBuilder.setContentText(text);
-        mBuilder.setAutoCancel(true);
-        NotificationManager mNotifyMgr = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-        assert mNotifyMgr != null;
-        mNotifyMgr.notify(mNotificationId++, mBuilder.build());
-    }
-
     public static void scheduleSync(Context ctx) {
         GcmNetworkManager gcmNetworkManager = GcmNetworkManager.getInstance(ctx);
         PeriodicTask periodicTask = new PeriodicTask.Builder()

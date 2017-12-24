@@ -16,7 +16,7 @@ import java.util.Date;
  * Created by cerki on 03-Dec-17.
  */
 
-@Entity // TODO move ApiDatabase as core Database and rename;
+@Entity
 public class Following {
     @PrimaryKey
     public int id;

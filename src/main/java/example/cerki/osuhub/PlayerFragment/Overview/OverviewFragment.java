@@ -74,7 +74,7 @@ public class OverviewFragment extends Fragment {
         loadButtonState(followButton);
         final TextView username = view.findViewById(R.id.player_username);
         username.setText(mUsername);
-        final TextView userView = view.findViewById(R.id.other_info_temp); // TODO CHANGE THIS
+        final TextView userView = view.findViewById(R.id.other_info_temp); // TODO change to appropriate views
         loadAvatarInto(view);
         loadUserInto(userView);
         setListenersFor(followButton);

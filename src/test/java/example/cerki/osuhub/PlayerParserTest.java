@@ -42,7 +42,7 @@ public class PlayerParserTest {
         assertEquals(user.getPlaycount(),19586);
         assertEquals(user.getPpRank(),1);
         assertEquals(user.getUsername(),"Cookiezi");
-        assertEquals(user.getCountry(),"flags/kr.png"); // Todo change this to KR only
+        assertEquals(user.getCountry(),"flags/kr.png");
     }
 
     @Test

@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,13 +32,13 @@ import io.reactivex.schedulers.Schedulers;
  */
 public class ScoreBoardFragment extends Fragment {
 
-    // TODO: Customize parameter argument names
     private static final String ARG_BEATMAP_ID = "mBeatmapId";
-    // TODO: Customize parameters
     private int mBeatmapId = 0;
     private OnListFragmentInteractionListener mListener;
     private List<Score> mData;
     private FlexibleAdapter<Score> mAdapter;
+    private RecyclerView mRecycler;
+    private ProgressBar mProgressBar;
 
 
     /**
@@ -47,7 +48,6 @@ public class ScoreBoardFragment extends Fragment {
     public ScoreBoardFragment() {
     }
 
-    // TODO: Customize parameter initialization
     @SuppressWarnings("unused")
     public static ScoreBoardFragment newInstance(int beatmap_id) {
         ScoreBoardFragment fragment = new ScoreBoardFragment();
@@ -72,22 +72,44 @@ public class ScoreBoardFragment extends Fragment {
                 .subscribe((items)-> {
                     Log.v("tag","WAT " + items.size());
             mAdapter.updateDataSet(items);
+            setUpdating(false);
                 });
+    }
+    public void setUpdating(boolean bool){
+        if(bool){
+            mRecycler.setVisibility(View.GONE);
+            mProgressBar.setVisibility(View.VISIBLE);
+        }
+        else{
+            mRecycler.setVisibility(View.VISIBLE);
+            mProgressBar.setVisibility(View.GONE);
+        }
+    }
+   public boolean isUpdating(){
+       return mRecycler.getVisibility() == View.GONE;
+   }
+
+    public FlexibleAdapter<Score> getmAdapter() {
+        return mAdapter;
+    }
+
+    public void updateData(List<Score> scores){
+        mAdapter.updateDataSet(scores);
+        setUpdating(false);
     }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_scoreboard_list, container, false);
         // Set the adapter
-        if (view instanceof RecyclerView) {
             Context context = view.getContext();
-            RecyclerView recyclerView = (RecyclerView) view;
+            mProgressBar = view.findViewById(R.id.progress_bar);
+            mRecycler = view.findViewById(R.id.recycler);
             mData = new ArrayList<>();
             mAdapter = new FlexibleAdapter<>(mData);
-            recyclerView.setLayoutManager(new LinearLayoutManager(context));
-            recyclerView.setAdapter(mAdapter);
+            mRecycler.setLayoutManager(new LinearLayoutManager(context));
+            mRecycler.setAdapter(mAdapter);
             initData();
-        }
         return view;
     }
 
@@ -99,7 +121,7 @@ public class ScoreBoardFragment extends Fragment {
             mListener = (OnListFragmentInteractionListener) context;
         } else {
             throw new RuntimeException(context.toString()
-                    + " must implement OnListFragmentInteractionListener");
+                    + " must implement OnRecentPlayInteractionListener");
         }
     }
 
@@ -120,7 +142,6 @@ public class ScoreBoardFragment extends Fragment {
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnListFragmentInteractionListener {
-        // TODO: Update argument type and name
         void onListFragmentInteraction(Score item);
     }
 }

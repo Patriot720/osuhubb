@@ -4,6 +4,7 @@ import java.util.List;
 
 import example.cerki.osuhub.API.POJO.Beatmap;
 import example.cerki.osuhub.API.POJO.BestScore;
+import example.cerki.osuhub.API.POJO.RecentScore;
 import example.cerki.osuhub.API.POJO.Score;
 import example.cerki.osuhub.API.POJO.User;
 import io.reactivex.Flowable;
@@ -31,4 +32,12 @@ public interface OsuApiService {
     Single<List<Score>> getScoresBy(@Query("b") int beatmap_id);
     @GET("get_user")
     Single<List<User>> getUserBy(@Query("u")int mUserId);
+    @GET("get_scores")
+    Single<List<Score>> getScoresBy(@Query("b") int beatmap_id,@Query("mods") int modFlags);
+    @GET("get_scores")
+    Single<List<Score>> getScoresBy(@Query("b") int beatmap_id,@Query("u") String usernameOrId);
+    @GET("get_user_recent?limit=50")
+    Single<List<BestScore>> getRecentScoresBy(@Query("u") String usernameOrId);
+    @GET("get_user_recent?limit=50")
+    Single<List<BestScore>> getRecentScoresBy(@Query("u") int userId);
 }

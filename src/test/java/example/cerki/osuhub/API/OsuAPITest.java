@@ -18,6 +18,8 @@ import example.cerki.osuhub.API.ApiDatabase.ApiDatabase;
 import example.cerki.osuhub.API.POJO.Beatmap;
 import example.cerki.osuhub.API.POJO.BestScore;
 import example.cerki.osuhub.API.POJO.User;
+import example.cerki.osuhub.Feed.FeedItem;
+import example.cerki.osuhub.Feed.FeedItemFactory;
 import io.reactivex.Flowable;
 import io.reactivex.Single;
 import retrofit2.Call;
@@ -28,7 +30,6 @@ import static org.junit.Assert.*;
  * Created by cerki on 10-Dec-17.
  */
 @RunWith(RobolectricTestRunner.class)
-@Ignore
 public class OsuAPITest {
 
     private OsuApiService osuApiService;
@@ -47,6 +48,24 @@ public class OsuAPITest {
         List<Beatmap> body = beatmapBy.blockingGet();
         assertEquals(body.get(0).getArtist(),"ClariS");
     }
+
+    @Test
+    public void getRecentTestEmptyRecent() throws Exception {
+        List<BestScore> rafis = osuApiService.getRecentScoresBy("rafis").blockingGet();
+        assertEquals(rafis.size(),0);
+
+    }
+
+    @Test
+    public void getRecentTest() throws Exception {
+        List<BestScore> filsdelama = osuApiService.getRecentScoresBy("filsdelama").blockingGet();
+        assertTrue(filsdelama.size() > 0);
+        BestScore bestScore = filsdelama.get(0);
+        Beatmap beatmap = osuApiService.getBeatmapBy(bestScore.getBeatmapId()).blockingGet().get(0);
+        FeedItem feedItem = FeedItemFactory.getFeeditem("filsdelama", bestScore, beatmap);
+        assertTrue(feedItem.missCount != null);
+    }
+
 
     @Test
     public void getUser() throws Exception {

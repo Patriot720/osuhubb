@@ -29,7 +29,7 @@ public  class NewFeedTaskNetwork extends AsyncTask<Void,Void,List<FeedItem>>{
     }
 
     @Override
-    protected List<FeedItem> doInBackground(Void... voids) { // Todo tests
+    protected List<FeedItem> doInBackground(Void... voids) {
         List<Following> all = ApiDatabase.getInstance().followingDao().getAll();
         List<FeedItem> feedItems = new ArrayList<>();
         BestScoreDao scoreDb = ApiDatabase.getInstance().bestScoreDao();

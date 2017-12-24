@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import example.cerki.osuhub.PlayerFragment.Overview.OverviewFragment;
+import example.cerki.osuhub.PlayerFragment.RecentPlays.RecentScoresFragment;
 import example.cerki.osuhub.R;
 
 /**
@@ -74,6 +75,7 @@ public class PlayerFragment extends android.support.v4.app.Fragment {
     private void setupPager(ViewPager pager) {
         PagerAdapter adapter = new PagerAdapter(getChildFragmentManager());
         adapter.addFragment(OverviewFragment.newInstance(userId, mUsername),"Overview");
+        adapter.addFragment(RecentScoresFragment.newInstance(userId,mUsername),"Recent scores");
         pager.setAdapter(adapter);
     }
 

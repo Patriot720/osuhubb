@@ -119,7 +119,7 @@ public class ListFragment extends android.support.v4.app.Fragment {
             mListener = (OnListFragmentInteractionListener) context;
         } else {
             throw new RuntimeException(context.toString()
-                    + " must implement OnListFragmentInteractionListener");
+                    + " must implement OnRecentPlayInteractionListener");
         }
     }
 

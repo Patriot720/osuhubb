@@ -30,6 +30,7 @@ public class Util {
     public static final String API_KEY = "b40b7a7a8207b1ebd870eaf1f74bd2995f1a2cb6";
     public static final String TIMESTAMP_PATTERN = "yyyy-MM-dd HH:mm:ss";
 
+
     public static String makeRequestUrl(String method,String query){
         return BASE_URL + method + "?k=" + API_KEY + "&" + query;
     }

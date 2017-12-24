@@ -32,6 +32,7 @@ import eu.davidea.flexibleadapter.items.IFlexible;
 import eu.davidea.flexibleadapter.utils.Log;
 import example.cerki.osuhub.API.ApiDatabase.ApiDatabase;
 import example.cerki.osuhub.API.OsuAPI;
+import example.cerki.osuhub.API.POJO.RecentScore;
 import example.cerki.osuhub.API.POJO.User;
 import example.cerki.osuhub.BeatmapActivity.BeatmapActivity;
 import example.cerki.osuhub.Feed.FeedItem;
@@ -39,6 +40,7 @@ import example.cerki.osuhub.Feed.FeedItemFragment;
 import example.cerki.osuhub.List.ListFragment;
 import example.cerki.osuhub.Notifications.NotificationsService;
 import example.cerki.osuhub.PlayerFragment.PlayerFragment;
+import example.cerki.osuhub.PlayerFragment.RecentPlays.RecentScoresFragment;
 import example.cerki.osuhub.Searching.SearchHandler;
 import io.reactivex.Scheduler;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -181,7 +183,6 @@ public class MainActivity extends AppCompatActivity
             Runtime.getRuntime().exec(
                     "logcat -f " + outputFile.getAbsolutePath());
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
 
@@ -277,6 +278,4 @@ public class MainActivity extends AppCompatActivity
 //            i.setData(Uri.parse(url));
 //            startActivity(i);
         }
-
-
 }

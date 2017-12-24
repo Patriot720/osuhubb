@@ -16,7 +16,7 @@ import example.cerki.osuhub.Util;
  * Created by cerki on 11-Dec-17.
  */
 
-public class NewFeedTaskDb extends AsyncTask<Void,Void,List<FeedItem>>{ // Todo should be tested;
+public class NewFeedTaskDb extends AsyncTask<Void,Void,List<FeedItem>>{
     private WorkDoneListener workDoneListener;
 
     public NewFeedTaskDb(WorkDoneListener workDoneListener) {

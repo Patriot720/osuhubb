@@ -23,7 +23,7 @@ import example.cerki.osuhub.Feed.FeedItem;
 @TypeConverters({Converters.class})
 public interface BestScoreDao {
     @Query("SELECT * FROM bestscore WHERE userId=:userId AND date=:date")
-    BestScore getBy(int userId,Date date); // TOdo change to Date
+    BestScore getBy(int userId,Date date);
     @Query("SELECT * FROM bestscore WHERE userId=:userId")
     List<BestScore> getBy(int userId);
     @Query("SELECT * FROM bestscore WHERE date > :date")

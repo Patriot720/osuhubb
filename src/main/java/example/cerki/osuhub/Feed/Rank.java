@@ -24,6 +24,8 @@ public class Rank {
             return R.drawable.c;
         if(rank.equals("D"))
             return R.drawable.d;
+        if(rank.equals("F"))
+            return R.drawable.f;
         return 0;
     }
 }

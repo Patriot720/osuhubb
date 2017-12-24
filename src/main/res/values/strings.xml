@@ -17,8 +17,6 @@
     <string name="follow">Follow</string>
     <string name="following">Following</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_beatmap">BeatmapActivity</string>
     <string name="no_more_load_retry" />
     <string name="endless_cancel">Cancelled</string>
@@ -29,4 +27,5 @@
     <string name="search">Search</string>
     <string name="open_in_browser">Open in browser</string>
     <string name="sorting_dialog_title">Get mods scoreboard</string>
+    <string name="mods_accept">Sort</string>
 </resources>

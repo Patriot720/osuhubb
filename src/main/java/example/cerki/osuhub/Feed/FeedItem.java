@@ -1,8 +1,5 @@
 package example.cerki.osuhub.Feed;
 
-import android.arch.persistence.room.Entity;
-import android.arch.persistence.room.PrimaryKey;
-import android.arch.persistence.room.TypeConverters;
 import android.support.annotation.NonNull;
 import android.view.View;
 import android.widget.ImageView;
@@ -91,8 +88,8 @@ public class FeedItem extends AbstractFlexibleItem<FeedItem.FeedViewHolder> impl
         holder.mCombo.setText(combo);
         holder.mMods.setText(mods);
         holder.mUsername.setText(username);
-        holder.mMapName.setText(mapName);
-        holder.mStarRate.setText(starRate); // TODO Calculate for MODS
+        holder.mBeatmapFullName.setText(mapName);
+        holder.mStarRate.setText(starRate);
         holder.mRelativeDate.setText(relativeDate);
         Glide.with(holder.itemView)
                 .load(Rank.getRankResourceId(rank))
@@ -125,7 +122,7 @@ public class FeedItem extends AbstractFlexibleItem<FeedItem.FeedViewHolder> impl
         public TextView mPerformance;
         public TextView mCombo;
         public TextView mUsername;
-        public TextView mMapName; // TODO bad naming it's map_name + difficulty name
+        public TextView mBeatmapFullName;
         public TextView mMissCount;
         public TextView mMods;
         public TextView mAccuracy;
@@ -138,7 +135,7 @@ public class FeedItem extends AbstractFlexibleItem<FeedItem.FeedViewHolder> impl
             mPerformance = view.findViewById(R.id.pp);
             mCombo = view.findViewById(R.id.combo);
             mUsername = view.findViewById(R.id.username);
-            mMapName = view.findViewById(R.id.map_name);
+            mBeatmapFullName = view.findViewById(R.id.map_name);
             mMissCount = view.findViewById(R.id.miss_count);
             mMods = view.findViewById(R.id.mods);
             mAccuracy = view.findViewById(R.id.acc);

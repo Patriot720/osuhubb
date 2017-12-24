@@ -1,6 +1,10 @@
 package example.cerki.osuhub;
 
 import android.support.annotation.NonNull;
+import android.widget.GridLayout;
+import android.widget.GridView;
+
+import com.github.zagum.switchicon.SwitchIconView;
 
 /**
  * Created by cerki on 06-Dec-17.
@@ -40,7 +44,7 @@ public class Mods {
        }
        if((flags & DoubleTime) == DoubleTime){
            if((flags & Nightcore) == Nightcore)builder.append("NC");
-           else builder.append("DT"); // Todo test this
+           else builder.append("DT");
        }
        if((flags & Relax) == Relax)builder.append("RX");
        if((flags & HalfTime) == HalfTime)builder.append("HF");
@@ -53,5 +57,17 @@ public class Mods {
     @NonNull
     public static String parseFlags(String flags){
         return parseFlags(Integer.parseInt(flags));
+    }
+    public static int getModsIntegerValue(GridLayout modsView){
+        int childCount = modsView.getChildCount();
+        int mods = 0;
+        for (int i = 0; i < childCount; i++) {
+            SwitchIconView mod = (SwitchIconView) modsView.getChildAt(i);
+            if(mod.isIconEnabled()) {
+                int flag = Integer.parseInt((String) mod.getTag());
+                mods += flag;
+            }
+        }
+        return mods;
     }
 }
