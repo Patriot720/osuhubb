@@ -1,4 +1,4 @@
-package example.cerki.osuhub.Feed;
+package example.cerki.osuhub;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -22,7 +22,7 @@ import example.cerki.osuhub.R;
 public abstract class GenericRecyclerFragment<T extends IFlexible> extends Fragment{
     private OnListFragmentInteractionListener mListener;
     private List<T> mData;
-    private FlexibleAdapter<T> mAdapter;
+    private FlexibleAdapter mAdapter;
     private SwipeRefreshLayout mRefresh;
     private RecyclerView mRecycler;
     public interface OnListFragmentInteractionListener {
@@ -52,10 +52,10 @@ public abstract class GenericRecyclerFragment<T extends IFlexible> extends Fragm
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_feeditem_list, container, false);
+        View view = inflater.inflate(getLayoutResource(), container, false);
         if(view instanceof SwipeRefreshLayout){
             mRefresh = (SwipeRefreshLayout) view;
-            mRecycler = view.findViewById(R.id.feedlist);
+            mRecycler = view.findViewById(R.id.list);
             mAdapter = new FlexibleAdapter<>(mData);
             mRefresh.setRefreshing(true);
             mRefresh.setOnRefreshListener(this::updateData);
@@ -71,6 +71,7 @@ public abstract class GenericRecyclerFragment<T extends IFlexible> extends Fragm
         initData();
         return view;
     }
+    public abstract int getLayoutResource();
     public abstract void addListeners();
     public abstract void initData();
     public abstract void updateData();

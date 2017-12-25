@@ -1,17 +1,14 @@
 package example.cerki.osuhub;
 
-import android.app.SearchManager;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentManager;
-import android.support.v7.widget.SearchView;
-import android.view.View;
-import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -19,20 +16,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import eu.davidea.flexibleadapter.FlexibleAdapter;
 import eu.davidea.flexibleadapter.items.IFlexible;
 import eu.davidea.flexibleadapter.utils.Log;
 import example.cerki.osuhub.API.ApiDatabase.ApiDatabase;
 import example.cerki.osuhub.API.OsuAPI;
-import example.cerki.osuhub.API.POJO.RecentScore;
 import example.cerki.osuhub.API.POJO.User;
 import example.cerki.osuhub.BeatmapActivity.BeatmapActivity;
 import example.cerki.osuhub.Feed.FeedItem;
@@ -40,14 +35,10 @@ import example.cerki.osuhub.Feed.FeedItemFragment;
 import example.cerki.osuhub.List.ListFragment;
 import example.cerki.osuhub.Notifications.NotificationsService;
 import example.cerki.osuhub.PlayerFragment.PlayerFragment;
-import example.cerki.osuhub.PlayerFragment.RecentPlays.RecentScoresFragment;
 import example.cerki.osuhub.Searching.SearchHandler;
-import io.reactivex.Scheduler;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import jonathanfinerty.once.Once;
-
-import static junit.framework.Assert.assertEquals;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
@@ -79,13 +70,8 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
         FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        fab.setOnClickListener(view -> Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                .setAction("Action", null).show());
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -234,7 +220,9 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
         android.support.v4.app.Fragment fragment = null;
         if (id == R.id.nav_feed) {
-            fragment = new FeedItemFragment();
+            FeedItemFragment feedItemFragment = new FeedItemFragment();
+            feedItemFragment.setListener(this::feedFragmentListener);
+            fragment = feedItemFragment;
         } else if (id == R.id.nav_list) {
             fragment = ListFragment.newInstance();
         }
@@ -266,16 +254,11 @@ public class MainActivity extends AppCompatActivity
 
     }
 
-    @Override
-    public void onListFragmentInteraction(FeedItem item) {
+    public void feedFragmentListener(IFlexible item) {
             // Todo implement Map Activity
+            FeedItem realItem = (FeedItem) item;
             Intent intent = new Intent(this, BeatmapActivity.class);
-            intent.putExtra("beatmap_id",item.beatmap_id);
+            intent.putExtra("beatmap_id",realItem.beatmap_id);
             startActivity(intent);
-//            String group = matcher.group(1);
-//            String url = "https://osu.ppy.sh/beatmapsets/" + group;
-//            Intent i = new Intent(Intent.ACTION_VIEW);
-//            i.setData(Uri.parse(url));
-//            startActivity(i);
         }
 }
