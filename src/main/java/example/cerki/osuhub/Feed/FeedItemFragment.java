@@ -4,6 +4,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 
 import eu.davidea.flexibleadapter.FlexibleAdapter;
 import example.cerki.osuhub.GenericRecyclerFragment;
+import example.cerki.osuhub.MainActivity;
 import example.cerki.osuhub.R;
 import example.cerki.osuhub.Util;
 
@@ -13,6 +14,12 @@ import example.cerki.osuhub.Util;
 
 @SuppressWarnings("unchecked")
 public class FeedItemFragment extends GenericRecyclerFragment<FeedItem> {
+    @Override
+    public boolean setListener(MainActivity context) {
+        setListener(context::feedFragmentListener);
+        return true;
+    }
+
     @Override
     public int getLayoutResource() {
         return R.layout.fragment_feeditem_list;
@@ -29,7 +36,7 @@ public class FeedItemFragment extends GenericRecyclerFragment<FeedItem> {
     }
 
     @Override
-    public void initData() {
+    public void initDataDatabase() {
         new NewFeedTaskDb(items -> {
             getAdapter().updateDataSet(items);
             getRefresher().setRefreshing(false);

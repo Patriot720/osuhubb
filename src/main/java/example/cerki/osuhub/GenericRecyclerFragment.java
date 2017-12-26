@@ -15,7 +15,7 @@ import java.util.List;
 
 import eu.davidea.flexibleadapter.FlexibleAdapter;
 import eu.davidea.flexibleadapter.items.IFlexible;
-import example.cerki.osuhub.R;
+import example.cerki.osuhub.PlayerFragment.PlayerFragment;
 
 
 @SuppressWarnings("unchecked")
@@ -33,15 +33,21 @@ public abstract class GenericRecyclerFragment<T extends IFlexible> extends Fragm
         return mListener;
     }
 
-    public void setListener(OnListFragmentInteractionListener mListener) {
-        this.mListener = mListener;
+    public void setListener(OnListFragmentInteractionListener mListener) { this.mListener = mListener;
     }
+    public void setOnClickListener(){
+        mAdapter.addListener((FlexibleAdapter.OnItemClickListener) position -> {
+            getListener().onListFragmentInteraction(mAdapter.getItem(position));
+            return true;
+        });
+    }
+    public abstract boolean setListener(MainActivity context);
 
     public List<T> getDataList() {
         return mData;
     }
 
-    public FlexibleAdapter<T> getAdapter() {
+    public FlexibleAdapter getAdapter() {
         return mAdapter;
     }
 
@@ -58,7 +64,7 @@ public abstract class GenericRecyclerFragment<T extends IFlexible> extends Fragm
             mRecycler = view.findViewById(R.id.list);
             mAdapter = new FlexibleAdapter<>(mData);
             mRefresh.setRefreshing(true);
-            mRefresh.setOnRefreshListener(this::updateData);
+            mRefresh.setOnRefreshListener(this::updateDataWrap);
         }
         Context context = view.getContext();
         mRecycler.setLayoutManager(new LinearLayoutManager(context));
@@ -68,17 +74,47 @@ public abstract class GenericRecyclerFragment<T extends IFlexible> extends Fragm
         mRecycler.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_LOW);
         mRecycler.setAdapter(mAdapter);
         addListeners();
-        initData();
+        initDataDatabase();
+        setOnClickListener();
+        doAfterViewCreated();
         return view;
     }
-    public abstract int getLayoutResource();
-    public abstract void addListeners();
-    public abstract void initData();
-    public abstract void updateData();
 
-    public GenericRecyclerFragment() {
+    protected void doAfterViewCreated() {
+
     }
 
+    public abstract int getLayoutResource();
+
+    public void addListeners() {
+
+    }
+
+    public abstract void initDataDatabase();
+    public abstract void updateData();
+
+    private void updateDataWrap(){
+        if(!Util.isNetworkAvailable(getContext()))
+            return;
+        SwipeRefreshLayout refresher = getRefresher();
+        refresher.setRefreshing(true);
+        updateData();
+    }
+    public void onUpdate(List<T> items){
+        mRefresh.setRefreshing(false);
+        mAdapter.updateDataSet(items);
+    }
+    public GenericRecyclerFragment() {
+    }
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (setListener((MainActivity) context) ){
+        } else {
+            throw new RuntimeException(context.toString()
+                    + " must implement OnFragmentInteractionListener");
+        }
+    }
     @Override
     public void onDetach() {
         super.onDetach();

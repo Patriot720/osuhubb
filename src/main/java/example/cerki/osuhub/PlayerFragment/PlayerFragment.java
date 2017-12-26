@@ -9,8 +9,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import example.cerki.osuhub.MainActivity;
 import example.cerki.osuhub.PlayerFragment.Overview.OverviewFragment;
 import example.cerki.osuhub.PlayerFragment.RecentPlays.RecentScoresFragment;
+import example.cerki.osuhub.PlayerFragment.TopPlays.TopPlaysFragment;
 import example.cerki.osuhub.R;
 
 /**
@@ -74,8 +76,9 @@ public class PlayerFragment extends android.support.v4.app.Fragment {
 
     private void setupPager(ViewPager pager) {
         PagerAdapter adapter = new PagerAdapter(getChildFragmentManager());
-        adapter.addFragment(OverviewFragment.newInstance(userId, mUsername),"Overview");
-        adapter.addFragment(RecentScoresFragment.newInstance(userId,mUsername),"Recent scores");
+        adapter.addFragment(OverviewFragment.newInstance(userId, mUsername),getString(R.string.player_overview));
+        adapter.addFragment(RecentScoresFragment.newInstance(userId,mUsername),getString(R.string.player_recent));
+        adapter.addFragment(TopPlaysFragment.newInstance(userId,mUsername),getString(R.string.player_top));  // Todo remove these two arguments userId and username;
         pager.setAdapter(adapter);
     }
 
@@ -88,7 +91,7 @@ public class PlayerFragment extends android.support.v4.app.Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
+        if (context instanceof MainActivity) {
             mListener = (OnFragmentInteractionListener) context;
         } else {
             throw new RuntimeException(context.toString()

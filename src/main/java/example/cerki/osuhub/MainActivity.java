@@ -16,7 +16,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
 
@@ -42,9 +41,8 @@ import jonathanfinerty.once.Once;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
-        PlayerFragment.OnFragmentInteractionListener,
-        ListFragment.OnListFragmentInteractionListener,
-        FeedItemFragment.OnListFragmentInteractionListener{
+        PlayerFragment.OnFragmentInteractionListener
+        {
 
     private FragmentManager mFragmentManager;
     private String SCHEDULE_NOTIFICATIONS_TAG = "tag";
@@ -224,7 +222,9 @@ public class MainActivity extends AppCompatActivity
             feedItemFragment.setListener(this::feedFragmentListener);
             fragment = feedItemFragment;
         } else if (id == R.id.nav_list) {
-            fragment = ListFragment.newInstance();
+            ListFragment fragment1 = new ListFragment();
+            fragment1.setListener(this::onListFragmentInteraction);
+            fragment = fragment1;
         }
         mFragmentManager.beginTransaction().replace(R.id.content_main,fragment).commit();
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -232,7 +232,6 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-    @Override
     public void onListFragmentInteraction(IFlexible player) {
         if(player instanceof User) {
             User user = ((User) player);

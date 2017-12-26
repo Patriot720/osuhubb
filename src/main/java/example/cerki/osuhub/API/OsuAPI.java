@@ -12,6 +12,7 @@ import java.util.List;
 import example.cerki.osuhub.API.ApiDatabase.ApiDatabase;
 import example.cerki.osuhub.API.ApiDatabase.UserDao;
 import example.cerki.osuhub.API.POJO.Beatmap;
+import example.cerki.osuhub.API.POJO.BestScore;
 import example.cerki.osuhub.API.POJO.User;
 import example.cerki.osuhub.Util;
 import okhttp3.HttpUrl;

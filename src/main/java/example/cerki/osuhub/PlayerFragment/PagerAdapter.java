@@ -32,6 +32,7 @@ class PagerAdapter extends FragmentPagerAdapter{
         return mTitles.get(position);
     }
 
+
     @Override
     public int getCount() {
         return mFragments.size();

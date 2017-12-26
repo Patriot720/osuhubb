@@ -28,4 +28,7 @@
     <string name="open_in_browser">Open in browser</string>
     <string name="sorting_dialog_title">Get mods scoreboard</string>
     <string name="mods_accept">Sort</string>
+    <string name="player_overview">Overview</string>
+    <string name="player_recent">Recent scores</string>
+    <string name="player_top">Top scores</string>
 </resources>
