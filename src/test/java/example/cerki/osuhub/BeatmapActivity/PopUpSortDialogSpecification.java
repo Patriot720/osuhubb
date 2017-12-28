@@ -101,7 +101,7 @@ public class PopUpSortDialogSpecification {
     }
 
     private void setRecyclerVisible() {
-        RecyclerView recyclerView = beatmapActivity.getScoreboard().getView().findViewById(R.id.recycler);
+        RecyclerView recyclerView = beatmapActivity.getScoreboard().getView().findViewById(R.id.list);
         recyclerView.setVisibility(View.VISIBLE);
     }
 

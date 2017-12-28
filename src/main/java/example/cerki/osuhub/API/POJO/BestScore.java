@@ -64,6 +64,8 @@ public class BestScore {
         @Expose
         private Float pp;
 
+
+
     public int getBeatmapId() {
             return beatmapId;
         }

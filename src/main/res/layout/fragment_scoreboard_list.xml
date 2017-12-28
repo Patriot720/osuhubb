@@ -5,16 +5,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <HorizontalScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycler"
+        android:id="@+id/list"
         android:name="example.cerki.osuhub.BeatmapActivity.ScoreBoardFragment"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:visibility="gone"
         app:layoutManager="LinearLayoutManager"
         tools:context="example.cerki.osuhub.BeatmapActivity.ScoreBoardFragment"
         tools:listitem="@layout/fragment_scoreboard" />
-
+</HorizontalScrollView>
     <ProgressBar
         android:id="@+id/progress_bar"
         android:layout_width="wrap_content"

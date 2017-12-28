@@ -1,7 +1,5 @@
 package example.cerki.osuhub;
 
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
@@ -19,17 +17,11 @@ import android.view.MenuItem;
 
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
 
-import java.io.File;
-import java.io.IOException;
-
 import eu.davidea.flexibleadapter.FlexibleAdapter;
-import eu.davidea.flexibleadapter.items.IFlexible;
 import eu.davidea.flexibleadapter.utils.Log;
 import example.cerki.osuhub.API.ApiDatabase.ApiDatabase;
 import example.cerki.osuhub.API.OsuAPI;
 import example.cerki.osuhub.API.POJO.User;
-import example.cerki.osuhub.BeatmapActivity.BeatmapActivity;
-import example.cerki.osuhub.Feed.FeedItem;
 import example.cerki.osuhub.Feed.FeedItemFragment;
 import example.cerki.osuhub.List.ListFragment;
 import example.cerki.osuhub.Notifications.NotificationsService;
@@ -40,8 +32,7 @@ import io.reactivex.schedulers.Schedulers;
 import jonathanfinerty.once.Once;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener,
-        PlayerFragment.OnFragmentInteractionListener
+        implements NavigationView.OnNavigationItemSelectedListener
         {
 
     private FragmentManager mFragmentManager;
@@ -52,18 +43,6 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        String[] perms = {"android.permission.WRITE_EXTERNAL_STORAGE",
-        "android.permission.READ_LOGS"
-        ,"android.permission.READ_EXTERNAL_STORAGE"
-        ,"android.permission.INTERNET"};
-
-        int permsRequestCode = 200;
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            requestPermissions(perms, permsRequestCode);
-        }
-                    Thread.setDefaultUncaughtExceptionHandler(new ExceptionHandler(
-                    Environment.getExternalStorageDirectory().getPath())); // Todo refactor
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -155,34 +134,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        SendLoagcatMail();
     }
-
-    public void SendLoagcatMail(){
-
-        // save logcat in file
-        File outputFile = new File(Environment.getExternalStorageDirectory(),
-                "logcat.txt");
-        try {
-            Runtime.getRuntime().exec(
-                    "logcat -f " + outputFile.getAbsolutePath());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        //send file using email
-        Intent emailIntent = new Intent(Intent.ACTION_SEND);
-        // Set type to "email"
-        emailIntent.setType("vnd.android.cursor.dir/email");
-        String to[] = {"cerkin-3@yandex.ru"};
-        emailIntent .putExtra(Intent.EXTRA_EMAIL, to);
-        // the attachment
-        emailIntent .putExtra(Intent.EXTRA_STREAM, outputFile.getAbsolutePath());
-        // the mail subject
-        emailIntent .putExtra(Intent.EXTRA_SUBJECT, "Subject");
-        startActivity(Intent.createChooser(emailIntent , "Send email..."));
-    }
-
     private void launchUserFragment(User user) {
            getSupportFragmentManager()
                             .beginTransaction()
@@ -218,28 +170,14 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
         android.support.v4.app.Fragment fragment = null;
         if (id == R.id.nav_feed) {
-            FeedItemFragment feedItemFragment = new FeedItemFragment();
-            feedItemFragment.setListener(this::feedFragmentListener);
-            fragment = feedItemFragment;
+            fragment = FeedItemFragment.newInstance();
         } else if (id == R.id.nav_list) {
-            ListFragment fragment1 = new ListFragment();
-            fragment1.setListener(this::onListFragmentInteraction);
-            fragment = fragment1;
+            fragment = ListFragment.newInstance();
         }
         mFragmentManager.beginTransaction().replace(R.id.content_main,fragment).commit();
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
-    }
-
-    public void onListFragmentInteraction(IFlexible player) {
-        if(player instanceof User) {
-            User user = ((User) player);
-            android.support.v4.app.Fragment fragment = PlayerFragment.newInstance(user.getUserId(), user.getUsername());
-            mFragmentManager.beginTransaction().add(R.id.content_main, fragment)
-                    .addToBackStack("stack")
-                    .commit();
-        }
     }
     private void scheduleNotifications() {
         if (!Once.beenDone(Once.THIS_APP_INSTALL, SCHEDULE_NOTIFICATIONS_TAG)) {
@@ -247,17 +185,4 @@ public class MainActivity extends AppCompatActivity
             Once.markDone(SCHEDULE_NOTIFICATIONS_TAG);
         }
     }
-
-    @Override
-    public void onFragmentInteraction(Uri uri) {
-
-    }
-
-    public void feedFragmentListener(IFlexible item) {
-            // Todo implement Map Activity
-            FeedItem realItem = (FeedItem) item;
-            Intent intent = new Intent(this, BeatmapActivity.class);
-            intent.putExtra("beatmap_id",realItem.beatmap_id);
-            startActivity(intent);
         }
-}

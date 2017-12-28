@@ -36,8 +36,10 @@ public interface OsuApiService {
     Single<List<Score>> getScoresBy(@Query("b") int beatmap_id,@Query("mods") int modFlags);
     @GET("get_scores")
     Single<List<Score>> getScoresBy(@Query("b") int beatmap_id,@Query("u") String usernameOrId);
-    @GET("get_user_recent?limit=50")
+    @GET("get_user_recent?limit=100")
     Single<List<BestScore>> getRecentScoresBy(@Query("u") String usernameOrId);
-    @GET("get_user_recent?limit=50")
+    @GET("get_user_recent?limit=100")
     Single<List<BestScore>> getRecentScoresBy(@Query("u") int userId);
+    @GET("get_user_recent")
+    Single<List<BestScore>> getRecentScoresBy(@Query("u") int userId,@Query("limit") int limit);
 }

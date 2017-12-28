@@ -12,6 +12,7 @@ import butterknife.BindView;
 import eu.davidea.flexibleadapter.FlexibleAdapter;
 import eu.davidea.flexibleadapter.items.AbstractFlexibleItem;
 import eu.davidea.viewholders.FlexibleViewHolder;
+import example.cerki.osuhub.Mods;
 import example.cerki.osuhub.R;
 
 /**
@@ -224,15 +225,40 @@ public class Score extends AbstractFlexibleItem<Score.ViewHolder>{
     public void bindViewHolder(FlexibleAdapter adapter, ViewHolder holder, int position, List payloads) {
         holder.performance.setText(pp);
         holder.username.setText(username);
+        holder.maxCombo.setText(maxcombo);
+        holder.count50.setText(count50);
+        holder.count100.setText(count100);
+        holder.count300.setText(count300);
+        holder.countMiss.setText(countmiss);
+        holder.score.setText(score);
+        holder.enabledMods.setText(Mods.parseFlags(enabledMods));
+        holder.rank.setText(rank);
     }
+
 
     public class ViewHolder extends FlexibleViewHolder{
         TextView performance;
         TextView username;
+        TextView maxCombo;
+        TextView count50;
+        TextView count100;
+        TextView count300;
+        TextView countMiss;
+        TextView rank;
+        TextView score;
+        TextView enabledMods;
         public ViewHolder(View view, FlexibleAdapter adapter) {
             super(view, adapter);
             performance = view.findViewById(R.id.performance);
             username = view.findViewById(R.id.username);
+            maxCombo = view.findViewById(R.id.max_combo);
+            count50 = view.findViewById(R.id.count50);
+            count100 = view.findViewById(R.id.count100);
+            count300 = view.findViewById(R.id.count300);
+            countMiss = view.findViewById(R.id.count_miss);
+            score = view.findViewById(R.id.score);
+            enabledMods = view.findViewById(R.id.enabled_mods);
+            rank = view.findViewById(R.id.rank);
         }
     }
 }

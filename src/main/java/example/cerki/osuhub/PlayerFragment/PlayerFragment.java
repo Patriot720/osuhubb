@@ -1,7 +1,5 @@
 package example.cerki.osuhub.PlayerFragment;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -9,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import example.cerki.osuhub.MainActivity;
 import example.cerki.osuhub.PlayerFragment.Overview.OverviewFragment;
 import example.cerki.osuhub.PlayerFragment.RecentPlays.RecentScoresFragment;
 import example.cerki.osuhub.PlayerFragment.TopPlays.TopPlaysFragment;
@@ -18,7 +15,6 @@ import example.cerki.osuhub.R;
 /**
  * A simple {@link android.support.v4.app.Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link PlayerFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
  * Use the {@link PlayerFragment#newInstance} factory method to
  * create an instance of this fragment.
@@ -31,7 +27,6 @@ public class PlayerFragment extends android.support.v4.app.Fragment {
     private int userId;
     private String mUsername;
 
-    private OnFragmentInteractionListener mListener;
 
     public PlayerFragment() {
         // Required empty public constructor
@@ -66,6 +61,7 @@ public class PlayerFragment extends android.support.v4.app.Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+
         View inflate = inflater.inflate(R.layout.fragment_player_detailed, container, false);
         TabLayout tabs = inflate.findViewById(R.id.player_tabs);
         ViewPager pager = inflate.findViewById(R.id.player_pager);
@@ -78,44 +74,8 @@ public class PlayerFragment extends android.support.v4.app.Fragment {
         PagerAdapter adapter = new PagerAdapter(getChildFragmentManager());
         adapter.addFragment(OverviewFragment.newInstance(userId, mUsername),getString(R.string.player_overview));
         adapter.addFragment(RecentScoresFragment.newInstance(userId,mUsername),getString(R.string.player_recent));
-        adapter.addFragment(TopPlaysFragment.newInstance(userId,mUsername),getString(R.string.player_top));  // Todo remove these two arguments userId and username;
+        adapter.addFragment(TopPlaysFragment.newInstance(userId),getString(R.string.player_top));  // Todo remove these two arguments userId and username;
         pager.setAdapter(adapter);
     }
 
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof MainActivity) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
-
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other mFragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnFragmentInteractionListener {
-        void onFragmentInteraction(Uri uri);
-    }
 }

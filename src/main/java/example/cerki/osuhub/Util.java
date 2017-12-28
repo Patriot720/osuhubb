@@ -112,6 +112,8 @@ public class Util {
     }
 
     static public boolean isNetworkAvailable(Context context) {
+        if(context == null)
+            return false;
         ConnectivityManager connectivityManager
                 = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         assert connectivityManager != null;

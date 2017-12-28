@@ -13,14 +13,11 @@ import android.widget.ProgressBar;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.Callable;
-import java.util.function.BiConsumer;
 
 import eu.davidea.flexibleadapter.FlexibleAdapter;
 import example.cerki.osuhub.API.OsuAPI;
 import example.cerki.osuhub.API.POJO.Score;
 import example.cerki.osuhub.R;
-import io.reactivex.Scheduler;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
@@ -30,13 +27,14 @@ import io.reactivex.schedulers.Schedulers;
  * Activities containing this fragment MUST implement the {@link OnListFragmentInteractionListener}
  * interface.
  */
+@SuppressWarnings("unchecked")
 public class ScoreBoardFragment extends Fragment {
 
     private static final String ARG_BEATMAP_ID = "mBeatmapId";
     private int mBeatmapId = 0;
     private OnListFragmentInteractionListener mListener;
     private List<Score> mData;
-    private FlexibleAdapter<Score> mAdapter;
+    private FlexibleAdapter mAdapter;
     private RecyclerView mRecycler;
     private ProgressBar mProgressBar;
 
@@ -104,9 +102,10 @@ public class ScoreBoardFragment extends Fragment {
         // Set the adapter
             Context context = view.getContext();
             mProgressBar = view.findViewById(R.id.progress_bar);
-            mRecycler = view.findViewById(R.id.recycler);
+            mRecycler = view.findViewById(R.id.list);
             mData = new ArrayList<>();
             mAdapter = new FlexibleAdapter<>(mData);
+            mAdapter.addScrollableHeader(new ScoreBoardHeader());
             mRecycler.setLayoutManager(new LinearLayoutManager(context));
             mRecycler.setAdapter(mAdapter);
             initData();
@@ -142,6 +141,6 @@ public class ScoreBoardFragment extends Fragment {
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnListFragmentInteractionListener {
-        void onListFragmentInteraction(Score item);
+        void onListFragmentInteraction(Score item); // Todo fix random email on mode change
     }
 }
