@@ -1,8 +1,6 @@
 package example.cerki.osuhub;
 
-import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
@@ -22,11 +20,10 @@ import eu.davidea.flexibleadapter.utils.Log;
 import example.cerki.osuhub.API.ApiDatabase.ApiDatabase;
 import example.cerki.osuhub.API.OsuAPI;
 import example.cerki.osuhub.API.POJO.User;
-import example.cerki.osuhub.Feed.FeedItemFragment;
-import example.cerki.osuhub.List.ListFragment;
 import example.cerki.osuhub.Notifications.NotificationsService;
 import example.cerki.osuhub.PlayerFragment.PlayerFragment;
 import example.cerki.osuhub.Searching.SearchHandler;
+import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import jonathanfinerty.once.Once;
@@ -170,9 +167,25 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
         android.support.v4.app.Fragment fragment = null;
         if (id == R.id.nav_feed) {
-            fragment = FeedItemFragment.newInstance();
         } else if (id == R.id.nav_list) {
-            fragment = ListFragment.newInstance();
+            fragment = GenericRecyclerBuilder.using(R.layout.fragment_player_list)
+                    .onClickListener(item1 -> {
+                    })
+                    .workerFunctions(new GenericRecyclerFragment.WorkerInterface() {
+                        @Override
+                        public void initData(GenericRecyclerFragment fragment1) {
+                            Single.fromCallable(() -> ApiDatabase.getInstance().userDao().getAll())
+                                    .subscribeOn(Schedulers.newThread())
+                                    .observeOn(AndroidSchedulers.mainThread())
+                                    .subscribe((items) -> {
+                                        fragment1.onUpdate(items); // todo Fix
+                                    });
+                        }
+
+                        @Override
+                        public void updateData(GenericRecyclerFragment fragment1) {
+                        }
+                    }).build();
         }
         mFragmentManager.beginTransaction().replace(R.id.content_main,fragment).commit();
         DrawerLayout drawer = findViewById(R.id.drawer_layout);

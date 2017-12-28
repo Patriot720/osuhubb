@@ -1,5 +1,6 @@
 package example.cerki.osuhub;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -22,57 +23,68 @@ import example.cerki.osuhub.List.ProgressItem;
 
 
 @SuppressWarnings("unchecked")
-public abstract class GenericRecyclerFragment<T extends AbstractFlexibleItem> extends Fragment
-implements FlexibleAdapter.EndlessScrollListener
+public class GenericRecyclerFragment<T extends AbstractFlexibleItem> extends Fragment
 {
-    private static final String ARG_BEATMAP_ID = "beatmapId" ;
+
+    interface OnClickListener<T extends AbstractFlexibleItem>{
+        void onItemClick(T item);
+    }
+    interface WorkerInterface {
+        void initData(GenericRecyclerFragment fragment);
+        void updateData(GenericRecyclerFragment fragment);
+    }
+
+    private int layoutResource;
     private FlexibleAdapter mAdapter;
     private SwipeRefreshLayout mRefresh;
-    private static final String ARG_USER_ID = "userId" ;
-    private static final String ARG_USERNAME = "username" ;
-    private int userId = 0;
-    private String username = "";
-    private int beatmapId = 0;
     private View mProgressBar;
     private RecyclerView mRecycler;
+    private OnClickListener<T> listener;
+    private FlexibleAdapter.EndlessScrollListener endlessScroll;
+    private WorkerInterface worker;
+    private int pageSize;
 
-    protected abstract int getEndlessScrollPageSize();
-    protected abstract int getLayoutResource();
-    public abstract void initDataDatabase();
-    public abstract void updateData();
-    protected abstract void onItemClick(T item);
     protected void doAfterViewCreated() {}
     protected int getFabButtonResource(){
        return  R.drawable.common_full_open_on_phone;
-    };
+    }
     protected void onFabButtonClick(View view){
     }
+    // Todo fab button
 
+    @SuppressLint("ValidFragment")
+    public GenericRecyclerFragment(int layoutResource, OnClickListener<T> listener, FlexibleAdapter.EndlessScrollListener endlessScroll, WorkerInterface worker, int pageSize) {
+        this.layoutResource = layoutResource;
+        this.listener = listener;
+        this.endlessScroll = endlessScroll;
+        this.worker = worker;
+        this.pageSize = pageSize;
+    }
 
     public GenericRecyclerFragment() {}
 
     public void setOnClickListener(){
         mAdapter.addListener((FlexibleAdapter.OnItemClickListener) position -> {
-            onItemClick((T) mAdapter.getItem(position));
+            listener.onItemClick((T) mAdapter.getItem(position));
             return true;
         });
     }
 
     public void setEndlessScroll(){
-        mAdapter.setEndlessScrollListener(this,new ProgressItem())
-                .setEndlessPageSize(getEndlessScrollPageSize());
+        mAdapter.setEndlessScrollListener(endlessScroll,new ProgressItem())
+                .setEndlessPageSize(pageSize);
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(getLayoutResource(), container, false);
+        View view = inflater.inflate(layoutResource, container, false);
         setRetainInstance(true);
         mAdapter = new FlexibleAdapter<>(new ArrayList<>());
         setupRefresh(view);
         setupRecyclerView(view);
         setupProgressBar(view);
-        initDataDatabase();
+        worker.initData(this);
         setOnClickListener();
         setEndlessScroll();
         setupFabButton();
@@ -115,41 +127,10 @@ implements FlexibleAdapter.EndlessScrollListener
         mRecycler.setAdapter(mAdapter);
     }
 
-
-    public void setBeatmapId(int beatmapId){
-        Bundle arguments = getArguments();
-        if(arguments == null)
-            return;
-        arguments.putInt(ARG_BEATMAP_ID,beatmapId);
-        setArguments(arguments);
-    }
-    public void setArguments(int userId,String username){
-        Bundle bundle = new Bundle();
-        bundle.putInt(ARG_USER_ID,userId);
-        bundle.putString(ARG_USERNAME,username);
-        setArguments(bundle);
-    }
-    public void setArguments(int userId){
-        setArguments(userId,"");
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            userId = getArguments().getInt(ARG_USER_ID);
-            username = getArguments().getString(ARG_USERNAME);
-            beatmapId = getArguments().getInt(ARG_BEATMAP_ID);
-        }
-    }
     private void updateDataWrap(){
         if(!Util.isNetworkAvailable(getContext()))
             return;
-        updateData();
-    }
-
-    @Override
-    public void noMoreLoad(int newItemsSize) {
+        worker.updateData(this);
     }
 
     public void onUpdate(List<T> items){
@@ -157,9 +138,6 @@ implements FlexibleAdapter.EndlessScrollListener
         mAdapter.updateDataSet(items);
     }
 
-    public int getUserId() {
-        return userId;
-    }
     public void setUpdating(boolean bool){
         if(bool){
             mRecycler.setVisibility(View.GONE);
@@ -171,20 +149,17 @@ implements FlexibleAdapter.EndlessScrollListener
         }
         mRefresh.setRefreshing(bool);
     }
+
     public void addItems(int position, List<T> items){
         mAdapter.addItems(0, items);
         setUpdating(false);
     }
+
     public void addItemsOnTop(List<T> items){
         addItems(0,items);
-    }
-
-    public String getUsername() {
-        return username;
     }
 
     public FlexibleAdapter getAdapter() {
         return mAdapter;
     }
-
 }
