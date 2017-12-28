@@ -67,6 +67,7 @@ implements FlexibleAdapter.EndlessScrollListener
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(getLayoutResource(), container, false);
+        setRetainInstance(true);
         mAdapter = new FlexibleAdapter<>(new ArrayList<>());
         setupRefresh(view);
         setupRecyclerView(view);
