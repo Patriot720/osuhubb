@@ -63,9 +63,6 @@ public class MainActivity extends AppCompatActivity
 
         ApiDatabase.createInstance(this);
 
-
-        FlexibleAdapter.enableLogs(Log.Level.VERBOSE);
-
         setupSearchView();
 
         Once.initialise(this);
