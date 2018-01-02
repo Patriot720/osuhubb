@@ -1,4 +1,4 @@
-package example.cerki.osuhub;
+package example.cerki.osuhub.ui.Activities;
 
 import android.os.Build;
 import android.os.Bundle;
@@ -26,6 +26,7 @@ import example.cerki.osuhub.Feed.FeedItemFragment;
 import example.cerki.osuhub.List.ListFragment;
 import example.cerki.osuhub.Notifications.NotificationsService;
 import example.cerki.osuhub.PlayerFragment.PlayerFragment;
+import example.cerki.osuhub.R;
 import example.cerki.osuhub.Searching.SearchHandler;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;

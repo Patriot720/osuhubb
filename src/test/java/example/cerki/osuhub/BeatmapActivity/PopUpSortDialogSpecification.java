@@ -23,6 +23,7 @@ import example.cerki.osuhub.API.OsuAPI;
 import example.cerki.osuhub.API.POJO.Score;
 import example.cerki.osuhub.Mods;
 import example.cerki.osuhub.R;
+import example.cerki.osuhub.ui.Activities.BeatmapActivity;
 
 import static example.cerki.osuhub.R.id.clear_button;
 import static junit.framework.Assert.assertTrue;

@@ -1,13 +1,11 @@
 package example.cerki.osuhub;
 
 import android.content.Intent;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
 
 import java.util.List;
 
 import example.cerki.osuhub.API.POJO.BestScore;
-import example.cerki.osuhub.BeatmapActivity.BeatmapActivity;
+import example.cerki.osuhub.ui.Activities.BeatmapActivity;
 import example.cerki.osuhub.Feed.FeedItem;
 
 /**

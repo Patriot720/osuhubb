@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="example.cerki.osuhub.BeatmapActivity.BeatmapActivity">
+    tools:context="example.cerki.osuhub.ui.Activities.BeatmapActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"

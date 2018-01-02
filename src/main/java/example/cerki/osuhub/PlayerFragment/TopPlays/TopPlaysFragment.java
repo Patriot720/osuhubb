@@ -5,7 +5,7 @@ import android.content.Intent;
 import java.util.Collections;
 
 import example.cerki.osuhub.API.OsuAPI;
-import example.cerki.osuhub.BeatmapActivity.BeatmapActivity;
+import example.cerki.osuhub.ui.Activities.BeatmapActivity;
 import example.cerki.osuhub.Feed.FeedItem;
 import example.cerki.osuhub.FeedRecyclerFragment;
 import example.cerki.osuhub.PlayerFragment.RecentPlays.RecentScoresTask;

@@ -14,6 +14,7 @@ import eu.davidea.flexibleadapter.FlexibleAdapter;
 import eu.davidea.flexibleadapter.items.AbstractFlexibleItem;
 import eu.davidea.viewholders.FlexibleViewHolder;
 import example.cerki.osuhub.R;
+import example.cerki.osuhub.Util;
 
 import static com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade;
 
@@ -92,7 +93,7 @@ public class FeedItem extends AbstractFlexibleItem<FeedItem.FeedViewHolder> impl
         holder.mStarRate.setText(starRate);
         holder.mRelativeDate.setText(relativeDate);
         Glide.with(holder.itemView)
-                .load(Rank.getRankResourceId(rank))
+                .load(Util.getAssetUriString("ranks/" + rank))
                 .into(holder.mRank);
         Glide.with(holder.itemView)
                 .load(coverUrl)

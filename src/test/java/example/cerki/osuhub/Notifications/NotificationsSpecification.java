@@ -5,8 +5,6 @@ import android.arch.persistence.room.Room;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mockito;
-import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
@@ -19,7 +17,6 @@ import example.cerki.osuhub.API.OsuApiService;
 import example.cerki.osuhub.API.POJO.Beatmap;
 import example.cerki.osuhub.API.POJO.BestScore;
 import example.cerki.osuhub.API.POJO.Following;
-import example.cerki.osuhub.MainActivity;
 import example.cerki.osuhub.Util;
 
 import static org.junit.Assert.assertEquals;
@@ -27,8 +24,6 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Mockito.times;
 
 /**
  * Created by cerki on 16.12.2017.

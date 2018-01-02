@@ -20,7 +20,7 @@
             android:name="android.app.default_searchable"
             android:value=".Searching.SearchActivity"/>
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.Activities.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
 
@@ -41,7 +41,7 @@
         </service>
 
         <activity
-            android:name=".BeatmapActivity.BeatmapActivity"
+            android:name=".ui.Activities.BeatmapActivity"
             android:label="@string/title_activity_beatmap"
             android:theme="@style/AppTheme.NoActionBar" />
     </application>

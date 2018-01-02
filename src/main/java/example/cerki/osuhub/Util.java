@@ -35,6 +35,9 @@ public class Util {
         return BASE_URL + method + "?k=" + API_KEY + "&" + query;
     }
 
+    public static String getAssetUriString(String relativeFilePath){
+        return "file:///android_asset/" + relativeFilePath;
+    }
     @SuppressLint("DefaultLocale")
     public static String getAccuracyString(BestScore score){
         float count50 = score.getCount50();

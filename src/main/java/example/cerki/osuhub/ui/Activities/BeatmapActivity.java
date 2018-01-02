@@ -1,4 +1,4 @@
-package example.cerki.osuhub.BeatmapActivity;
+package example.cerki.osuhub.ui.Activities;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -19,8 +19,10 @@ import com.github.zagum.switchicon.SwitchIconView;
 
 import example.cerki.osuhub.API.OsuAPI;
 import example.cerki.osuhub.API.POJO.Score;
+import example.cerki.osuhub.BeatmapActivity.ScoreBoardFragment;
 import example.cerki.osuhub.Mods;
 import example.cerki.osuhub.R;
+import example.cerki.osuhub.ui.Dialogs.ScoreboardSortingDialog;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
@@ -28,7 +30,7 @@ public class BeatmapActivity extends AppCompatActivity implements ScoreBoardFrag
 
     private int beatmap_id;
     private ScoreBoardFragment mScoreboard;
-    private MaterialDialog dialog;
+    private ScoreboardSortingDialog dialog;
 
     public MaterialDialog getPopUpDialog() {
         return dialog;
@@ -44,36 +46,18 @@ public class BeatmapActivity extends AppCompatActivity implements ScoreBoardFrag
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(view -> dialog.show());
-        dialog = new MaterialDialog.Builder(this)
-                .title(R.string.sorting_dialog_title)
-                .customView(R.layout.sorting_dialog_view, false)
-                .positiveText(R.string.mods_accept)
-                .onPositive((dialog1, which) -> updateScoreboard(dialog1.getCustomView()))
-                .build();
-        Button clearButton = dialog.getCustomView().findViewById(R.id.clear_button);
-        clearButton.setOnClickListener(l -> {
-            clearMods(dialog.getCustomView().findViewById(R.id.mods));
-            clearUsername(dialog.getCustomView().findViewById(R.id.username));
-        });
-        initFragments();
+
+        dialog = new ScoreboardSortingDialog(this,this::updateScoreboard);
+
+        initFragments(); // Todo just do recycler
     }
 
-    private void clearMods(GridLayout modsView) {
-        for (int i = 0; i < modsView.getChildCount(); i++) {
-            SwitchIconView icon = (SwitchIconView) modsView.getChildAt(i);
-            icon.setIconEnabled(false);
-        }
-    }
-
-    private void clearUsername(EditText text) {
-        text.setText("");
-    }
 
     public ScoreBoardFragment getScoreboard() {
         return mScoreboard;
     }
 
-    protected void updateScoreboard(View customView) {
+    protected void updateScoreboard() {
         GridLayout mods = customView.findViewById(R.id.mods);
         EditText  textView = customView.findViewById(R.id.username);
         String text = textView.getText().toString();
