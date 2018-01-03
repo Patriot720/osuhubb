@@ -11,6 +11,7 @@ import com.google.android.gms.gcm.TaskParams;
 
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 import example.cerki.osuhub.Data.ApiDatabase.ApiDatabase;
 import example.cerki.osuhub.Data.Api.OsuAPI;
@@ -19,35 +20,41 @@ import example.cerki.osuhub.Data.POJO.BestScore;
 import example.cerki.osuhub.Data.POJO.Following;
 import example.cerki.osuhub.Data.POJO.FeedItem;
 import example.cerki.osuhub.Data.Factories.FeedItemFactory;
+import example.cerki.osuhub.Data.POJO.Score;
 import example.cerki.osuhub.R;
 
 public class NotificationsService extends GcmTaskService {
     private static final String PERIODIC_SYNC_TAG = "tag";
     private static final long SYNC_PERIOD_SECONDS = 1800; // TODO extract to settings
     private static int mNotificationId = 1;
+    private ApiDatabase db;
 
     @Override
     public int onRunTask(TaskParams taskParams) {
-        ApiDatabase db = ApiDatabase.createInstance(this);
-        notifyAll(db);
+        db = ApiDatabase.createInstance(this);
+        notifyForEachFollowing();
         return GcmNetworkManager.RESULT_SUCCESS;
     }
-    public void notifyAll(ApiDatabase db) {
+    public void notifyForEachFollowing() {
         Collection<Following> all = db.followingDao().getAll();
-        Collection<BestScore> newScores;
         for (Following f : all) {
-            newScores = OsuAPI.getApi().getBestScoresBy(f.id).blockingGet();
-            for (BestScore score : newScores)
-                if(score.isNewerThan(f.realTimestamp)) {
-                Beatmap beatmap = OsuAPI.getBeatmapBy(score.getBeatmapId());
-                    pushNotification(f.username, score, beatmap);
-                }
-            f.realTimestamp = new Date().getTime();
-            db.followingDao().insert(f);
+            OsuAPI.getApi().getBestScoresBy(f.id).subscribe((scores)->this.pushNotificationsFor(f,scores),
+                    Throwable::printStackTrace);
         }
     }
+
+    public void pushNotificationsFor(Following f,List<BestScore> scores){
+        for (BestScore score : scores)
+            if(score.isNewerThan(f.realTimestamp)) {
+                Beatmap beatmap = OsuAPI.getBeatmapBy(score.getBeatmapId());
+                pushNotification(f.username, score, beatmap);
+            }
+        f.realTimestamp = new Date().getTime();
+        db.followingDao().insert(f);
+    }
+
     public void pushNotification(String username,BestScore score,Beatmap beatmap){
-        FeedItem feeditem = FeedItemFactory.getFeeditem(username, score, beatmap);
+        FeedItem feeditem = FeedItemFactory.getFeeditem(username, score, beatmap); // Todo fix consecutive notifications
         Notification.Builder builder = new Notification.Builder(this);
         builder.setSmallIcon(R.mipmap.ic_launcher);
         builder.setContentTitle(username);
