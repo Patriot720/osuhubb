@@ -1,10 +1,8 @@
 package example.cerki.osuhub.API;
 
-import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Room;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
@@ -18,11 +16,9 @@ import example.cerki.osuhub.API.ApiDatabase.ApiDatabase;
 import example.cerki.osuhub.API.POJO.Beatmap;
 import example.cerki.osuhub.API.POJO.BestScore;
 import example.cerki.osuhub.API.POJO.User;
-import example.cerki.osuhub.Feed.FeedItem;
+import example.cerki.osuhub.API.POJO.FeedItem;
 import example.cerki.osuhub.Feed.FeedItemFactory;
-import io.reactivex.Flowable;
 import io.reactivex.Single;
-import retrofit2.Call;
 
 import static org.junit.Assert.*;
 

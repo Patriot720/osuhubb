@@ -3,13 +3,8 @@ package example.cerki.osuhub.Feed;
 import android.annotation.SuppressLint;
 import android.text.format.DateUtils;
 
-import org.json.JSONException;
-
-import java.io.IOException;
-import java.text.ParseException;
-import java.util.Date;
-
 import example.cerki.osuhub.API.POJO.BestScore;
+import example.cerki.osuhub.API.POJO.FeedItem;
 import example.cerki.osuhub.Mods;
 import example.cerki.osuhub.Util;
 

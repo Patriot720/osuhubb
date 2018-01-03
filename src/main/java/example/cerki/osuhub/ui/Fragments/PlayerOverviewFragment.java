@@ -1,4 +1,4 @@
-package example.cerki.osuhub.PlayerFragment.Overview;
+package example.cerki.osuhub.ui.Fragments;
 
 
 import android.os.Bundle;
@@ -11,13 +11,13 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
-import java.lang.reflect.Field;
 import java.util.Date;
 
 import example.cerki.osuhub.API.ApiDatabase.ApiDatabase;
 import example.cerki.osuhub.API.ApiDatabase.FollowingDao;
 import example.cerki.osuhub.API.OsuAPI;
 import example.cerki.osuhub.API.POJO.Following;
+import example.cerki.osuhub.PlayerFragment.Overview.AvatarTask;
 import example.cerki.osuhub.R;
 import example.cerki.osuhub.Util;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -25,10 +25,10 @@ import io.reactivex.schedulers.Schedulers;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link OverviewFragment#newInstance} factory method to
+ * Use the {@link PlayerOverviewFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class OverviewFragment extends Fragment {
+public class PlayerOverviewFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "mUserId";
     private static final String ARG_PARAM2 = "mUsername";
@@ -37,7 +37,7 @@ public class OverviewFragment extends Fragment {
     private String mUsername;
 
 
-    public OverviewFragment() {
+    public PlayerOverviewFragment() {
         // Required empty public constructor
     }
 
@@ -48,8 +48,8 @@ public class OverviewFragment extends Fragment {
      * @param userId Parameter 1.
      * @return A new instance of fragment OverviewFragment.
      */
-    public static OverviewFragment newInstance(int userId, String username) {
-        OverviewFragment fragment = new OverviewFragment();
+    public static PlayerOverviewFragment newInstance(int userId, String username) {
+        PlayerOverviewFragment fragment = new PlayerOverviewFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_PARAM1, userId);
         args.putString(ARG_PARAM2, username);

@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:gravity="top|center"
     android:orientation="vertical"
-    tools:context="example.cerki.osuhub.PlayerFragment.Overview.OverviewFragment">
+    tools:context="example.cerki.osuhub.ui.Fragments.PlayerOverviewFragment">
 
 
     <LinearLayout

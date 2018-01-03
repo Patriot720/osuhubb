@@ -17,9 +17,9 @@ import example.cerki.osuhub.API.POJO.User;
 import example.cerki.osuhub.UserParser;
 
 
-class Task extends AsyncTask<String,Void,List<User>> {
+public class Task extends AsyncTask<String,Void,List<User>> {
     public static final String REQUEST_URL = "https://osu.ppy.sh/rankings/osu/performance";
-    interface WorkDoneListener{
+    public interface WorkDoneListener{
         void workDone(List<User> users);
     }
     private WorkDoneListener workDoneListener;

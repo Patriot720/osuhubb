@@ -1,11 +1,8 @@
-package example.cerki.osuhub.List;
-
-import android.os.Bundle;
+package example.cerki.osuhub.ui.Fragments;
 
 import example.cerki.osuhub.API.ApiDatabase.ApiDatabase;
 import example.cerki.osuhub.API.POJO.User;
-import example.cerki.osuhub.GenericRecyclerFragment;
-import example.cerki.osuhub.PlayerFragment.PlayerFragment;
+import example.cerki.osuhub.List.Task;
 import example.cerki.osuhub.R;
 import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;

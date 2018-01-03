@@ -1,4 +1,4 @@
-package example.cerki.osuhub.PlayerFragment.RecentPlays;
+package example.cerki.osuhub.ui.Fragments;
 
 import android.view.View;
 
@@ -7,13 +7,13 @@ import java.util.List;
 
 import example.cerki.osuhub.API.OsuAPI;
 import example.cerki.osuhub.API.POJO.BestScore;
-import example.cerki.osuhub.FeedRecyclerFragment;
+import example.cerki.osuhub.PlayerFragment.RecentPlays.RecentScoresTask;
 import example.cerki.osuhub.R;
 import io.reactivex.schedulers.Schedulers;
 
 
 @SuppressWarnings("unchecked")
-public class RecentScoresFragment extends FeedRecyclerFragment{
+public class PlayerRecentScoresFragment extends FeedRecyclerFragment{
 
     @Override
     public int getLayoutResource() {
@@ -49,8 +49,8 @@ public class RecentScoresFragment extends FeedRecyclerFragment{
         initDataDatabase();
     }
 
-    public static RecentScoresFragment newInstance(int userId,String username){
-        RecentScoresFragment recentScoresFragment = new RecentScoresFragment();
+    public static PlayerRecentScoresFragment newInstance(int userId, String username){
+        PlayerRecentScoresFragment recentScoresFragment = new PlayerRecentScoresFragment();
         recentScoresFragment.setArguments(userId,username);
         return recentScoresFragment;
     }

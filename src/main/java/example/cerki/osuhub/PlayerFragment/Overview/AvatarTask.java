@@ -14,11 +14,11 @@ import java.net.URL;
 
 
 
-class AvatarTask extends AsyncTask<String,Void,Bitmap>{
+public class AvatarTask extends AsyncTask<String,Void,Bitmap>{
     AvatarTask(WorkDoneListener workDoneListener) {
         this.workDoneListener = workDoneListener;
     }
-    interface WorkDoneListener{
+    public interface WorkDoneListener{
         void workDone(Bitmap bitmap);
     }
 

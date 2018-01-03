@@ -12,6 +12,6 @@
     android:layout_height="match_parent"
     android:layoutAnimation="@anim/layout_animation_fall_down"
     app:layoutManager="LinearLayoutManager"
-    tools:context="example.cerki.osuhub.List.ListFragment"
+    tools:context="example.cerki.osuhub.ui.Fragments.ListFragment"
     tools:listitem="@layout/fragment_player" />
     </android.support.v4.widget.SwipeRefreshLayout>

@@ -1,4 +1,4 @@
-package example.cerki.osuhub.Feed;
+package example.cerki.osuhub.API.POJO;
 
 import android.support.annotation.NonNull;
 import android.view.View;

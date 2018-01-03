@@ -1,4 +1,4 @@
-package example.cerki.osuhub.PlayerFragment;
+package example.cerki.osuhub.ui.Fragments;
 
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -7,9 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import example.cerki.osuhub.PlayerFragment.Overview.OverviewFragment;
-import example.cerki.osuhub.PlayerFragment.RecentPlays.RecentScoresFragment;
-import example.cerki.osuhub.PlayerFragment.TopPlays.TopPlaysFragment;
+import example.cerki.osuhub.ui.Adapters.PagerAdapter;
 import example.cerki.osuhub.R;
 
 /**
@@ -72,9 +70,9 @@ public class PlayerFragment extends android.support.v4.app.Fragment {
 
     private void setupPager(ViewPager pager) {
         PagerAdapter adapter = new PagerAdapter(getChildFragmentManager());
-        adapter.addFragment(OverviewFragment.newInstance(userId, mUsername),getString(R.string.player_overview));
-        adapter.addFragment(RecentScoresFragment.newInstance(userId,mUsername),getString(R.string.player_recent));
-        adapter.addFragment(TopPlaysFragment.newInstance(userId),getString(R.string.player_top));  // Todo remove these two arguments userId and username;
+        adapter.addFragment(PlayerOverviewFragment.newInstance(userId, mUsername),getString(R.string.player_overview));
+        adapter.addFragment(PlayerRecentScoresFragment.newInstance(userId,mUsername),getString(R.string.player_recent));
+        adapter.addFragment(PlayerTopPlaysFragment.newInstance(userId),getString(R.string.player_top));  // Todo remove these two arguments userId and username;
         pager.setAdapter(adapter);
     }
 

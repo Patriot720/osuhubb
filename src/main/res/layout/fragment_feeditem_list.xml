@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layoutManager="LinearLayoutManager"
-        tools:context="example.cerki.osuhub.Feed.FeedItemFragment"
+        tools:context="example.cerki.osuhub.ui.Fragments.FeedItemFragment"
         tools:listitem="@layout/fragment_feeditem">
 
     </android.support.v7.widget.RecyclerView>

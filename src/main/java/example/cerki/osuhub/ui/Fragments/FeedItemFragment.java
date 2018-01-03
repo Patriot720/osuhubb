@@ -1,6 +1,7 @@
-package example.cerki.osuhub.Feed;
+package example.cerki.osuhub.ui.Fragments;
 
-import example.cerki.osuhub.FeedRecyclerFragment;
+import example.cerki.osuhub.Feed.NewFeedTaskDb;
+import example.cerki.osuhub.Feed.NewFeedTaskNetwork;
 import example.cerki.osuhub.R;
 
 

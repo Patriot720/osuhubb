@@ -1,4 +1,4 @@
-package example.cerki.osuhub.PlayerFragment.TopPlays;
+package example.cerki.osuhub.ui.Fragments;
 
 import android.content.Intent;
 
@@ -6,15 +6,14 @@ import java.util.Collections;
 
 import example.cerki.osuhub.API.OsuAPI;
 import example.cerki.osuhub.ui.Activities.BeatmapActivity;
-import example.cerki.osuhub.Feed.FeedItem;
-import example.cerki.osuhub.FeedRecyclerFragment;
+import example.cerki.osuhub.API.POJO.FeedItem;
 import example.cerki.osuhub.PlayerFragment.RecentPlays.RecentScoresTask;
 import example.cerki.osuhub.R;
 import io.reactivex.schedulers.Schedulers;
 
 
 @SuppressWarnings("unchecked")
-public class TopPlaysFragment extends FeedRecyclerFragment{
+public class PlayerTopPlaysFragment extends FeedRecyclerFragment{
 
     @Override
     protected int getEndlessScrollPageSize() {
@@ -34,8 +33,8 @@ public class TopPlaysFragment extends FeedRecyclerFragment{
     }
 
 
-    public static TopPlaysFragment newInstance(int userId) {
-        TopPlaysFragment fragment = new TopPlaysFragment();
+    public static PlayerTopPlaysFragment newInstance(int userId) {
+        PlayerTopPlaysFragment fragment = new PlayerTopPlaysFragment();
         fragment.setArguments(userId);
         return fragment;
     }

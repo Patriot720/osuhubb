@@ -1,8 +1,6 @@
 package example.cerki.osuhub.ui.Activities;
 
-import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
@@ -17,15 +15,13 @@ import android.view.MenuItem;
 
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
 
-import eu.davidea.flexibleadapter.FlexibleAdapter;
-import eu.davidea.flexibleadapter.utils.Log;
 import example.cerki.osuhub.API.ApiDatabase.ApiDatabase;
 import example.cerki.osuhub.API.OsuAPI;
 import example.cerki.osuhub.API.POJO.User;
-import example.cerki.osuhub.Feed.FeedItemFragment;
-import example.cerki.osuhub.List.ListFragment;
+import example.cerki.osuhub.ui.Fragments.FeedItemFragment;
+import example.cerki.osuhub.ui.Fragments.ListFragment;
 import example.cerki.osuhub.Notifications.NotificationsService;
-import example.cerki.osuhub.PlayerFragment.PlayerFragment;
+import example.cerki.osuhub.ui.Fragments.PlayerFragment;
 import example.cerki.osuhub.R;
 import example.cerki.osuhub.Searching.SearchHandler;
 import io.reactivex.android.schedulers.AndroidSchedulers;

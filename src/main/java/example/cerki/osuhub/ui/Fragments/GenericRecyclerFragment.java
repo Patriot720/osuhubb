@@ -1,4 +1,4 @@
-package example.cerki.osuhub;
+package example.cerki.osuhub.ui.Fragments;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -19,6 +19,8 @@ import java.util.List;
 import eu.davidea.flexibleadapter.FlexibleAdapter;
 import eu.davidea.flexibleadapter.items.AbstractFlexibleItem;
 import example.cerki.osuhub.List.ProgressItem;
+import example.cerki.osuhub.R;
+import example.cerki.osuhub.Util;
 
 
 @SuppressWarnings("unchecked")

@@ -1,4 +1,4 @@
-package example.cerki.osuhub.BeatmapActivity;
+package example.cerki.osuhub.ui;
 
 import android.view.View;
 

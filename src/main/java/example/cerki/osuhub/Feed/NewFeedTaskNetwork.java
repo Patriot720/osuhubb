@@ -11,8 +11,6 @@ import example.cerki.osuhub.API.ApiDatabase.BestScoreDao;
 import example.cerki.osuhub.API.OsuAPI;
 import example.cerki.osuhub.API.POJO.*;
 import example.cerki.osuhub.API.POJO.Beatmap;
-import io.reactivex.Completable;
-import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by cerki on 11-Dec-17.

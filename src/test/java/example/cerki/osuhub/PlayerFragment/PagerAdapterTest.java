@@ -8,6 +8,8 @@ import android.support.v4.app.FragmentManager;
 import org.junit.Before;
 import org.junit.Test;
 
+import example.cerki.osuhub.ui.Adapters.PagerAdapter;
+
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 

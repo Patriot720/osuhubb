@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -12,23 +11,25 @@ import android.view.MenuItem;
 
 import example.cerki.osuhub.API.OsuAPI;
 import example.cerki.osuhub.API.POJO.Score;
-import example.cerki.osuhub.BeatmapActivity.ScoreBoardFragment;
 import example.cerki.osuhub.R;
 import example.cerki.osuhub.ui.Dialogs.ScoreboardSortingDialog;
+import example.cerki.osuhub.ui.FlexibleAdapterExtension;
+import example.cerki.osuhub.ui.ViewWrappers.ScoreboardViewWrap;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
-public class BeatmapActivity extends AppCompatActivity implements ScoreBoardFragment.OnListFragmentInteractionListener {
+public class BeatmapActivity extends AppCompatActivity{
 
-    private int beatmap_id;
-    private ScoreBoardFragment mScoreboard;
+    private int beatmapId;
     private ScoreboardSortingDialog dialog;
+    private FlexibleAdapterExtension<Score> adapter;
+    private ScoreboardViewWrap scoreboardViewWrap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_beatmap);
-        beatmap_id = getIntent().getIntExtra("beatmap_id", 0);
+        beatmapId = getIntent().getIntExtra("beatmapId", 0);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -37,48 +38,48 @@ public class BeatmapActivity extends AppCompatActivity implements ScoreBoardFrag
 
         dialog = new ScoreboardSortingDialog(this,this::updateScoreboard);
 
-        initFragments(); // Todo just do recycler
+        initScoreboard();
     }
 
 
-    public ScoreBoardFragment getScoreboard() {
-        return mScoreboard;
-    }
 
     protected void updateScoreboard() {
         int modsIntegerValue = dialog.getModsIntegerValue();
         String username = dialog.getUsername();
         if(dialog.isEmpty()) {
-            mScoreboard.initData();
+            initData();
             return;
         }
-        mScoreboard.setUpdating(true);
         if (dialog.isUsernameEmpty())
             updateByMods(modsIntegerValue);
         else
             updateByUsername(username);
     }
 
-    private void updateByUsername(String username) {
-        OsuAPI.getApi().getScoresBy(beatmap_id, username)
+    private void initData() {
+        OsuAPI.getApi().getScoresBy(beatmapId)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(mScoreboard::updateData);
+                .subscribe((items)-> adapter.updateDataSet(items));
+    }
+
+    private void updateByUsername(String username) {
+        OsuAPI.getApi().getScoresBy(beatmapId, username)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe((items)->adapter.updateDataSet(items));
     }
 
     private void updateByMods(int modsIntegerValue) {
-        OsuAPI.getApi().getScoresBy(beatmap_id, modsIntegerValue)
+        OsuAPI.getApi().getScoresBy(beatmapId, modsIntegerValue)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(mScoreboard::updateData);
+                .subscribe((items)->adapter.updateDataSet(items));
     }
 
-    private void initFragments() {
-        FragmentManager manager = getSupportFragmentManager();
-        mScoreboard = ScoreBoardFragment.newInstance(beatmap_id);
-        manager.beginTransaction()
-                .replace(R.id.scoreboard_fragment, mScoreboard)
-                .commit();
+    private void initScoreboard(){
+        adapter = new FlexibleAdapterExtension<Score>(null,this); // todo  ¯\_(ツ)_/¯
+        scoreboardViewWrap = new ScoreboardViewWrap(findViewById(R.id.scoreboard_frame), adapter);
     }
 
     @Override
@@ -97,14 +98,9 @@ public class BeatmapActivity extends AppCompatActivity implements ScoreBoardFrag
     }
 
     private void openInBrowser() {
-        String url = "https://osu.ppy.sh/b/" + beatmap_id; // Todo
+        String url = "https://osu.ppy.sh/b/" + beatmapId; // Todo
         Intent intent = new Intent(Intent.ACTION_VIEW);
         intent.setData(Uri.parse(url));
         startActivity(intent);
-    }
-
-    @Override
-    public void onListFragmentInteraction(Score item) {
-
     }
 }

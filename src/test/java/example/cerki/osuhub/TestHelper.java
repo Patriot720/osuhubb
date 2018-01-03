@@ -16,8 +16,6 @@ import java.lang.reflect.Modifier;
 import java.net.URL;
 import java.util.Arrays;
 
-import example.cerki.osuhub.Feed.Beatmap;
-
 import static org.junit.Assert.assertEquals;
 
 public class TestHelper {

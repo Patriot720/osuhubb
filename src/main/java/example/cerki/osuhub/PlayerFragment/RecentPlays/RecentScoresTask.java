@@ -6,10 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import example.cerki.osuhub.API.OsuAPI;
-import example.cerki.osuhub.API.OsuApiService;
 import example.cerki.osuhub.API.POJO.Beatmap;
 import example.cerki.osuhub.API.POJO.BestScore;
-import example.cerki.osuhub.Feed.FeedItem;
+import example.cerki.osuhub.API.POJO.FeedItem;
 import example.cerki.osuhub.Feed.FeedItemFactory;
 
 /**
