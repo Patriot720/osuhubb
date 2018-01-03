@@ -7,8 +7,8 @@ import org.robolectric.RobolectricTestRunner;
 
 import java.util.List;
 
-import example.cerki.osuhub.API.POJO.Beatmap;
-import example.cerki.osuhub.Util;
+import example.cerki.osuhub.Data.POJO.Beatmap;
+import example.cerki.osuhub.Util.Util;
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;

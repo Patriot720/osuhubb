@@ -13,13 +13,13 @@ import android.widget.ToggleButton;
 
 import java.util.Date;
 
-import example.cerki.osuhub.API.ApiDatabase.ApiDatabase;
-import example.cerki.osuhub.API.ApiDatabase.FollowingDao;
-import example.cerki.osuhub.API.OsuAPI;
-import example.cerki.osuhub.API.POJO.Following;
-import example.cerki.osuhub.PlayerFragment.Overview.AvatarTask;
+import example.cerki.osuhub.Data.ApiDatabase.ApiDatabase;
+import example.cerki.osuhub.Data.ApiDatabase.Dao.FollowingDao;
+import example.cerki.osuhub.Data.Api.OsuAPI;
+import example.cerki.osuhub.Data.POJO.Following;
+import example.cerki.osuhub.Logic.Tasks.PlayerAvatarTask;
 import example.cerki.osuhub.R;
-import example.cerki.osuhub.Util;
+import example.cerki.osuhub.Util.Util;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
@@ -110,7 +110,7 @@ public class PlayerOverviewFragment extends Fragment {
     private void loadAvatarInto(View view) {
         final ImageView avatar = view.findViewById(R.id.player_avatar);
         final ProgressBar progressBar = view.findViewById(R.id.avatar_progressbar);
-        new AvatarTask(bitmap -> {
+        new PlayerAvatarTask(bitmap -> {
             avatar.setImageBitmap(bitmap);
             avatar.setVisibility(View.VISIBLE);
             progressBar.setVisibility(View.GONE);

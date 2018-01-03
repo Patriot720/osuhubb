@@ -1,7 +1,7 @@
 package example.cerki.osuhub.ui.Fragments;
 
-import example.cerki.osuhub.Feed.NewFeedTaskDb;
-import example.cerki.osuhub.Feed.NewFeedTaskNetwork;
+import example.cerki.osuhub.Logic.Tasks.FeedDbTask;
+import example.cerki.osuhub.Logic.Tasks.FeedNetworkTask;
 import example.cerki.osuhub.R;
 
 
@@ -15,7 +15,7 @@ public class FeedItemFragment extends FeedRecyclerFragment{
 
     @Override
     public void initDataDatabase() {
-        new NewFeedTaskDb(items -> {
+        new FeedDbTask(items -> {
             this.onUpdate(items);
             updateData();
         }).execute();
@@ -24,7 +24,7 @@ public class FeedItemFragment extends FeedRecyclerFragment{
     @Override
     public void updateData() {
         setUpdating(true);
-        new NewFeedTaskNetwork(this::addItemsOnTop).execute();
+        new FeedNetworkTask(this::addItemsOnTop).execute();
     }
     public static FeedItemFragment newInstance(){
         return new FeedItemFragment();

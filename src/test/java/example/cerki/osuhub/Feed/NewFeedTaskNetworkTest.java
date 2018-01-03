@@ -2,16 +2,13 @@ package example.cerki.osuhub.Feed;
 
 import org.junit.Before;
 import org.junit.Ignore;
-import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
-import example.cerki.osuhub.API.ApiDatabase.ApiDatabase;
-import example.cerki.osuhub.API.OsuAPI;
-import example.cerki.osuhub.API.OsuApiService;
-
-import static org.junit.Assert.*;
+import example.cerki.osuhub.Data.ApiDatabase.ApiDatabase;
+import example.cerki.osuhub.Data.Api.OsuAPI;
+import example.cerki.osuhub.Data.Api.OsuApiService;
 
 /**
  * Created by cerki on 11-Dec-17.

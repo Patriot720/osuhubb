@@ -7,7 +7,7 @@ import org.robolectric.RobolectricTestRunner;
 import java.util.Date;
 import java.util.TimeZone;
 
-import example.cerki.osuhub.Util;
+import example.cerki.osuhub.Util.Util;
 
 import static org.junit.Assert.assertTrue;
 

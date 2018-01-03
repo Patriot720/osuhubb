@@ -12,7 +12,8 @@ import org.junit.runners.JUnit4;
 
 import java.io.File;
 
-import example.cerki.osuhub.API.POJO.User;
+import example.cerki.osuhub.Data.POJO.User;
+import example.cerki.osuhub.Logic.UserParser;
 
 import static example.cerki.osuhub.TestHelper.*;
 import static org.junit.Assert.assertEquals;

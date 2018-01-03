@@ -8,11 +8,10 @@ import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
-import example.cerki.osuhub.API.ApiDatabase.ApiDatabase;
-import example.cerki.osuhub.API.POJO.Following;
+import example.cerki.osuhub.Data.ApiDatabase.ApiDatabase;
+import example.cerki.osuhub.Data.POJO.Following;
 import io.reactivex.Completable;
 import io.reactivex.Maybe;
-import io.reactivex.Scheduler;
 import io.reactivex.schedulers.Schedulers;
 
 import static org.junit.Assert.*;

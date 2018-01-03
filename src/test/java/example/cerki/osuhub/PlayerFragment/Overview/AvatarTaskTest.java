@@ -9,7 +9,7 @@ import org.junit.Test;
 
 import java.io.File;
 
-import example.cerki.osuhub.PlayerFragment.Overview.AvatarTask;
+import example.cerki.osuhub.Logic.Tasks.PlayerAvatarTask;
 
 import static org.junit.Assert.*;
 import static org.mockito.Matchers.any;
@@ -25,7 +25,7 @@ public class AvatarTaskTest {
 
     @Test
     public void getAvatar() throws Exception {
-        String url = new AvatarTask(new AvatarTask.WorkDoneListener() {
+        String url = new PlayerAvatarTask(new PlayerAvatarTask.WorkDoneListener() {
             @Override
             public void workDone(Bitmap bitmap) {
 

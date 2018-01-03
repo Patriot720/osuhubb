@@ -9,8 +9,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import example.cerki.osuhub.API.OsuAPI;
-import example.cerki.osuhub.API.POJO.Score;
+import example.cerki.osuhub.Data.Api.OsuAPI;
+import example.cerki.osuhub.Data.POJO.Score;
 import example.cerki.osuhub.R;
 import example.cerki.osuhub.ui.Dialogs.ScoreboardSortingDialog;
 import example.cerki.osuhub.ui.FlexibleAdapterExtension;

@@ -11,13 +11,14 @@ import org.robolectric.RuntimeEnvironment;
 import java.util.Date;
 import java.util.List;
 
-import example.cerki.osuhub.API.ApiDatabase.ApiDatabase;
-import example.cerki.osuhub.API.OsuAPI;
-import example.cerki.osuhub.API.OsuApiService;
-import example.cerki.osuhub.API.POJO.Beatmap;
-import example.cerki.osuhub.API.POJO.BestScore;
-import example.cerki.osuhub.API.POJO.Following;
-import example.cerki.osuhub.Util;
+import example.cerki.osuhub.Data.ApiDatabase.ApiDatabase;
+import example.cerki.osuhub.Data.Api.OsuAPI;
+import example.cerki.osuhub.Data.Api.OsuApiService;
+import example.cerki.osuhub.Data.POJO.Beatmap;
+import example.cerki.osuhub.Data.POJO.BestScore;
+import example.cerki.osuhub.Data.POJO.Following;
+import example.cerki.osuhub.Logic.NotificationsService;
+import example.cerki.osuhub.Util.Util;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;

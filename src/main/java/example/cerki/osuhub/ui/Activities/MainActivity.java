@@ -15,15 +15,15 @@ import android.view.MenuItem;
 
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
 
-import example.cerki.osuhub.API.ApiDatabase.ApiDatabase;
-import example.cerki.osuhub.API.OsuAPI;
-import example.cerki.osuhub.API.POJO.User;
+import example.cerki.osuhub.Data.ApiDatabase.ApiDatabase;
+import example.cerki.osuhub.Data.Api.OsuAPI;
+import example.cerki.osuhub.Data.POJO.User;
 import example.cerki.osuhub.ui.Fragments.FeedItemFragment;
 import example.cerki.osuhub.ui.Fragments.ListFragment;
-import example.cerki.osuhub.Notifications.NotificationsService;
+import example.cerki.osuhub.Logic.NotificationsService;
 import example.cerki.osuhub.ui.Fragments.PlayerFragment;
 import example.cerki.osuhub.R;
-import example.cerki.osuhub.Searching.SearchHandler;
+import example.cerki.osuhub.Logic.SearchHandler;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import jonathanfinerty.once.Once;

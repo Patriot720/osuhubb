@@ -18,9 +18,9 @@ import java.util.List;
 
 import eu.davidea.flexibleadapter.FlexibleAdapter;
 import eu.davidea.flexibleadapter.items.AbstractFlexibleItem;
-import example.cerki.osuhub.List.ProgressItem;
+import example.cerki.osuhub.Data.POJO.ProgressItem;
 import example.cerki.osuhub.R;
-import example.cerki.osuhub.Util;
+import example.cerki.osuhub.Util.Util;
 
 
 @SuppressWarnings("unchecked")

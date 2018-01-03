@@ -4,10 +4,9 @@ import android.content.Intent;
 
 import java.util.List;
 
-import example.cerki.osuhub.API.POJO.BestScore;
+import example.cerki.osuhub.Data.POJO.BestScore;
 import example.cerki.osuhub.ui.Activities.BeatmapActivity;
-import example.cerki.osuhub.API.POJO.FeedItem;
-import example.cerki.osuhub.ui.Fragments.GenericRecyclerFragment;
+import example.cerki.osuhub.Data.POJO.FeedItem;
 
 /**
  * Created by cerki on 27.12.2017.

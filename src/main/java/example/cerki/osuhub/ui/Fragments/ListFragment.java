@@ -1,8 +1,8 @@
 package example.cerki.osuhub.ui.Fragments;
 
-import example.cerki.osuhub.API.ApiDatabase.ApiDatabase;
-import example.cerki.osuhub.API.POJO.User;
-import example.cerki.osuhub.List.Task;
+import example.cerki.osuhub.Data.ApiDatabase.ApiDatabase;
+import example.cerki.osuhub.Data.POJO.User;
+import example.cerki.osuhub.Logic.Tasks.ListTask;
 import example.cerki.osuhub.R;
 import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -42,7 +42,7 @@ public class ListFragment extends GenericRecyclerFragment<User>{
 
     @Override
     public void updateData() {
-        new Task(this::onUpdate).loadUsers();
+        new ListTask(this::onUpdate).loadUsers();
     }
 
     public static ListFragment newInstance() {
@@ -51,6 +51,6 @@ public class ListFragment extends GenericRecyclerFragment<User>{
 
     @Override
     public void onLoadMore(int lastPosition, int currentPage) {
-        new Task(getAdapter()::onLoadMoreComplete).loadUsersFromPage(currentPage+1);
+        new ListTask(getAdapter()::onLoadMoreComplete).loadUsersFromPage(currentPage+1);
     }
 }

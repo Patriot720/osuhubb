@@ -9,9 +9,9 @@ import org.robolectric.RuntimeEnvironment;
 import java.util.Calendar;
 import java.util.Date;
 
-import example.cerki.osuhub.API.ApiDatabase.ApiDatabase;
-import example.cerki.osuhub.API.POJO.BestScore;
-import example.cerki.osuhub.Util;
+import example.cerki.osuhub.Data.ApiDatabase.ApiDatabase;
+import example.cerki.osuhub.Data.POJO.BestScore;
+import example.cerki.osuhub.Util.Util;
 
 import static org.junit.Assert.*;
 

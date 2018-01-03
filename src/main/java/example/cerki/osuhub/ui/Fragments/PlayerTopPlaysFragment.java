@@ -4,10 +4,10 @@ import android.content.Intent;
 
 import java.util.Collections;
 
-import example.cerki.osuhub.API.OsuAPI;
+import example.cerki.osuhub.Data.Api.OsuAPI;
 import example.cerki.osuhub.ui.Activities.BeatmapActivity;
-import example.cerki.osuhub.API.POJO.FeedItem;
-import example.cerki.osuhub.PlayerFragment.RecentPlays.RecentScoresTask;
+import example.cerki.osuhub.Data.POJO.FeedItem;
+import example.cerki.osuhub.Logic.Tasks.RecentScoresTask;
 import example.cerki.osuhub.R;
 import io.reactivex.schedulers.Schedulers;
 

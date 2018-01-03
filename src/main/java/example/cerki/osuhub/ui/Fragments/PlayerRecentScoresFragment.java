@@ -5,9 +5,9 @@ import android.view.View;
 import java.util.ArrayList;
 import java.util.List;
 
-import example.cerki.osuhub.API.OsuAPI;
-import example.cerki.osuhub.API.POJO.BestScore;
-import example.cerki.osuhub.PlayerFragment.RecentPlays.RecentScoresTask;
+import example.cerki.osuhub.Data.Api.OsuAPI;
+import example.cerki.osuhub.Data.POJO.BestScore;
+import example.cerki.osuhub.Logic.Tasks.RecentScoresTask;
 import example.cerki.osuhub.R;
 import io.reactivex.schedulers.Schedulers;
 

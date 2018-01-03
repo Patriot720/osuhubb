@@ -19,9 +19,9 @@ import org.robolectric.RobolectricTestRunner;
 import java.util.List;
 
 import eu.davidea.flexibleadapter.FlexibleAdapter;
-import example.cerki.osuhub.API.OsuAPI;
-import example.cerki.osuhub.API.POJO.Score;
-import example.cerki.osuhub.Mods;
+import example.cerki.osuhub.Data.Api.OsuAPI;
+import example.cerki.osuhub.Data.POJO.Score;
+import example.cerki.osuhub.Util.Mods;
 import example.cerki.osuhub.R;
 import example.cerki.osuhub.ui.Activities.BeatmapActivity;
 

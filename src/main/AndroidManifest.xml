@@ -32,7 +32,7 @@
         </activity>
 
         <service
-            android:name=".Notifications.NotificationsService"
+            android:name=".Logic.NotificationsService"
             android:exported="true"
             android:permission="com.google.android.gms.permission.BIND_NETWORK_TASK_SERVICE">
             <intent-filter>
