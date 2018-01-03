@@ -15,7 +15,7 @@ import java.net.URL;
 
 
 public class PlayerAvatarTask extends AsyncTask<String,Void,Bitmap>{
-    PlayerAvatarTask(WorkDoneListener workDoneListener) {
+    public PlayerAvatarTask(WorkDoneListener workDoneListener) {
         this.workDoneListener = workDoneListener;
     }
     public interface WorkDoneListener{

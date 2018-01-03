@@ -1,10 +1,102 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+    <EditText
+        android:id="@+id/username"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <GridLayout
+        android:id="@+id/mods"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:columnCount="5"
+        android:rowCount="4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/username">
+
+        <com.github.zagum.switchicon.SwitchIconView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+
+            app:si_disabled_alpha=".3"
+            app:si_no_dash="true"
+            app:srcCompat="@drawable/ic_selection_mod_hidden" />
+
+        <com.github.zagum.switchicon.SwitchIconView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+
+            app:si_disabled_alpha=".3"
+            app:si_no_dash="true"
+            app:srcCompat="@drawable/ic_selection_mod_nofail" />
+
+        <com.github.zagum.switchicon.SwitchIconView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+
+            app:si_disabled_alpha=".3"
+            app:si_no_dash="true"
+            app:srcCompat="@drawable/ic_selection_mod_easy" />
+
+        <com.github.zagum.switchicon.SwitchIconView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+
+            app:si_disabled_alpha=".3"
+            app:si_no_dash="true"
+            app:srcCompat="@drawable/ic_selection_mod_halftime" />
+
+        <com.github.zagum.switchicon.SwitchIconView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+
+            app:si_disabled_alpha=".3"
+            app:si_no_dash="true"
+            app:srcCompat="@drawable/ic_selection_mod_doubletime" />
+
+        <com.github.zagum.switchicon.SwitchIconView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+
+            app:si_disabled_alpha=".3"
+            app:si_no_dash="true"
+            app:srcCompat="@drawable/ic_selection_mod_hardrock" />
+
+        <com.github.zagum.switchicon.SwitchIconView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+
+            app:si_disabled_alpha=".3"
+            app:si_no_dash="true"
+            app:srcCompat="@drawable/ic_selection_mod_perfect" />
+
+        <com.github.zagum.switchicon.SwitchIconView
+
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            app:si_disabled_alpha=".3"
+            app:si_no_dash="true"
+            app:srcCompat="@drawable/ic_selection_mod_spinout" />
+    </GridLayout>
 
     <Button
         android:id="@+id/clear_button"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="13dp"
+        android:text="@string/clear"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mods" />
 </android.support.constraint.ConstraintLayout>

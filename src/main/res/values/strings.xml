@@ -31,4 +31,5 @@
     <string name="player_overview">Overview</string>
     <string name="player_recent">Recent scores</string>
     <string name="player_top">Top scores</string>
+    <string name="clear">clear</string>
 </resources>

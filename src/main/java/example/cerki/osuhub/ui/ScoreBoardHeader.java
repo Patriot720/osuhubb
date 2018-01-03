@@ -22,7 +22,7 @@ class ScoreBoardHeader extends AbstractFlexibleItem<ScoreBoardHeader.ViewHolder>
 
     @Override
     public int getLayoutRes() {
-        return R.layout.fragment_scoreboard;
+        return R.layout.scoreboard_header;
     }
 
     @Override
