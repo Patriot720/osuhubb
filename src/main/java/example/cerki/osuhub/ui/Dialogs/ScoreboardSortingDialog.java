@@ -9,8 +9,6 @@ import android.widget.GridLayout;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.github.zagum.switchicon.SwitchIconView;
 
-import java.util.concurrent.Callable;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import example.cerki.osuhub.R;
@@ -29,7 +27,7 @@ public class ScoreboardSortingDialog {
     @BindView(R.id.clear_button)
     Button clearButton;
     @BindView(R.id.mods)
-    GridLayout mods;
+    GridLayout modsView;
     @BindView(R.id.username)
     EditText username;
 
@@ -57,12 +55,36 @@ public class ScoreboardSortingDialog {
     }
 
     private void clearMods() {
-        for (int i = 0; i < mods.getChildCount(); i++) {
-            SwitchIconView icon = (SwitchIconView) mods.getChildAt(i);
+        for (int i = 0; i < modsView.getChildCount(); i++) {
+            SwitchIconView icon = (SwitchIconView) modsView.getChildAt(i);
             icon.setIconEnabled(false);
         }
     }
 
+    public String getUsername(){
+        return username.getText().toString();
+    }
+
+    public boolean isEmpty(){
+        return getModsIntegerValue() == 0 && getUsername().isEmpty();
+    }
+    public boolean isUsernameEmpty(){
+        return getUsername().isEmpty();
+    }
+
+
+    public  int getModsIntegerValue(){
+        int childCount = modsView.getChildCount();
+        int mods = 0;
+        for (int i = 0; i < childCount; i++) {
+            SwitchIconView mod = (SwitchIconView) modsView.getChildAt(i);
+            if(mod.isIconEnabled()) {
+                int flag = Integer.parseInt((String) mod.getTag());
+                mods += flag;
+            }
+        }
+        return mods;
+    }
     private void clearUsername() {
         username.setText("");
     }

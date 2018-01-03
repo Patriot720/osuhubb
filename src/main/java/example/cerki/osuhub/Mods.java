@@ -54,20 +54,9 @@ public class Mods {
        if((flags & Relax2) == Relax2)builder.append("RX");
        return builder.toString();
     }
+
     @NonNull
     public static String parseFlags(String flags){
         return parseFlags(Integer.parseInt(flags));
-    }
-    public static int getModsIntegerValue(GridLayout modsView){
-        int childCount = modsView.getChildCount();
-        int mods = 0;
-        for (int i = 0; i < childCount; i++) {
-            SwitchIconView mod = (SwitchIconView) modsView.getChildAt(i);
-            if(mod.isIconEnabled()) {
-                int flag = Integer.parseInt((String) mod.getTag());
-                mods += flag;
-            }
-        }
-        return mods;
     }
 }

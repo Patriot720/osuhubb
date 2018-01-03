@@ -9,18 +9,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.GridLayout;
-
-import com.afollestad.materialdialogs.MaterialDialog;
-import com.github.zagum.switchicon.SwitchIconView;
 
 import example.cerki.osuhub.API.OsuAPI;
 import example.cerki.osuhub.API.POJO.Score;
 import example.cerki.osuhub.BeatmapActivity.ScoreBoardFragment;
-import example.cerki.osuhub.Mods;
 import example.cerki.osuhub.R;
 import example.cerki.osuhub.ui.Dialogs.ScoreboardSortingDialog;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -31,10 +23,6 @@ public class BeatmapActivity extends AppCompatActivity implements ScoreBoardFrag
     private int beatmap_id;
     private ScoreBoardFragment mScoreboard;
     private ScoreboardSortingDialog dialog;
-
-    public MaterialDialog getPopUpDialog() {
-        return dialog;
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,19 +46,17 @@ public class BeatmapActivity extends AppCompatActivity implements ScoreBoardFrag
     }
 
     protected void updateScoreboard() {
-        GridLayout mods = customView.findViewById(R.id.mods);
-        EditText  textView = customView.findViewById(R.id.username);
-        String text = textView.getText().toString();
-        int modsIntegerValue = Mods.getModsIntegerValue(mods);
-        if(modsIntegerValue == 0 && text.isEmpty()) {
+        int modsIntegerValue = dialog.getModsIntegerValue();
+        String username = dialog.getUsername();
+        if(dialog.isEmpty()) {
             mScoreboard.initData();
             return;
         }
         mScoreboard.setUpdating(true);
-        if (text.isEmpty())
+        if (dialog.isUsernameEmpty())
             updateByMods(modsIntegerValue);
         else
-            updateByUsername(text);
+            updateByUsername(username);
     }
 
     private void updateByUsername(String username) {
