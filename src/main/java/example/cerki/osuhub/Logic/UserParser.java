@@ -1,8 +1,16 @@
 package example.cerki.osuhub.Logic;
 
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 
+import java.io.IOException;
+import java.util.ArrayList;
+
+import example.cerki.osuhub.Data.ApiDatabase.ApiDatabase;
+import example.cerki.osuhub.Data.ApiDatabase.Dao.UserDao;
 import example.cerki.osuhub.Data.POJO.User;
 public class UserParser { // todo move to logic mb
     public static User parseUser(Element tr){
@@ -31,5 +39,5 @@ public class UserParser { // todo move to logic mb
         user.setCountry(country);
         return user;
     }
-
+    // Todo add move from task to here
 }

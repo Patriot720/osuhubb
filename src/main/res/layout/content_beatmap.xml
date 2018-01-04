@@ -34,13 +34,12 @@
         </FrameLayout>
 
         <ImageView
-            android:id="@+id/background"
+            android:id="@+id/preview_image"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:adjustViewBounds="false"
             android:cropToPadding="true"
-            android:scaleType="center"
-            app:srcCompat="@drawable/cover" />
+            android:scaleType="center" />
 
         <FrameLayout
             android:id="@+id/basic_info"

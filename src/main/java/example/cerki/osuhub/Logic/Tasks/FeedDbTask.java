@@ -7,10 +7,10 @@ import java.util.Collections;
 import java.util.List;
 
 import example.cerki.osuhub.Data.ApiDatabase.ApiDatabase;
-import example.cerki.osuhub.Data.POJO.*;
-import example.cerki.osuhub.Data.POJO.Beatmap;
 import example.cerki.osuhub.Data.Factories.FeedItemFactory;
-import example.cerki.osuhub.Logic.Tasks.FeedNetworkTask.WorkDoneListener;
+import example.cerki.osuhub.Data.POJO.Beatmap;
+import example.cerki.osuhub.Data.POJO.BestScore;
+import example.cerki.osuhub.Data.POJO.FeedItem;
 import example.cerki.osuhub.Util.Util;
 
 /**
@@ -18,6 +18,9 @@ import example.cerki.osuhub.Util.Util;
  */
 
 public class FeedDbTask extends AsyncTask<Void,Void,List<FeedItem>>{
+    public interface WorkDoneListener{
+        void workDone(List<FeedItem> items);
+    }
     private WorkDoneListener workDoneListener;
 
     public FeedDbTask(WorkDoneListener workDoneListener) {

@@ -1,74 +1,55 @@
 package example.cerki.osuhub.Logic.Tasks;
 
-import android.os.AsyncTask;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import example.cerki.osuhub.Data.ApiDatabase.ApiDatabase;
-import example.cerki.osuhub.Data.ApiDatabase.Dao.BestScoreDao;
 import example.cerki.osuhub.Data.Api.OsuAPI;
-import example.cerki.osuhub.Data.POJO.*;
-import example.cerki.osuhub.Data.POJO.Beatmap;
+import example.cerki.osuhub.Data.Api.OsuApiService;
+import example.cerki.osuhub.Data.ApiDatabase.ApiDatabase;
+import example.cerki.osuhub.Data.ApiDatabase.Dao.BeatmapDao;
+import example.cerki.osuhub.Data.ApiDatabase.Dao.BestScoreDao;
+import example.cerki.osuhub.Data.ApiDatabase.Dao.FollowingDao;
 import example.cerki.osuhub.Data.Factories.FeedItemFactory;
+import example.cerki.osuhub.Data.POJO.Beatmap;
+import example.cerki.osuhub.Data.POJO.BestScore;
+import example.cerki.osuhub.Data.POJO.FeedItem;
+import example.cerki.osuhub.Data.POJO.Following;
 
-/**
- * Created by cerki on 11-Dec-17.
- */
 
-public  class FeedNetworkTask extends AsyncTask<Void,Void,List<FeedItem>>{
-    public interface WorkDoneListener{
-        public void workDone(List<FeedItem> items);
-    }
-    private WorkDoneListener workDoneListener;
+public class FeedNetworkTask {
 
-    public FeedNetworkTask(WorkDoneListener workDoneListener) {
-        this.workDoneListener = workDoneListener;
+    public static List<FeedItem> getFeedItems() {
+        ApiDatabase instance = ApiDatabase.getInstance();
+        return getFeedItems(instance.followingDao(), instance.bestScoreDao(), OsuAPI.getApi(), instance.beatmapDao());
     }
 
-    @Override
-    protected List<FeedItem> doInBackground(Void... voids) {
-        List<Following> all = ApiDatabase.getInstance().followingDao().getAll();
+    public static List<FeedItem> getFeedItems(FollowingDao followingDao, BestScoreDao scoreDb, OsuApiService api, BeatmapDao beatmapDao) {
+        List<Following> all = followingDao.getAll();
         List<FeedItem> feedItems = new ArrayList<>();
-        BestScoreDao scoreDb = ApiDatabase.getInstance().bestScoreDao();
         for (Following following : all) {
-            List<BestScore> scores = getScoresFor(following.id);
-            List<BestScore> dbScores = scoreDb.getBy(following.id);
-            if(dbScores.equals(scores))
+            int pp = Math.round(api.getUserBy(following.id).blockingGet().get(0).getPpRaw());
+            if (following.pp == pp)
                 continue;
+            following.pp = pp;
+            followingDao.insert(following);
+            List<BestScore> scores = api.getBestScoresBy(following.id).blockingGet();
             for (BestScore score : scores) {
-                if(score.isWeekOld()) { // Todo speedup with firebase
-                    if(scoreDb.getBy(score.getUserId(),score.getDate()) == null) {
+                if (score.isWeekOld()) { // Todo speedup with firebase
+                    if (scoreDb.getBy(score.getUserId(), score.getDate()) == null)
                         scoreDb.insert(score);
-                        example.cerki.osuhub.Data.POJO.Beatmap beatmap = getBeatmap(score.getBeatmapId());
-                        FeedItem feeditem = FeedItemFactory.getFeeditem(following.username, score, beatmap);
-                        feedItems.add(feeditem);
+                    Beatmap beatmap = beatmapDao.getBy(score.getBeatmapId());
+                    if (beatmap == null) {
+                        beatmap = api.getBeatmapBy(score.getBeatmapId()).blockingGet().get(0);
+                        beatmapDao.insert(beatmap);
                     }
+                    FeedItem feeditem = FeedItemFactory.getFeeditem(following.username, score, beatmap);
+                    feedItems.add(feeditem);
                 }
             }
         }
         Collections.sort(feedItems);
         return feedItems;
-    }
 
-    private List<BestScore> getScoresFor(int userId) {
-        return OsuAPI.getApi().getBestScoresBy(userId).blockingGet(); // todo okhttp3.internal.http2.StreamResetException: stream was reset: INTERNAL_ERROR
     }
-    private Beatmap getBeatmap(int id){
-        Beatmap dbBeatmap = ApiDatabase.getInstance().beatmapDao().getBy(id);
-        if(dbBeatmap == null) { // TODO bad stuff
-            Beatmap beatmap = OsuAPI.getApi().getBeatmapBy(id).blockingGet().get(0);
-            ApiDatabase.getInstance().beatmapDao().insert(beatmap);
-            return beatmap;
-        }
-        return dbBeatmap;
-    }
-
-
-    @Override
-    protected void onPostExecute(List<FeedItem> feedItems) {
-        workDoneListener.workDone(feedItems);
-    }
-
 }

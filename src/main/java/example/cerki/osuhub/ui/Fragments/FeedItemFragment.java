@@ -3,6 +3,9 @@ package example.cerki.osuhub.ui.Fragments;
 import example.cerki.osuhub.Logic.Tasks.FeedDbTask;
 import example.cerki.osuhub.Logic.Tasks.FeedNetworkTask;
 import example.cerki.osuhub.R;
+import io.reactivex.Single;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
 
 @SuppressWarnings("unchecked")
@@ -24,8 +27,12 @@ public class FeedItemFragment extends FeedRecyclerFragment{
     @Override
     public void updateData() {
         setUpdating(true);
-        new FeedNetworkTask(this::addItemsOnTop).execute();
+        Single.fromCallable(FeedNetworkTask::getFeedItems) // Todo refactor
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(this::addItemsOnTop);
     }
+
     public static FeedItemFragment newInstance(){
         return new FeedItemFragment();
     }

@@ -1,6 +1,7 @@
 package example.cerki.osuhub.ui.Activities;
 
 import android.content.Intent;
+import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -8,7 +9,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import example.cerki.osuhub.Data.Api.OsuAPI;
 import example.cerki.osuhub.Data.POJO.Score;
 import example.cerki.osuhub.R;
@@ -24,19 +30,29 @@ public class BeatmapActivity extends AppCompatActivity{
     private ScoreboardSortingDialog dialog;
     private FlexibleAdapterExtension<Score> adapter;
     private ScoreboardViewWrap scoreboardViewWrap;
+    @BindView(R.id.preview_image)
+    ImageView previewImageView;
+    private String coverUrl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_beatmap);
         beatmapId = getIntent().getIntExtra("beatmapId", 0);
+        coverUrl = getIntent().getStringExtra("coverUrl");
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        ButterKnife.bind(this);
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(view -> dialog.show());
 
         dialog = new ScoreboardSortingDialog(this,this::updateScoreboard);
+
+        Glide.with(this)
+                .load(coverUrl)
+                .into(previewImageView);
 
         initScoreboard();
     }
@@ -75,6 +91,8 @@ public class BeatmapActivity extends AppCompatActivity{
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe((items)->adapter.updateDataSet(items));
+    }
+    private void loadPreview(){
     }
 
     private void initScoreboard(){

@@ -16,6 +16,7 @@ public class Following {
     public int id;
     public Long realTimestamp;
     public String username;
+    public int pp;
 
     @Ignore
     public Following(int id, Long realTimestamp, String username) {
@@ -24,7 +25,15 @@ public class Following {
         this.username = username;
     }
 
-    public Following(int id,String username){
+    @Ignore
+    public Following(int id, Long realTimestamp, String username, int pp) {
+        this.id = id;
+        this.realTimestamp = realTimestamp;
+        this.username = username;
+        this.pp = pp;
+    }
+
+    public Following(int id, String username){
         this.id = id;
         this.username = username;
         this.realTimestamp = new Date().getTime();
