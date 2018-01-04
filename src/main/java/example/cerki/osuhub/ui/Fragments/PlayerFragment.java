@@ -20,7 +20,7 @@ import example.cerki.osuhub.R;
 public class PlayerFragment extends android.support.v4.app.Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "userId";
-    private static final String ARG_PARAM2 = "mUsername" ;
+    private static final String ARG_PARAM2 = "mUsername";
 
     private int userId;
     private String mUsername;

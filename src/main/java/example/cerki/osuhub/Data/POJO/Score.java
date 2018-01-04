@@ -6,6 +6,7 @@ import android.widget.TextView;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.List;
 
 import eu.davidea.flexibleadapter.FlexibleAdapter;
@@ -17,7 +18,7 @@ import example.cerki.osuhub.R;
 /**
  * Created by cerki on 17.12.2017.
  */
-public class Score extends AbstractFlexibleItem<Score.ViewHolder>{
+public class Score extends AbstractFlexibleItem<Score.ViewHolder> implements Serializable{
         @SerializedName("score_id")
         @Expose
         private String scoreId;

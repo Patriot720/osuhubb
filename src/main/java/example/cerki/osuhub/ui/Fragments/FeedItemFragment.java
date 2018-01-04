@@ -10,8 +10,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import butterknife.BindView;
+import butterknife.BindViews;
 import butterknife.ButterKnife;
 import eu.davidea.flexibleadapter.FlexibleAdapter;
 import eu.davidea.flexibleadapter.items.IFlexible;
@@ -35,6 +37,8 @@ implements FlexibleAdapterExtension.OnDataUpdatedListener ,
     @BindView(R.id.refresh)
     SwipeRefreshLayout refreshLayout;
     private FlexibleAdapterExtension adapter;
+    @BindView(R.id.progress_bar)
+    ProgressBar progressBar;
 
     public FeedItemFragment() {
     }
@@ -84,5 +88,6 @@ implements FlexibleAdapterExtension.OnDataUpdatedListener ,
     @Override
     public void onDataUpdated() {
         refreshLayout.setRefreshing(false);
+        progressBar.setVisibility(View.GONE);
     }
 }

@@ -1,5 +1,6 @@
 package example.cerki.osuhub.ui.Fragments;
 
+import android.support.v4.app.Fragment;
 import android.view.View;
 
 import java.util.ArrayList;
@@ -13,14 +14,8 @@ import io.reactivex.schedulers.Schedulers;
 
 
 @SuppressWarnings("unchecked")
-public class PlayerRecentScoresFragment extends FeedRecyclerFragment{
+public class PlayerRecentScoresFragment extends Fragment {
 
-    @Override
-    public int getLayoutResource() {
-        return R.layout.fragment_feeditem_list;
-    }
-
-    @Override
     public void initDataDatabase() {
         OsuAPI.getApi().getRecentScoresBy(getUserId())
                 .subscribeOn(Schedulers.newThread())

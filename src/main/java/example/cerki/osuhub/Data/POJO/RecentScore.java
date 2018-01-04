@@ -3,11 +3,13 @@ package example.cerki.osuhub.Data.POJO;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
+
 /**
  * Created by cerki on 23.12.2017.
  */
 
-public class RecentScore {
+public class RecentScore implements Serializable{
     @SerializedName("beatmap_id")
     @Expose
     private String beatmapId;

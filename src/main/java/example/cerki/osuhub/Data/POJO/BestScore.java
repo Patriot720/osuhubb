@@ -7,6 +7,7 @@ import android.arch.persistence.room.TypeConverters;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import example.cerki.osuhub.Data.ApiDatabase.Converters;
@@ -14,7 +15,7 @@ import example.cerki.osuhub.Util.Util;
 
 @Entity(primaryKeys = {"beatmapId","userId"})
 @TypeConverters({Converters.class})
-public class BestScore {
+public class BestScore implements Serializable{
         @SerializedName("beatmap_id")
         @Expose
         private int beatmapId;
