@@ -42,7 +42,7 @@ public class ScoreboardSortingDialog {
         dialogView = dialog.getCustomView();
         if(dialogView == null)
             return;
-        ButterKnife.bind(dialogView);
+        ButterKnife.bind(this,dialogView);
 
         clearButton.setOnClickListener(l -> {
             clearMods();

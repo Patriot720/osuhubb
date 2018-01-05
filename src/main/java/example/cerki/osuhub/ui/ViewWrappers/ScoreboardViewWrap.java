@@ -14,6 +14,7 @@ import example.cerki.osuhub.ui.FlexibleAdapterExtension;
  * Created by cerki on 03.01.2018.
  */
 
+@SuppressWarnings("unchecked")
 public class ScoreboardViewWrap
 implements FlexibleAdapterExtension.OnDataUpdatedListener
 {
@@ -23,11 +24,13 @@ implements FlexibleAdapterExtension.OnDataUpdatedListener
     @BindView(R.id.progress_bar)
     ProgressBar mProgressBar;
 
-    public ScoreboardViewWrap(FrameLayout scoreboardFrame, FlexibleAdapterExtension adapter) {
+    public ScoreboardViewWrap(FrameLayout scoreboardFrame,FlexibleAdapterExtension adapter) {
         this.adapter = adapter;
-        ButterKnife.bind(scoreboardFrame);
+        adapter.addListener(this);
+        ButterKnife.bind(this,scoreboardFrame);
         mRecycler.setAdapter(adapter);
     }
+
 
     public boolean isUpdating(){
         return mRecycler.getVisibility() == View.GONE;

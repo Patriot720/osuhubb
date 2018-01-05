@@ -3,72 +3,40 @@ package example.cerki.osuhub.ui.Fragments;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ProgressBar;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import eu.davidea.flexibleadapter.FlexibleAdapter;
 import eu.davidea.flexibleadapter.items.IFlexible;
 import example.cerki.osuhub.Data.ApiDatabase.ApiDatabase;
 import example.cerki.osuhub.Data.POJO.User;
 import example.cerki.osuhub.Logic.Tasks.ListTask;
 import example.cerki.osuhub.R;
-import example.cerki.osuhub.ui.FlexibleAdapterExtension;
 import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
 
 @SuppressWarnings("unchecked")
-public class ListFragment extends Fragment
-implements FlexibleAdapterExtension.OnDataUpdatedListener ,
+public class ListFragment extends GenericRecyclerFragment
+implements
         FlexibleAdapter.OnItemClickListener,
         FlexibleAdapter.EndlessScrollListener{
-    @BindView(R.id.list)
-    RecyclerView recyclerView;
-    @BindView(R.id.refresh)
-    SwipeRefreshLayout refreshLayout;
-    private FlexibleAdapterExtension adapter;
-    @BindView(R.id.progress_bar)
-    ProgressBar progressBar;
-
-
-    protected void onItemClick(User item) {
-        android.support.v4.app.Fragment fragment = PlayerFragment.newInstance(item.getUserId(), item.getUsername());
-        getFragmentManager().beginTransaction().add(R.id.content_main, fragment)
-                .addToBackStack("stack")
-                .commit();
-    }
-
-    @Nullable
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_player_list, container, false);
-        ButterKnife.bind(view);
-        adapter = new FlexibleAdapterExtension<>(null,this);
-        recyclerView.setAdapter(adapter);
-        refreshLayout.setOnRefreshListener(this::updateData);
-        refreshLayout.setRefreshing(true);
-        updateData();
-        initDataDatabase();
-        return view;
-    }
 
     public void initDataDatabase() {
         Single.fromCallable(()-> ApiDatabase.getInstance().userDao().getAll())
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe((items)-> adapter.updateDataSet(items));
+                .subscribe((items)-> getAdapter().updateDataSet(items));
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        updateData();
+        initDataDatabase();
     }
 
     public void updateData() {
-        new ListTask(adapter::onLoadMoreComplete).loadUsers();
+        new ListTask(getAdapter()::updateDataSet).loadUsers();
     }
 
     public static ListFragment newInstance() {
@@ -76,17 +44,28 @@ implements FlexibleAdapterExtension.OnDataUpdatedListener ,
     }
 
     @Override
+    protected int getAdapterPageSize() {
+        return 50;
+    }
+
+    @Override
     public void noMoreLoad(int newItemsSize) {}
 
     public void onLoadMore(int lastPosition, int currentPage) {
-        new ListTask((items)->adapter.onLoadMoreComplete(items)).loadUsersFromPage(currentPage+1);
+        new ListTask((items)->getAdapter().onLoadMoreComplete(items)).loadUsersFromPage(currentPage+1);
     }
 
     @Override
     public boolean onItemClick(int position) {
-        IFlexible item = adapter.getItem(position);
+        IFlexible item = getAdapter().getItem(position);
         if(item instanceof User)
-            onItemClick((User) item);
+        {
+            User user = (User) item;
+            android.support.v4.app.Fragment fragment = PlayerFragment.newInstance(user.getUserId(), user.getUsername());
+            getFragmentManager().beginTransaction().add(R.id.content_main, fragment)
+                    .addToBackStack("stack")
+                    .commit();
+        }
         return true;
     }
 
@@ -96,4 +75,8 @@ implements FlexibleAdapterExtension.OnDataUpdatedListener ,
     progressBar.setVisibility(View.GONE);
     }
 
+    @Override
+    public void onRefresh() {
+        updateData();
+    }
 }

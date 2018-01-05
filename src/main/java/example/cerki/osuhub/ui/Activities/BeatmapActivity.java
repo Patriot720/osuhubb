@@ -55,6 +55,7 @@ public class BeatmapActivity extends AppCompatActivity{
                 .into(previewImageView);
 
         initScoreboard();
+        initData();
     }
 
 
@@ -96,8 +97,8 @@ public class BeatmapActivity extends AppCompatActivity{
     }
 
     private void initScoreboard(){
-        adapter = new FlexibleAdapterExtension<Score>(null,this); // todo  ¯\_(ツ)_/¯
-        scoreboardViewWrap = new ScoreboardViewWrap(findViewById(R.id.scoreboard_frame), adapter);
+        adapter = new FlexibleAdapterExtension<Score>(null,this);
+        scoreboardViewWrap = new ScoreboardViewWrap(findViewById(R.id.scoreboard_frame),adapter);
     }
 
     @Override
