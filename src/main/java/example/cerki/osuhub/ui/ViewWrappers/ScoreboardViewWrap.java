@@ -1,5 +1,6 @@
 package example.cerki.osuhub.ui.ViewWrappers;
 
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -24,11 +25,13 @@ implements FlexibleAdapterExtension.OnDataUpdatedListener
     @BindView(R.id.progress_bar)
     ProgressBar mProgressBar;
 
+
     public ScoreboardViewWrap(FrameLayout scoreboardFrame,FlexibleAdapterExtension adapter) {
         this.adapter = adapter;
         adapter.addListener(this);
         ButterKnife.bind(this,scoreboardFrame);
         mRecycler.setAdapter(adapter);
+        mRecycler.setLayoutManager(new LinearLayoutManager(scoreboardFrame.getContext()));
     }
 
 
@@ -44,6 +47,14 @@ implements FlexibleAdapterExtension.OnDataUpdatedListener
             mRecycler.setVisibility(View.VISIBLE);
             mProgressBar.setVisibility(View.GONE);
         }
+    }
+
+    public RecyclerView getRecycler() {
+        return mRecycler;
+    }
+
+    public ProgressBar getProgressBar() {
+        return mProgressBar;
     }
 
     @Override

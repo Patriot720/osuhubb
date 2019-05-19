@@ -19,6 +19,7 @@ import example.cerki.osuhub.R;
 
 @SuppressWarnings("WeakerAccess")
 public class ScoreboardSortingDialog {
+
     public interface OnPositiveListener{
         void onPositive();
     }
@@ -30,6 +31,18 @@ public class ScoreboardSortingDialog {
     GridLayout modsView;
     @BindView(R.id.username)
     EditText username;
+
+    public MaterialDialog getDialog() {
+        return dialog;
+    }
+
+    public Button getClearButton() {
+        return clearButton;
+    }
+
+    public GridLayout getModsView() {
+        return modsView;
+    }
 
     public ScoreboardSortingDialog(Context context, OnPositiveListener onPositive) {
         dialog = new MaterialDialog.Builder(context)
@@ -63,6 +76,10 @@ public class ScoreboardSortingDialog {
 
     public String getUsername(){
         return username.getText().toString();
+    }
+
+    public void setUsername(String name) {
+        username.setText(name);
     }
 
     public boolean isEmpty(){

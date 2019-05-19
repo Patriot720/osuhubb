@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
@@ -34,6 +35,14 @@ public class BeatmapActivity extends AppCompatActivity{
     ImageView previewImageView;
     private String coverUrl;
 
+    public FlexibleAdapterExtension<Score> getAdapter() {
+        return adapter;
+    }
+
+    public void setAdapter(FlexibleAdapterExtension<Score> adapter) {
+        this.adapter = adapter;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,7 +57,7 @@ public class BeatmapActivity extends AppCompatActivity{
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(view -> dialog.show());
 
-        dialog = new ScoreboardSortingDialog(this,this::updateScoreboard);
+        dialog = new ScoreboardSortingDialog(this, this::updateScoreboard);
 
         Glide.with(this)
                 .load(coverUrl)
@@ -58,9 +67,16 @@ public class BeatmapActivity extends AppCompatActivity{
         initData();
     }
 
+    public ScoreboardSortingDialog getDialog() {
+        return dialog;
+    }
 
+    public ScoreboardViewWrap getScoreboardViewWrap() {
+        return scoreboardViewWrap;
+    }
 
     protected void updateScoreboard() {
+        scoreboardViewWrap.setUpdating(true);
         int modsIntegerValue = dialog.getModsIntegerValue();
         String username = dialog.getUsername();
         if(dialog.isEmpty()) {
